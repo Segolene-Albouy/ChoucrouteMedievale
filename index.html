@@ -3,79 +3,347 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medieval Event Updates</title>
-
+    <title>Choucroute médiévale</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Almendra:wght@400;700&family=Astloch&family=Bokor&family=Caudex&family=Eagle+Lake&family=Grenze+Gotisch:wght@200&family=MedievalSharp&family=Pirata+One&family=UnifrakturCook:wght@700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Almendra:wght@400;700&family=Astloch&family=Bokor&family=Caudex&family=Eagle+Lake&family=Grenze+Gotisch:wght@200;400;700&family=MedievalSharp&family=Pirata+One&family=UnifrakturCook:wght@700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
     <style>
+        html, body {
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Caudex', serif;
-            background-color: #444;
-            background-image: url('pattern-castle.png');
-            background-repeat: repeat;
-            background-size: auto;
-            background-attachment: fixed;
+            font-family: 'MedievalSharp', serif;
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
         }
 
         h1, h2, h3, h4 {
-            font-family: 'UnifrakturMaguntia', serif;
+            font-family: 'Grenze Gotisch', serif;
             color: #b90000;
         }
-
-        header {
-            background-color: #9932cc; /* Dark purple header */
-            padding: 20px;
-            text-align: center;
-            font-size: 36px;
-            background-image: url('stonewall.jpeg');
+        h1 {
+            font-family: 'UnifrakturMaguntia', serif;
+            font-size: 76px;
         }
 
         section {
-            width: 500px;
+            width: 40vw;
+            max-width: 540px;
             margin: 20px auto;
             padding: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            background-image: url('parchment.jpg');
+            background-image: url('static/parchment.jpg');
         }
 
-        footer {
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            color: white;
-            background-image: url('stonewall.jpeg');
+        main {
+            display: flex;
+            flex: 1;
+            justify-content: space-between;
+            align-items: center;
+            background-image: url('static/wall.jpg');
+            background-repeat: repeat;
+            background-size: auto;
+            background-attachment: scroll;
         }
-    </style>
+
+        .main-content {
+            width: 100%;
+            text-align: center;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        #banner {
+            margin: 50px;
+            display: flex;
+            min-height: 100%;
+        }
+
+        .banner-part {
+            flex: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .torch {
+            width: 30px;
+            max-width: 30px;
+        }
+
+        .torch-img {
+            margin: -10px;
+            flex: 1;
+        }
+
+        .torch-img img {
+            width: 100%;
+            height: auto;
+        }
+
+        .banner-center {
+            flex: 1;
+            margin: auto;
+        }
+
+        /* DOORS */
+
+        .door-container {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 20px;
+            margin: auto;
+            width: 55vw;
+        }
+
+        .door {
+            position: relative;
+            text-align: center;
+            text-decoration: none;
+            color: #b90000;
+            width: 150px;
+            height: auto;
+            overflow: hidden;
+        }
+
+        .door img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .door span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Grenze Gotisch', cursive;
+            font-size: 30px;
+            text-shadow: 2px 2px 4px rgb(141 66 1 / 90%);
+            color: #b90000;
+        }
+
+        .door:hover span {
+            animation: glow 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 1px 1px 4px #ffe375, 0 0 10px #ffe375;
+            }
+            to {
+                text-shadow: 1px 1px 8px #ffe375, 0 0 20px #ffe375;
+            }
+        }
+
+        .door:hover img {
+            content: url('static/opendor.gif');
+        }
+
+        /* BRICKS */
+
+        #left-bricks, #right-bricks, .bricks, .left-border, .right-border {
+            box-sizing: border-box; /* Added to include padding and border in the width calculation */
+        }
+
+        #left-bricks, #right-bricks {
+            z-index: 999;
+            padding: 0;
+            margin: 0;
+            transition: transform 5s ease;
+            display: flex;
+            justify-content: space-between;
+            width: 1279px;
+            min-width: 1279px;
+        }
+        #left-bricks {
+            transform: translateX(calc((100vw/2) - 1279px)); 
+        }
+
+        #right-bricks {
+            /* TODO fix that */
+            /*transform: translateX(calc(1px - (1279px/2) - (100vw/2)));*/
+            transform: translateX(-100vw);
+            /*transform: translateX(50%);
+            margin-right: calc((50% - 1190px) / 2);*/
+        }
+
+        .bricks {
+            display: block;
+            background-repeat: repeat;
+            background-size: auto;
+            background-attachment: local;
+            width: 1190px;
+            min-width: 1190px;
+            min-height: 1000px;
+            margin: 0;
+            padding: 0;
+            background-image: url('static/bricks.png');
+        }
+        
+        .left-border, .right-border {
+            display: block;
+            background-repeat: repeat;
+            background-size: auto;
+            background-attachment: local;
+            min-height: 1000px;
+            margin: 0;
+            padding: 0;
+            width: 89x;
+            min-width: 89px;
+        }
+        .left-border {
+            background-image: url('static/bricks_left.gif');
+        }
+        .right-border {
+            background-image: url('static/bricks_right.gif');
+        }
+
+        @keyframes openLeftBricks {
+            0% {
+                transform: translateX(50%);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes openRightBricks {
+            0% {
+                transform: translateX(-50%);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        #left-bricks.loaded {
+            animation: openLeftBricks 3s forwards;
+            margin-left: -1190px;
+        }
+
+        #right-bricks.loaded {
+            animation: openRightBricks 3s forwards;
+            margin-right: -1190px;
+        }
+
+        #opendor {
+            z-index: 10000;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'UnifrakturMaguntia', serif;
+            font-size: 50px;
+            text-shadow: 2px 2px 4px rgb(141 66 1 / 90%);
+            color: #b90000;
+
+            background-image: url('static/scroll.png');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            border: none;
+            background-color: transparent;
+            filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.5));
+
+            width: 300px;
+            height: 404px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+
+            transition: transform 3s ease;
+        }
+        #opendor.fade {
+            transform: translate(-50%, -200%);
+        }
+</style>
+<link rel="icon" type="image/png" href="static/favicon/castle1.png">
+<script>
+    function opendor(){
+        document.getElementById("left-bricks").classList.add('loaded');
+        document.getElementById("right-bricks").classList.add('loaded');
+        play("slide");
+        document.getElementById("opendor").classList.add('fade');
+        setTimeout(() => {
+          play("tavern");
+        }, 2000);
+    }
+    function play(audioFilename){
+        const audio = new Audio(`static/sounds/${audioFilename}.mp3`);
+        audio.play();
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {});
+    
+</script>
 </head>
 <body>
+    <main>
+        <button id="opendor" onclick="opendor()">Ouvrez les portes !</button>
+        <div id="left-bricks">
+            <div class="bricks"></div>
+            <div class="left-border"></div>
+        </div>
 
-    <header>
-        <h1>Choucroute médiévale</h1>
-    </header>
+        <div class="main-content">
+            <div id="banner">
+                <div class="banner-part torch">
+                    <div class="torch-img">
+                        <img src="static/fireanim.gif"/>
+                    </div>
+                    <div class="torch-img">
+                        <img src="static/torch.gif"/>
+                    </div>
+                </div>
+                <div class="banner-part banner-center">
+                    <h1>Choucroute médiévale</h1>
+                </div>
+                <div class="banner-part torch">
+                    <div class="torch-img">
+                        <img src="static/fireanim.gif"/>
+                    </div>
+                    <div class="torch-img">
+                        <img src="static/torch.gif"/>
+                    </div>
+                </div>
+            </div>
+            
+            <section>
+                <h2>Oyez Oyez</h2>
+                <p>Nouvelles sur l'événement</p>
+            </section>
 
-    <section>
-        <h2>Oyez Oyez</h2>
-        <p>Nouvelles sur l'événement</p>
-    </section>
+            <div class="door-container">
+                <a href="#" class="door" id="donjon">
+                    <img src="static/closedor.gif" alt="Donjon Door">
+                    <span>Donjon</span>
+                </a>
 
-    <section>
-        <h2>Loterie aux personnages</h2>
-        <p>Tirage au sort pour les invités</p>
-    </section>
+                <a href="#" class="door" id="personnages">
+                    <img src="static/closedor.gif" alt="Personnages Door">
+                    <span>Personnages</span>
+                </a>
 
-    <section>
-        <h2>Fabrique ton accoutrement</h2>
-        <p>Exemples pour fabriquer des tenues médiévales en un clin d'oeil</p>
-    </section>
+                <a href="#" class="door" id="astuces">
+                    <img src="static/closedor.gif" alt="Astuces Door">
+                    <span>Astuces</span>
+                </a>
+            </div>
+        </div>
 
-    <footer>
-        <p>Prout prout</p>
-    </footer>
-
+        <div id="right-bricks">
+            <div class="right-border"></div>
+            <div class="bricks"></div>
+        </div>
+    </main>
 </body>
 </html>
