@@ -25,6 +25,10 @@
         display: flex;
         min-height: 100vh;
         flex-direction: column;
+        background-image: url("static/wall.jpg");
+        background-repeat: repeat;
+        background-size: auto;
+        background-attachment: scroll;
       }
 
       h1,
@@ -48,19 +52,23 @@
         background-image: url("static/parchment.jpg");
       }
 
-      main {
+      #landing {
         display: flex;
+        align-items: center;
+        position: absolute;
+        z-index: 499;
+        width: 100vw;
+      }
+
+      main {
+        display: none;
         flex: 1;
         justify-content: space-between;
         align-items: center;
-        background-image: url("static/wall.jpg");
-        background-repeat: repeat;
-        background-size: auto;
-        background-attachment: scroll;
       }
 
-      .main-content {
-        width: 100%;
+      #main-content {
+        /* width: 100%; */
         text-align: center;
         margin: 20px auto;
         padding: 20px;
@@ -166,37 +174,17 @@
 
       #left-bricks,
       #right-bricks {
-        z-index: 499;
-        padding: 0;
-        margin: 0;
-        transition: transform 5s ease;
         display: flex;
-        justify-content: space-between;
-        width: 1279px;
-        min-width: 1279px;
+        width: 50%;
+        height: 100vh;
+        z-index: 499;
+        transition: transform 5s ease;
       }
-      #left-bricks {
-        transform: translateX(calc((100vw / 2) - 1279px));
-      }
-
-      #right-bricks {
-        /* TODO fix that */
-        /*transform: translateX(calc(1px - (1279px/2) - (100vw/2)));*/
-        transform: translateX(-100vw);
-        /*transform: translateX(50%);
-            margin-right: calc((50% - 1190px) / 2);*/
-      }
-
       .bricks {
-        display: block;
+        flex-grow: 1;
         background-repeat: repeat;
         background-size: auto;
         background-attachment: local;
-        width: 1190px;
-        min-width: 1190px;
-        min-height: 1000px;
-        margin: 0;
-        padding: 0;
         background-image: url("static/bricks.png");
       }
 
@@ -211,7 +199,9 @@
         padding: 0;
         width: 89x;
         min-width: 89px;
+        transition: all 2s ease-in-out;
       }
+
       .left-border {
         background-image: url("static/bricks_left.gif");
       }
@@ -221,7 +211,7 @@
 
       @keyframes openLeftBricks {
         0% {
-          transform: translateX(50%);
+          transform: translateX(-90%);
         }
         100% {
           transform: translateX(0);
@@ -230,21 +220,19 @@
 
       @keyframes openRightBricks {
         0% {
-          transform: translateX(-50%);
+          transform: translateX(90%);
         }
         100% {
           transform: translateX(0);
         }
       }
 
-      #left-bricks.loaded {
-        animation: openLeftBricks 3s forwards;
-        margin-left: -1190px;
+      #landing.loaded #left-bricks {
+        transform: translateX(-95%);
       }
 
-      #right-bricks.loaded {
-        animation: openRightBricks 3s forwards;
-        margin-right: -1190px;
+      #landing.loaded #right-bricks {
+        transform: translateX(95%);
       }
 
       #opendor {
@@ -301,8 +289,8 @@
     <link rel="icon" type="image/png" href="static/favicon/castle1.png" />
     <script>
       function opendor() {
-        document.getElementById("left-bricks").classList.add("loaded");
-        document.getElementById("right-bricks").classList.add("loaded");
+        document.getElementById("landing").classList.add("loaded");
+        document.getElementsByTagName("main")[0].style.display = "block";
         play("slide");
         document.getElementById("opendor").classList.add("fade");
         setTimeout(() => {
@@ -319,14 +307,20 @@
   </head>
   <body>
     <div id="main-cursor" class="custom-cursor"></div>
-    <main>
-      <button id="opendor" onclick="opendor()">Ouvrez les portes !</button>
+    <button id="opendor" onclick="opendor()">Ouvrez les portes !</button>
+    <div id="landing">
       <div id="left-bricks">
         <div class="bricks"></div>
         <div class="left-border"></div>
       </div>
+      <div id="right-bricks">
+        <div class="right-border"></div>
+        <div class="bricks"></div>
+      </div>
+    </div>
 
-      <div class="main-content">
+    <main>
+      <div id="main-content">
         <div id="banner">
           <div class="banner-part torch">
             <div class="torch-img">
@@ -370,11 +364,6 @@
             <span>Astuces</span>
           </a>
         </div>
-      </div>
-
-      <div id="right-bricks">
-        <div class="right-border"></div>
-        <div class="bricks"></div>
       </div>
     </main>
   </body>
