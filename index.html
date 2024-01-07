@@ -40,7 +40,7 @@
       }
       h1 {
         font-family: "UnifrakturMaguntia", serif;
-        font-size: 76px;
+        font-size: 8vw;
       }
 
       section {
@@ -55,7 +55,7 @@
       #landing {
         display: flex;
         align-items: center;
-        position: absolute;
+        position: fixed;
         z-index: 499;
         width: 100vw;
       }
@@ -65,6 +65,7 @@
         flex: 1;
         justify-content: space-between;
         align-items: center;
+        padding: 5vh 7vw;
       }
 
       #main-content {
@@ -90,6 +91,7 @@
       .torch {
         width: 30px;
         max-width: 30px;
+        margin: auto;
       }
 
       .torch-img {
@@ -197,7 +199,7 @@
         min-height: 1000px;
         margin: 0;
         padding: 0;
-        width: 89x;
+        width: 89px;
         min-width: 89px;
         transition: all 2s ease-in-out;
       }
@@ -228,11 +230,11 @@
       }
 
       #landing.loaded #left-bricks {
-        transform: translateX(-95%);
+        transform: translateX(-90%);
       }
 
       #landing.loaded #right-bricks {
-        transform: translateX(95%);
+        transform: translateX(90%);
       }
 
       #opendor {
@@ -307,7 +309,7 @@
   </head>
   <body>
     <div id="main-cursor" class="custom-cursor"></div>
-    <button id="opendor" onclick="opendor()">Ouvrez les portes !</button>
+    <button id="opendor" onclick="opendor()">Pénétrez au chateau !</button>
     <div id="landing">
       <div id="left-bricks">
         <div class="bricks"></div>
