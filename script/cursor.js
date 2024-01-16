@@ -2,7 +2,13 @@ const width = 30;
 const height = 52;
 const fps = 30;
 let hoverInterval = null; // Interval des particules quand element hover.
-let hoverAnimationRunning = false;
+let hoverAnimation = {
+  running: false,
+  currentPosition: {
+    x: 0,
+    y: 0,
+  },
+};
 
 const createParticleCursor = (x, y, size, rotation, duration) => {
   const cursor = particlePool.getNewParticle(duration);
@@ -29,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const { x, y } = mousePosition(e);
     mainCursor.style.left = x + "px";
     mainCursor.style.top = y + "px";
+    hoverAnimation.currentPosition = { x, y };
     // console.log({ sx: e.pageX, sy: e.pageY });
   });
 
@@ -39,11 +46,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const interactiveElements = document.querySelectorAll("button, a");
 
   interactiveElements.forEach((element) => {
-    element.addEventListener("mouseenter", function (e) {
-      hoverAnimationRunning = true;
+    element.addEventListener("mousemove", function (e) {
+      hoverAnimation.running = true;
     });
     element.addEventListener("mouseleave", function (e) {
-      hoverAnimationRunning = false;
+      hoverAnimation.running = false;
     });
   });
 
@@ -78,12 +85,11 @@ function spawnParticle(x, y, options) {
 }
 
 function burst(nbParticle) {
-  const {
-    x: eltX,
-    y: eltY,
-    width,
-    height,
-  } = document.getElementById("main-cursor").getBoundingClientRect();
+  const { width, height } = document
+    .getElementById("main-cursor")
+    .getBoundingClientRect();
+
+  const { x: mouseX, y: mouseY } = hoverAnimation.currentPosition;
 
   const particles = [];
 
@@ -91,8 +97,8 @@ function burst(nbParticle) {
     const randomX = randomBetween(-1, 1);
     const randomY = randomBetween(-1, 1);
 
-    const x = eltX + width / 2 + Math.floor(randomX * width * 0.2);
-    const y = eltY + height / 2 + Math.floor(randomY * height * 0.2);
+    const x = mouseX - width / 2 + Math.floor(randomX * width * 0.2);
+    const y = mouseY - height / 2 + Math.floor(randomY * height * 0.2);
 
     const ratio = Math.random();
     const size = ratio * 1.5;
@@ -126,7 +132,7 @@ function initIdleCursorAnimation() {
     });
 
     document.getElementById("main-cursor").style.opacity = 1;
-    if (!hoverAnimationRunning) return;
+    if (!hoverAnimation.running) return;
     document.getElementById("main-cursor").style.opacity = 0;
     burst(2);
   }, 1000 / fps);
