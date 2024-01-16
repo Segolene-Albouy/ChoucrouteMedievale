@@ -40,7 +40,6 @@ h4 {
   margin: 20vh 0;
   animation: glow 1s ease-in-out infinite alternate;
   display: block;
-  position: relative;
 }
 
 section {
@@ -62,6 +61,10 @@ main {
   margin: 0 7vw;
 }
 
+main * {
+  position: relative;
+}
+
 #torchs {
   width: 90%;
   margin: auto;
@@ -73,6 +76,12 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.torch > *:first-child {
+  opacity: 0;
+}
+.torch.on > *:first-child {
+  opacity: 1;
 }
 
 .page.hidden {

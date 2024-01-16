@@ -15,3 +15,27 @@
 .cursor-particle {
   opacity: 1;
 }
+
+.custom-cursor.amplify {
+  animation: scale 2s ease-in-out infinite alternate;
+}
+
+/* ANIMATIONS */
+/* scale up & down */
+@keyframes scale {
+  0% {
+    width: 30px;
+    height: 52px;
+    /* transform: scale(1); */
+  }
+  50% {
+    transform: scale(1.5);
+    width: 45px;
+    height: 78px;
+  }
+  100% {
+    transform: scale(1);
+    width: 30px;
+    height: 52px;
+  }
+}
