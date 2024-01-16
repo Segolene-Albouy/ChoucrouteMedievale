@@ -1,0 +1,77 @@
+* {
+  cursor: none !important;
+}
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "MedievalSharp", serif;
+  min-height: 100vh;
+  background-image: url("../static/wall.jpg");
+  background-repeat: repeat;
+  background-size: auto;
+  background-attachment: scroll;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Grenze Gotisch", serif;
+  color: #b90000;
+}
+h1 {
+  font-family: "UnifrakturMaguntia", serif;
+  font-size: 8vw;
+}
+
+section {
+  width: 40%;
+  max-width: 540px;
+  margin: 1.5em auto;
+  padding: 1.5em;
+  background-image: url("../static/parchment.jpg");
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#landing {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  z-index: 499;
+  width: 100vw;
+}
+
+main {
+  display: none;
+  padding: 5vh 7vw;
+}
+
+#torchs {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.torch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  text-align: center;
+  margin: 20vh 0;
+  animation: glow 1s ease-in-out infinite alternate;
+}

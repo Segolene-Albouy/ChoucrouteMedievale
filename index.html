@@ -10,292 +10,12 @@
       href="https://fonts.googleapis.com/css2?family=Almendra:wght@400;700&family=Astloch&family=Bokor&family=Caudex&family=Eagle+Lake&family=Grenze+Gotisch:wght@200;400;700&family=MedievalSharp&family=Pirata+One&family=UnifrakturCook:wght@700&family=UnifrakturMaguntia&display=swap"
       rel="stylesheet"
     />
-    <style>
-      * {
-        cursor: none !important;
-      }
-      html,
-      body {
-        max-width: 100vw;
-        overflow-x: hidden;
-        cursor: none;
-      }
-
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: "MedievalSharp", serif;
-        display: flex;
-        min-height: 100vh;
-        flex-direction: column;
-        background-image: url("static/wall.jpg");
-        background-repeat: repeat;
-        background-size: auto;
-        background-attachment: scroll;
-      }
-
-      h1,
-      h2,
-      h3,
-      h4 {
-        font-family: "Grenze Gotisch", serif;
-        color: #b90000;
-      }
-      h1 {
-        font-family: "UnifrakturMaguntia", serif;
-        font-size: 8vw;
-      }
-
-      section {
-        width: 40vw;
-        max-width: 540px;
-        margin: 20px auto;
-        padding: 20px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        background-image: url("static/parchment.jpg");
-      }
-
-      #landing {
-        display: flex;
-        align-items: center;
-        position: fixed;
-        z-index: 499;
-        width: 100vw;
-      }
-
-      main {
-        display: none;
-        flex: 1;
-        justify-content: space-between;
-        align-items: center;
-        padding: 5vh 7vw;
-      }
-
-      #main-content {
-        /* width: 100%; */
-        text-align: center;
-        margin: 20px auto;
-        padding: 20px;
-      }
-
-      #banner {
-        margin: 50px;
-        display: flex;
-        min-height: 100%;
-      }
-
-      .banner-part {
-        flex: 1;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .torch {
-        width: 30px;
-        max-width: 30px;
-        margin: auto;
-      }
-
-      .torch-img {
-        margin: -10px;
-        flex: 1;
-      }
-
-      .torch-img img {
-        width: 100%;
-        height: auto;
-      }
-
-      .banner-center {
-        flex: 1;
-        margin: auto;
-      }
-
-      /* DOORS */
-
-      .door-container {
-        display: flex;
-        justify-content: space-between;
-        padding-top: 20px;
-        margin: auto;
-        width: 55vw;
-      }
-
-      .door {
-        position: relative;
-        text-align: center;
-        text-decoration: none;
-        color: #b90000;
-        width: 150px;
-        height: auto;
-        overflow: hidden;
-      }
-
-      .door img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .door span {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-family: "Grenze Gotisch", cursive;
-        font-size: 30px;
-        text-shadow: 2px 2px 4px rgb(141 66 1 / 90%);
-        color: #b90000;
-      }
-
-      .door:hover span {
-        animation: glow 1s ease-in-out infinite alternate;
-      }
-
-      @keyframes glow {
-        from {
-          text-shadow: 1px 1px 4px #ffe375, 0 0 10px #ffe375;
-        }
-        to {
-          text-shadow: 1px 1px 8px #ffe375, 0 0 20px #ffe375;
-        }
-      }
-
-      .door:hover img {
-        content: url("static/opendor.gif");
-      }
-
-      /* BRICKS */
-
-      #left-bricks,
-      #right-bricks,
-      .bricks,
-      .left-border,
-      .right-border {
-        box-sizing: border-box; /* Added to include padding and border in the width calculation */
-      }
-
-      #left-bricks,
-      #right-bricks {
-        display: flex;
-        width: 50%;
-        height: 100vh;
-        z-index: 499;
-        transition: transform 5s ease;
-      }
-      .bricks {
-        flex-grow: 1;
-        background-repeat: repeat;
-        background-size: auto;
-        background-attachment: local;
-        background-image: url("static/bricks.png");
-      }
-
-      .left-border,
-      .right-border {
-        display: block;
-        background-repeat: repeat;
-        background-size: auto;
-        background-attachment: local;
-        min-height: 1000px;
-        margin: 0;
-        padding: 0;
-        width: 89px;
-        min-width: 89px;
-        transition: all 2s ease-in-out;
-      }
-
-      .left-border {
-        background-image: url("static/bricks_left.gif");
-      }
-      .right-border {
-        background-image: url("static/bricks_right.gif");
-      }
-
-      @keyframes openLeftBricks {
-        0% {
-          transform: translateX(-90%);
-        }
-        100% {
-          transform: translateX(0);
-        }
-      }
-
-      @keyframes openRightBricks {
-        0% {
-          transform: translateX(90%);
-        }
-        100% {
-          transform: translateX(0);
-        }
-      }
-
-      #landing.loaded #left-bricks {
-        transform: translateX(-90%);
-      }
-
-      #landing.loaded #right-bricks {
-        transform: translateX(90%);
-      }
-
-      #opendor {
-        z-index: 500;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-family: "UnifrakturMaguntia", serif;
-        font-size: 50px;
-        text-shadow: 2px 2px 4px rgb(141 66 1 / 90%);
-        color: #b90000;
-
-        background-image: url("static/scroll.png");
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat;
-        border: none;
-        background-color: transparent;
-        filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.5));
-
-        width: 300px;
-        height: 404px;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 60px;
-
-        transition: transform 3s ease;
-      }
-      #opendor.fade {
-        transform: translate(-50%, -200%);
-      }
-
-      #opendor:hover {
-        text-shadow: 1px 1px 4px #710000, 0 0 10px #710000;
-      }
-
-      /* CUSTOM CURSOR */
-      .custom-cursor {
-        position: absolute;
-        width: 30px;
-        height: 52px;
-        pointer-events: none; /* Ensure the cursor does not interfere with interactions */
-        z-index: 9999; /* Ensure the cursor appears on top of other elements */
-        background-image: url("static/fireanim.gif");
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat;
-        transform: translate(-50%, -50%);
-      }
-
-      .cursor-particle {
-        opacity: 1;
-      }
-    </style>
     <link rel="icon" type="image/png" href="static/favicon/castle1.png" />
+    <link rel="stylesheet" href="./styles/global.css" />
+    <link rel="stylesheet" href="./styles/cursor.css" />
+    <link rel="stylesheet" href="./styles/landing.css" />
+    <link rel="stylesheet" href="./styles/bricks.css" />
+    <link rel="stylesheet" href="./styles/door.css" />
     <script>
       function opendor() {
         document.getElementById("landing").classList.add("loaded");
@@ -329,50 +49,37 @@
     </div>
 
     <main>
-      <div id="main-content">
-        <div id="banner">
-          <div class="banner-part torch">
-            <div class="torch-img">
-              <img src="static/fireanim.gif" />
-            </div>
-            <div class="torch-img">
-              <img src="static/torch.gif" />
-            </div>
-          </div>
-          <div class="banner-part banner-center">
-            <h1>Choucroute médiévale</h1>
-          </div>
-          <div class="banner-part torch">
-            <div class="torch-img">
-              <img src="static/fireanim.gif" />
-            </div>
-            <div class="torch-img">
-              <img src="static/torch.gif" />
-            </div>
-          </div>
+      <div id="torchs">
+        <div class="torch">
+          <img src="static/fireanim.gif" />
+          <img src="static/torch.gif" />
         </div>
-
-        <section>
-          <h2>Oyez Oyez</h2>
-          <p>Nouvelles sur l'événement</p>
-        </section>
-
-        <div class="door-container">
-          <a href="#" class="door" id="donjon">
-            <img src="static/closedor.gif" alt="Donjon Door" />
-            <span>Donjon</span>
-          </a>
-
-          <a href="#" class="door" id="personnages">
-            <img src="static/closedor.gif" alt="Personnages Door" />
-            <span>Personnages</span>
-          </a>
-
-          <a href="#" class="door" id="astuces">
-            <img src="static/closedor.gif" alt="Astuces Door" />
-            <span>Astuces</span>
-          </a>
+        <div class="torch">
+          <img src="static/fireanim.gif" />
+          <img src="static/torch.gif" />
         </div>
+      </div>
+      <h1>Choucroute médiévale</h1>
+      <section>
+        <h2>Oyez Oyez</h2>
+        <p>Nouvelles sur l'événement</p>
+      </section>
+
+      <div class="door-container">
+        <a href="#" class="door" id="donjon">
+          <img src="static/closedor.gif" alt="Donjon Door" />
+          <span>Donjon</span>
+        </a>
+
+        <a href="#" class="door" id="personnages">
+          <img src="static/closedor.gif" alt="Personnages Door" />
+          <span>Personnages</span>
+        </a>
+
+        <a href="#" class="door" id="astuces">
+          <img src="static/closedor.gif" alt="Astuces Door" />
+          <span>Astuces</span>
+        </a>
       </div>
     </main>
   </body>

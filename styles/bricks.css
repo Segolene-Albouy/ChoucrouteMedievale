@@ -1,0 +1,76 @@
+/* BRICKS */
+
+#left-bricks,
+#right-bricks,
+.bricks,
+.left-border,
+.right-border {
+  box-sizing: border-box; /* Added to include padding and border in the width calculation */
+}
+
+#left-bricks,
+#right-bricks {
+  display: flex;
+  width: 50%;
+  height: 100vh;
+  z-index: 499;
+  transition: transform 5s ease;
+}
+.bricks {
+  flex-grow: 1;
+  background-repeat: repeat;
+  background-size: auto;
+  background-attachment: local;
+  background-image: url("../static/bricks.png");
+}
+
+.left-border,
+.right-border {
+  display: block;
+  background-repeat: repeat;
+  background-size: auto;
+  background-attachment: local;
+  min-height: 1000px;
+  margin: 0;
+  padding: 0;
+  width: 89px;
+  min-width: 89px;
+  transition: all 2s ease-in-out;
+}
+
+.left-border {
+  background-image: url("../static/bricks_left.gif");
+}
+.right-border {
+  background-image: url("../static/bricks_right.gif");
+}
+
+@keyframes openLeftBricks {
+  0% {
+    transform: translateX(-90%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes openRightBricks {
+  0% {
+    transform: translateX(90%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+#landing.loaded {
+  z-index: 0;
+}
+
+#landing.loaded #left-bricks {
+  transform: translateX(-90%);
+}
+
+#landing.loaded #right-bricks {
+  transform: translateX(90%);
+}

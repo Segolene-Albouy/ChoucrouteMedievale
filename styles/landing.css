@@ -1,0 +1,36 @@
+#opendor {
+  z-index: 500;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "UnifrakturMaguntia", serif;
+  font-size: 3.5em;
+  text-shadow: 2px 2px 4px rgb(141 66 1 / 90%);
+  color: #b90000;
+
+  background-image: url("../static/scroll.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  border: none;
+  background-color: transparent;
+  filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.5));
+
+  width: 300px;
+  height: 404px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3em;
+
+  transition: transform 3s ease;
+}
+#opendor.fade {
+  transform: translate(-50%, -200%);
+}
+
+#opendor:hover {
+  text-shadow: 1px 1px 4px #710000, 0 0 10px #710000;
+}

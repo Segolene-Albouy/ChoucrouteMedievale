@@ -1,0 +1,63 @@
+/* DOORS */
+
+@media screen and (max-width: 768px) {
+  .door-container {
+    flex-direction: column;
+    width: 100%;
+    gap: 2em;
+  }
+  .door {
+    margin: 0.75em auto;
+  }
+}
+
+.door-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1em;
+}
+
+.door {
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  color: #b90000;
+  width: 150px;
+  height: auto;
+  overflow: hidden;
+}
+
+.door img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.door span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Grenze Gotisch", cursive;
+  font-size: 2em;
+  text-shadow: 2px 2px 4px rgb(141 66 1 / 90%);
+  color: #b90000;
+}
+
+.door:hover span {
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 1px 1px 4px #ffe375, 0 0 10px #ffe375;
+  }
+  to {
+    text-shadow: 1px 1px 8px #ffe375, 0 0 20px #ffe375;
+  }
+}
+
+.door:hover img {
+  content: url("../static/opendor.gif");
+}

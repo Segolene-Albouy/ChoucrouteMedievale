@@ -36,13 +36,15 @@ document.addEventListener("DOMContentLoaded", function () {
     burst(50);
   });
 
-  const openDoorButton = document.querySelector("#opendor");
+  const interactiveElements = document.querySelectorAll("button, a");
 
-  openDoorButton.addEventListener("mousemove", function (e) {
-    hoverAnimationRunning = true;
-  });
-  openDoorButton.addEventListener("mouseleave", function (e) {
-    hoverAnimationRunning = false;
+  interactiveElements.forEach((element) => {
+    element.addEventListener("mouseenter", function (e) {
+      hoverAnimationRunning = true;
+    });
+    element.addEventListener("mouseleave", function (e) {
+      hoverAnimationRunning = false;
+    });
   });
 
   initIdleCursorAnimation();
