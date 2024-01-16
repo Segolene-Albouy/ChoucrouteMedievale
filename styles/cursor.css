@@ -1,4 +1,7 @@
 /* CUSTOM CURSOR */
+* {
+  cursor: none !important;
+}
 .custom-cursor {
   position: absolute;
   width: 30px;
@@ -10,6 +13,7 @@
   background-position: center center;
   background-repeat: no-repeat;
   transform: translate(-50%, -50%);
+  transform-origin: 0 0;
 }
 
 .cursor-particle {
@@ -17,7 +21,7 @@
 }
 
 .custom-cursor.amplify {
-  animation: scale 2s ease-in-out infinite alternate;
+  animation: scale 1.7s ease-in-out infinite alternate;
 }
 
 /* ANIMATIONS */
@@ -29,12 +33,12 @@
     /* transform: scale(1); */
   }
   50% {
-    transform: scale(1.5);
+    /* transform: scale(1.5); */
     width: 45px;
     height: 78px;
   }
   100% {
-    transform: scale(1);
+    /* transform: scale(1); */
     width: 30px;
     height: 52px;
   }
