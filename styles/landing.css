@@ -1,3 +1,12 @@
+#landing {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 499;
+  width: 100vw;
+}
 #opendor {
   z-index: 500;
   position: absolute;
@@ -28,9 +37,21 @@
   transition: transform 3s ease;
 }
 #opendor.fade {
-  transform: translate(-50%, -200%);
+  transform: translate(-50%, -100vh);
 }
 
 #opendor:hover {
   text-shadow: 1px 1px 4px #710000, 0 0 10px #710000;
+}
+
+#landing.loaded {
+  z-index: 0;
+}
+
+#landing.loading #left-bricks {
+  transform: translateX(-90%);
+}
+
+#landing.loading #right-bricks {
+  transform: translateX(90%);
 }

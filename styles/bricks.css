@@ -62,15 +62,3 @@
     transform: translateX(0);
   }
 }
-
-#landing.loaded {
-  z-index: 0;
-}
-
-#landing.loaded #left-bricks {
-  transform: translateX(-90%);
-}
-
-#landing.loaded #right-bricks {
-  transform: translateX(90%);
-}

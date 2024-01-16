@@ -43,7 +43,9 @@ document.addEventListener("DOMContentLoaded", function () {
     burst(50);
   });
 
-  const interactiveElements = document.querySelectorAll("button, a");
+  const interactiveElements = document.querySelectorAll(
+    "button, a, false-link"
+  );
 
   interactiveElements.forEach((element) => {
     element.addEventListener("mousemove", function (e) {
@@ -119,9 +121,19 @@ function burst(nbParticle) {
 function initIdleCursorAnimation() {
   hoverInterval = setInterval(() => {
     // monitorParticles();
-    particlePool.getRunningParticles().forEach((particle) => {
+
+    // Move particles
+    particlePool.getRunningParticles().forEach((p) => {
+      const { particle } = p;
+      const { width, height } = document.body.getBoundingClientRect();
       const top = parseInt(particle.style.top.slice(0, -2));
       const left = parseInt(particle.style.left.slice(0, -2));
+
+      if (top < 0 || top > height || left < 0 || left > width) {
+        p.state = "ended";
+        particle.style.display = "none";
+        return;
+      }
 
       const addedX = Math.round(particle.direction.x * particle.speed);
       const addedY = Math.round(particle.direction.y * particle.speed);
@@ -141,7 +153,7 @@ function initIdleCursorAnimation() {
 const particlePool = {
   pool: [],
   getRunningParticles: function () {
-    return this.pool.filter((p) => p.state == "running").map((p) => p.particle);
+    return this.pool.filter((p) => p.state == "running");
   },
   getNewParticle: function (duration) {
     const freeParticle = this.pool.find((p) => p.state == "ended");

@@ -26,9 +26,21 @@ h4 {
   font-family: "Grenze Gotisch", serif;
   color: #b90000;
 }
-h1 {
+
+.false-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.main-title {
   font-family: "UnifrakturMaguntia", serif;
-  font-size: 8vw;
+  font-size: 8.5em;
+  color: #b90000;
+  text-align: center;
+  margin: 20vh 0;
+  animation: glow 1s ease-in-out infinite alternate;
+  display: block;
+  position: relative;
 }
 
 section {
@@ -44,17 +56,10 @@ section {
   align-items: center;
 }
 
-#landing {
-  display: flex;
-  align-items: center;
-  position: fixed;
-  z-index: 499;
-  width: 100vw;
-}
-
 main {
   display: none;
-  padding: 5vh 7vw;
+  padding: 5vh 2vw;
+  margin: 0 7vw;
 }
 
 #torchs {
@@ -70,8 +75,6 @@ main {
   align-items: center;
 }
 
-h1 {
-  text-align: center;
-  margin: 20vh 0;
-  animation: glow 1s ease-in-out infinite alternate;
+.page.hidden {
+  display: none;
 }
