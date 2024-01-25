@@ -16,30 +16,10 @@
     <link rel="stylesheet" href="./styles/landing.css" />
     <link rel="stylesheet" href="./styles/bricks.css" />
     <link rel="stylesheet" href="./styles/door.css" />
+    <link rel="stylesheet" href="./styles/donjon.css" />
     <script src="script/lib.js"></script>
-    <script src="script/framework.js"></script>
     <script src="script/cursor.js"></script>
-    <script>
-      function opendor() {
-        document.getElementById("landing").classList.add("loading");        
-        document.getElementsByTagName("main")[0].style.display = "block";
-        play("slide");
-        pages.home.show();
-        document.getElementById("opendor").classList.add("fade");
-        setTimeout(() => {
-          play("tavern");
-        }, 2000);
-
-        setTimeout(() => {// Animation end
-          document.getElementById("opendor").remove();
-          document.getElementById("landing").classList.add("loaded");
-        }, 3000);
-      }
-      function play(audioFilename) {
-        const audio = new Audio(`static/sounds/${audioFilename}.mp3`);
-        audio.play();
-      }
-    </script>
+    <script src="script/framework.js"></script>
   </head>
   <body>
     <div id="main-cursor" class="custom-cursor"></div>
@@ -62,8 +42,8 @@
           <img src="static/torch.gif" />
         </div>
         <div class="torch">
-          <img src="static/fireanim.gif" />
-          <img src="static/torch.gif" />
+          <img src="static/fireanim.gif" alt="FIIIRE!!!"/>
+          <img src="static/torch.gif" alt="torch"/>
         </div>
       </div>
       <a href="home" class="false-link main-title">Choucroute médiévale</a>
@@ -79,12 +59,12 @@
             <span>Donjon</span>
           </a>
 
-          <a href="donjon" class="door">
+          <a href="perso" class="door">
             <img src="static/closedor.gif" alt="Personnages Door" />
             <span>Personnages</span>
           </a>
 
-          <a href="donjon" class="door">
+          <a href="astuces" class="door">
             <img src="static/closedor.gif" alt="Astuces Door" />
             <span>Astuces</span>
           </a>
@@ -92,10 +72,20 @@
       </div>
       
       <div id="donjon" class="page">
+        <!--<h2>Viens te détendre au donjon</h2>
         <section>
           <h2>Donjon</h2>
           <p>Informations sur le donjon</p>
-        </section>
+        </section>-->
+
+        <div id="scroll">
+          <div id="sexy"></div>
+        </div>
+      </div>
+
+      <div id="perso" class="page"></div>
+
+      <div id="astuces" class="page"></div>
     </main>
   </body>
 </html>

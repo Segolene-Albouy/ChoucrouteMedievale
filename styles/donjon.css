@@ -1,0 +1,24 @@
+#scroll {
+    z-index: 500;
+    margin: auto;
+    background-image: url("../static/scroll.png");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    border: none;
+    background-color: transparent;
+    filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.5));
+    width: 66vw;
+    height: 89vw;
+    padding: 3em;
+}
+
+#sexy {
+    padding-top: 10vw;
+    margin: auto;
+    font-family: monospace;
+    font-weight: bold;
+    white-space: pre;
+    display: inline-block;
+    width: 100%;
+}

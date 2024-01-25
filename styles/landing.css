@@ -36,6 +36,7 @@
 
   transition: transform 3s ease;
 }
+
 #opendor.fade {
   transform: translate(-50%, -100vh);
 }
