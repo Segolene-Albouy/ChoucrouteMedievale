@@ -7,6 +7,12 @@ function randomBetween(min, max) {
   return Math.random() * (max - min) + min;
 }
 
+// Je sais faut pas faire ça mais je m'en fous
+String.prototype.capitalize = function () {
+  return this.charAt(0).toUpperCase() + this.slice(1);
+};
+
+
 let currentAudio = null;
 function play(audioFilename) {
   if (currentAudio) {

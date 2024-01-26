@@ -1,82 +1,14 @@
 const pages = {};
 let currentOpenPage = null;
-let currentPageId = "home";
-
-
-function opendor() {
-    const landiv = document.getElementById("landing");
-    const openDor = document.getElementById("opendor");
-
-    landiv.classList.add("loading");
-
-    document.getElementsByTagName("main")[0].style.display = "block";
-    play("slide");
-
-    pages[currentPageId].show();
-
-    openDor.classList.add("fade");
-    setTimeout(() => { // Animation end
-        openDor.remove();
-        landiv.classList.add("loaded");
-    }, 3000);
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    // Compute pages
-    document.querySelectorAll(".page").forEach((page, i) => {
-        if (!page.id) {
-            throw new Error("Les .page doivent avoir un id");
-        } else if (pages[page.id]) {
-            throw new Error(
-                `Les .page doivent avoir un id unique. #${page.id} a déjà été attribué`
-            );
-        }
-        pages[page.id] = new Page(page.id);
-    });
-
-    const initialPage = window.location.href.split("/").pop().replace("#", "");
-    if (pages[initialPage]) {
-        currentPageId = initialPage;
-    }
-
-    // Compute links
-    document.querySelectorAll("a").forEach((link) => {
-        const pageId = link.getAttribute("href");
-        if (!pages[pageId]) {
-            throw new Error(
-                `Les liens doivent pointer vers une .page existante. ${link.href} n'existe pas`
-            );
-        }
-        // Add click event
-        link.addEventListener("click", function (e) {
-            e.preventDefault();
-            console.log(e);
-            console.log({ pageId });
-            pages[pageId].show();
-        });
-    });
-
-    // Hide all pages
-    document.querySelectorAll(".page").forEach((page, i) => {
-        pages[page.id].hide();
-    });
-});
-
-window.addEventListener("popstate", function (event) {
-    // show previous page if user click on "Back to page"
-    const pageId = event.state ? event.state.page : "home";
-    if (pages[pageId]) {
-        pages[pageId].show();
-    }
-});
+let currentPageId = "cour";
 
 const loadHome = () => {
     setTimeout(() => {
         play("tavern");
     }, 2500);
 };
-const loadCharacters = () => {};
-const loadTricks = () => {};
+const loadBanquet = () => {};
+const loadArmurerie = () => {};
 
 const loadDungeon = () => {
     particlePool.extinguishParticles();
@@ -107,19 +39,66 @@ const loadDungeon = () => {
         .catch(error => console.error('Error loading ASCII content:', error));
 };
 
-
-const callbacks = {
-    home: loadHome,
+const pagesCallbacks = {
+    cour: loadHome,
     donjon: loadDungeon,
-    perso: loadCharacters,
-    astuces: loadTricks
+    banquet: loadBanquet,
+    armurerie: loadArmurerie
 }
+
+function opendor() {
+    const landiv = document.getElementById("landing");
+    const openDor = document.getElementById("opendor");
+
+    landiv.classList.add("loading");
+
+    document.getElementsByTagName("main")[0].style.display = "block";
+    play("slide");
+
+    pages[currentPageId].show();
+
+    openDor.classList.add("fade");
+    setTimeout(() => { // Animation end
+        openDor.remove();
+        landiv.classList.add("loaded");
+    }, 3000);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const pagesIds = Object.keys(pagesCallbacks);
+    document.querySelectorAll(".page").forEach((page, ) => {
+        if (!page.id) {
+            throw new Error("Les .page doivent avoir un id");
+        } else if (!pagesIds.includes(page.id)) {
+            throw new Error(`#${page.id} n'a pas de fonction pour l'instancier`);
+        }
+        pages[page.id] = new Page(page.id);
+    });
+
+    const initialPage = window.location.href.split("/").pop().replace("#", "");
+    if (pages[initialPage]) {
+        currentPageId = initialPage;
+    }
+
+    // Hide all pages
+    document.querySelectorAll(".page").forEach((page, i) => {
+        pages[page.id].hide();
+    });
+});
+
+window.addEventListener("popstate", function (event) {
+    // show previous page if user click on "Back to page"
+    const pageId = event.state ? event.state.page : "cour";
+    if (pages[pageId]) {
+        pages[pageId].show();
+    }
+});
 
 class Page {
     constructor(id) {
         this.id = id;
-        this.callback = callbacks[this.id]
-        //this.path = this.id === "home" ? "" : `${this.id}`;
+        this.callback = pagesCallbacks[this.id]
+        //this.path = this.id === "cour" ? "" : `${this.id}`;
     }
     show() {
         // TODO close and open walls + sounds of footsteps with reverb
@@ -129,9 +108,33 @@ class Page {
         document.getElementById(this.id).classList.remove("hidden");
         this.callback();
 
-        history.pushState({ page: this.id }, null, this.id === "home" ? "/" : `/#${this.id}`);
+        history.pushState({ page: this.id }, null, this.id === "cour" ? "/" : `/#${this.id}`);
+        this.createDoors()
     }
     hide() {
         document.getElementById(this.id).classList.add("hidden");
+    }
+
+    createDoors(){
+        const doors = document.getElementById("doors");
+        doors.innerHTML = "";
+
+        const pagesIds = Object.keys(pagesCallbacks).filter(id => id !== this.id);
+        pagesIds.map(pageId => {
+            // const link = pageId === "cour" ?
+            const door = document.createElement("a");
+            door.setAttribute("href", pageId);
+            door.classList.add("door");
+            door.innerHTML += `<img src="static/closedor.gif" alt="${pageId} Door" />
+                               <span>${pageId.capitalize()}</span>`;
+
+            door.addEventListener("click", function (e) {
+                e.preventDefault();
+                console.log(e);
+                console.log({ pageId });
+                pages[pageId].show();
+            });
+            doors.appendChild(door);
+        });
     }
 }
