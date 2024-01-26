@@ -1,4 +1,4 @@
-// Create a random between min an max function
+// Create a random between min and max function
 function floorRandomBetween(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
@@ -10,8 +10,8 @@ function randomBetween(min, max) {
 let currentAudio = null;
 function play(audioFilename) {
   if (currentAudio) {
-    // audio.pause();
-    fadeOutAndPause(currentAudio);
+    currentAudio.pause();
+    // fadeOutAndPause(currentAudio);
   }
 
   const audio = new Audio(`static/sounds/${audioFilename}.mp3`);
