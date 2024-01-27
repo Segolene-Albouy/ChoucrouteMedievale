@@ -13,19 +13,22 @@ String.prototype.capitalize = function () {
   return this.charAt(0).toUpperCase() + this.slice(1);
 };
 
-let currentAudio = null;
-function play(audioFilename) {
+var currentAudio = null;
+function play(audioFilename, onended = () => {}) {
   if (currentAudio) {
     currentAudio.pause();
     // fadeOutAndPause(currentAudio);
   }
 
+  console.log("creating audio ", audioFilename);
   const audio = new Audio(`static/sounds/${audioFilename}.mp3`);
   audio.play();
   currentAudio = audio;
 
   audio.onended = function () {
     currentAudio = null;
+    console.log("audio ended");
+    onended();
   };
 }
 

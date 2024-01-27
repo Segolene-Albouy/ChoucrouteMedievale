@@ -2,10 +2,8 @@ const pages = {};
 let currentOpenPage = null;
 let currentPageId = "cour";
 
-const loadHome = () => {
-  setTimeout(() => {
-    play("tavern");
-  }, 2500);
+const loadHome = (firstTime) => {
+  if (!firstTime) play("tavern");
 };
 const loadBanquet = () => {};
 const loadArmurerie = () => {};
@@ -64,9 +62,9 @@ function opendor() {
   landiv.classList.add("loading");
 
   document.getElementsByTagName("main")[0].style.display = "block";
-  play("slide");
+  play("slide", () => play("tavern"));
 
-  pages[currentPageId].show();
+  pages[currentPageId].show(true);
 
   openDor.classList.add("fade");
   setTimeout(() => {
@@ -112,13 +110,14 @@ class Page {
     this.callback = pagesCallbacks[this.id];
     //this.path = this.id === "cour" ? "" : `${this.id}`;
   }
-  show() {
+  // permet de passer des arguments de n'importe où et de n'importe quel type (cf opendor pages[currentPageId].show({firstTime:true}); pour fix le bug du son tavern qui se répète)
+  show(props) {
     // TODO close and open walls + sounds of footsteps with reverb
     if (currentOpenPage === this) return;
     if (currentOpenPage) currentOpenPage.hide();
     currentOpenPage = this;
     document.getElementById(this.id).classList.remove("hidden");
-    this.callback();
+    this.callback(props);
 
     history.pushState(
       { page: this.id },
