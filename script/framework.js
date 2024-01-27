@@ -59,14 +59,15 @@ function opendor() {
   const landiv = document.getElementById("landing");
   const openDor = document.getElementById("opendor");
 
-  landiv.classList.add("loading");
-
   document.getElementsByTagName("main")[0].style.display = "block";
   play("slide", () => play("tavern"));
 
   pages[currentPageId].show(true);
 
   openDor.classList.add("fade");
+  setTimeout(() => {
+    landiv.classList.add("loading"); // Pour prendre en compte le délai de lancement de l'audio
+  }, 200);
   setTimeout(() => {
     // Animation end
     openDor.remove();
