@@ -6,6 +6,7 @@
   left: 0;
   z-index: 499;
   width: 100vw;
+  gap: 15px;
 }
 #opendor {
   z-index: 500;
@@ -36,8 +37,9 @@
 
   transition: transform 3s ease;
 }
+
 #opendor.fade {
-  transform: translate(-50%, -100vh);
+  transform: translate(-50%, calc(-100% - 50vh));
 }
 
 #opendor:hover {

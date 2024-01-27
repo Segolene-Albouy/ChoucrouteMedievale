@@ -39,9 +39,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // console.log({ sx: e.pageX, sy: e.pageY });
   });
 
-  document.addEventListener("click", function (e) {
+  /*document.addEventListener("click", function (e) {
     burst(50);
-  });
+  });*/
+  document.addEventListener("click", burst, true);
 
   const interactiveElements = document.querySelectorAll(
     "button, a, false-link"
@@ -76,7 +77,7 @@ function spawnParticle(x, y, options) {
       : randomBetween(0, Math.PI * 2)
     : randomBetween(0, Math.PI * 2);
 
-  let follow = particlePool.pool.length == 0;
+  let follow = particlePool.pool.length === 0;
   const particle = createParticleCursor(x, y, size, rotation, duration);
   particle.direction = direction;
   particle.speed = speed;
@@ -86,14 +87,14 @@ function spawnParticle(x, y, options) {
   return particle;
 }
 
-function burst(nbParticle) {
+function burst(nbParticle = 50) {
   const { width, height } = document
     .getElementById("main-cursor")
     .getBoundingClientRect();
 
   const { x: mouseX, y: mouseY } = hoverAnimation.currentPosition;
 
-  const particles = [];
+  let particles = [];
 
   for (let i = 0; i < nbParticle; i++) {
     const randomX = randomBetween(-1, 1);
@@ -139,8 +140,7 @@ function initIdleCursorAnimation() {
       const addedY = Math.round(particle.direction.y * particle.speed);
       particle.style.top = top + addedX + "px";
       particle.style.left = left + addedY + "px";
-      particle.style.opacity =
-        parseFloat(particle.style.opacity) - fps / particle.duration;
+      particle.style.opacity = parseFloat(particle.style.opacity) - fps / particle.duration;
     });
 
     document.getElementById("main-cursor").style.opacity = 1;
@@ -153,10 +153,10 @@ function initIdleCursorAnimation() {
 const particlePool = {
   pool: [],
   getRunningParticles: function () {
-    return this.pool.filter((p) => p.state == "running");
+    return this.pool.filter((p) => p.state === "running");
   },
   getNewParticle: function (duration) {
-    const freeParticle = this.pool.find((p) => p.state == "ended");
+    const freeParticle = this.pool.find((p) => p.state === "ended");
     let targetParticle;
 
     if (freeParticle) {
@@ -171,7 +171,7 @@ const particlePool = {
       const poolParticle = {
         particle: element,
         state: "running",
-        follow: this.pool.length == 0,
+        follow: this.pool.length === 0,
       };
       this.pool.push(poolParticle);
       targetParticle = poolParticle;
@@ -183,13 +183,31 @@ const particlePool = {
     }, duration);
     return targetParticle.particle;
   },
+  extinguishParticles: function() {
+    document.removeEventListener("click", burst, true);
+    this.getRunningParticles().map(p => {
+      p.state = "ended";
+      p.particle.remove();
+    });
+    setNewCursor("sword/sword13.png", animateSword)
+  }
 };
 
+function setNewCursor(newImg, clickEvent) {
+  const mainCursor = document.getElementById("main-cursor");
+  mainCursor.style.backgroundImage = `url('../static/${newImg}')`;
+  /*mainCursor.style.width =
+  mainCursor.style.height =*/
+  document.addEventListener("click", clickEvent, true);
+}
+
+function animateSword(){
+  const mainCursor = document.getElementById("main-cursor");
+  mainCursor.style.backgroundImage = 'url("../static/sword/sword13.gif")';
+  setTimeout(() => {mainCursor.style.backgroundImage = 'url("../static/sword/sword13.png")'}, 2500)
+}
+
+
 function monitorParticles() {
-  console.log(
-    "Particle running " +
-      particlePool.getRunningParticles().length +
-      "/" +
-      particlePool.pool.length
-  );
+  console.log(`Particle running ${particlePool.getRunningParticles().length}/${particlePool.pool.length}`);
 }

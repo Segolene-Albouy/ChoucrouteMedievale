@@ -16,31 +16,11 @@
     <link rel="stylesheet" href="./styles/landing.css" />
     <link rel="stylesheet" href="./styles/bricks.css" />
     <link rel="stylesheet" href="./styles/door.css" />
+    <link rel="stylesheet" href="./styles/donjon.css" />
     <script src="script/lib.js"></script>
-    <script src="script/framework.js"></script>
     <script src="script/cursor.js"></script>
     <script src="script/torchs.js"></script>
-    <script>
-      function opendor() {
-        document.getElementById("landing").classList.add("loading");        
-        document.getElementsByTagName("main")[0].style.display = "block";
-        play("slide");
-        pages.home.show();
-        document.getElementById("opendor").classList.add("fade");
-        setTimeout(() => {
-          play("tavern");
-        }, 2000);
-
-        setTimeout(() => {// Animation end
-          document.getElementById("opendor").remove();
-          document.getElementById("landing").classList.add("loaded");
-        }, 3000);
-      }
-      function play(audioFilename) {
-        const audio = new Audio(`static/sounds/${audioFilename}.mp3`);
-        audio.play();
-      }
-    </script>
+    <script src="script/framework.js"></script>
   </head>
   <body>
     <div id="main-cursor" class="custom-cursor"></div>
@@ -58,45 +38,64 @@
 
     <main>
       <div id="torchs">
-        <div class="torch on">
-          <img src="static/fireanim.gif" />
-          <img src="static/torch.gif" />
+        <div class="torch">
+          <img src="static/fireanim.gif" alt="FIIIRE!!!" />
+          <img src="static/torch.gif" alt="torch" />
         </div>
-        <div class="torch on">
-          <img src="static/fireanim.gif" />
-          <img src="static/torch.gif" />
+        <a href="/" class="false-link main-title">Choucroute médiévale</a>
+        <div class="torch">
+          <img src="static/fireanim.gif" alt="FIIIRE!!!" />
+          <img src="static/torch.gif" alt="torch" />
         </div>
       </div>
-      <a href="home" class="false-link main-title">Choucroute médiévale</a>
-      <div id="home" class="page">
+
+      <div id="cour" class="page">
         <section>
-          <h2>Oyez Oyez</h2>
-          <p>Nouvelles sur l'événement</p>
+          <h1>Oyez Oyez</h1>
+          <h2>Dameselles et damelots</h2>
+          <p>
+            Entrez entrez dans la cour du château ! Les seigneurs de la Viellarnoult
+            préparent moult réjouissances pour la grand fête du chou nouveau.
+            Le 16 mars 1024, les quatre fiefs du Royaume se réuniront pour prouver
+            leur valeur dans le plus grand tournoi que la Bretagne ait porté pour
+            tenter de gagner le chou-chêne d'or
+          </p>
+          <p>
+            Les preux champions s'affronteront autour de cinq épreuves
+          </p>
+          <ul>
+            <li>Concours de costume</li>
+            <li>Jeu d'habileté</li>
+            <li>Joute chevalresque</li>
+            <li>Blind test bardcore</li>
+            <li>Sardine</li>
+          </ul>
+          <p>꧁༺꫱༻꧂</p>
+          <p>
+            En attendant de savoir sous quel étendards vous pourrez concourir,
+            visitez-donc le château ! Vous aurez ici à la cour toutes les
+            dernières nouvelles des festivités.
+          </p>
         </section>
-
-        <div class="door-container">
-          <a href="donjon" class="door">
-            <img src="static/closedor.gif" alt="Donjon Door" />
-            <span>Donjon</span>
-          </a>
-
-          <a href="donjon" class="door">
-            <img src="static/closedor.gif" alt="Personnages Door" />
-            <span>Personnages</span>
-          </a>
-
-          <a href="donjon" class="door">
-            <img src="static/closedor.gif" alt="Astuces Door" />
-            <span>Astuces</span>
-          </a>
-        </div>
       </div>
 
       <div id="donjon" class="page">
+        <!--<h2>Viens te détendre au donjon</h2>
         <section>
           <h2>Donjon</h2>
           <p>Informations sur le donjon</p>
-        </section>
+        </section>-->
+
+        <div id="scroll">
+          <div id="sexy"></div>
+        </div>
+      </div>
+
+      <div id="banquet" class="page"></div>
+
+      <div id="armurerie" class="page"></div>
+
+      <div id="doors" class="door-container"></div>
     </main>
   </body>
 </html>
