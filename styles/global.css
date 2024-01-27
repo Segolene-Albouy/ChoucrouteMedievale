@@ -23,8 +23,15 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: "Grenze Gotisch", serif;
+  font-family: "UnifrakturMaguntia", serif;
   color: #b90000;
+}
+
+h1 {
+  font-size: 10vh;
+}
+h2 {
+  font-size: 7vh;
 }
 
 .false-link {
@@ -37,7 +44,7 @@ h4 {
   font-size: 6vw;
   color: #b90000;
   text-align: center;
-  margin: 10vh 0;
+  margin: 7vh 0;
   animation: glow 1s ease-in-out infinite alternate;
   display: block;
   position: relative;
@@ -46,7 +53,7 @@ h4 {
 section {
   width: 40%;
   max-width: 540px;
-  margin: 1.5em auto;
+  margin: 5em auto;
   padding: 1.5em;
   background-image: url("../static/parchment.jpg");
   text-align: center;
