@@ -13,7 +13,9 @@ const loadArmurerie = () => {};
 const loadDungeon = () => {
   particlePool.extinguishParticles();
   play("fire");
+
   const ascii = document.getElementById("sexy");
+  if (ascii.innerHTML !== "") return;
   const charWidth = 226;
 
   ascii.style.fontSize = `${ascii.offsetWidth / (charWidth * 0.67)}px`; // 0.67 to compensate that font is higher than wide
