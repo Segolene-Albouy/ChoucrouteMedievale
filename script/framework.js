@@ -16,33 +16,34 @@ const loadDungeon = () => {
   if (ascii.innerHTML !== "") return;
   const charWidth = 226;
 
-  ascii.style.fontSize = `${ascii.offsetWidth / (charWidth * 0.67)}px`; // 0.67 to compensate that font is higher than wide
-
   fetch("static/chevalier-sexy.txt")
     .then((response) => response.text())
     .then((sexyAscii) => {
       let index = 0;
+      ascii.innerHTML = sexyAscii;
+      console.log(ascii.getBoundingClientRect());
+      // ascii.style.fontSize = `${ascii.offsetWidth * (5 / 835)}px`; // 0.67 to compensate that font is higher than wide
 
-      const sexyInterval = setInterval(() => {
-        const char = sexyAscii[index];
-        if (char === " ") {
-          // Next not space index
-          let nextIndex = index;
-          while (sexyAscii[nextIndex] === " " && nextIndex < sexyAscii.length) {
-            nextIndex++;
-          }
-          // add characters between indexes
-          ascii.innerHTML += sexyAscii.slice(index, nextIndex);
-          index = nextIndex;
-        } else {
-          ascii.innerHTML += char;
-          index++;
-        }
-        if (index >= sexyAscii.length) {
-          clearInterval(sexyInterval);
-          return;
-        }
-      }, 1);
+      //   const sexyInterval = setInterval(() => {
+      //     const char = sexyAscii[index];
+      //     if (char === " ") {
+      //       // Next not space index
+      //       let nextIndex = index;
+      //       while (sexyAscii[nextIndex] === " " && nextIndex < sexyAscii.length) {
+      //         nextIndex++;
+      //       }
+      //       // add characters between indexes
+      //       ascii.innerHTML += sexyAscii.slice(index, nextIndex);
+      //       index = nextIndex;
+      //     } else {
+      //       ascii.innerHTML += char;
+      //       index++;
+      //     }
+      //     if (index >= sexyAscii.length) {
+      //       clearInterval(sexyInterval);
+      //       return;
+      //     }
+      //   }, 1);
     })
     .catch((error) => console.error("Error loading ASCII content:", error));
 };
@@ -152,3 +153,8 @@ class Page {
     });
   }
 }
+
+window.addEventListener("resize", function () {
+  const widthHeightElement = document.getElementById("width_height");
+  widthHeightElement.textContent = `Screen Size: ${window.innerWidth}px x ${window.innerHeight}px`;
+});
