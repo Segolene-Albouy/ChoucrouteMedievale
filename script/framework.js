@@ -23,7 +23,7 @@ const loadDungeon = () => {
     .then((sexyAscii) => {
       let index = 0;
 
-      function typeChar() {
+      const sexyInterval = setInterval(() => {
         const char = sexyAscii[index];
         if (char === " ") {
           // Next not space index
@@ -38,12 +38,11 @@ const loadDungeon = () => {
           ascii.innerHTML += char;
           index++;
         }
-
-        if (index < sexyAscii.length) {
-          setTimeout(typeChar, 0.2);
+        if (index >= sexyAscii.length) {
+          clearInterval(sexyInterval);
+          return;
         }
-      }
-      typeChar();
+      }, 1);
     })
     .catch((error) => console.error("Error loading ASCII content:", error));
 };
