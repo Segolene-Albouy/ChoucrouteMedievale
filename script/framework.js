@@ -141,7 +141,7 @@ class Page {
       door.setAttribute("href", pageId);
       door.classList.add("door");
       door.innerHTML += `<img src="static/closedor.gif" alt="${pageId} Door" />
-                               <span>${pageId.capitalize()}</span>`;
+                         <span>${pageId.capitalize()}</span>`;
 
       door.addEventListener("click", function (e) {
         e.preventDefault();

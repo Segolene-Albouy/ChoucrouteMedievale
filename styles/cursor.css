@@ -8,7 +8,7 @@
   height: 52px;
   pointer-events: none; /* Ensure the cursor does not interfere with interactions */
   z-index: 9999; /* Ensure the cursor appears on top of other elements */
-  background-image: url("../static/fireanim.gif");
+  background-image: url("../static/gif/fireanim.gif");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;

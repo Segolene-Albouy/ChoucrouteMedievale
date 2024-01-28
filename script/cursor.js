@@ -189,7 +189,7 @@ const particlePool = {
       p.state = "ended";
       p.particle.remove();
     });
-    setNewCursor("sword/sword13.png", animateSword)
+    setNewCursor("gif/sword/sword13.png", animateSword)
   }
 };
 
@@ -203,8 +203,8 @@ function setNewCursor(newImg, clickEvent) {
 
 function animateSword(){
   const mainCursor = document.getElementById("main-cursor");
-  mainCursor.style.backgroundImage = 'url("../static/sword/sword13.gif")';
-  setTimeout(() => {mainCursor.style.backgroundImage = 'url("../static/sword/sword13.png")'}, 2500)
+  mainCursor.style.backgroundImage = 'url("../static/gif/sword/sword13.gif")';
+  setTimeout(() => {mainCursor.style.backgroundImage = 'url("../static/gif/sword/sword13.png")'}, 2500)
 }
 
 
