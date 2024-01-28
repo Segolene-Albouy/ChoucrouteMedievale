@@ -24,31 +24,47 @@ h4 {
   color: #b90000;
 }
 
-h1 {
-  font-size: 10vh;
-}
-h2 {
-  font-size: 7vh;
-}
-
-.false-link {
-  text-decoration: none;
-  color: inherit;
-}
-
-.main-title {
-  font-family: "UnifrakturMaguntia", serif;
-  font-size: 6vw;
-  color: #b90000;
-  text-align: center;
-  margin: 7vh 0;
-  animation: glow 1s ease-in-out infinite alternate;
+#oyez {
+  width: 75%;
+  height: auto;
   display: block;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 768px) {
+  section {
+    width: 80%;
+  }
+  .main-title {
+    font-size: 15vw;
+    margin: -7vw;
+    padding-top: 22vh;
+  }
+  h1 {
+    font-size: 7vh;
+  }
+  h2 {
+    font-size: 4vh;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  section {
+    width: 40%;
+  }
+  .main-title {
+    font-size: 6vw;
+    margin: 7vh 0;
+  }
+  h1 {
+    font-size: 10vh;
+  }
+  h2 {
+    font-size: 7vh;
+  }
 }
 
 section {
-  width: 40%;
-  max-width: 540px;
   margin: 5em auto;
   padding: 1.5em;
   background-image: url("../static/parchment.jpg");
@@ -74,12 +90,14 @@ main * {
   margin: auto;
   display: flex;
   justify-content: space-between;
+  overflow: visible;
 }
 
 .torch {
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 100;
 }
 .torch > *:first-child {
   opacity: 0;
@@ -90,4 +108,21 @@ main * {
 
 .page.hidden {
   display: none;
+}
+
+.false-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.main-title {
+  font-family: "UnifrakturMaguntia", serif;
+  color: #b90000;
+  text-align: center;
+  animation: glow 1s ease-in-out infinite alternate;
+  display: block;
+}
+
+ul {
+  text-align: left;
 }
