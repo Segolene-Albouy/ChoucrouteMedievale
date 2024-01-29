@@ -5,10 +5,16 @@ body {
   cursor: none;
 }
 
+@font-face{
+  font-family : "ancient";
+  src : url('../static/fonts/CloisterBlack.ttf');
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-family: "MedievalSharp", serif;
+  font-family: "ancient", serif;
+  font-size: 1.1em;
   min-height: 100vh;
   background-image: url("../static/wall.jpg");
   background-repeat: repeat;
@@ -31,14 +37,31 @@ h4 {
   margin: 0 auto;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 490px) {
   section {
     width: 80%;
   }
   .main-title {
     font-size: 15vw;
     margin: -7vw;
-    padding-top: 22vh;
+    padding-top: calc(134px + 15vw + 2vh); /* 134px is the height of .torchs */
+  }
+  h1 {
+    font-size: 7vh;
+  }
+  h2 {
+    font-size: 4vh;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  section {
+    width: 80%;
+  }
+  .main-title {
+    font-size: 13vw;
+    margin: -7vw;
+    padding-top: calc(134px + 12vw + 2vh); /* 134px is the height of .torchs */
   }
   h1 {
     font-size: 7vh;
@@ -53,7 +76,7 @@ h4 {
     width: 40%;
   }
   .main-title {
-    font-size: 6vw;
+    font-size: 6.5vw;
     margin: 7vh 0;
   }
   h1 {
@@ -125,4 +148,32 @@ main * {
 
 ul {
   text-align: left;
+}
+
+hr {
+  /*background-image: url("../static/gif/hr.gif");*/
+  background-image: url("../static/gif/sword/sword5.gif");
+  width: 75%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-attachment: scroll;
+  background-position: center center;
+  display: block;
+  height: 4vh;
+  border: 0;
+}
+
+mark {
+  background-color: transparent;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  animation: pulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    color: rgb(80, 21, 0);
+  }
+  to {
+    color: rgb(159, 42, 0);
+  }
 }
