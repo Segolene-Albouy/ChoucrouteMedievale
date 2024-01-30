@@ -1,11 +1,19 @@
-#landing {
-  display: flex;
-  align-items: center;
+#main-landing {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 499;
   width: 100vw;
+}
+
+#landing-bg {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* z-index: 499; */
+  width: 100%;
   gap: 15px;
 }
 #opendor {
@@ -38,6 +46,17 @@
   transition: transform 3s ease;
 }
 
+.landing-content {
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+}
+
 #opendor.fade {
   transform: translate(-50%, calc(-100% - 50vh));
 }
@@ -46,14 +65,123 @@
   text-shadow: 1px 1px 4px #710000, 0 0 10px #710000;
 }
 
-#landing.loaded {
+#landing-bg.loaded {
   z-index: 0;
 }
 
-#landing.loading #left-bricks {
+#landing-bg.loading #left-bricks {
   transform: translateX(-90%);
 }
 
-#landing.loading #right-bricks {
+#landing-bg.loading #right-bricks {
   transform: translateX(90%);
+}
+#landing-name {
+  transition: all 3s ease;
+}
+#landing-name.submitted {
+  opacity: 0;
+  pointer-events: none;
+}
+#ask-name {
+  box-shadow: 0 0 2em 0.1em;
+  padding: 2em;
+  text-align: center;
+  font-size: 1.4em;
+}
+
+#banner {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  width: 85%;
+  max-height: 76px;
+}
+
+#banner .shiny_shield {
+  margin-top: -10%;
+  transform: scale(0.7);
+}
+
+#ask-name h3 {
+  font-size: 3em;
+  margin: 3%;
+  font-family: "Chomsky", serif;
+  letter-spacing: 0.1em;
+  font-weight: normal;
+}
+#ask-name p {
+  padding: 0 1em;
+}
+#ask-name #errorMessage {
+  display: none;
+  font-weight: bold;
+  font-size: 1.3em;
+  max-height: 1.3em;
+  margin: 0;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#ask-name #errorMessage span {
+  flex-grow: 1;
+}
+#ask-name #errorMessage span::before,
+#ask-name #errorMessage span::after {
+  content: "!!";
+  font-size: 1.3em;
+  font-family: "Chomsky", serif;
+  margin: 0 5%;
+}
+
+#errorMessage.again span {
+  animation: wiggle 0.2s ease-out 0s 3 alternate none;
+}
+
+#ask-name input {
+  background: none;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid black;
+  padding: 0.2em;
+  font-size: 1.4em;
+  color: rgba(0, 0, 0, 0.8);
+  font-family: "MedievalSharp", serif;
+  text-align: center;
+  margin-top: 2%;
+}
+#ask-name select {
+  display: block;
+  width: 90%;
+  background: none;
+  outline: none;
+  border: none;
+  padding: 0.2em;
+  font-size: 1.4em;
+  color: rgba(0, 0, 0, 0.8);
+  font-family: "MedievalSharp", serif;
+  text-align: center;
+  box-shadow: 0 0 0.2em 1px black;
+  margin: 2% auto;
+  border-radius: 0.4em;
+}
+#ask-name select:hover {
+  box-shadow: 0 0 0.2em 2px black;
+}
+#ask-name button {
+  display: block;
+  outline: none;
+  background: none;
+  color: darkred;
+  font-family: "Chomsky", serif;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  font-size: 2em;
+  border: 0;
+  line-height: 140%;
+  letter-spacing: 0.1em;
+  margin-top: 6%;
+}
+
+#ask-name button:hover {
+  text-shadow: 0px 0px 5px;
 }

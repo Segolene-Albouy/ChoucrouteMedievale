@@ -23,7 +23,7 @@ const loadDungeon = () => {
     .then((sexyAscii) => {
       let index = 0;
 
-      function typeChar() {
+      const sexyInterval = setInterval(() => {
         const char = sexyAscii[index];
         if (char === " ") {
           // Next not space index
@@ -38,12 +38,11 @@ const loadDungeon = () => {
           ascii.innerHTML += char;
           index++;
         }
-
-        if (index < sexyAscii.length) {
-          setTimeout(typeChar, 0.2);
+        if (index >= sexyAscii.length) {
+          clearInterval(sexyInterval);
+          return;
         }
-      }
-      typeChar();
+      }, 1);
     })
     .catch((error) => console.error("Error loading ASCII content:", error));
 };
@@ -56,7 +55,7 @@ const pagesCallbacks = {
 };
 
 function opendor() {
-  const landiv = document.getElementById("landing");
+  const landiv = document.getElementById("landing-bg");
   const openDor = document.getElementById("opendor");
 
   document.getElementsByTagName("main")[0].style.display = "block";
