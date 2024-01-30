@@ -11,6 +11,7 @@
       rel="stylesheet"
     />
     <link rel="icon" type="image/png" href="static/favicon/castle1.png" />
+    <link rel="stylesheet" href="./styles/gifs.css" />
     <link rel="stylesheet" href="./styles/global.css" />
     <link rel="stylesheet" href="./styles/cursor.css" />
     <link rel="stylesheet" href="./styles/landing.css" />
@@ -21,18 +22,49 @@
     <script src="script/cursor.js"></script>
     <script src="script/torchs.js"></script>
     <script src="script/framework.js"></script>
+    <script src="script/submitName.js"></script>
   </head>
   <body>
     <div id="main-cursor" class="custom-cursor"></div>
-    <button id="opendor" onclick="opendor()">Pénétrez au chateau !</button>
-    <div id="landing">
-      <div id="left-bricks">
-        <div class="bricks"></div>
-        <div class="left-border"></div>
+    <div id="main-landing">
+      <div id="landing-bg">
+        <div id="left-bricks">
+          <div class="bricks"></div>
+          <div class="left-border"></div>
+        </div>
+        <div id="right-bricks">
+          <div class="right-border"></div>
+          <div class="bricks"></div>
+        </div>
       </div>
-      <div id="right-bricks">
-        <div class="right-border"></div>
-        <div class="bricks"></div>
+      <div class="landing-content">
+        <button id="opendor" onclick="opendor()">Pénétrez au chateau !</button>
+      </div>
+      <div id="landing-name" class="landing-content">
+        <form id="ask_name" class="parchment" onsubmit="submitName(event)">
+          <div id="banner">
+            <img
+              src="static/knight_horse_blue.gif"
+              class="knight_horse_blue reverse-gifs"
+            />
+            <img src="static/shiny_shield.gif" class="shiny_shield" />
+            <img src="static/knight_horse_blue.gif" class="knight_horse_blue" />
+          </div>
+          <h3>Halte Troubadour !</h3>
+          <p>La seigneurie de la Viellarnoult ne conoisse point vostre nom.</p>
+          <p>Révélez vostre nom avant de pénétrer au château.</p>
+          <p id="errorMessage">
+            <img
+              src="static/angry_knight.gif"
+              class="reverse-gifs angry_knight"
+            />
+            <span>VOSTRE NOM MANANT</span>
+            <img src="static/angry_knight.gif" class="angry_knight" />
+          </p>
+          <input type="text" id="name_input" name="name" autofocus />
+          <select name="adjectif"></select>
+          <button type="submit">Soumettre ce nom à la garde du château</button>
+        </form>
       </div>
     </div>
 
@@ -50,19 +82,17 @@
       </div>
 
       <div id="cour" class="page">
-        <section>
+        <section class="parchment">
           <h1>Oyez Oyez</h1>
           <h2>Dameselles et damelots</h2>
           <p>
-            Entrez entrez dans la cour du château ! Les seigneurs de la Viellarnoult
-            préparent moult réjouissances pour la grand fête du chou nouveau.
-            Le 16 mars 1024, les quatre fiefs du Royaume se réuniront pour prouver
-            leur valeur dans le plus grand tournoi que la Bretagne ait porté pour
-            tenter de gagner le chou-chêne d'or
+            Entrez entrez dans la cour du château ! Les seigneurs de la
+            Viellarnoult préparent moult réjouissances pour la grand fête du
+            chou nouveau. Le 16 mars 1024, les quatre fiefs du Royaume se
+            réuniront pour prouver leur valeur dans le plus grand tournoi que la
+            Bretagne ait porté pour tenter de gagner le chou-chêne d'or
           </p>
-          <p>
-            Les preux champions s'affronteront autour de cinq épreuves
-          </p>
+          <p>Les preux champions s'affronteront autour de cinq épreuves</p>
           <ul>
             <li>Concours de costume</li>
             <li>Jeu d'habileté</li>

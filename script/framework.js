@@ -55,7 +55,7 @@ const pagesCallbacks = {
 };
 
 function opendor() {
-  const landiv = document.getElementById("landing");
+  const landiv = document.getElementById("landing-bg");
   const openDor = document.getElementById("opendor");
 
   document.getElementsByTagName("main")[0].style.display = "block";

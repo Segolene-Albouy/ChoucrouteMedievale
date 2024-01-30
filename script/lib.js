@@ -7,6 +7,15 @@ function randomBetween(min, max) {
   return Math.random() * (max - min) + min;
 }
 
+function shuffleArray(arr) {
+  const newArr = [...arr];
+  for (let i = newArr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
+  }
+  return newArr;
+}
+
 // Je sais faut pas faire ça mais je m'en fous
 // Grosse thug
 String.prototype.capitalize = function () {

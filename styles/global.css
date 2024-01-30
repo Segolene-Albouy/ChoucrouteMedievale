@@ -51,7 +51,6 @@ section {
   max-width: 540px;
   margin: 5em auto;
   padding: 1.5em;
-  background-image: url("../static/parchment.jpg");
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -90,4 +89,34 @@ main * {
 
 .page.hidden {
   display: none;
+}
+
+.parchment {
+  background-position: center;
+  background-image: url("../static/seamless-parchment.jpg");
+}
+
+@font-face {
+  font-family: Chomsky; /* Name the font family */
+  src: url("../static/fonts/Chomsky.otf") format("opentype"); /* Path to the font */
+}
+
+.reverse-gifs {
+  transform: scaleX(-1);
+}
+
+/* Wiggle animation */
+@keyframes wiggle {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(4deg);
+  }
+  75% {
+    transform: rotate(-4deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
