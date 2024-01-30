@@ -1,9 +1,11 @@
 var errorMessageElement = null;
 var wrongOnce = false;
+
 function submitName(evt) {
   evt.preventDefault();
 
   const name = evt.target.name ? evt.target.name.value : null;
+  const adj = evt.target.adjectif ? evt.target.adjectif.value : null;
   console.log(evt);
   if (!name) {
     if (wrongOnce) {
@@ -18,14 +20,25 @@ function submitName(evt) {
     }
     return;
   }
+  localStorage.setItem('medievalName', `${name} ${adj}`);
   console.log({ name });
   document.getElementById("landing-name").classList.add("submitted");
 }
 document.addEventListener("DOMContentLoaded", function () {
+  const medievalName = localStorage.getItem('medievalName');
+  if (medievalName){
+    console.log({ medievalName });
+    document.getElementById("ask-name").innerHTML = `<h1>Bienvenue ${medievalName}</h1>`;
+    setInterval(() => {
+      document.getElementById("landing-name").classList.add("submitted");
+    }, 2000);
+    return;
+  }
+
   errorMessageElement = document.getElementById("errorMessage");
 
   // Build adjectifs options
-  const select = document.querySelector("#ask_name select");
+  const select = document.querySelector("#ask-name select");
   shuffleArray(adjectifs).forEach(([adjectif, fem]) => {
     const option = document.createElement("option");
     option.value = adjectif;
@@ -56,6 +69,7 @@ const adjectifs = [
   ["Le Cruel", "La Cruelle"],
   ["Le Bien Pensant", "La Bien Pensante"],
   ["Le Beau", "La Belle"],
+  ["Le Fol Dingo", "La Fol Dingo"],
   ["Le Fainéant", "La Fainéante"],
   ["Le Combattant", "La Combattante"],
   ["Le Valeureux", "La Valeureuse"],
@@ -70,6 +84,7 @@ const adjectifs = [
   ["Le Malicieux", "La Malicieuse"],
   ["L’Espiègle"],
   ["Le Cynique", "La Cynique"],
+  ["Le Devergoigneux", "La Devergoigneuse"],
   ["L’Optimiste"],
   ["L’Étrange"],
   ["L’Allié", "L’Alliée"],
@@ -107,5 +122,6 @@ Le bleu
 Le pubert
 Le Zelé
 Le puant
-// Et la copilot me propose "Le puceau"
+// Et la copilot me propose "Le puceau" AHA
+// en vrai je pense qu'on pourra dédoublonner lâche/couard, vaillant/valeureux ?
 */
