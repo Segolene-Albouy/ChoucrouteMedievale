@@ -28,10 +28,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const medievalName = localStorage.getItem('medievalName');
   if (medievalName){
     console.log({ medievalName });
-    document.getElementById("ask-name").innerHTML = `<h1>Bienvenue ${medievalName}</h1>`;
+    // TODO save to API
+    // TODO allow say "c'est pas moi"
+
+    // document.getElementById("ask-name").innerHTML = `<h1>Bienvenue <mark>${medievalName}</mark></h1>`;
     setInterval(() => {
       document.getElementById("landing-name").classList.add("submitted");
-    }, 2000);
+    }, 1000);
     return;
   }
 
