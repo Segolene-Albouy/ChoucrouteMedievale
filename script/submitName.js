@@ -97,3 +97,15 @@ const adjectifs = [
   ["L’Angélique"],
   ["L’Intrépide"],
 ];
+
+/*
+On été mentionné mais pas ajouté (je me dis ça va pas trop dans le thème ou autre..):
+L'enculé
+Le casanié
+L'ivrogne (tout le monde voudra être l'ivrogne)
+Le bleu
+Le pubert
+Le Zelé
+Le puant
+// Et la copilot me propose "Le puceau"
+*/
