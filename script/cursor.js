@@ -30,10 +30,8 @@ function mousePosition(e) {
 
 document.addEventListener("DOMContentLoaded", function () {
   const mainCursor = document.getElementById("main-cursor");
-  if (isMobile()) {
-    mainCursor.style.display = "none";
-    return;
-  }
+  initIdleCursorAnimation();
+  activateBurstOnClick();
 
   document.addEventListener("mousemove", function (e) {
     const { x, y } = mousePosition(e);
@@ -43,10 +41,15 @@ document.addEventListener("DOMContentLoaded", function () {
     // console.log({ sx: e.pageX, sy: e.pageY });
   });
 
+  if (isMobile()) {
+    mainCursor.style.display = "none";
+    console.log("Cursor particle deactivated on mobile");
+    return;
+  }
+
   /*document.addEventListener("click", function (e) {
     burst(50);
   });*/
-  activateBurstOnClick();
 
   const interactiveElements = document.querySelectorAll(
     "button, a, false-link"
@@ -104,7 +107,7 @@ function burst(nbParticle = 50) {
   const { x: mouseX, y: mouseY } = hoverAnimation.currentPosition;
 
   let particles = [];
-
+  if (isNaN(nbParticle)) nbParticle = 50;
   for (let i = 0; i < nbParticle; i++) {
     const randomX = randomBetween(-1, 1);
     const randomY = randomBetween(-1, 1);
@@ -129,9 +132,8 @@ function burst(nbParticle = 50) {
 }
 
 function initIdleCursorAnimation() {
-  if (isMobile()) return;
   hoverInterval = setInterval(() => {
-    // monitorParticles();
+    monitorParticles();
 
     // Move particles
     particlePool.getRunningParticles().forEach((p) => {
@@ -203,22 +205,21 @@ const particlePool = {
 };
 
 function resetCursor() {
-  setNewCursor("fireanim", burst);
+  setNewCursor("gif/fireanim.gif");
   activateBurstOnClick();
 }
 
-function setNewCursor(newImg, clickEvent) {
+function setNewCursor(newImg, showCursor = false) {
   const mainCursor = document.getElementById("main-cursor");
   mainCursor.style.backgroundImage = `url('../static/${newImg}')`;
-  /*mainCursor.style.width =
-  mainCursor.style.height =*/
-  document.addEventListener("click", clickEvent, true);
 }
 
 function animateSword() {
   const mainCursor = document.getElementById("main-cursor");
+  mainCursor.style.display = "block";
   mainCursor.style.backgroundImage = 'url("../static/gif/sword/sword13.gif")';
   setTimeout(() => {
+    mainCursor.style.display = "none";
     mainCursor.style.backgroundImage = 'url("../static/gif/sword/sword13.png")';
   }, 2500);
 }

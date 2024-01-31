@@ -6,22 +6,26 @@ const loadHome = (firstTime) => {
   resetCursor();
   if (!firstTime) play("tavern");
 };
+const unloadHome = () => {};
+
 const loadBanquet = () => {
   resetCursor();
 };
+const unloadBanquet = () => {};
 const loadArmurerie = () => {
   resetCursor();
 };
+const unloadArmurerie = () => {};
 
 const loadDungeon = () => {
   particlePool.extinguishParticles();
-  setNewCursor("gif/sword/sword13.png", animateSword);
+  setNewCursor("gif/sword/sword13.png");
+  document.addEventListener("click", animateSword, true);
   disableBurstOnClick();
   play("fire");
 
   const ascii = document.getElementById("sexy");
   if (ascii.innerHTML !== "") return;
-  const charWidth = 226;
 
   fetch("static/chevalier-sexy.txt")
     .then((response) => response.text())
@@ -52,11 +56,23 @@ const loadDungeon = () => {
     .catch((error) => console.error("Error loading ASCII content:", error));
 };
 
-const pagesCallbacks = {
+const unloadDungeon = () => {
+  document.removeEventListener("click", animateSword, true);
+  activateBurstOnClick();
+};
+
+const pagesOnload = {
   cour: loadHome,
   donjon: loadDungeon,
   banquet: loadBanquet,
   armurerie: loadArmurerie,
+};
+
+const pagesOnUnload = {
+  cour: unloadHome,
+  donjon: unloadDungeon,
+  banquet: unloadBanquet,
+  armurerie: unloadArmurerie,
 };
 
 function opendor() {
@@ -80,7 +96,7 @@ function opendor() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  const pagesIds = Object.keys(pagesCallbacks);
+  const pagesIds = Object.keys(pagesOnload);
   document.querySelectorAll(".page").forEach((page) => {
     if (!page.id) {
       throw new Error("Les .page doivent avoir un id");
@@ -115,17 +131,21 @@ window.addEventListener("popstate", function (event) {
 class Page {
   constructor(id) {
     this.id = id;
-    this.callback = pagesCallbacks[this.id];
+    this.onload = pagesOnload[this.id];
+    this.onunload = pagesOnUnload[this.id];
   }
   // permet de passer des arguments de n'importe où et de n'importe quel type
   // (cf opendor pages[currentPageId].show({firstTime:true}); pour fix le bug du son tavern qui se répète)
   show(props) {
     // TODO close and open walls + sounds of footsteps with reverb
     if (currentOpenPage === this) return;
-    if (currentOpenPage) currentOpenPage.hide();
+    if (currentOpenPage) {
+      currentOpenPage.onunload();
+      currentOpenPage.hide();
+    }
     currentOpenPage = this;
     document.getElementById(this.id).classList.remove("hidden");
-    this.callback(props);
+    this.onload(props);
 
     history.pushState(
       { page: this.id },
@@ -140,7 +160,7 @@ class Page {
 
 function createDoorsNavigation() {
   // Create input radio for each page
-  const pagesIds = Object.keys(pagesCallbacks);
+  const pagesIds = Object.keys(pagesOnload);
   const doors = document.getElementById("doors");
   pagesIds.forEach((pageId) => {
     const input = document.createElement("input");
