@@ -65,17 +65,21 @@
   text-shadow: 1px 1px 4px #710000, 0 0 10px #710000;
 }
 
-#landing-bg.loaded {
+#main-landing.loaded {
   z-index: 0;
 }
+#main-landing.loaded .landing-content {
+  display: none;
+}
 
-#landing-bg.loading #left-bricks {
+#main-landing.loading #left-bricks {
   transform: translateX(-90%);
 }
 
-#landing-bg.loading #right-bricks {
+#main-landing.loading #right-bricks {
   transform: translateX(90%);
 }
+
 #landing-name {
   transition: all 3s ease;
 }

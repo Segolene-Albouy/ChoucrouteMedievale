@@ -6,7 +6,6 @@ function submitName(evt) {
 
   const name = evt.target.name ? evt.target.name.value : null;
   const adj = evt.target.adjectif ? evt.target.adjectif.value : null;
-  console.log(evt);
   if (!name) {
     if (wrongOnce) {
       // Abusé
@@ -20,21 +19,19 @@ function submitName(evt) {
     }
     return;
   }
-  localStorage.setItem('medievalName', `${name} ${adj}`);
+  localStorage.setItem("medievalName", `${name} ${adj}`);
   console.log({ name });
   document.getElementById("landing-name").classList.add("submitted");
 }
 document.addEventListener("DOMContentLoaded", function () {
-  const medievalName = localStorage.getItem('medievalName');
-  if (medievalName){
+  const medievalName = localStorage.getItem("medievalName");
+  if (medievalName) {
+    document.getElementById("landing-name").style.display = "none";
     console.log({ medievalName });
     // TODO save to API
     // TODO allow say "c'est pas moi"
 
     // document.getElementById("ask-name").innerHTML = `<h1>Bienvenue <mark>${medievalName}</mark></h1>`;
-    setInterval(() => {
-      document.getElementById("landing-name").classList.add("submitted");
-    }, 1000);
     return;
   }
 
@@ -114,6 +111,8 @@ const adjectifs = [
   ["Le Vile", "La Vile"],
   ["L’Angélique"],
   ["L’Intrépide"],
+  ["L’Audicieux", "L’Audicieuse"],
+  ["Le Dangereux", "La Dangereuse"],
 ];
 
 /*
