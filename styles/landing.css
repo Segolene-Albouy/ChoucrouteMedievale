@@ -91,10 +91,11 @@
   box-shadow: 0 0 2em 0.1em;
   padding: 2em;
   text-align: center;
-  font-size: 1.4em;
+  font-size: 1rem;
 }
 
 #banner {
+  position: relative;
   display: flex;
   justify-content: space-between;
   margin: auto;
@@ -104,7 +105,26 @@
 
 #banner .shiny_shield {
   margin-top: -10%;
-  transform: scale(0.7);
+  transform: scale(0.5) translateY(-25%);
+}
+@media screen and (max-width: 490px) {
+  #banner .shiny_shield {
+    position: absolute;
+    margin: 0;
+    transform: translateX(-25%) scale(0.5);
+    top: -28%;
+    left: 50%;
+    transform-origin: 0 0;
+  }
+  #banner .knight_horse_blue.reverse-gifs {
+    transform: scale(-0.7, 0.7);
+  }
+  #banner .knight_horse_blue {
+    transform: scale(0.7);
+  }
+  #banner {
+    width: 95%;
+  }
 }
 
 #ask-name h3 {
@@ -114,7 +134,7 @@
   letter-spacing: 0.1em;
   font-weight: normal;
 }
-#ask-name p {
+#ask-name > p {
   padding: 0 1em;
 }
 #ask-name #errorMessage {
@@ -188,4 +208,17 @@
 
 #ask-name button:hover {
   text-shadow: 0px 0px 5px;
+}
+
+#name_taken {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1%;
+  margin-top: 2%;
+}
+
+#name_taken p {
+  margin: 0;
 }

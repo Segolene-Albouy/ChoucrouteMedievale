@@ -19,9 +19,16 @@ function submitName(evt) {
     }
     return;
   }
-  localStorage.setItem("medievalName", `${name} ${adj}`);
-  console.log({ name });
-  document.getElementById("landing-name").classList.add("submitted");
+
+  errorMessageElement.style.display = "none";
+  const nameTaken = false; // TODO check if name is taken with API
+  if (nameTaken) {
+    document.getElementById("name_taken").style.display = "flex";
+  } else {
+    localStorage.setItem("medievalName", `${name} ${adj}`);
+    document.getElementById("landing-name").classList.add("submitted");
+    // TODO Save to API
+  }
 }
 document.addEventListener("DOMContentLoaded", function () {
   const medievalName = localStorage.getItem("medievalName");
