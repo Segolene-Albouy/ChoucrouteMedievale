@@ -1,24 +1,23 @@
 #scroll {
-    margin: auto;
-    background-image: url("../static/scroll.png");
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    border: none;
-    background-color: transparent;
-    filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.5));
-    width: 66vw;
-    height: 89vw;
-    padding: 3em;
+  margin: auto;
+  background-image: url("../static/scroll.png");
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  border: none;
+  background-color: transparent;
+  filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.5));
+  height: 105vw;
+  display: flex;
+  justify-content: center;
 }
 
 #sexy {
-    padding-top: 10vw;
-    margin: auto;
-    font-family: monospace;
-    font-weight: bold;
-    white-space: pre;
-    display: inline-block;
-    padding-left: 3vw;
-    width: 100%;
+  line-height: 0.6vw;
+  font-size: 0.5vw;
+  font-family: monospace;
+  font-weight: bold;
+  white-space: pre;
+  width: fit-content;
+  margin-top: 14%;
 }
