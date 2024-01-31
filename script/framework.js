@@ -120,13 +120,14 @@ document.addEventListener("DOMContentLoaded", function () {
   createDoorsNavigation();
 });
 
-window.addEventListener("popstate", function (event) {
-  // show previous page if user click on "Back to page"
-  const pageId = event.state ? event.state.page : "cour";
-  if (pages[pageId]) {
-    pages[pageId].show();
-  }
-});
+// Cause un bug sur Chrome qui fait que event.state est toujours null
+// window.addEventListener("popstate", function (event) {
+//   // show previous page if user click on "Back to page"
+//   const pageId = event.state ? event.state.page : "cour";
+//   if (pages[event.state.page]) {
+//     pages[pageId].show();
+//   }
+// });
 
 class Page {
   constructor(id) {
@@ -158,6 +159,12 @@ class Page {
   }
 }
 
+function logDoors() {
+  document.querySelectorAll('input[name="doors"]').forEach((input) => {
+    console.log(input.id, input.checked);
+  });
+}
+
 function createDoorsNavigation() {
   // Create input radio for each page
   const pagesIds = Object.keys(pagesOnload);
@@ -166,7 +173,7 @@ function createDoorsNavigation() {
     const input = document.createElement("input");
     input.setAttribute("type", "radio");
     input.setAttribute("name", "doors");
-    input.setAttribute("id", pageId);
+    input.setAttribute("id", pageId + "door");
     // Create label including link
     // const label = document.createElement("label");
     // label.setAttribute("for", pageId);
@@ -179,7 +186,8 @@ function createDoorsNavigation() {
     door.addEventListener("click", function (e) {
       // Scroll body to top of page
       pages[pageId].show(); // Show page
-      input.setAttribute("checked", "checked"); // Check input (will change CSS)
+      input.checked = true;
+      // Check input (will change CSS)
       (function smoothscroll() {
         var currentScroll =
           document.documentElement.scrollTop || document.body.scrollTop;
@@ -192,7 +200,7 @@ function createDoorsNavigation() {
 
     // Set selected if currentPageId is this pageId
     if (currentPageId === pageId) {
-      input.setAttribute("checked", "checked");
+      input.checked = true;
     }
 
     // Add to DOM

@@ -133,7 +133,7 @@ function burst(nbParticle = 50) {
 
 function initIdleCursorAnimation() {
   hoverInterval = setInterval(() => {
-    monitorParticles();
+    // monitorParticles();
 
     // Move particles
     particlePool.getRunningParticles().forEach((p) => {
@@ -219,7 +219,7 @@ function animateSword() {
   mainCursor.style.display = "block";
   mainCursor.style.backgroundImage = 'url("../static/gif/sword/sword13.gif")';
   setTimeout(() => {
-    mainCursor.style.display = "none";
+    if (isMobile()) mainCursor.style.display = "none";
     mainCursor.style.backgroundImage = 'url("../static/gif/sword/sword13.png")';
   }, 2500);
 }

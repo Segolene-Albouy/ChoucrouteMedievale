@@ -35,14 +35,12 @@ function play(audioFilename, onended = () => {}) {
     // fadeOutAndPause(currentAudio);
   }
 
-  console.log("creating audio ", audioFilename);
   const audio = new Audio(`static/sounds/${audioFilename}.mp3`);
   audio.play();
   currentAudio = audio;
 
   audio.onended = function () {
     currentAudio = null;
-    console.log("audio ended");
     onended();
   };
 }
