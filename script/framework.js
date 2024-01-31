@@ -3,13 +3,20 @@ let currentOpenPage = null;
 let currentPageId = "cour";
 
 const loadHome = (firstTime) => {
+  resetCursor();
   if (!firstTime) play("tavern");
 };
-const loadBanquet = () => {};
-const loadArmurerie = () => {};
+const loadBanquet = () => {
+  resetCursor();
+};
+const loadArmurerie = () => {
+  resetCursor();
+};
 
 const loadDungeon = () => {
   particlePool.extinguishParticles();
+  setNewCursor("gif/sword/sword13.png", animateSword);
+  disableBurstOnClick();
   play("fire");
 
   const ascii = document.getElementById("sexy");

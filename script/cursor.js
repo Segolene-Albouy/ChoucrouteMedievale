@@ -30,6 +30,10 @@ function mousePosition(e) {
 
 document.addEventListener("DOMContentLoaded", function () {
   const mainCursor = document.getElementById("main-cursor");
+  if (isMobile()) {
+    mainCursor.style.display = "none";
+    return;
+  }
 
   document.addEventListener("mousemove", function (e) {
     const { x, y } = mousePosition(e);
@@ -42,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
   /*document.addEventListener("click", function (e) {
     burst(50);
   });*/
-  document.addEventListener("click", burst, true);
+  activateBurstOnClick();
 
   const interactiveElements = document.querySelectorAll(
     "button, a, false-link"
@@ -56,9 +60,14 @@ document.addEventListener("DOMContentLoaded", function () {
       hoverAnimation.running = false;
     });
   });
-
-  initIdleCursorAnimation();
 });
+
+function activateBurstOnClick() {
+  document.addEventListener("click", burst, true);
+}
+function disableBurstOnClick() {
+  document.removeEventListener("click", burst, true);
+}
 
 function spawnParticle(x, y, options) {
   let speed = options
@@ -120,6 +129,7 @@ function burst(nbParticle = 50) {
 }
 
 function initIdleCursorAnimation() {
+  if (isMobile()) return;
   hoverInterval = setInterval(() => {
     // monitorParticles();
 
@@ -140,7 +150,8 @@ function initIdleCursorAnimation() {
       const addedY = Math.round(particle.direction.y * particle.speed);
       particle.style.top = top + addedX + "px";
       particle.style.left = left + addedY + "px";
-      particle.style.opacity = parseFloat(particle.style.opacity) - fps / particle.duration;
+      particle.style.opacity =
+        parseFloat(particle.style.opacity) - fps / particle.duration;
     });
 
     document.getElementById("main-cursor").style.opacity = 1;
@@ -183,15 +194,18 @@ const particlePool = {
     }, duration);
     return targetParticle.particle;
   },
-  extinguishParticles: function() {
-    document.removeEventListener("click", burst, true);
-    this.getRunningParticles().map(p => {
+  extinguishParticles: function () {
+    this.getRunningParticles().map((p) => {
       p.state = "ended";
       p.particle.remove();
     });
-    setNewCursor("gif/sword/sword13.png", animateSword)
-  }
+  },
 };
+
+function resetCursor() {
+  setNewCursor("fireanim", burst);
+  activateBurstOnClick();
+}
 
 function setNewCursor(newImg, clickEvent) {
   const mainCursor = document.getElementById("main-cursor");
@@ -201,13 +215,18 @@ function setNewCursor(newImg, clickEvent) {
   document.addEventListener("click", clickEvent, true);
 }
 
-function animateSword(){
+function animateSword() {
   const mainCursor = document.getElementById("main-cursor");
   mainCursor.style.backgroundImage = 'url("../static/gif/sword/sword13.gif")';
-  setTimeout(() => {mainCursor.style.backgroundImage = 'url("../static/gif/sword/sword13.png")'}, 2500)
+  setTimeout(() => {
+    mainCursor.style.backgroundImage = 'url("../static/gif/sword/sword13.png")';
+  }, 2500);
 }
 
-
 function monitorParticles() {
-  console.log(`Particle running ${particlePool.getRunningParticles().length}/${particlePool.pool.length}`);
+  console.log(
+    `Particle running ${particlePool.getRunningParticles().length}/${
+      particlePool.pool.length
+    }`
+  );
 }

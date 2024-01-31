@@ -16,6 +16,12 @@ function shuffleArray(arr) {
   return newArr;
 }
 
+function isMobile() {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  );
+}
+
 // Je sais faut pas faire ça mais je m'en fous
 // Grosse thug
 String.prototype.capitalize = function () {
