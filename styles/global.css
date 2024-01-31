@@ -1,3 +1,9 @@
+* {
+  box-sizing: border-box;
+  --scroll-w: 395px;
+  --scroll-h: 506px;
+}
+
 html,
 body {
   max-width: 100vw;
@@ -5,9 +11,9 @@ body {
   cursor: none;
 }
 
-@font-face{
-  font-family : "ancient";
-  src : url('../static/fonts/CloisterBlack.ttf');
+@font-face {
+  font-family: "ancient";
+  src: url("../static/fonts/CloisterBlack.ttf");
 }
 
 body {

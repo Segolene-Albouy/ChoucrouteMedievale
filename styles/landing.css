@@ -35,8 +35,8 @@
   background-color: transparent;
   filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.5));
 
-  width: 300px;
-  height: 404px;
+  height: var(--scroll-h);
+  width: var(--scroll-w);
 
   display: flex;
   justify-content: center;
