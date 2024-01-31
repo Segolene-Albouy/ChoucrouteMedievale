@@ -92,6 +92,9 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll(".page").forEach((page, i) => {
     pages[page.id].hide();
   });
+
+  // create doors
+  createDoorsNavigation();
 });
 
 window.addEventListener("popstate", function (event) {
@@ -122,31 +125,52 @@ class Page {
       null,
       this.id === "cour" ? "/" : `/#${this.id}`
     );
-    this.createDoors();
   }
   hide() {
     document.getElementById(this.id).classList.add("hidden");
   }
+}
 
-  createDoors() {
-    const doors = document.getElementById("doors");
-    doors.innerHTML = "";
+function createDoorsNavigation() {
+  // Create input radio for each page
+  const pagesIds = Object.keys(pagesCallbacks);
+  const doors = document.getElementById("doors");
+  pagesIds.forEach((pageId) => {
+    const input = document.createElement("input");
+    input.setAttribute("type", "radio");
+    input.setAttribute("name", "doors");
+    input.setAttribute("id", pageId);
+    // Create label including link
+    // const label = document.createElement("label");
+    // label.setAttribute("for", pageId);
+    const door = document.createElement("a");
+    door.setAttribute("href", `#${pageId}`); // Make anchor link
+    door.classList.add("door");
+    door.classList.add("door");
+    door.innerText = pageId.capitalize();
 
-    const pagesIds = Object.keys(pagesCallbacks).filter((id) => id !== this.id);
-    pagesIds.map((pageId) => {
-      const door = document.createElement("a");
-      door.setAttribute("href", pageId);
-      door.classList.add("door");
-      door.innerHTML += `<img src="static/closedor.gif" alt="${pageId} Door" />
-                         <span>${pageId.capitalize()}</span>`;
-
-      door.addEventListener("click", function (e) {
-        e.preventDefault();
-        console.log(e);
-        console.log({ pageId });
-        pages[pageId].show();
-      });
-      doors.appendChild(door);
+    door.addEventListener("click", function (e) {
+      // Scroll body to top of page
+      pages[pageId].show(); // Show page
+      input.setAttribute("checked", "checked"); // Check input (will change CSS)
+      (function smoothscroll() {
+        var currentScroll =
+          document.documentElement.scrollTop || document.body.scrollTop;
+        if (currentScroll > 0) {
+          window.requestAnimationFrame(smoothscroll);
+          window.scrollTo(0, currentScroll - currentScroll / 5);
+        }
+      })();
     });
-  }
+
+    // Set selected if currentPageId is this pageId
+    if (currentPageId === pageId) {
+      input.setAttribute("checked", "checked");
+    }
+
+    // Add to DOM
+    // label.appendChild(door);
+    doors.appendChild(input);
+    doors.appendChild(door);
+  });
 }
