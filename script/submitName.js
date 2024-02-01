@@ -69,7 +69,7 @@ function submitName(evt) {
       case 'add':
         // todo handle what if no psw and/or no name
         localStorage.setItem("medievalPsw", res.psw);
-        localStorage.setItem("medievalPsw", res.name);
+        localStorage.setItem("medievalName", res.name);
         openGates(res.name, true);
         // TODO SHOW PASSWORD TO USER
         break;
