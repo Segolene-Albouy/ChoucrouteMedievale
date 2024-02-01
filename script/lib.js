@@ -82,3 +82,48 @@ function getHeightWidth(elementId) {
   const el = document.getElementById(elementId);
   return [el.offsetHeight, el.offsetWidth];
 }
+
+const getJSON = function (url) {
+  return new Promise((resolve, reject) => {
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+    xhr.responseType = "json";
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        resolve(xhr.response);
+      }
+      reject(xhr);
+    };
+    xhr.send();
+  });
+};
+
+const postJSON = function (url, data) {
+  return new Promise((resolve, reject) => {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        resolve(xhr.response);
+      }
+      reject(xhr);
+    };
+    xhr.send(JSON.stringify(data));
+  });
+  /*return fetch(url, {method: "POST", headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)});*/
+};
+/**
+ * Example
+ * retrieveJSON(url).then(data => {
+ *      // do something with data
+ *  }).catch(e => {
+ *      console.log(e);
+ *  });
+ * @param url
+ * @param {Object|null} data data to post
+ * @return {Promise<unknown>}
+ */
+const retrieveJSON = async (url, data = null) => {
+  return (await data) ? postJSON(url, data) : getJSON(url);
+};
