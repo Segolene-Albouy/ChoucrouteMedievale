@@ -177,10 +177,10 @@ mark {
 
 @keyframes pulse {
   from {
-    color: rgb(80, 21, 0);
+    color: rgb(101, 26, 0);
   }
   to {
-    color: rgb(159, 42, 0);
+    color: rgb(183, 46, 0);
   }
 }
 

@@ -45,39 +45,50 @@
         <div id="ask-name" class="parchment">
           <div id="banner">
             <img
-                    src="static/knight_horse_blue.gif"
-                    class="knight_horse_blue reverse-gifs"
+              src="static/knight_horse_blue.gif"
+              class="knight_horse_blue reverse-gifs"
             />
             <img src="static/shiny_shield.gif" class="shiny_shield" />
             <img src="static/knight_horse_blue.gif" class="knight_horse_blue" />
           </div>
-          <h3>Halte-là vagabond !</h3>
-          <p>La seigneurie de la Vielarnoult ne conoisse point vostre nom.</p>
-          <p>Révélez vostre nom avant de pénétrer au château.</p>
-          <div id="name-psw">
-            <button id="name" class="choice-jdr" onclick="iChoose('form-name')">Je donne mon nom</button>
-            <button id="psw" class="choice-jdr" onclick="iChoose('form-psw')">Je donne un mot de passe</button>
+          <div id="douves">
+            <h3>Halte-là vagabond !</h3>
+            <p>La seigneurie de la Vielarnoult ne conoisse point vostre nom.</p>
+            <p>Révélez-le avant de pénétrer au chasteau.</p>
           </div>
-          <form id="form-name" class="parchment" onsubmit="submitName(event)">
-            <p id="errorMessage">
+          <div id="name-psw" class="choice-container">
+            <button id="choose-name" class="choice-rpg" onclick="choose(this, showName)">Je donne mon nom</button>
+            <button id="choose-psw" class="choice-rpg" onclick="choose(this, showPsw)">Je donne un mot de passe</button>
+          </div>
+          <form id="form-name" class="rpg-form" onsubmit="submitName(event)">
+            <div id="error-name">
               <img
                 src="static/angry_knight.gif"
-                class="reverse-gifs angry_knight"
+                class="reverse-gifs angry-knight"
               />
-              <span>VOSTRE NOM MANANT</span>
-              <img src="static/angry_knight.gif" class="angry_knight" />
-            </p>
-            <div id="name_taken">
+              <span>!! Vostre nom manant !!</span>
+              <img src="static/angry_knight.gif" class="angry-knight" />
+            </div>
+            <div id="name-taken">
               <p>Hélas ce nom est déjà pris par un autre invité !</p>
               <img src="static/gif/Sword_Fighters.gif" width="205" height="138" />
               <p>Vous connoisse-t-on sous un autre nom ?</p>
             </div>
             <input type="text" id="name_input" name="name" autofocus />
             <select name="adjectif"></select>
-            <button type="submit">Soumettre ce nom à la garde du château</button>
+            <button id="name-submit" type="submit">Soumettre ce nom à la garde du chasteau</button>
           </form>
-          <form id="form-psw">
-
+          <form id="form-psw" class="rpg-form" onsubmit="submitPsw(event)">
+            <div id="error-psw">
+              <img
+                  src="static/angry_knight.gif"
+                  class="reverse-gifs angry-knight"
+              />
+              <span>!! Ce n'est point le mot de passe !!</span>
+              <img src="static/angry_knight.gif" class="angry-knight" />
+            </div>
+            <input type="text" id="psw_input" name="psw" autofocus />
+            <button id="psw-submit" type="submit">Proférer ce mot de passe aux gardes</button>
           </form>
       </div>
 

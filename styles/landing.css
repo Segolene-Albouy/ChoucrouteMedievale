@@ -40,10 +40,16 @@
 
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   padding: 3em;
 
   transition: transform 3s ease;
+}
+
+#opendor mark {
+  font-family: "ancient", serif;
+  font-size: 0.5em;
 }
 
 .landing-content {
@@ -98,10 +104,11 @@
 #banner {
   position: relative;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: auto;
   width: 85%;
   max-height: 76px;
+  padding-bottom: 1em;
 }
 
 #banner .shiny_shield {
@@ -135,35 +142,46 @@
   letter-spacing: 0.1em;
   font-weight: normal;
 }
-#ask-name > p {
+#ask-name p {
   padding: 0 1em;
+  font-family: "MedievalSharp", serif;
 }
-#ask-name #errorMessage {
+#error-name, #error-psw {
+  font-family: "MedievalSharp", serif;
   display: none;
+  text-align: center;
   font-weight: bold;
   font-size: 1.3em;
-  max-height: 1.3em;
+  max-height: 2.6em;
   margin: 0;
-  justify-content: space-between;
   align-items: center;
+  /*white-space: nowrap;*/
+  justify-content: space-around;
 }
 
-#ask-name #errorMessage span {
+#error-name, #error-psw span {
   flex-grow: 1;
+  margin: 0 10px;
+  font-family: "ancient", serif;
 }
-#ask-name #errorMessage span::before,
-#ask-name #errorMessage span::after {
+
+/*#error-name span::before, #error-psw span::before,
+#error-name span::after, #error-psw span::after {
   content: "!!";
   font-size: 1.3em;
   font-family: "Chomsky", serif;
   margin: 0 5%;
-}
+}*/
 
-#errorMessage.again span {
+#error-name.again, #error-psw.again span {
   animation: wiggle 0.2s ease-out 0s 3 alternate none;
 }
 
-#ask-name input {
+.rpg-form {
+  margin-top: 5vh;
+}
+
+.rpg-form input {
   background: none;
   outline: none;
   border: none;
@@ -175,7 +193,7 @@
   text-align: center;
   margin-top: 2%;
 }
-#ask-name select {
+.rpg-form select {
   display: block;
   width: 90%;
   background: none;
@@ -190,10 +208,10 @@
   margin: 2% auto;
   border-radius: 0.4em;
 }
-#ask-name select:hover {
+.rpg-form select:hover {
   box-shadow: 0 0 0.2em 2px black;
 }
-#ask-name button {
+.rpg-form button {
   display: block;
   outline: none;
   background: none;
@@ -208,10 +226,10 @@
 }
 
 #ask-name button:hover {
-  text-shadow: 0px 0px 5px;
+  text-shadow: 0 0 5px;
 }
 
-#name_taken {
+#name-taken {
   display: none;
   flex-direction: column;
   align-items: center;
@@ -220,6 +238,54 @@
   margin-top: 2%;
 }
 
-#name_taken p {
+#name-taken p {
   margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .choice-rpg {
+    width: 25vw;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .choice-rpg {
+    width: 10vw;
+  }
+}
+
+.choice-container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 0 auto;
+  padding: 5vh;
+}
+
+.choice-rpg {
+  background-image: url("../static/parchment.jpg");
+  background-attachment: scroll;
+  background-position: center center;
+  /*background-size: contain;*/
+  padding: 10px 20px;
+  border: none; /*1px solid #501500;*/
+  font-size: 1.3em;
+  font-family: "Chomsky", serif;
+  color: #663300;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+  margin: 0 1em;
+}
+
+.choice-rpg:hover {
+  transform: translateY(3px);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+#form-name {
+  display: none;
+}
+
+#form-psw {
+  display: none;
 }
