@@ -60,14 +60,14 @@
             <button
               id="choose-psw"
               class="choice-rpg"
-              onclick="choose(this, showPsw)"
+              onclick="choose(showPsw)"
             >
               Je connais le mot de passe
             </button>
             <button
               id="choose-name"
               class="choice-rpg"
-              onclick="choose(this, showName)"
+              onclick="choose(showName)"
             >
               Je donne mon nom
             </button>
@@ -110,6 +110,16 @@
               Proférer ce mot de passe aux gardes
             </button>
           </form>
+          <div id="welcome">
+            <p><span class="username"></span><span class="thinking"></span></span></p>
+            <p>Curieux, mais soit...
+              <br/>
+              Vénérable <span class="username"></span>, scribez-cette note dans vos parchemins, elle vous servira à vous faire reconnaître des autres gardes du chasteau.
+              <br/>
+              Cette information est de grande importance, ne la divulguez en aucun cas !
+            </p>
+            <p><mark class="password"></mark></p>
+          </div>
         </div>
       </div>
     </div>

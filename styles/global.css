@@ -198,6 +198,12 @@ mark {
   transform: scaleX(-1);
 }
 
+.thinking::after {
+  content: ".";
+  position: absolute;
+  animation: 3s thinking ease forwards;
+}
+
 /* Wiggle animation */
 @keyframes wiggle {
   0% {
@@ -211,5 +217,29 @@ mark {
   }
   100% {
     transform: rotate(0deg);
+  }
+}
+
+@keyframes thinking {
+  0% {
+    content: "";
+  }
+  15% {
+    content: ".";
+  }
+  30% {
+    content: "..";
+  }
+  45% {
+    content: "...";
+  }
+  60% {
+    content: "....";
+  }
+  75% {
+    content: ".....";
+  }
+  100% {
+    content: "......";
   }
 }

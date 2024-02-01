@@ -6,8 +6,9 @@ var pswAttempts = null;
 const devMode = false;
 let currentDisplayedFormId = null;
 
-function choose(rpgBtn, callback) {
-  rpgBtn.parentElement.remove();
+function choose(callback) {
+  document.getElementById("douves").remove();
+  document.getElementById("name-psw").remove();
   callback();
 }
 
@@ -88,7 +89,6 @@ function submitPsw(evt) {
 
 function showName() {
   currentDisplayedFormId = "form-name";
-  document.getElementById("douves").remove();
   document.getElementById("form-name").style.display = "block";
 
   // Build adjectifs options
@@ -110,7 +110,6 @@ function showName() {
 
 function showPsw() {
   currentDisplayedFormId = "form-psw";
-  document.getElementById("douves").remove();
   document.getElementById("form-psw").style.display = "block";
 }
 
@@ -151,21 +150,25 @@ document.addEventListener("DOMContentLoaded", function () {
     // ça passe les gardes
     openGates(medievalName);
     // API call to update last connection
-    retrieveJSON(APIurl, { psw: medievalPsw }).catch((res) => {
+    retrieveJSON(APIurl, { psw: medievalPsw }).then((res) => {
       console.log(JSON.parse(res.response));
     });
+    // TODO .catch si le gueux n'existe plus
     return;
   }
   // TODO add to the condition if (no psw but name) or (no name but psw)
   if (localStorage.getItem("pswAttempts")) {
     // if the user already tried to connect with psw before, reset their attempts
     pswAttempts = 0;
-    document.getElementById("choose-name").remove();
-    document.getElementById("douves").innerHTML = `<h3>Halte-là !</h3>
-      <p>Je reconnois vostre visage.</p><p>Quel est vostre mot de passe ?</p>`;
+    localStorage.setItem("pswAttempts", "0");
+    // On reset les attemps si il rafraichit la page mais on laisse la page d'acceuil ?
+    // document.getElementById("choose-name").remove();
+    // document.getElementById("douves").innerHTML = `<h3>Halte-là !</h3>
+    //   <p>Je reconnois vostre visage.</p><p>Quel est vostre mot de passe ?</p>`;
   }
   // les gardes apparaissent
-  document.getElementById("ask-name").style.display = "block";
+  // document.getElementById("ask-name").style.display = "block";
+  document.getElementById("ask-name").style.scale = "1";
 });
 
 /**
@@ -231,12 +234,12 @@ async function apiNewGueux(name) {
   const targetForm = document.getElementById(currentDisplayedFormId);
   try {
     const res = await retrieveJSON(APIurl, { name });
+
+    //Success
     targetForm.removeAttribute("state");
-    // todo handle what if no psw and/or no name
     localStorage.setItem("medievalPsw", res.psw);
     localStorage.setItem("medievalName", res.name);
-    openGates(res.name, true);
-    // TODO SHOW PASSWORD TO USER
+    welcomeUser(res.name, res.pws);
   } catch (e) {
     targetForm.setAttribute("state", "error");
     console.log(e);
@@ -293,4 +296,27 @@ async function apiCheckGueux(psw) {
         }
     }
   }
+}
+
+function welcomeUser(name, psw) {
+  document.getElementById("form-name").style.display = "none";
+  document.getElementById("welcome").style.display = "block";
+  document.querySelector("#welcome .thinking").setAttribute("running", "true");
+
+  Array.from(document.querySelectorAll(".username")).forEach((el) => {
+    el.innerText = name;
+  });
+  Array.from(document.querySelectorAll(".password")).forEach((el) => {
+    el.innerText = psw;
+  });
+
+  setTimeout(() => {
+    document
+      .querySelectorAll("#welcome >*:not(:first-child)")
+      .forEach((e) => (e.style.opacity = "1"));
+
+    document.getElementById("welcome").addEventListener("click", () => {
+      openGates(name, true);
+    });
+  }, 3000);
 }

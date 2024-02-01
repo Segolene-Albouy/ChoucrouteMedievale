@@ -94,11 +94,14 @@
   pointer-events: none;
 }
 #ask-name {
-  display: none;
+  /* display: none; */
+  scale: 0;
+  transition: all 0.2s ease-in;
   box-shadow: 0 0 2em 0.1em;
   padding: 2em;
   text-align: center;
   font-size: 1rem;
+  max-width: 80vw;
 }
 
 #banner {
@@ -272,6 +275,24 @@
   transform: translateY(3px);
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }
+#welcome {
+  display: none;
+  font-size: 1.2em;
+  line-height: 1.5em;
+}
+#welcome > *:not(:first-child) {
+  opacity: 0;
+}
+#welcome .username:first-child {
+  font-weight: bold;
+  font-size: 1.21em;
+}
+#welcome .password {
+  font-family: "ancient", serif;
+  text-shadow: 2px 2px 4px rgb(141 66 1 / 90%);
+  color: #b90000;
+  filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.5));
+}
 
 @media screen and (max-width: 768px) {
   .choice-rpg {
@@ -280,5 +301,9 @@
   .choice-container {
     flex-direction: column;
     gap: 1em;
+  }
+
+  #ask-name {
+    max-width: none;
   }
 }
