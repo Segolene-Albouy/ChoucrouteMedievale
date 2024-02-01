@@ -30,17 +30,45 @@ function submitName(evt) {
     // TODO Save to API
   }
 }
+
+function iChoose(elId){
+
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   const medievalName = localStorage.getItem("medievalName");
-  if (medievalName) {
-    document.getElementById("landing-name").style.display = "none";
+
+  /*if (medievalName) {
     console.log({ medievalName });
+    document.getElementById("landing-name").remove();
+
+    retrieveJSON(
+        "https://europe-west9-choucroutemedievale.cloudfunctions.net/checkName",
+        { name: medievalName }
+    ).then(res => {
+      res = JSON.parse(res).body;
+
+      /!*if (!output && !isArray(output)){
+        errMsg(output, data, "Result output of Fill by model function is not correctly formatted");
+        return;
+      }*!/
+    }).catch(e => {
+      console.table(JSON.parse(e.response).detail);
+    });
+
     // TODO save to API
     // TODO allow say "c'est pas moi"
 
     // document.getElementById("ask-name").innerHTML = `<h1>Bienvenue <mark>${medievalName}</mark></h1>`;
     return;
+  }*/
+  const pswAttempts = localStorage.getItem("pswAttempts");
+  if (pswAttempts){
+    localStorage.setItem("pswAttempts", "0");
+    // TODO do not show name / only mdp
   }
+
+  document.getElementById("ask-name").style.display = "block";
 
   errorMessageElement = document.getElementById("errorMessage");
 
@@ -123,7 +151,7 @@ const adjectifs = [
 ];
 
 /*
-On été mentionné mais pas ajouté (je me dis ça va pas trop dans le thème ou autre..):
+Ont été mentionnés mais pas ajouté (je me dis ça va pas trop dans le thème ou autre..):
 L'enculé
 Le casanié
 L'ivrogne (tout le monde voudra être l'ivrogne)
@@ -134,3 +162,4 @@ Le puant
 // Et la copilot me propose "Le puceau" AHA
 // en vrai je pense qu'on pourra dédoublonner lâche/couard, vaillant/valeureux ?
 */
+

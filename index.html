@@ -6,6 +6,7 @@
     <title>Choucroute médiévale</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- TODO enlever des polices -->
     <link
       href="https://fonts.googleapis.com/css2?family=Almendra:wght@400;700&family=Astloch&family=Bokor&family=Caudex&family=Eagle+Lake&family=Grenze+Gotisch:wght@200;400;700&family=MedievalSharp&family=Pirata+One&family=UnifrakturCook:wght@700&family=UnifrakturMaguntia&display=swap"
       rel="stylesheet"
@@ -41,36 +42,46 @@
         <button id="opendor" onclick="opendor()">Pénétrez au chateau !</button>
       </div>
       <div id="landing-name" class="landing-content">
-        <form id="ask-name" class="parchment" onsubmit="submitName(event)">
+        <div id="ask-name" class="parchment">
           <div id="banner">
             <img
-              src="static/knight_horse_blue.gif"
-              class="knight_horse_blue reverse-gifs"
+                    src="static/knight_horse_blue.gif"
+                    class="knight_horse_blue reverse-gifs"
             />
             <img src="static/shiny_shield.gif" class="shiny_shield" />
             <img src="static/knight_horse_blue.gif" class="knight_horse_blue" />
           </div>
           <h3>Halte-là vagabond !</h3>
-          <p>La seigneurie de la Viellarnoult ne conoisse point vostre nom.</p>
+          <p>La seigneurie de la Vielarnoult ne conoisse point vostre nom.</p>
           <p>Révélez vostre nom avant de pénétrer au château.</p>
-          <p id="errorMessage">
-            <img
-              src="static/angry_knight.gif"
-              class="reverse-gifs angry_knight"
-            />
-            <span>VOSTRE NOM MANANT</span>
-            <img src="static/angry_knight.gif" class="angry_knight" />
-          </p>
-          <div id="name_taken">
-            <p>Hélas ce nom est déjà pris par un autre invité !</p>
-            <img src="static/gif/Sword_Fighters.gif" width="205" height="138" />
-            <p>Vous connoisse-t-on sous un autre nom ?</p>
+          <div id="name-psw">
+            <button id="name" class="choice-jdr" onclick="iChoose('form-name')">Je donne mon nom</button>
+            <button id="psw" class="choice-jdr" onclick="iChoose('form-psw')">Je donne un mot de passe</button>
           </div>
-          <input type="text" id="name_input" name="name" autofocus />
-          <select name="adjectif"></select>
-          <button type="submit">Soumettre ce nom à la garde du château</button>
-        </form>
+          <form id="form-name" class="parchment" onsubmit="submitName(event)">
+            <p id="errorMessage">
+              <img
+                src="static/angry_knight.gif"
+                class="reverse-gifs angry_knight"
+              />
+              <span>VOSTRE NOM MANANT</span>
+              <img src="static/angry_knight.gif" class="angry_knight" />
+            </p>
+            <div id="name_taken">
+              <p>Hélas ce nom est déjà pris par un autre invité !</p>
+              <img src="static/gif/Sword_Fighters.gif" width="205" height="138" />
+              <p>Vous connoisse-t-on sous un autre nom ?</p>
+            </div>
+            <input type="text" id="name_input" name="name" autofocus />
+            <select name="adjectif"></select>
+            <button type="submit">Soumettre ce nom à la garde du château</button>
+          </form>
+          <form id="form-psw">
+
+          </form>
       </div>
+
+    </div>
     </div>
 
     <main>
@@ -94,17 +105,16 @@
           <h2>Dameselles et damelots</h2>
           <p>
             Entrez entrez dans la cour du chasteau ! Les seigneurs de la
-            Viellarnoult préparent moult réjouissances pour la grand fête du
-            chou nouveau. Le <mark>16 mars</mark> mil vingt-quatre, les quatre
-            fiefs du Royaume se réuniront pour demonstrer prouesses et
-            valeresses dans le plus prodigieux tournoi que la Bretagne ait cognu
-            !
+            Vielarnoult préparent moult réjouissances pour la grand fête du
+            chou nouveau. Le <mark>16 mars</mark> deux mil vingt-quatre, les
+            quatre fiefs du Royaume se réuniront pour demonstrer prouesses et
+            valeresses dans le plus prodigieux tournoi que la Bretagne ait
+            cognu !
           </p>
           <p>
-            Pour de gagner le <mark>chou-chêne d'or</mark>, les preux champions
-            devront s'affronter autour de cinq espreuves
+            Pour tenter de gagner le <mark>chou-chêne d'or</mark>, les preux
+            champions devront s'affronter autour de quinte espreuves
           </p>
-          <p>Les preux champions s'affronteront autour de cinq épreuves</p>
           <ul>
             <li>Le tournoi du plus flamboyant costume</li>
             <li>Le Catapultou</li>
@@ -144,10 +154,11 @@
 
       <div id="armurerie" class="page">
         <section class="parchment">
-          <h2>
-            Dégouspiller avec<br />vostre affublement<br />de
+          <h2>Qui entre paré ainsi ?</h2>
+          <p>
+            Dégouspille, maraud, avec<br />ton affublement<br />de
             <mark>giguedouilleux</mark> !
-          </h2>
+          </p>
           <img src="../static/gif/knight3.gif" alt="boursemolle" />
         </section>
       </div>

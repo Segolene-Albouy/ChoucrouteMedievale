@@ -88,6 +88,7 @@
   pointer-events: none;
 }
 #ask-name {
+  display: none;
   box-shadow: 0 0 2em 0.1em;
   padding: 2em;
   text-align: center;

@@ -49,49 +49,61 @@ const firestore = new Firestore({
 });
 
 const gueuxDb = firestore.collection('names');
+const mdpDb = firestore.collection('psw');
 
 functions.http('setName', async (req, res) => {
+    const domain = req.headers.referer;
+    if (!domain || !domain.includes('choucroute-medievale.tech')) {
+        res.status(403).send(`Que croyais-tu, manand ?`);
+        return;
+    }
+
     try {
         const now = Firestore.FieldValue.serverTimestamp();
 
         // GET req.query
         // POST req.body
-        const { name, fromLocalStorage } = req.body;
+        const { name, psw } = req.body;
         const ipAddress = req.ip;
 
-        const nameQuery = await gueuxDb.where('name', '==', name).get();
-        const ipQuery = await gueuxDb.where('ips', 'array-contains', ipAddress).get();
+        if (name){
+            const nameQuery = await gueuxDb.where('name', '==', name).get();
+            // const ipQuery = await gueuxDb.where('ips', 'array-contains', ipAddress).get();
 
-        // TODO difference entre info venues du fileStorage ou non
-        // ajouter une nouvelle ip si même nom et nouvel ip
-        // forcer que la requête vienne de choucroute-medievale.tech
+            let status;
+            if (nameQuery.size === 1) {
+                const gueuxDoc = nameQuery.docs[0];
+                const gueuxData = gueuxDoc.data();
 
-        let status;
-        if (nameQuery.size === 1) {
-            const gueuxDoc = nameQuery.docs[0];
-            const gueuxData = gueuxDoc.data();
+                await gueuxDoc.ref.update({ lastConnection: now });
+                if (!gueuxData.ips || !gueuxData.ips.includes(ipAddress)) {
+                    await gueuxDoc.ref.update({ ips: Firestore.FieldValue.arrayUnion(ipAddress) });
+                }
 
-            await gueuxDoc.ref.update({ lastConnection: now });
-            if (!gueuxData.ips || !gueuxData.ips.includes(ipAddress)) {
-                await gueuxDoc.ref.update({ ips: Firestore.FieldValue.arrayUnion(ipAddress) });
+                status = "update";
+            } else if (nameQuery.size > 1) {
+                status = "wtf";
+                res.status(201).json({
+                    greetings: `Bienvenue à toi, ${name}!`,
+                    ip: ipAddress,
+                    status
+                });
+            } else {
+                // Name not associated, create a new gueux profile
+                const newGueux = {
+                    name: name,
+                    team: "",
+                    created: now,
+                    lastConnection: now,
+                    ips: [ipAddress]
+                };
+
+                await gueuxDb.doc(gueuxDb.doc().id).set(newGueux);
+                status = "add";
             }
-
-            status = "update";
-        } else if (nameQuery.size > 1) {
-            status = "wtf";
-        } else {
-            // Name not associated, create a new gueux profile
-            const newGueux = {
-                name: name,
-                team: "",
-                created: now,
-                lastConnection: now,
-                ips: [ipAddress]
-            };
-
-            await gueuxDb.doc(gueuxDb.doc().id).set(newGueux);
-            status = "add";
         }
+
+
 
         // res.send(`Bienvenue à toi, ${name}!`);
         res.status(201).json({
