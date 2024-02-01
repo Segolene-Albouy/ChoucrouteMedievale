@@ -71,6 +71,10 @@ function submitName(evt) {
         localStorage.setItem("medievalPsw", res.psw);
         localStorage.setItem("medievalPsw", res.name);
         openGates(res.name, true);
+        // TODO SHOW PASSWORD TO USER
+        break;
+      case 'no-more-psw':
+        // todo handle no more password
         break;
       case 'wtf':
       default:
@@ -94,6 +98,8 @@ function submitPsw(evt) {
 
   const medievalPsw = evt.target.psw ? evt.target.psw.value : null;
   console.log(medievalPsw);
+
+  // TOSO normalize password (no maj, spaces replaced by "-")
 
   retrieveJSON(
       APIurl, { psw: medievalPsw }
@@ -186,7 +192,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     return;
   }
-  // TODO what about y'a un nom mais pas de mdp ??
+  // TODO add to the condition if (no psw but name) or (no name but psw)
   if (localStorage.getItem("pswAttempts")){
     // if the user already tried to connect with psw before, reset their attempts
     pswAttempts = 0;

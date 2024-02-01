@@ -29,9 +29,22 @@ const firestore = new Firestore({
 const gueuxDb = firestore.collection('names');
 const mdpDb = firestore.collection('psw');
 
-async function newPsw () {
-    const freePsw = await mdpDb.where('attributed', '==', false).get();
-    return freePsw.docs[0].id;
+async function newPsw() {
+    try {
+        const freePswQuery = await mdpDb.where('attributed', '==', false).limit(1).get();
+
+        if (!freePswQuery.empty) {
+            const freePs = freePswQuery.docs[0];
+            await freePs.ref.update({ attributed: true });
+            return freePs.id;
+        } else {
+            console.error('No available passwords.');
+            return null;
+        }
+    } catch (error) {
+        console.error('Error when generating password:', error);
+        throw error;
+    }
 }
 
 async function newGueux (name, psw, ipAddress, now) {
@@ -95,8 +108,15 @@ functions.http('setName', async (req, res) => {
                 status = "wtf";
             } else {
                 // name not taken, create a new gueux profile
-                psw = newPsw();
-                await newGueux(name, psw, ipAddress, now)
+                psw = await newPsw();
+                if (!psw) {
+                    res.status(201).json({
+                        name: name,
+                        psw: psw,
+                        status: "no-more-psw"
+                    });
+                }
+                await newGueux(name, psw, ipAddress, now);
                 status = "add";
             }
         } else if (psw){
@@ -105,8 +125,10 @@ functions.http('setName', async (req, res) => {
 
             if (pswQuery.size === 1) {
                 // the password is correct
+                const gueux = pswQuery.docs[0];
                 status = "update"
-                await updateGueux(pswQuery.docs[0], ipAddress, now);
+                name = gueux.data().name
+                await updateGueux(gueux, ipAddress, now);
             } else if (pswQuery.size > 1) {
                 // that psw was attributed multiple time (should not happen)
                 status = "wtf";
@@ -117,9 +139,9 @@ functions.http('setName', async (req, res) => {
         }
 
         res.status(201).json({
-            name,
-            psw,
-            status
+            name: name,
+            psw: psw,
+            status: status
         });
     } catch (error) {
         res.status(500).json({
