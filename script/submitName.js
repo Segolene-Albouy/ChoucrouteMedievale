@@ -99,7 +99,7 @@ function submitPsw(evt) {
   const medievalPsw = evt.target.psw ? evt.target.psw.value : null;
   console.log(medievalPsw);
 
-  // TOSO normalize password (no maj, spaces replaced by "-")
+  // TODO normalize password (no maj, spaces replaced by "-")
 
   retrieveJSON(
       APIurl, { psw: medievalPsw }
@@ -119,7 +119,7 @@ function submitPsw(evt) {
       case 'update':
         // todo handle what if no psw and/or no name
         localStorage.setItem("medievalPsw", res.psw);
-        localStorage.setItem("medievalPsw", res.name);
+        localStorage.setItem("medievalName", res.name);
         openGates(res.name, true);
         break;
       case 'incorrect':
@@ -180,6 +180,8 @@ function openGates(medievalName, submitted= false){
 document.addEventListener("DOMContentLoaded", function () {
   const medievalName = localStorage.getItem("medievalName");
   const medievalPsw = localStorage.getItem("medievalPsw");
+
+  console.log({ medievalName, medievalPsw })
 
   if (medievalName && medievalPsw) {
     // ça passe les gardes
