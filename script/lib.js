@@ -102,7 +102,7 @@ const postJSON = function (url, data) {
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onload = function () {
-      if (xhr.status === 200) {
+      if (xhr.status >= 200 && xhr.status < 300) {
         resolve(xhr.response);
       }
       reject(xhr);

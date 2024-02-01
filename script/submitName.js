@@ -1,27 +1,35 @@
-var errorMessageElement = null;
+// var errorMessageElement = null;
 var wrongOnce = false;
-var APIurl = "https://europe-west9-choucroutemedievale.cloudfunctions.net/checkName";
+var APIurl =
+  "https://europe-west9-choucroutemedievale.cloudfunctions.net/checkName";
 var pswAttempts = null;
+const devMode = false;
+let currentDisplayedFormId = null;
 
-function choose(rpgBtn, callback){
+function choose(rpgBtn, callback) {
   rpgBtn.parentElement.remove();
   callback();
 }
 
-function resetLocalStorage(){
+function resetLocalStorage() {
   localStorage.removeItem("pswAttempts");
   localStorage.removeItem("medievalPsw");
   localStorage.removeItem("medievalName");
 }
 
-function passePartout(){
+function passePartout() {
   localStorage.setItem("medievalName", "Segoline La Devergoigneuse");
   localStorage.setItem("medievalPsw", "Je suis ton maitre");
 }
 
-function displayError(msg=null){
-  if (msg){
-    errorMessageElement.querySelector('span').innerHTML = msg;
+function displayError(msg) {
+  const errorMessageElement = document.querySelector(
+    `${currentDisplayedFormId} div[role=error]`
+  );
+  console.log(errorMessageElement);
+
+  if (msg) {
+    errorMessageElement.querySelector("span").innerHTML = msg;
   }
 
   if (wrongOnce) {
@@ -30,115 +38,58 @@ function displayError(msg=null){
     setTimeout(() => {
       errorMessageElement.classList.remove("again");
     }, 600);
-  } else {
-    wrongOnce = true;
-    errorMessageElement.style.display = "flex";
   }
+  wrongOnce = true;
 }
 
 function submitName(evt) {
-  evt.preventDefault();
-
-  const name = evt.target.name ? evt.target.name.value : null;
-  const adj = evt.target.adjectif ? evt.target.adjectif.value : null;
-  if (!name) {
-    displayError();
+  try {
+    commonFormHandler(evt, "name");
+  } catch (e) {
     return;
   }
-  errorMessageElement.style.display = "none";
+
+  const name = evt.target.name.value;
+  const adj = evt.target.adjectif.value;
+
   let medievalName = `${name} ${adj}`;
-  retrieveJSON(
-      APIurl, { name: medievalName }
-  ).then(res => {
-    console.log(res);
-  }).catch(res => {
-    // WEIRD: the response is caught here
-    res = JSON.parse(res.response);
-    if (res.hasOwnProperty("error")){
-      console.log(res.error);
-      displayError("?? Quelle est cette sorcellerie ??");
-      document.getElementById("name-submit").remove();
-      return
-    }
-    console.log(res);
-    switch (res.status) {
-      case 'taken':
-        // todo user already taken
-        document.getElementById("name-taken").style.display = "flex";
-        break;
-      case 'add':
-        // todo handle what if no psw and/or no name
-        localStorage.setItem("medievalPsw", res.psw);
-        localStorage.setItem("medievalName", res.name);
-        openGates(res.name, true);
-        // TODO SHOW PASSWORD TO USER
-        break;
-      case 'no-more-psw':
-        // todo handle no more password
-        break;
-      case 'wtf':
-      default:
-        console.log("should not happen");
-        displayError("?? Quelle est cette sorcellerie ??");
-        document.getElementById("psw-submit").remove();
-    }
-  });
+  if (devMode) return;
+  evt.target.setAttribute("state", "loading");
+  apiNewGueux(medievalName);
 }
 
 function submitPsw(evt) {
-  evt.preventDefault();
-  pswAttempts++;
-  localStorage.setItem("pswAttempts", `${pswAttempts}`);
-  if (pswAttempts > 3){
+  if (pswAttempts > 3) {
     displayError("!! Degouspillez sale maraud !!");
     document.getElementById("psw-submit").remove();
     // todo add: demande aux seigneurs
     return;
   }
 
-  const medievalPsw = evt.target.psw ? evt.target.psw.value : null;
+  try {
+    commonFormHandler(evt, "psw");
+  } catch (e) {
+    // Pas de valeur dans le form
+    pswAttempts++;
+    localStorage.setItem("pswAttempts", `${pswAttempts}`);
+    return;
+  }
+  const targetForm = evt.target;
+  let medievalPsw = targetForm.psw.value
+    .trim()
+    .toLowerCase()
+    .replace(/\s/g, "-");
   console.log(medievalPsw);
+  if (devMode) return;
 
-  // TODO normalize password (no maj, spaces replaced by "-")
-
-  retrieveJSON(
-      APIurl, { psw: medievalPsw }
-  ).then(res => {
-    console.log(res);
-  }).catch(res => {
-    // WEIRD: the response is caught here
-    res = JSON.parse(res.response);
-    if (res.hasOwnProperty("error")){
-      console.log(res.error);
-      displayError("?? Essaye tu de nous tromper maraud ??");
-      document.getElementById("psw-submit").remove();
-      return
-    }
-    console.log(res);
-    switch (res.status) {
-      case 'update':
-        // todo handle what if no psw and/or no name
-        localStorage.setItem("medievalPsw", res.psw);
-        localStorage.setItem("medievalName", res.name);
-        openGates(res.name, true);
-        break;
-      case 'incorrect':
-        displayError();
-        break;
-      case 'wtf':
-      default:
-        console.log("should not happen");
-        displayError("?? Quelle diablerie avait vous faist ??");
-        document.getElementById("psw-submit").remove();
-    }
-  });
+  targetForm.setAttribute("state", "loading");
+  apiCheckGueux(medievalPsw);
 }
 
-function showName(){
+function showName() {
+  currentDisplayedFormId = "form-name";
   document.getElementById("douves").remove();
   document.getElementById("form-name").style.display = "block";
-
-  errorMessageElement = document.getElementById("error-name");
 
   // Build adjectifs options
   const select = document.querySelector("#ask-name select");
@@ -157,15 +108,28 @@ function showName(){
   select.children[0].selected = true;
 }
 
-function showPsw(){
+function showPsw() {
+  currentDisplayedFormId = "form-psw";
   document.getElementById("douves").remove();
   document.getElementById("form-psw").style.display = "block";
-  errorMessageElement = document.getElementById("error-psw");
 }
 
-function openGates(medievalName, submitted= false){
-  document.getElementById("opendor").innerHTML = `Pénétrez au chateau<mark>${medievalName}</mark>`;
-  if (submitted){
+function commonFormHandler(evt, keyNeeded) {
+  evt.preventDefault();
+  if (!evt.target[keyNeeded].value.trim()) {
+    // Check key is here
+    evt.target.setAttribute("state", "error"); // set form state to error => will trigger css
+    throw new Error(`No ${keyNeeded} in form`);
+  }
+}
+
+function openGates(medievalName, submitted = false) {
+  document.getElementById(
+    "opendor"
+  ).innerHTML += `<mark>${medievalName}</mark>`;
+
+  if (submitted) {
+    // Ajout d'une classe pour faire un transition smooth
     document.getElementById("landing-name").classList.add("submitted");
   } else {
     document.getElementById("landing-name").remove();
@@ -181,21 +145,19 @@ document.addEventListener("DOMContentLoaded", function () {
   const medievalName = localStorage.getItem("medievalName");
   const medievalPsw = localStorage.getItem("medievalPsw");
 
-  console.log({ medievalName, medievalPsw })
+  console.log({ medievalName, medievalPsw });
 
   if (medievalName && medievalPsw) {
     // ça passe les gardes
     openGates(medievalName);
     // API call to update last connection
-    retrieveJSON(
-        APIurl, { psw: medievalPsw }
-    ).catch(res => {
+    retrieveJSON(APIurl, { psw: medievalPsw }).catch((res) => {
       console.log(JSON.parse(res.response));
     });
     return;
   }
   // TODO add to the condition if (no psw but name) or (no name but psw)
-  if (localStorage.getItem("pswAttempts")){
+  if (localStorage.getItem("pswAttempts")) {
     // if the user already tried to connect with psw before, reset their attempts
     pswAttempts = 0;
     document.getElementById("choose-name").remove();
@@ -264,3 +226,71 @@ const adjectifs = [
   ["L’Audicieux", "L’Audicieuse"],
   ["Le Dangereux", "La Dangereuse"],
 ];
+
+async function apiNewGueux(name) {
+  const targetForm = document.getElementById(currentDisplayedFormId);
+  try {
+    const res = await retrieveJSON(APIurl, { name });
+    targetForm.removeAttribute("state");
+    // todo handle what if no psw and/or no name
+    localStorage.setItem("medievalPsw", res.psw);
+    localStorage.setItem("medievalName", res.name);
+    openGates(res.name, true);
+    // TODO SHOW PASSWORD TO USER
+  } catch (e) {
+    targetForm.setAttribute("state", "error");
+    console.log(e);
+
+    switch (res.status) {
+      case 401: // Nom déjà pris
+        // todo user already taken
+        document.getElementById("name-taken").style.display = "flex";
+        break;
+      case 500:
+        document.getElementById("psw-submit").remove();
+
+        if (res.hasOwnProperty("error")) {
+          // Error sur le back
+          console.log(res.error);
+          displayError("?? Quelle est cette sorcellerie ??");
+          document.getElementById("name-submit").remove();
+          displayError("?? Quelle est cette sorcellerie ??");
+        } else {
+          // Erreur no more password
+          // todo handle no more password
+        }
+    }
+  }
+}
+
+async function apiCheckGueux(psw) {
+  const targetForm = document.getElementById(currentDisplayedFormId);
+  try {
+    const res = await retrieveJSON(APIurl, { psw });
+    targetForm.removeAttribute("state");
+
+    localStorage.setItem("medievalPsw", res.psw);
+    localStorage.setItem("medievalName", res.name);
+    openGates(res.name, true);
+  } catch (e) {
+    targetForm.setAttribute("state", "error");
+
+    switch (res.status) {
+      case 400: // Mauvais password
+        displayError();
+        break;
+      case 500:
+        document.getElementById("psw-submit").remove();
+
+        if (res.hasOwnProperty("error")) {
+          // Error sur le back
+          console.log(res.error);
+          displayError("?? Essaye tu de nous tromper maraud ??");
+        } else {
+          // Erreur bdd psw assign to multiple users
+          console.log("should not happen");
+          displayError("?? Quelle diablerie avait vous faist ??");
+        }
+    }
+  }
+}

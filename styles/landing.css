@@ -146,7 +146,12 @@
   padding: 0 1em;
   font-family: "MedievalSharp", serif;
 }
-#error-name, #error-psw {
+.rpg-form {
+  display: none;
+}
+
+/* Message Erreur */
+.rpg-form div[role="error"] {
   font-family: "MedievalSharp", serif;
   display: none;
   text-align: center;
@@ -154,31 +159,28 @@
   font-size: 1.3em;
   max-height: 2.6em;
   margin: 0;
+  margin-top: 5vh;
   align-items: center;
   /*white-space: nowrap;*/
   justify-content: space-around;
 }
+.rpg-form[state="error"] div[role="error"] {
+  display: flex;
+}
 
-#error-name, #error-psw span {
+.rpg-form div[role="error"] span {
   flex-grow: 1;
   margin: 0 10px;
   font-family: "ancient", serif;
 }
 
-/*#error-name span::before, #error-psw span::before,
-#error-name span::after, #error-psw span::after {
-  content: "!!";
-  font-size: 1.3em;
-  font-family: "Chomsky", serif;
-  margin: 0 5%;
-}*/
-
-#error-name.again, #error-psw.again span {
+.rpg-form div[role="error"].again span {
   animation: wiggle 0.2s ease-out 0s 3 alternate none;
 }
 
-.rpg-form {
-  margin-top: 5vh;
+/* Loading state */
+.rpg-form[state="loading"] button[type="submit"] {
+  pointer-events: none;
 }
 
 .rpg-form input {
@@ -222,6 +224,7 @@
   border: 0;
   line-height: 140%;
   letter-spacing: 0.1em;
+  margin: auto;
   margin-top: 6%;
 }
 
@@ -242,24 +245,11 @@
   margin: 0;
 }
 
-@media screen and (max-width: 768px) {
-  .choice-rpg {
-    width: 25vw;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .choice-rpg {
-    width: 10vw;
-  }
-}
-
 .choice-container {
   display: flex;
-  justify-content: center;
-  align-content: center;
-  margin: 0 auto;
-  padding: 5vh;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20%;
 }
 
 .choice-rpg {
@@ -275,6 +265,7 @@
   transition: all 0.3s ease;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
   margin: 0 1em;
+  width: 30%;
 }
 
 .choice-rpg:hover {
@@ -282,10 +273,12 @@
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }
 
-#form-name {
-  display: none;
-}
-
-#form-psw {
-  display: none;
+@media screen and (max-width: 768px) {
+  .choice-rpg {
+    width: 80%;
+  }
+  .choice-container {
+    flex-direction: column;
+    gap: 1em;
+  }
 }

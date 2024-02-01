@@ -57,11 +57,23 @@
             <p>Révélez-le avant de pénétrer au chasteau.</p>
           </div>
           <div id="name-psw" class="choice-container">
-            <button id="choose-name" class="choice-rpg" onclick="choose(this, showName)">Je donne mon nom</button>
-            <button id="choose-psw" class="choice-rpg" onclick="choose(this, showPsw)">Je donne un mot de passe</button>
+            <button
+              id="choose-psw"
+              class="choice-rpg"
+              onclick="choose(this, showPsw)"
+            >
+              Je connais le mot de passe
+            </button>
+            <button
+              id="choose-name"
+              class="choice-rpg"
+              onclick="choose(this, showName)"
+            >
+              Je donne mon nom
+            </button>
           </div>
           <form id="form-name" class="rpg-form" onsubmit="submitName(event)">
-            <div id="error-name">
+            <div id="error-name" role="error">
               <img
                 src="static/angry_knight.gif"
                 class="reverse-gifs angry-knight"
@@ -71,28 +83,35 @@
             </div>
             <div id="name-taken">
               <p>Hélas ce nom est déjà pris par un autre invité !</p>
-              <img src="static/gif/Sword_Fighters.gif" width="205" height="138" />
+              <img
+                src="static/gif/Sword_Fighters.gif"
+                width="205"
+                height="138"
+              />
               <p>Vous connoisse-t-on sous un autre nom ?</p>
             </div>
             <input type="text" id="name_input" name="name" autofocus />
             <select name="adjectif"></select>
-            <button id="name-submit" type="submit">Soumettre ce nom à la garde du chasteau</button>
+            <button id="name-submit" type="submit">
+              Soumettre ce nom à la garde du chasteau
+            </button>
           </form>
           <form id="form-psw" class="rpg-form" onsubmit="submitPsw(event)">
-            <div id="error-psw">
+            <div id="error-psw" role="error">
               <img
-                  src="static/angry_knight.gif"
-                  class="reverse-gifs angry-knight"
+                src="static/angry_knight.gif"
+                class="reverse-gifs angry-knight"
               />
               <span>!! Ce n'est point le mot de passe !!</span>
               <img src="static/angry_knight.gif" class="angry-knight" />
             </div>
             <input type="text" id="psw_input" name="psw" autofocus />
-            <button id="psw-submit" type="submit">Proférer ce mot de passe aux gardes</button>
+            <button id="psw-submit" type="submit">
+              Proférer ce mot de passe aux gardes
+            </button>
           </form>
+        </div>
       </div>
-
-    </div>
     </div>
 
     <main>
@@ -116,11 +135,11 @@
           <h2>Dameselles et damelots</h2>
           <p>
             Entrez entrez dans la cour du chasteau ! Les seigneurs de la
-            Vielarnoult préparent moult réjouissances pour la grand fête du
-            chou nouveau. Le <mark>16 mars</mark> deux mil vingt-quatre, les
-            quatre fiefs du Royaume se réuniront pour demonstrer prouesses et
-            valeresses dans le plus prodigieux tournoi que la Bretagne ait
-            cognu !
+            Vielarnoult préparent moult réjouissances pour la grand fête du chou
+            nouveau. Le <mark>16 mars</mark> deux mil vingt-quatre, les quatre
+            fiefs du Royaume se réuniront pour demonstrer prouesses et
+            valeresses dans le plus prodigieux tournoi que la Bretagne ait cognu
+            !
           </p>
           <p>
             Pour tenter de gagner le <mark>chou-chêne d'or</mark>, les preux
