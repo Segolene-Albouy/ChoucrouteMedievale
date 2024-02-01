@@ -60,18 +60,17 @@ function submitName(evt) {
 }
 
 function submitPsw(evt) {
-  if (pswAttempts > 3) {
-    displayError("!! Degouspillez sale maraud !!");
-    document.getElementById("psw-submit").remove();
-    // todo add: demande aux seigneurs
-    return;
-  }
-
   try {
     commonFormHandler(evt, "psw");
   } catch (e) {
     // Pas de valeur dans le form
+
     pswAttempts++;
+    if (pswAttempts >= 3) {
+      document.getElementById("psw-submit").remove();
+      document.getElementById("form-psw").remove();
+      document.getElementById("psw-fail").style.display = "block";
+    }
     localStorage.setItem("pswAttempts", `${pswAttempts}`);
     return;
   }

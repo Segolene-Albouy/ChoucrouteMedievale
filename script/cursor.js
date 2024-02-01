@@ -62,6 +62,9 @@ document.addEventListener("DOMContentLoaded", function () {
     element.addEventListener("mouseleave", function (e) {
       hoverAnimation.running = false;
     });
+    element.addEventListener("click", function (e) {
+      hoverAnimation.running = false;
+    });
   });
 });
 
@@ -100,6 +103,7 @@ function spawnParticle(x, y, options) {
 }
 
 function burst(nbParticle = 50) {
+  console.log("burst");
   const { width, height } = document
     .getElementById("main-cursor")
     .getBoundingClientRect();

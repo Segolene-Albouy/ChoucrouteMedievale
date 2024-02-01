@@ -115,8 +115,7 @@
 }
 
 #banner .shiny_shield {
-  margin-top: -10%;
-  transform: scale(0.5) translateY(-25%);
+  transform: scale(0.5) translateY(-75%);
 }
 @media screen and (max-width: 490px) {
   #banner .shiny_shield {
@@ -292,8 +291,17 @@
   text-shadow: 2px 2px 4px rgb(141 66 1 / 90%);
   color: #b90000;
   filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.5));
+  font-size: 2em;
 }
 
+#psw-fail {
+  display: none;
+}
+#psw-fail h3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 @media screen and (max-width: 768px) {
   .choice-rpg {
     width: 80%;
