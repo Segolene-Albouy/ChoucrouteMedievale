@@ -95,7 +95,7 @@ function submitPsw(evt) {
 function showName() {
   currentDisplayedFormId = "form-name";
   document.getElementById("form-name").style.display = "block";
-
+  document.getElementById("name-input").focus();
   // Build adjectifs options
   const select = document.querySelector("#ask-name select");
   shuffleArray(adjectifs).forEach(([adjectif, fem]) => {

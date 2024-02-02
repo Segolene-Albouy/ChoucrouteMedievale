@@ -184,9 +184,22 @@
 .rpg-form[state="loading"] button[type="submit"] {
   pointer-events: none;
 }
-
+.medieval-select {
+  position: relative;
+}
+.select-arrow {
+  position: absolute;
+  top: 50%;
+  right: 15%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.select-arrow img {
+  width: 25px;
+  height: auto;
+}
 .rpg-form input {
-  background: none;
+  background: rgba(250, 235, 215, 0.4);
   outline: none;
   border: none;
   border-bottom: 2px solid black;
@@ -195,11 +208,12 @@
   color: rgba(0, 0, 0, 0.8);
   font-family: "MedievalSharp", serif;
   text-align: center;
-  margin-top: 2%;
+  margin: 7% auto 2%;
+  width: 75%;
 }
 .rpg-form select {
   display: block;
-  width: 90%;
+  width: 75%;
   background: none;
   outline: none;
   border: none;
@@ -226,7 +240,6 @@
   border: 0;
   line-height: 140%;
   letter-spacing: 0.1em;
-  margin: auto;
   margin-top: 6%;
 }
 
