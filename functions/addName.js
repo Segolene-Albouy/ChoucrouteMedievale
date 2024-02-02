@@ -32,9 +32,9 @@ const mdpDb = firestore.collection("psw");
 async function newPsw() {
   try {
     const freePswQuery = await mdpDb
-      .where("attributed", "==", false)
-      .limit(1)
-      .get();
+        .where("attributed", "==", false)
+        .limit(1)
+        .get();
 
     if (!freePswQuery.empty) {
       const freePs = freePswQuery.docs[0];
@@ -73,13 +73,19 @@ async function updateGueux(gueux, ipAddress, now) {
   return gueuxData;
 }
 
-functions.http("setName", async (req, res) => {
+functions.http("checkName", async (req, res) => {
   let { name, psw } = req.body; // GET req.query / POST req.body
 
   /* WARNING ONLY FOR DEVELOPMENT */
   res.set("Access-Control-Allow-Origin", "*");
   res.set("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
   res.set("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === 'OPTIONS') {
+    // Handle preflight request
+    res.status(204).send('');
+    return;
+  }
 
   /*if (name === "Segoline La Devergoigneuse"){
         res.status(201).json({
@@ -98,10 +104,10 @@ functions.http("setName", async (req, res) => {
     const now = Firestore.FieldValue.serverTimestamp();
     const ipAddress = req.ip;
 
-    // The user submits a name
+
     if (name) {
+      // The user submits a name
       const nameQuery = await gueuxDb.where("name", "==", name).get();
-      // const ipQuery = await gueuxDb.where('ips', 'array-contains', ipAddress).get();
 
       if (nameQuery.size >= 1) {
         // the name is already taken
@@ -173,3 +179,55 @@ functions.http("setName", async (req, res) => {
  *     }
  * };
  */
+
+
+/**
+ * const castes = [
+ *     "noble",
+ *     "chevalier",
+ *     "artisan",
+ *     "paysan"
+ * ];
+ *
+ * const teams = {
+ *     corbeau: {
+ *         color: "black"
+ *     },
+ *     cerf: {
+ *         color: "green"
+ *     },
+ *     kraken: {
+ *         color: "blue"
+ *     },
+ *     dragon: {
+ *         color: "red"
+ *     }
+ * };
+ */
+
+const pswToAdd = ["turbo-prout"];
+
+functions.http("addPsw", async (req, res) => {
+  try {
+    const promises = pswToAdd.map(async (psw) => {
+      const docRef = mdpDb.doc(psw);
+      const docSnapshot = await docRef.get();
+
+      if (!docSnapshot.exists) {
+        await docRef.set({ attributed: false });
+      } else {
+        await docRef.update({ attributed: false });
+      }
+    });
+
+    await Promise.all(promises);
+
+    res.status(200).json({
+      message: "Documents added successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      error,
+    });
+  }
+});

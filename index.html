@@ -58,18 +58,18 @@
           </div>
           <div id="name-psw" class="choice-container">
             <button
-              id="choose-psw"
-              class="choice-rpg"
-              onclick="choose(showPsw)"
-            >
-              Je connais le mot de passe
-            </button>
-            <button
               id="choose-name"
               class="choice-rpg"
               onclick="choose(showName)"
             >
               Je donne mon nom
+            </button>
+            <button
+              id="choose-psw"
+              class="choice-rpg"
+              onclick="choose(showPsw)"
+            >
+              Je connois le mot de passe
             </button>
           </div>
           <form id="form-name" class="rpg-form" onsubmit="submitName(event)">
@@ -111,14 +111,18 @@
             </button>
           </form>
           <div id="welcome">
-            <p><span class="username"></span><span class="thinking"></span></span></p>
-            <p>Curieux, mais soit...
-              <br/>
-              Vénérable <span class="username"></span>, scribez-cette note dans vos parchemins, elle vous servira à vous faire reconnaître des autres gardes du chasteau.
+            <p>
+              <span class="username"></span>
+              <span class="thinking"></span>
+            </p>
+            <p>Curieux, mais soit...</p>
+            <p>Vénérable <span class="username"></span></p>
+            <p><mark class="password"></mark></p>
+            <p><b>scribez-cette note dans vos parchemins</b>,<br/>
+              elle vous servira à vous faire reconnaître des autres gardes du chasteau.
               <br/>
               Cette information est de grande importance, ne la divulguez en aucun cas !
             </p>
-            <p><mark class="password"></mark></p>
           </div>
           <div id="psw-fail">
               <h3> <img
@@ -126,8 +130,9 @@
                 class="reverse-gifs angry-knight"
               /> Quel idiot ce gueux !
               <img src="static/angry_knight.gif" class="angry-knight" /></h3>
-              
-            <p>Vous avez énérvé la garde du chasteau, addressez les seigneurs par vos propres moyens.</p>
+
+            <p>Vous avez énérvé la garde du chasteau.</p>
+            <p>Addressez les seigneurs par vos propres moyens.</p>
           </div>
         </div>
       </div>

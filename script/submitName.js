@@ -20,7 +20,7 @@ function resetLocalStorage() {
 
 function passePartout() {
   localStorage.setItem("medievalName", "Segoline La Devergoigneuse");
-  localStorage.setItem("medievalPsw", "Je suis ton maitre");
+  localStorage.setItem("medievalPsw", "prout");
 }
 
 function displayError(msg) {
@@ -118,6 +118,7 @@ function commonFormHandler(evt, keyNeeded) {
     // Check key is here
     evt.target.setAttribute("state", "error"); // set form state to error => will trigger css
     throw new Error(`No ${keyNeeded} in form`);
+    // TODO displayError avec le again qui se remet
   }
 }
 
@@ -136,7 +137,8 @@ function openGates(medievalName, submitted = false) {
   // ici si un ptit filou a ajouté un medievalName + un medievalPsw dans son localStorage, il peut entrer
   // en revanche, il n'aura jamais de clans s'il fait ça 🤨
 
-  // TODO allow say "je veux changer de nom"
+  // TODO allow "je veux changer de nom"
+  // TODO allow "c'est pas moi"
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -148,11 +150,16 @@ document.addEventListener("DOMContentLoaded", function () {
   if (medievalName && medievalPsw) {
     // ça passe les gardes
     openGates(medievalName);
+    if (devMode) return;
     // API call to update last connection
     retrieveJSON(APIurl, { psw: medievalPsw }).then((res) => {
       console.log(JSON.parse(res.response));
+    }).catch(e => {
+      console.log("Vous êtes un fossoyeur d'identité vilain !")
+      // TODO le gueux n'existe pas
+      //  => peut-être il se fait rattrapper par les garde aux chateau
     });
-    // TODO .catch si le gueux n'existe plus
+
     return;
   }
   // TODO add to the condition if (no psw but name) or (no name but psw)
@@ -161,9 +168,9 @@ document.addEventListener("DOMContentLoaded", function () {
     pswAttempts = 0;
     localStorage.setItem("pswAttempts", "0");
     // On reset les attemps si il rafraichit la page mais on laisse la page d'acceuil ?
-    // document.getElementById("choose-name").remove();
+    // oui carrément pour laisser les 2 options après j'aimais bien l'idée de changer le texte quand même
     // document.getElementById("douves").innerHTML = `<h3>Halte-là !</h3>
-    //   <p>Je reconnois vostre visage.</p><p>Quel est vostre mot de passe ?</p>`;
+    //   <p>Je reconnois vostre visage.</p><p>Possedez-vous un mot de passe ?</p>`;
   }
   // les gardes apparaissent
   // document.getElementById("ask-name").style.display = "block";
@@ -225,40 +232,37 @@ const adjectifs = [
   ["Le Vile", "La Vile"],
   ["L’Angélique"],
   ["L’Intrépide"],
-  ["L’Audicieux", "L’Audicieuse"],
+  ["L’Audacieux", "L’Audacieuse"],
   ["Le Dangereux", "La Dangereuse"],
 ];
 
 async function apiNewGueux(name) {
   const targetForm = document.getElementById(currentDisplayedFormId);
   try {
-    const res = await retrieveJSON(APIurl, { name });
-
-    //Success
-    targetForm.removeAttribute("state");
-    localStorage.setItem("medievalPsw", res.psw);
-    localStorage.setItem("medievalName", res.name);
-    welcomeUser(res.name, res.pws);
-  } catch (e) {
+    let res = await retrieveJSON(APIurl, { name });
+    if (res){ // Success
+      res = JSON.parse(res);
+      targetForm.removeAttribute("state");
+      localStorage.setItem("medievalPsw", res.psw);
+      localStorage.setItem("medievalName", res.name);
+      welcomeUser(res.name, res.psw);
+    }
+  } catch (res) {
     targetForm.setAttribute("state", "error");
-    console.log(e);
-
     switch (res.status) {
-      case 401: // Nom déjà pris
-        // todo user already taken
+      case 401:
+        console.log("Nom de gueux déjà utilisé");
         document.getElementById("name-taken").style.display = "flex";
         break;
       case 500:
         document.getElementById("psw-submit").remove();
-
         if (res.hasOwnProperty("error")) {
           // Error sur le back
           console.log(res.error);
           displayError("?? Quelle est cette sorcellerie ??");
           document.getElementById("name-submit").remove();
-          displayError("?? Quelle est cette sorcellerie ??");
         } else {
-          // Erreur no more password
+          console.log("Nous n'avons plus de mot de passe en réserve");
           // todo handle no more password
         }
     }
@@ -268,17 +272,19 @@ async function apiNewGueux(name) {
 async function apiCheckGueux(psw) {
   const targetForm = document.getElementById(currentDisplayedFormId);
   try {
-    const res = await retrieveJSON(APIurl, { psw });
-    targetForm.removeAttribute("state");
-
-    localStorage.setItem("medievalPsw", res.psw);
-    localStorage.setItem("medievalName", res.name);
-    openGates(res.name, true);
-  } catch (e) {
+    let res = await retrieveJSON(APIurl, { psw });
+    if (res){ // Success
+      res = JSON.parse(res);
+      targetForm.removeAttribute("state");
+      localStorage.setItem("medievalPsw", res.psw);
+      localStorage.setItem("medievalName", res.name);
+      openGates(res.name, true);
+    }
+  } catch (res) {
     targetForm.setAttribute("state", "error");
-
     switch (res.status) {
-      case 400: // Mauvais password
+      case 400:
+        console.log("Mauvais mot de passe");
         displayError();
         break;
       case 500:
@@ -290,14 +296,15 @@ async function apiCheckGueux(psw) {
           displayError("?? Essaye tu de nous tromper maraud ??");
         } else {
           // Erreur bdd psw assign to multiple users
-          console.log("should not happen");
-          displayError("?? Quelle diablerie avait vous faist ??");
+          console.log("Cette situation ne devrait point advenir");
+          displayError("?? Quelle diablerie avez vous faist ??");
         }
     }
   }
 }
 
 function welcomeUser(name, psw) {
+  psw = psw.replace("-", " ");
   document.getElementById("form-name").style.display = "none";
   document.getElementById("welcome").style.display = "block";
   document.querySelector("#welcome .thinking").setAttribute("running", "true");

@@ -103,7 +103,7 @@ function spawnParticle(x, y, options) {
 }
 
 function burst(nbParticle = 50) {
-  console.log("burst");
+  // console.log("burst");
   const { width, height } = document
     .getElementById("main-cursor")
     .getBoundingClientRect();

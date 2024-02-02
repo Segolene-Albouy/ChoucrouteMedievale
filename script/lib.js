@@ -87,7 +87,7 @@ const getJSON = function (url) {
     xhr.open("GET", url, true);
     xhr.responseType = "json";
     xhr.onload = function () {
-      if (xhr.status === 200) {
+      if (xhr.status >= 200 && xhr.status < 300) {
         resolve(xhr.response);
       }
       reject(xhr);
@@ -109,7 +109,6 @@ const postJSON = function (url, data) {
     };
     xhr.send(JSON.stringify(data));
   });
-  /*return fetch(url, {method: "POST", headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)});*/
 };
 /**
  * Example
