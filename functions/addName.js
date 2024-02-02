@@ -8,7 +8,7 @@
 
 /**
  * package.json:
- {
+{
   "dependencies": {
     "@google-cloud/functions-framework": "^3.0.0",
     "@google-cloud/firestore": "^7.0.0"
@@ -76,7 +76,7 @@ async function updateGueux(gueux, ipAddress, now) {
 functions.http("checkName", async (req, res) => {
   let { name, psw } = req.body; // GET req.query / POST req.body
 
-  /* WARNING ONLY FOR DEVELOPMENT */
+ /* /!* WARNING ONLY FOR DEVELOPMENT *!/
   res.set("Access-Control-Allow-Origin", "*");
   res.set("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
   res.set("Access-Control-Allow-Headers", "Content-Type");
@@ -85,19 +85,13 @@ functions.http("checkName", async (req, res) => {
     // Handle preflight request
     res.status(204).send('');
     return;
-  }
+  }*/
 
-  /*if (name === "Segoline La Devergoigneuse"){
-        res.status(201).json({
-            greetings: `Hommage à toi, noble ${name} !`,
-        });
-    } else {
-        const domain = req.headers.referer;
-        if (!domain || !domain.includes('choucroute-medievale.tech')) {
-            res.status(403).send(`Que croyais-tu, manand ?`);
-            return;
-        }
-    }*/
+  const domain = req.headers.referer;
+  if (!domain || !domain.includes('choucroute-medievale.tech')) {
+    res.status(403).send(`Que croyais-tu, manand ?`);
+    return;
+  }
 
   let statusCode = 500;
   try {
@@ -179,55 +173,3 @@ functions.http("checkName", async (req, res) => {
  *     }
  * };
  */
-
-
-/**
- * const castes = [
- *     "noble",
- *     "chevalier",
- *     "artisan",
- *     "paysan"
- * ];
- *
- * const teams = {
- *     corbeau: {
- *         color: "black"
- *     },
- *     cerf: {
- *         color: "green"
- *     },
- *     kraken: {
- *         color: "blue"
- *     },
- *     dragon: {
- *         color: "red"
- *     }
- * };
- */
-
-const pswToAdd = ["turbo-prout"];
-
-functions.http("addPsw", async (req, res) => {
-  try {
-    const promises = pswToAdd.map(async (psw) => {
-      const docRef = mdpDb.doc(psw);
-      const docSnapshot = await docRef.get();
-
-      if (!docSnapshot.exists) {
-        await docRef.set({ attributed: false });
-      } else {
-        await docRef.update({ attributed: false });
-      }
-    });
-
-    await Promise.all(promises);
-
-    res.status(200).json({
-      message: "Documents added successfully",
-    });
-  } catch (error) {
-    res.status(500).json({
-      error,
-    });
-  }
-});

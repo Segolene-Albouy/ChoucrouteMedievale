@@ -54,7 +54,10 @@ function submitName(evt) {
   const adj = evt.target.adjectif.value;
 
   let medievalName = `${name} ${adj}`;
-  if (devMode) return;
+  if (devMode) {
+    welcomeUser("Prout", "turbo-prout");
+    return;
+  }
   evt.target.setAttribute("state", "loading");
   apiNewGueux(medievalName);
 }
@@ -80,7 +83,10 @@ function submitPsw(evt) {
     .toLowerCase()
     .replace(/\s/g, "-");
   console.log(medievalPsw);
-  if (devMode) return;
+  if (devMode) {
+    openGates("prout", true);
+    return;
+  }
 
   targetForm.setAttribute("state", "loading");
   apiCheckGueux(medievalPsw);
