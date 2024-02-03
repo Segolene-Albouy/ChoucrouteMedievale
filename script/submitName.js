@@ -116,6 +116,7 @@ function showName() {
 function showPsw() {
   currentDisplayedFormId = "form-psw";
   document.getElementById("form-psw").style.display = "block";
+  document.getElementById("psw-input").focus();
 }
 
 function commonFormHandler(evt, keyNeeded) {
