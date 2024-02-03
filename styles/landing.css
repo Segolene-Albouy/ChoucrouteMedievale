@@ -187,6 +187,11 @@
 .medieval-select {
   position: relative;
 }
+.medieval-select select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
 .select-arrow {
   position: absolute;
   top: 50%;
@@ -195,6 +200,8 @@
   pointer-events: none;
 }
 .select-arrow img {
+  /*height: 90%;
+  width: auto;*/
   width: 25px;
   height: auto;
 }
@@ -327,4 +334,8 @@
   #ask-name {
     max-width: none;
   }
+  /*.select-arrow img {
+    height: 70%;
+    margin-left: 1.5em;
+  }*/
 }
