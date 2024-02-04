@@ -159,7 +159,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (devMode) return;
     // API call to update last connection
     retrieveJSON(APIurl, { psw: medievalPsw }).then((res) => {
-      res = JSON.parse(res.response);
+      // res = JSON.parse(res.response);
       console.log(res);
       /*localStorage.setItem("medievalName", res.name);
       localStorage.setItem("medievalName", res.psw);*/
