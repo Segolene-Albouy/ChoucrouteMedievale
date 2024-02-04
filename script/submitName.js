@@ -159,10 +159,10 @@ document.addEventListener("DOMContentLoaded", function () {
     if (devMode) return;
     // API call to update last connection
     retrieveJSON(APIurl, { psw: medievalPsw }).then((res) => {
-      // res = JSON.parse(res.response);
-      console.log(res);
-      /*localStorage.setItem("medievalName", res.name);
-      localStorage.setItem("medievalName", res.psw);*/
+      res = JSON.parse(res);
+      console.log(res)
+      localStorage.setItem("medievalName", res.name);
+      localStorage.setItem("medievalName", res.psw);
     }).catch(e => {
       console.log("Vous êtes un fossoyeur d'identité vilain !", e);
       // TODO le gueux n'existe pas
