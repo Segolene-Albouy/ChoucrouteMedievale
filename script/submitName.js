@@ -82,7 +82,6 @@ function submitPsw(evt) {
     .trim()
     .toLowerCase()
     .replace(/\s/g, "-");
-  console.log(medievalPsw);
   if (devMode) {
     openGates("prout", true);
     return;
@@ -160,9 +159,12 @@ document.addEventListener("DOMContentLoaded", function () {
     if (devMode) return;
     // API call to update last connection
     retrieveJSON(APIurl, { psw: medievalPsw }).then((res) => {
-      console.log(JSON.parse(res.response));
+      res = JSON.parse(res.response);
+      console.log(res);
+      /*localStorage.setItem("medievalName", res.name);
+      localStorage.setItem("medievalName", res.psw);*/
     }).catch(e => {
-      console.log("Vous êtes un fossoyeur d'identité vilain !")
+      console.log("Vous êtes un fossoyeur d'identité vilain !", e);
       // TODO le gueux n'existe pas
       //  => peut-être il se fait rattrapper par les garde aux chateau
     });
