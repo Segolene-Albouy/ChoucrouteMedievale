@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
       res = JSON.parse(res);
       console.log(res)
       localStorage.setItem("medievalName", res.name);
-      localStorage.setItem("medievalName", res.psw);
+      localStorage.setItem("medievalPsw", res.psw);
     }).catch(e => {
       console.log("Vous êtes un fossoyeur d'identité vilain !", e);
       // TODO le gueux n'existe pas
