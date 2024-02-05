@@ -61,6 +61,15 @@ const unloadDungeon = () => {
   activateBurstOnClick();
 };
 
+const loadForum = () => {
+  resetCursor();
+  // load messages
+};
+
+const unloadForum = () => {
+  // reset forum home page
+};
+
 const pagesOnload = {
   cour: loadHome,
   donjon: loadDungeon,
