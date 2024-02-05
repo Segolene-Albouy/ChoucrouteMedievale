@@ -12,6 +12,7 @@
       rel="stylesheet"
     />
     <link rel="icon" type="image/png" href="static/favicon/castle1.png" />
+    <link rel="stylesheet" href="./styles/fantasy-btn.css" />
     <link rel="stylesheet" href="./styles/gifs.css" />
     <link rel="stylesheet" href="./styles/global.css" />
     <link rel="stylesheet" href="./styles/cursor.css" />
@@ -19,9 +20,11 @@
     <link rel="stylesheet" href="./styles/bricks.css" />
     <link rel="stylesheet" href="./styles/door.css" />
     <link rel="stylesheet" href="./styles/donjon.css" />
+    <link rel="stylesheet" href="./styles/forum.css" />
     <script src="script/lib.js"></script>
     <script src="script/cursor.js"></script>
     <script src="script/torchs.js"></script>
+    <script src="script/forum.js"></script>
     <script src="script/framework.js"></script>
     <script src="script/submitName.js"></script>
   </head>
@@ -94,7 +97,7 @@
             <div class="medieval-select">
               <select name="adjectif"></select>
               <div class="select-arrow">
-                <img src="static/gif/arrow.gif">
+                <img src="static/gif/arrow.gif" />
               </div>
             </div>
             <button id="name-submit" class="choice-rpg" type="submit">
@@ -232,34 +235,96 @@
 
       <div id="forum" class="page">
         <!-- Clan .collapsible -->
-        <h3>Forums des <span class="team"></span></h3>
+        <h3>Pigeonnier des<br /><span class="team"></span></h3>
         <!-- Compatriotes -->
         <div class="team-members">
           <h4>Se battent à vos côtés sous le même étendard :</h4>
-          <div id="team-list"></div>
+          <ul id="team-list"></ul>
         </div>
+        <hr />
         <!-- Discussions -->
         <!-- Nouvelle discussion .collapsible -->
-        <div id="new-discussion" class="collapsible" collapsed>
-          <h4 role="collapse-trigger">Entamer une nouvelle discussion</h4>
-          <form role="collapse-content">
+        <div id="new-discussion" class="collapsible">
+          <h4 role="collapse-trigger" class="fantasy-btn collapsed">
+            <span>Entamer une nouvelle discussion</span
+            ><img src="static/+.png" />
+          </h4>
+          <form role="collapse-content" onsubmit="submitDiscussion(event)">
             <!-- Titre -->
             <input
               type="text"
-              name="discussion-title"
+              name="discussionTitle"
               placeholder="Titre de la discussion"
+              required
             />
             <!-- Message -->
             <label for="discussion-message"
               >Message à adresser à vos compatriotes</label
             >
-            <textarea name="discussion-message"></textarea>
-            <button type="submit">Envoyer</button>
+            <div id="message-area" class="fantasy-btn">
+              <textarea
+                name="discussionMessage"
+                class="parchment"
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="choice-rpg">
+              <span>Envoyer</span>
+              <img src="static/licorne.gif" class="licorne" />
+            </button>
           </form>
         </div>
+        <hr />
         <!-- Liste discussions -->
-        <!-- Titre - author-->
-        <!-- datetime - author dernier message -->
+        <div id="discussion-list">
+          <div class="template discussion-preview">
+            <h4>
+              <img
+                src="static/gif/seagull_with_letter1.gif"
+                class="pigeon-letter"
+              /><span role="title"></span>
+            </h4>
+            <p class="infos">
+              <span>Par : <span role="author"></span></span>
+              <span role="msg-number"></span>
+              <br />
+              <span class="additional-info"
+                >Dernier message de <span role="last-author"></span>
+                <span role="last-datetime"></span
+              ></span>
+            </p>
+          </div>
+        </div>
+        <div id="focused-discussion">
+          <button
+            class="invisible"
+            role="go-back"
+            onclick="goBackToDiscussions()"
+          >
+            &lt;- Toutes les discussions
+          </button>
+          <h4 role="title"></h4>
+          <div class="message-wrapper fantasy-btn">
+            <div id="discussion-messages">
+              <div class="template message">
+                <p class="infos" role="author"></p>
+                <p role="message" class="parchment"></p>
+              </div>
+            </div>
+            <form id="new-message" onsubmit="submitMessage(event)">
+              <textarea
+                name="message"
+                required
+                placeholder="Répondre"
+              ></textarea>
+              <button type="submit" class="invisible">
+                <span>OK</span>
+              </button>
+              <img src="static/licorne.gif" class="licorne" />
+            </form>
+          </div>
+        </div>
+        <hr />
       </div>
 
       <div id="doors" class="door-container"></div>

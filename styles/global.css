@@ -243,3 +243,17 @@ mark {
     content: "......";
   }
 }
+
+.collapsed + [role="collapse-content"] {
+  max-height: 0px;
+  overflow: hidden;
+}
+[role="collapse-content"] {
+  transition: max-height 0.25s ease-in-out;
+}
+
+button.invisible {
+  border: none;
+  outline: none;
+  background: none;
+}

@@ -124,3 +124,33 @@ const postJSON = function (url, data) {
 const retrieveJSON = async (url, data = null) => {
   return (await data) ? postJSON(url, data) : getJSON(url);
 };
+
+function isToday(date) {
+  const today = new Date();
+  return (
+    date.getDate() === today.getDate() &&
+    date.getMonth() === today.getMonth() &&
+    date.getFullYear() === today.getFullYear()
+  );
+}
+
+function formatFullDateTime(date) {
+  return isToday(date)
+    ? `Aujourd'hui à ${new Intl.DateTimeFormat("fr-FR", {
+        timeStyle: "short",
+        timeZone: "Europe/Paris",
+      }).format(date)}`
+    : "le " +
+        new Intl.DateTimeFormat("fr-FR", {
+          dateStyle: "full",
+          timeStyle: "short",
+          timeZone: "Europe/Paris",
+        }).format(date);
+}
+
+function getConnectedUser() {
+  return {
+    name: localStorage.getItem("medievalName"),
+    psw: localStorage.getItem("medievalPsw"),
+  };
+}

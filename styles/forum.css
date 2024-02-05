@@ -1,0 +1,321 @@
+.fantasy span,
+.fantasy:after,
+.double:after {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+.fantasy:after,
+.double:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.fantasy {
+  background-color: #600;
+  border-width: 0.15em;
+  border-style: outset outset outset inset;
+  border-color: #fb2;
+  border-radius: 2px;
+  box-shadow: 0px 0px 0.09375em #000;
+}
+.fantasy:after {
+  box-shadow: 0px 0px 0.25em 0.25em rgba(0, 0, 0, 0.5) inset;
+}
+.double {
+  position: relative;
+  border: 0.2em double #fb2;
+}
+.double:after {
+  box-shadow: 0px 0px 0.25em 0.2em rgba(0, 0, 0, 0.7) inset;
+}
+
+#forum {
+  font-family: MedievalSharp, serif;
+  color: cornsilk;
+}
+
+#forum h3 {
+  font-family: "UnifrakturMaguntia", serif;
+  font-size: 3em;
+  text-shadow: 0px 0px 13px rgb(141, 86, 1);
+  text-align: center;
+  font-weight: lighter;
+}
+
+#form h3 .team {
+  letter-spacing: 10px;
+}
+
+#forum .team-members h4 {
+  font-size: 1.1em;
+  color: khaki;
+  margin: 0;
+  font-family: MedievalSharp, serif;
+}
+
+#forum .team-members #team-list {
+  list-style: none;
+  margin: 2% 0;
+}
+
+#new-discussion h4 {
+  display: flex;
+  align-items: center;
+  color: darkred;
+  --inlay-base-bg: cornsilk !important;
+  --inlay-hover-opacity: 0.7 !important;
+  --inlay-state-opacity: 0.7 !important;
+  --outline-color: transparent !important;
+}
+
+#new-discussion h4 span {
+  flex-grow: 1;
+  font-size: 3em;
+}
+@media (max-width: 600px) {
+  #new-discussion h4 span {
+    font-size: 2em;
+  }
+}
+#new-discussion form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+  padding: 0 5%;
+}
+
+#new-discussion form input {
+  font-size: 2em;
+  padding: 3%;
+  background: #ffffff27;
+  color: darkgray;
+  outline: none;
+  border: 0;
+  font-family: Medievalsharp;
+}
+
+#new-discussion form label {
+  font-size: 1.2em;
+  color: khaki;
+}
+#new-discussion #message-area.fantasy-btn {
+  --border-bg: khaki !important;
+  --inlay-bg: transparent !important;
+  --outline-color: transparent !important;
+  margin: 0 -5%;
+}
+
+#new-discussion textarea {
+  outline: none;
+  min-height: 30vh;
+  border: none;
+  width: 100%;
+  padding: 5%;
+  font-family: serif;
+  font-size: 1.1em;
+}
+
+#new-discussion button[type="submit"] {
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+  color: darkred;
+  letter-spacing: 2px;
+  font-family: "Chomsky", serif;
+  background-repeat: repeat;
+  background-size: auto;
+  background-attachment: scroll;
+  background-image: url("../static/wall.jpg");
+  filter: sepia(40%);
+  box-shadow: 0 0 10px 2px chocolate;
+  margin: auto;
+  margin-top: 2%;
+  width: 90%;
+}
+
+#new-discussion button[type="submit"] .licorne {
+  display: none;
+}
+
+#new-discussion form[state="loading"] button[type="submit"] {
+  text-align: left;
+  padding: 0;
+  animation: test-load 3s ease-in-out infinite;
+}
+#new-discussion form[state="loading"] button[type="submit"] span {
+  display: none;
+}
+#new-discussion form[state="loading"] button[type="submit"] .licorne {
+  display: inline;
+  animation: loadingTraverse 3s ease-in-out infinite;
+}
+
+@keyframes loadingTraverse {
+  0% {
+    transform: scaleX(-1);
+  }
+  49% {
+    transform: scaleX(-1);
+  }
+  50% {
+    transform: scaleX(1);
+    margin-left: calc(100% - var(--licorne-width));
+  }
+  99% {
+    transform: scaleX(1);
+  }
+  100% {
+    transform: scaleX(-1);
+    margin-left: 0;
+  }
+}
+
+.template {
+  display: none;
+}
+
+#discussion-list {
+  scroll-snap-type: both mandatory;
+  max-height: 100vh;
+  overflow-y: scroll;
+  overflow-x: visible;
+  margin: 0 -1em;
+  padding: 0 1em;
+}
+
+.discussion-preview {
+  border: 1px solid #ffffff9b;
+  padding: 2%;
+  margin-top: 11%;
+  box-shadow: 0 0 10px 2px chocolate;
+  border-radius: 0.4em;
+  scroll-snap-align: start;
+  scroll-margin: 1em 0;
+}
+
+.discussion-preview h4 {
+  font-family: "Chomsky", serif;
+  display: flex;
+  align-items: center;
+  gap: 3%;
+  font-size: 2em;
+  color: khaki;
+  margin: 0;
+  margin-bottom: 2%;
+}
+.discussion-preview [role="author"] {
+  font-size: 1.2em;
+}
+.discussion-preview [role="last-author"] {
+  font-weight: bold;
+}
+.discussion-preview .infos {
+  opacity: 0.8;
+  margin: 0;
+  position: relative;
+}
+
+.discussion-preview .infos [role="msg-number"] {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.discussion-preview .additional-info {
+  font-weight: light;
+  font-size: 0.8em;
+}
+#focused-discussion .message-wrapper {
+  --border-bg: khaki !important;
+  --inlay-bg: rgba(255, 255, 255, 0.2) !important;
+  --outline-color: transparent !important;
+  margin: auto -5%;
+  font-family: "ancient", serif;
+}
+#focused-discussion [role="go-back"] {
+  text-align: center;
+  letter-spacing: 1px;
+  padding-bottom: 1%;
+  border-bottom: 1px solid cornsilk;
+  width: fit-content;
+  color: cornsilk;
+  font-family: "MedievalSharp";
+}
+#focused-discussion [role="title"] {
+  text-align: center;
+  margin: 0;
+  margin-bottom: 0px;
+  margin-bottom: 3%;
+  font-size: 2.4em;
+  font-family: "Chomsky";
+  text-shadow: 1px 1px 1px chocolate;
+  font-weight: lighter;
+  letter-spacing: 1px;
+  text-decoration: underline;
+}
+#discussion-messages {
+  max-height: 100vh;
+  scroll-snap-type: both mandatory;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+#discussion-messages .message {
+  max-width: 50%;
+  font-size: 1.1em;
+  scroll-snap-align: end;
+  scroll-margin-bottom: 3px;
+}
+#discussion-messages .message p {
+  margin: 0;
+}
+#discussion-messages .message.self-message {
+  align-self: end;
+}
+
+#discussion-messages .message [role="author"] {
+  font-size: 0.8em;
+  color: cornsilk;
+  letter-spacing: 1px;
+}
+#discussion-messages .message [role="message"] {
+  padding: 2%;
+  border-radius: 0.3em;
+  color: black;
+  font-family: "MedievalSharp", serif;
+}
+#focused-discussion #new-message {
+  display: flex;
+  gap: 2%;
+  margin-top: 2%;
+}
+#focused-discussion #new-message textarea {
+  flex-grow: 1;
+  padding: 0.1em;
+  border: none;
+  outline: none;
+  background: #ffffff86;
+  font-size: 1.2em;
+  font-family: MedievalSharp, serif;
+}
+#focused-discussion #new-message button {
+  font-weight: bold;
+  color: cornsilk;
+  letter-spacing: 2px;
+  font-family: "MedievalSharp", serif;
+  background-repeat: repeat;
+  background-size: auto;
+  background-attachment: scroll;
+  background-image: url("../static/wall.jpg");
+  box-shadow: 0 0 10px 2px chocolate;
+  padding: 0 2%;
+}
+
+#focused-discussion #new-message .licorne {
+  display: none;
+}

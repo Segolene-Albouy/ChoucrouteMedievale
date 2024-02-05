@@ -61,20 +61,12 @@ const unloadDungeon = () => {
   activateBurstOnClick();
 };
 
-const loadForum = () => {
-  resetCursor();
-  // load messages
-};
-
-const unloadForum = () => {
-  // reset forum home page
-};
-
 const pagesOnload = {
   cour: loadHome,
   donjon: loadDungeon,
   banquet: loadBanquet,
   armurerie: loadArmurerie,
+  forum: loadForum,
 };
 
 const pagesOnUnload = {
@@ -82,6 +74,7 @@ const pagesOnUnload = {
   donjon: unloadDungeon,
   banquet: unloadBanquet,
   armurerie: unloadArmurerie,
+  forum: unloadForum,
 };
 
 function opendor() {
@@ -124,6 +117,15 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll(".page").forEach((page, i) => {
     pages[page.id].hide();
   });
+
+  // Create collapsible
+  document
+    .querySelectorAll("[role=collapse-trigger]")
+    .forEach((collapsible) => {
+      collapsible.addEventListener("click", function () {
+        this.classList.toggle("collapsed");
+      });
+    });
 
   // create doors
   createDoorsNavigation();
@@ -217,4 +219,12 @@ function createDoorsNavigation() {
     doors.appendChild(input);
     doors.appendChild(door);
   });
+}
+
+function bypassLanding() {
+  const landiv = document.getElementById("main-landing");
+  landiv.style.display = "none";
+  localStorage.setItem("medievalName", "dev_name");
+  localStorage.setItem("medievalPsw", "dev_psw");
+  opendor();
 }
