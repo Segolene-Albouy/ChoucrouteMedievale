@@ -1,8 +1,9 @@
+const apiURL = "https://europe-west9-choucroutemedievale.cloudfunctions.net/";
 var activeDiscussion = null;
 const patrieGueu = {
-  name: "Ours blancs du pole sud",
+  name: "dev__Team",
   members: [
-    { name: "dev_name" },
+    { name: "Clément L’Ancien" },
     { name: "Didi Le Goulu" },
     { name: "Ségolène La Dévergoigneuse" },
   ],
@@ -23,10 +24,15 @@ function loadForum() {
     teamList.appendChild(memberLi);
   });
 
+  document.getElementById("discussion-list").setAttribute("state", "loading");
   // load messages
-  apiLoadDiscussionList(patrieGueu.name).then((threads) => {
-    loadDiscussions(threads);
-  });
+  apiLoadDiscussionList(patrieGueu.name)
+    .then((threads) => {
+      loadDiscussions(threads);
+    })
+    .finally(() => {
+      document.getElementById("discussion-list").removeAttribute("state");
+    });
 }
 
 function loadDiscussions(threads) {
@@ -56,7 +62,18 @@ function loadDiscussions(threads) {
     discussionPreview.querySelector("[role='last-datetime']").innerText =
       formatFullDateTime(new Date(lastMessageTime));
     discussionPreview.addEventListener("click", () => {
-      apiLoadDiscussion(id, patrieGueu.name).then(focusDiscussion);
+      document
+        .getElementById("focused-discussion")
+        .setAttribute("state", "loading");
+      document.getElementById("discussion-list").style.display = "none";
+      document.getElementById("focused-discussion").style.display = "block";
+      apiLoadDiscussion(id, getConnectedUser().name)
+        .then((res) => focusDiscussion({ id, ...res }))
+        .finally(() => {
+          document
+            .getElementById("focused-discussion")
+            .removeAttribute("state");
+        });
     });
     discussionList.appendChild(discussionPreview);
   }
@@ -69,8 +86,6 @@ function unloadForum() {
 
 function focusDiscussion(discussion) {
   activeDiscussion = discussion;
-  document.getElementById("discussion-list").style.display = "none";
-  document.getElementById("focused-discussion").style.display = "block";
   const messagesElement = document.getElementById("discussion-messages");
   messagesElement
     .querySelectorAll(".message:not(.template)")
@@ -128,13 +143,16 @@ function submitDiscussion(evt) {
   console.log({ title, message, author });
 
   // TODO api request "newThread"
-  setTimeout(() => {
-    evt.target.setAttribute("state", "success");
-    evt.target.reset();
-    evt.target.parentElement
-      .querySelector("[role=collapse-trigger]")
-      .classList.add("collapsed");
-  }, 1000);
+
+  apiNewThread(title, message, author)
+    .then(() => {})
+    .finally(() => {
+      evt.target.setAttribute("state", "success");
+      evt.target.reset();
+      evt.target.parentElement
+        .querySelector("[role=collapse-trigger]")
+        .classList.add("collapsed");
+    });
 }
 
 function goBackToDiscussions() {
@@ -161,279 +179,48 @@ function submitMessage(evt) {
   //   newMessageElement.scrollIntoView(false);
   evt.target.reset();
 
-  apiSendMessage(activeDiscussion.id, message, author);
+  if (!hasUsedForum()) {
+    // Faire une popup avec un vieux monsieur ou autre
+    // "Bonjour visiteur, c'est la première fois que tu utilises le pigeonnier dit-moi...
+    //  Si tu souhaites voir les réponses de tes compatriotes tu dois faire un pas en arrière et revenir sur le pigeon qui t'intéresse."
+  }
+
+  evt.target.setAttribute("state", "loading");
+  apiSendMessage(activeDiscussion.id, message, author).finally(() => {
+    evt.target.removeAttribute("state");
+  });
 }
 
-async function apiLoadDiscussionList() {
-  return mockThreads;
+async function apiNewThread(title, message, author) {
+  // TODO call api "newThread"
+  const requestBody = { title, message, author };
+  return retrieveJSON(apiURL + "newThread", requestBody);
 }
 
-async function apiLoadDiscussion(threadId, patrieGueuName) {
-  return mockThreads.find((thread) => thread.id === threadId);
+async function apiLoadDiscussionList(gueuTeamName) {
+  return retrieveJSON(
+    apiURL +
+      "getThreads?" +
+      new URLSearchParams({ team: gueuTeamName }).toString()
+  );
+}
+
+async function apiLoadDiscussion(threadId, gueuName) {
+  return retrieveJSON(
+    apiURL +
+      "getThread?" +
+      new URLSearchParams({ threadId, gueuName }).toString()
+  );
 }
 
 async function apiSendMessage(threadId, message, author) {
   // TODO call api "newMessage"
+  const requestBody = { threadId, message, author };
+  return retrieveJSON(apiURL + "newMessage", requestBody);
 }
-const mockThreads = [
-  {
-    id: 1,
-    author: "Didi Le Goulu",
-    title: "A ki on nik la gueul ?",
-    lastMessageTime: new Date("2024-02-05T14:05:00"),
-    lastMessageAuthor: "dev_name",
-    messages: [
-      // Messages générés par Github Copilot: Grande barres de rires
-      {
-        author: "Didi Le Goulu",
-        content: "Salut les gars, je suis le deuxième à poster ici !",
-      },
-      {
-        author: "dev_name",
-        content: "On fait quoi ?",
-      },
-      {
-        author: "Didi Le Goulu",
-        content: "Qu'est-ce que vous pensez de la situation ?",
-      },
 
-      {
-        author: "Didi Le Goulu",
-        content:
-          "Vis-àvis de la situation actuelle, je propose qu'on fasse une réunion pour en discuter.",
-      },
-      {
-        author: "Segolene La Devergoigneuse",
-        content: "J'ai pas compris la question",
-      },
-      {
-        author: "Didi Le Goulu",
-        content: "Moi je dirais que c'est la faute à Clément",
-      },
-      {
-        author: "dev_name",
-        content: "Je suis d'accord avec Didi",
-      },
-      {
-        author: "Didi Le Goulu",
-        content: "Mais plutot pour une autre raison",
-      },
-      {
-        author: "Segolene La Devergoigneuse",
-        content: "D'accord on fait quoi maintenant ?",
-      },
-      {
-        author: "dev_name",
-        content: "On se casse",
-      },
-      {
-        author: "Didi Le Goulu",
-        content: "Salut les gars, je suis le deuxième à poster ici !",
-      },
-      {
-        author: "dev_name",
-        content: "On fait quoi ?",
-      },
-      {
-        author: "Didi Le Goulu",
-        content: "Qu'est-ce que vous pensez de la situation ?",
-      },
+function hasUsedForum() {
+  return localStorage.getItem("forumUsed") != null;
+}
 
-      {
-        author: "Didi Le Goulu",
-        content:
-          "Vis-àvis de la situation actuelle, je propose qu'on fasse une réunion pour en discuter.",
-      },
-      {
-        author: "Segolene La Devergoigneuse",
-        content: "J'ai pas compris la question",
-      },
-      {
-        author: "Didi Le Goulu",
-        content: "Moi je dirais que c'est la faute à Clément",
-      },
-      {
-        author: "dev_name",
-        content: "Je suis d'accord avec Didi",
-      },
-      {
-        author: "Didi Le Goulu",
-        content: "Mais plutot pour une autre raison",
-      },
-      {
-        author: "Segolene La Devergoigneuse",
-        content: "D'accord on fait quoi maintenant ?",
-      },
-      {
-        author: "dev_name",
-        content: "On se casse",
-      },
-      {
-        author: "Didi Le Goulu",
-        content: "Salut les gars, je suis le deuxième à poster ici !",
-      },
-      {
-        author: "dev_name",
-        content: "On fait quoi ?",
-      },
-      {
-        author: "Didi Le Goulu",
-        content: "Qu'est-ce que vous pensez de la situation ?",
-      },
-
-      {
-        author: "Didi Le Goulu",
-        content:
-          "Vis-àvis de la situation actuelle, je propose qu'on fasse une réunion pour en discuter.",
-      },
-      {
-        author: "Segolene La Devergoigneuse",
-        content: "J'ai pas compris la question",
-      },
-      {
-        author: "Didi Le Goulu",
-        content: "Moi je dirais que c'est la faute à Clément",
-      },
-      {
-        author: "dev_name",
-        content: "Je suis d'accord avec Didi",
-      },
-      {
-        author: "Didi Le Goulu",
-        content: "Mais plutot pour une autre raison",
-      },
-      {
-        author: "Segolene La Devergoigneuse",
-        content: "D'accord on fait quoi maintenant ?",
-      },
-      {
-        author: "dev_name",
-        content: "On se casse",
-      },
-      {
-        author: "Didi Le Goulu",
-        content: "Salut les gars, je suis le deuxième à poster ici !",
-      },
-      {
-        author: "dev_name",
-        content: "On fait quoi ?",
-      },
-      {
-        author: "Didi Le Goulu",
-        content: "Qu'est-ce que vous pensez de la situation ?",
-      },
-
-      {
-        author: "Didi Le Goulu",
-        content:
-          "Vis-àvis de la situation actuelle, je propose qu'on fasse une réunion pour en discuter.",
-      },
-      {
-        author: "Segolene La Devergoigneuse",
-        content: "J'ai pas compris la question",
-      },
-      {
-        author: "Didi Le Goulu",
-        content: "Moi je dirais que c'est la faute à Clément",
-      },
-      {
-        author: "dev_name",
-        content: "Je suis d'accord avec Didi",
-      },
-      {
-        author: "Didi Le Goulu",
-        content: "Mais plutot pour une autre raison",
-      },
-      {
-        author: "Segolene La Devergoigneuse",
-        content: "D'accord on fait quoi maintenant ?",
-      },
-      {
-        author: "dev_name",
-        content: "On se casse",
-      },
-    ],
-  },
-  {
-    id: 2,
-    author: "dev_name",
-    title: "Bienvenue les srabs !",
-    lastMessageTime: new Date("2021-01-01T12:00:00"),
-    lastMessageAuthor: "dev_name",
-    messages: [
-      {
-        author: "dev_name",
-        content: "Salut les gars, je suis le premier à poster ici !",
-      },
-    ],
-  },
-  {
-    id: 3,
-    author: "dev_name",
-    title: "Bienvenue les srabs !",
-    lastMessageTime: new Date("2021-01-01T12:00:00"),
-    lastMessageAuthor: "dev_name",
-    messages: [
-      {
-        author: "dev_name",
-        content: "Salut les gars, je suis le premier à poster ici !",
-      },
-    ],
-  },
-  {
-    id: 4,
-    author: "dev_name",
-    title: "Bienvenue les srabs !",
-    lastMessageTime: new Date("2021-01-01T12:00:00"),
-    lastMessageAuthor: "dev_name",
-
-    messages: [
-      {
-        author: "dev_name",
-        content: "Salut les gars, je suis le premier à poster ici !",
-      },
-    ],
-  },
-  {
-    id: 5,
-    author: "dev_name",
-    title: "Bienvenue les srabs !",
-    lastMessageTime: new Date("2021-01-01T12:00:00"),
-    lastMessageAuthor: "dev_name",
-
-    messages: [
-      {
-        author: "dev_name",
-        content: "Salut les gars, je suis le premier à poster ici !",
-      },
-    ],
-  },
-  {
-    id: 6,
-    author: "dev_name",
-    title: "Bienvenue les srabs !",
-    lastMessageTime: new Date("2021-01-01T12:00:00"),
-    lastMessageAuthor: "dev_name",
-
-    messages: [
-      {
-        author: "dev_name",
-        content: "Salut les gars, je suis le premier à poster ici !",
-      },
-    ],
-  },
-  {
-    id: 7,
-    author: "dev_name",
-    title: "Bienvenue les srabs !",
-    lastMessageTime: new Date("2021-01-01T12:00:00"),
-    lastMessageAuthor: "dev_name",
-
-    messages: [
-      {
-        author: "dev_name",
-        content: "Salut les gars, je suis le premier à poster ici !",
-      },
-    ],
-  },
-];
+function apiGetTeamMembers() {}

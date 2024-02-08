@@ -154,3 +154,11 @@ function getConnectedUser() {
     psw: localStorage.getItem("medievalPsw"),
   };
 }
+
+async function mockApiCall(returnedData) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(returnedData);
+    }, 2000);
+  });
+}

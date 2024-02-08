@@ -143,14 +143,12 @@
 #new-discussion form[state="loading"] button[type="submit"] {
   text-align: left;
   padding: 0;
-  animation: test-load 3s ease-in-out infinite;
 }
 #new-discussion form[state="loading"] button[type="submit"] span {
   display: none;
 }
 #new-discussion form[state="loading"] button[type="submit"] .licorne {
   display: inline;
-  animation: loadingTraverse 3s ease-in-out infinite;
 }
 
 @keyframes loadingTraverse {
@@ -184,6 +182,16 @@
   overflow-x: visible;
   margin: 0 -1em;
   padding: 0 1em;
+}
+#discussion-list[state="loading"] {
+  display: none;
+}
+#loading-discussion-list {
+  display: none;
+}
+#discussion-list[state="loading"] + #loading-discussion-list {
+  display: block;
+  width: 100%;
 }
 
 .discussion-preview {
@@ -228,6 +236,12 @@
   font-weight: light;
   font-size: 0.8em;
 }
+#focused-discussion {
+  display: none;
+}
+#focused-discussion[state="loading"] {
+  display: none !important;
+}
 #focused-discussion .message-wrapper {
   --border-bg: khaki !important;
   --inlay-bg: rgba(255, 255, 255, 0.2) !important;
@@ -235,7 +249,16 @@
   margin: auto -5%;
   font-family: "ancient", serif;
 }
-#focused-discussion [role="go-back"] {
+#loading-focused-discussion {
+  display: none;
+}
+#focused-discussion[state="loading"] + #loading-focused-discussion {
+  display: block;
+  width: 100%;
+}
+
+#focused-discussion [role="go-back"],
+#loading-focused-discussion [role="go-back"] {
   text-align: center;
   letter-spacing: 1px;
   padding-bottom: 1%;
@@ -318,4 +341,14 @@
 
 #focused-discussion #new-message .licorne {
   display: none;
+}
+#focused-discussion #new-message[state="loading"] > * {
+  display: none;
+}
+#focused-discussion #new-message[state="loading"] .licorne {
+  display: inline;
+}
+
+.loading.licorne {
+  animation: loadingTraverse 3s ease-in-out infinite;
 }
