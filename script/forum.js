@@ -236,7 +236,6 @@ async function apiLoadDiscussion(threadId, gueuName) {
 }
 
 async function apiSendMessage(threadId, message, author) {
-  // TODO call api "newMessage"
   const requestBody = { threadId, message, author };
   return retrieveJSON(apiURL + "newMessage", requestBody);
 }
@@ -248,12 +247,7 @@ function hasUsedForum() {
 function apiGetTeamInfos() {
   const gueuName = getConnectedUser().name;
 
-  return mockApiCall({
-    name: "dev__Team",
-    members: ["Gueux 1", "Gueux 2", "Gueux 3", "Gueux 4"],
-  });
-
-  // return retrieveJSON(
-  //   apiURL + "teamList?" + new URLSearchParams({ gueuName }).toString()
-  // );
+  return retrieveJSON(
+    apiURL + "teamList?" + new URLSearchParams({ gueuName }).toString()
+  );
 }
