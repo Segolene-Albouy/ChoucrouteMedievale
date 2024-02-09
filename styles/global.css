@@ -122,7 +122,7 @@ main * {
   position: relative;
 }
 
-#torchs {
+.main-banner {
   width: 90%;
   margin: auto;
   display: flex;
@@ -130,12 +130,18 @@ main * {
   overflow: visible;
 }
 
-.torch {
+.banner-side {
   display: flex;
   flex-direction: column;
   align-items: center;
   z-index: 100;
 }
+
+.banner-center {
+  /*width: 50%;*/
+  text-align: center;
+}
+
 .torch > *:first-child {
   opacity: 0;
 }
@@ -154,6 +160,13 @@ main * {
 
 ul {
   text-align: left;
+  list-style-type: none;
+}
+
+li::before {
+  content: "🙚";
+  margin-right: 0.5em;
+  margin-left: -1.5em;
 }
 
 hr {
@@ -167,6 +180,7 @@ hr {
   display: block;
   height: 4vh;
   border: 0;
+  margin: 5% auto;
 }
 
 mark {
@@ -242,4 +256,63 @@ mark {
   100% {
     content: "......";
   }
+}
+
+.collapsed + [role="collapse-content"] {
+  max-height: 0;
+  overflow: hidden;
+}
+[role="collapse-content"] {
+  transition: max-height 0.25s ease-in-out;
+}
+
+button.invisible {
+  border: none;
+  outline: none;
+  background: none;
+}
+
+body[state="locked"] {
+  overflow-y: hidden;
+  height: 100vh;
+}
+
+.popup {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 800;
+  align-items: center;
+  justify-content: center;
+  background-color: #24242496;
+}
+
+.popup-content {
+  display: flex;
+  align-items: center;
+  padding: 10% 0;
+  box-shadow: 0 0 15px 5px black;
+  width: 90vw;
+  justify-content: space-around;
+  font-size: 1.5em;
+}
+
+.popup[role="error"] {
+  color: red;
+}
+
+.popup[role="warning"] {
+  color: orangered;
+}
+
+.clickable {
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+.clickable:hover {
+  transform: translateY(3px);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }

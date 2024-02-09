@@ -12,8 +12,7 @@
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  transform: translate(-50%, -50%);
-  transform-origin: 0 0;
+  transform: translate(-50%, -100%);
 }
 
 .cursor-particle {

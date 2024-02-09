@@ -12,6 +12,7 @@
       rel="stylesheet"
     />
     <link rel="icon" type="image/png" href="static/favicon/castle1.png" />
+    <link rel="stylesheet" href="./styles/fantasy-btn.css" />
     <link rel="stylesheet" href="./styles/gifs.css" />
     <link rel="stylesheet" href="./styles/global.css" />
     <link rel="stylesheet" href="./styles/cursor.css" />
@@ -20,9 +21,11 @@
     <link rel="stylesheet" href="./styles/door.css" />
     <link rel="stylesheet" href="./styles/donjon.css" />
     <link rel="stylesheet" href="./styles/lookbook.css" />
+    <link rel="stylesheet" href="./styles/forum.css" />
     <script src="script/lib.js"></script>
     <script src="script/cursor.js"></script>
     <script src="script/torchs.js"></script>
+    <script src="script/forum.js"></script>
     <script src="script/framework.js"></script>
     <script src="script/submitName.js"></script>
   </head>
@@ -60,14 +63,14 @@
           <div id="name-psw" class="choice-container">
             <button
               id="choose-name"
-              class="choice-rpg"
+              class="choice-rpg clickable"
               onclick="choose(showName)"
             >
               Je donne mon nom
             </button>
             <button
               id="choose-psw"
-              class="choice-rpg"
+              class="choice-rpg clickable"
               onclick="choose(showPsw)"
             >
               Je connois le mot de passe
@@ -95,10 +98,10 @@
             <div class="medieval-select">
               <select name="adjectif"></select>
               <div class="select-arrow">
-                <img src="static/gif/arrow.gif">
+                <img src="static/gif/arrow.gif" />
               </div>
             </div>
-            <button id="name-submit" class="choice-rpg" type="submit">
+            <button id="name-submit" class="choice-rpg clickable" type="submit">
               Soumettre ce nom à la garde du chasteau
             </button>
           </form>
@@ -112,7 +115,7 @@
               <img src="static/angry_knight.gif" class="angry-knight" />
             </div>
             <input type="text" id="psw-input" name="psw" autofocus />
-            <button id="psw-submit" class="choice-rpg" type="submit">
+            <button id="psw-submit" class="choice-rpg clickable" type="submit">
               Proférer ce mot de passe aux gardes
             </button>
           </form>
@@ -122,20 +125,28 @@
               <span class="thinking"></span>
             </p>
             <p>Curieux, mais soit...</p>
-            <p>Vénérable <span class="username"></span> voici vostre mot de passe :</p>
+            <p>
+              Vénérable <span class="username"></span> voici vostre mot de passe
+              :
+            </p>
             <p><mark class="password"></mark></p>
             <p>
-              Scribez-le dans vos parchemins.<br/>
-              Il vous servira à vous faire reconnaître des autres gardes du chasteau.<br/>
-              Cette information est de grande importance, ne la divulguez en aucun cas !
+              Scribez-le dans vos parchemins.<br />
+              Il vous servira à vous faire reconnaître des autres gardes du
+              chasteau.<br />
+              Cette information est de grande importance, ne la divulguez en
+              aucun cas !
             </p>
           </div>
           <div id="psw-fail">
-              <h3> <img
+            <h3>
+              <img
                 src="static/angry_knight.gif"
                 class="reverse-gifs angry-knight"
-              /> Quel idiot ce gueux !
-              <img src="static/angry_knight.gif" class="angry-knight" /></h3>
+              />
+              Quel idiot ce gueux !
+              <img src="static/angry_knight.gif" class="angry-knight" />
+            </h3>
 
             <p>Vous avez énérvé la garde du chasteau.</p>
             <p>Addressez les seigneurs par vos propres moyens.</p>
@@ -145,14 +156,14 @@
     </div>
 
     <main>
-      <div id="torchs">
-        <div class="torch on">
-          <img src="../static/gif/fireanim.gif" alt="FIIIRE!!!" />
-          <img src="../static/gif/torch.gif" alt="torch" />
+      <div id="torchs" class="main-banner">
+        <div class="torch on banner-side">
+          <img src="static/gif/fireanim.gif" alt="FIIIRE!!!" />
+          <img src="static/gif/torch.gif" alt="torch" />
         </div>
-        <div class="torch on">
-          <img src="../static/gif/fireanim.gif" alt="FIIIRE!!!" />
-          <img src="../static/gif/torch.gif" alt="torch" />
+        <div class="torch on banner-side">
+          <img src="static/gif/fireanim.gif" alt="FIIIRE!!!" />
+          <img src="static/gif/torch.gif" alt="torch" />
         </div>
       </div>
       <div class="main-title">
@@ -161,7 +172,7 @@
 
       <div id="cour" class="page">
         <section class="parchment">
-          <img id="oyez" src="../static/oyezoyez.png" />
+          <img id="oyez" src="static/oyezoyez.png" />
           <h2>Dameselles et damelots</h2>
           <p>
             Entrez entrez dans la cour du chasteau ! Les seigneurs de la
@@ -204,7 +215,7 @@
       <div id="banquet" class="page">
         <section class="parchment">
           <h2>Patience escuyer,<br />la pitance n'est pas preste !</h2>
-          <img src="../static/gif/chandeler.gif" alt="prout" />
+          <img src="static/gif/chandeler.gif" alt="prout" />
         </section>
       </div>
 
@@ -215,7 +226,7 @@
             Dégouspille, maraud, avec<br />ton affublement<br />de
             <mark>giguedouilleux</mark> !
           </p>
-          <img src="../static/gif/knight3.gif" alt="boursemolle" />
+          <img src="static/gif/knight3.gif" alt="boursemolle" />
         </section>
       </div>-->
 
@@ -257,7 +268,157 @@
 
       </div>
 
+      <div id="forum" class="page">
+        <!-- Clan .collapsible -->
+        <div class="main-banner" style="justify-content: center">
+          <!--<div class="banner-side">
+            <img src="static/gif/colombe.gif" class="reverse-gifs">
+          </div>-->
+          <div class="banner-center">
+            <h3>Pigeonnier des<br /><mark class="team"></mark></h3>
+          </div>
+          <!--<div class="banner-side">
+            <img src="static/gif/colombe.gif">
+          </div>-->
+        </div>
+
+        <section id="forum-welcome">
+
+          <p>
+            Bienvenue dans la pièce secrète dedié à vostre fief.
+            Vous pouvez ici communiquer avec vostre clan
+            pour ourdir les plus vils complots.
+          </p>
+
+          <div class="team-members">
+            <h4>Se battent à vos côtés sous le même étendard :</h4>
+          </div>
+          <ul id="team-list"></ul>
+        </section>
+
+        <hr />
+        <!-- Discussions -->
+        <!-- Nouvelle discussion .collapsible -->
+        <div id="new-discussion" class="collapsible">
+          <h4 role="collapse-trigger" class="fantasy-btn collapsed clickable">
+            <span>Entamer une nouvelle discussion</span>
+            <img src="static/+.png" />
+          </h4>
+          <form role="collapse-content" onsubmit="submitDiscussion(event)">
+            <!-- Titre -->
+            <input
+              type="text"
+              name="discussionTitle"
+              placeholder="Titre de la discussion"
+              required
+            />
+            <!-- Message -->
+            <label for="discussion-message">
+              Message à adresser à vos compatriotes
+            </label>
+            <div id="message-area" class="fantasy-btn">
+              <textarea
+                name="discussionMessage"
+                class="parchment"
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="choice-rpg clickable">
+              <span>Envoyer</span>
+              <img src="static/licorne.gif" class="loading licorne" />
+            </button>
+          </form>
+        </div>
+        <!--<hr />-->
+        <!-- Liste discussions -->
+        <div id="discussion-list">
+          <div class="template discussion-preview">
+            <h4>
+              <img
+                src="static/gif/seagull_with_letter1.gif"
+                class="pigeon-letter"
+              /><span role="title"></span>
+            </h4>
+            <p class="infos">
+              <span>Par : <span role="author"></span></span>
+              <span role="msg-number"></span>
+              <br />
+              <span class="additional-info">
+                Dernier message de
+                <span role="last-author"></span>
+                <span role="last-datetime"></span>
+              </span>
+            </p>
+          </div>
+        </div>
+        <div id="loading-discussion-list">
+          <img src="static/licorne.gif" class="loading licorne" />
+        </div>
+        <div id="empty-discussion">
+          <h4>Aucune discussion pour le moment</h4>
+        </div>
+        <div id="focused-discussion">
+          <button
+            class="invisible"
+            role="go-back"
+            onclick="goBackToDiscussions()"
+          >
+            &lt;- Toutes les discussions
+          </button>
+          <h4 role="title"></h4>
+          <div class="message-wrapper fantasy-btn">
+            <div id="discussion-messages">
+              <div class="template message">
+                <p class="infos" role="author"></p>
+                <p role="message" class="parchment"></p>
+              </div>
+            </div>
+            <form id="new-message" onsubmit="submitMessage(event)">
+              <textarea
+                name="message"
+                required
+                placeholder="Répondre"
+              ></textarea>
+              <button type="submit" class="invisible">
+                <span>OK</span>
+              </button>
+              <img src="static/licorne.gif" class="loading licorne" />
+            </form>
+          </div>
+        </div>
+        <div id="loading-focused-discussion">
+          <button
+            class="invisible"
+            role="go-back"
+            onclick="goBackToDiscussions()"
+          >
+            &lt;- Toutes les discussions
+          </button>
+          <div><img src="static/licorne.gif" class="loading licorne" /></div>
+        </div>
+        <!--<hr />-->
+      </div>
+
       <div id="doors" class="door-container"></div>
+
+      <div class="popup" role="error">
+        <div class="popup-content parchment">
+          <img src="static/nuke.gif" class="reverse-gifs nuke" />
+          <span class="message"></span>
+          <img src="static/nuke.gif" class="nuke" />
+        </div>
+      </div>
+
+      <div class="popup" role="warning">
+        <div class="popup-content parchment">
+          <img
+            src="static/angry_knight.gif"
+            class="reverse-gifs angry-knight"
+          />
+          <span class="message"></span>
+          <img src="static/angry_knight.gif" class="angry-knight" />
+        </div>
+      </div>
     </main>
   </body>
 </html>
