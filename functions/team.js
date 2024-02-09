@@ -18,7 +18,7 @@ functions.http("teamList", async (req, res) => {
       return;
     }
     const gueux = gueuxQuery.docs[0];
-    if (gueux.data().team == "") {
+    if (gueux.data().team === "") {
       res.status(401).send({
         message:
           "Les mercenaires ne peuvent pas communiquer. Revenez lorsque l'étendard vous sera attribuer !",

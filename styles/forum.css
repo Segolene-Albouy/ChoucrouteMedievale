@@ -19,17 +19,17 @@
   border-style: outset outset outset inset;
   border-color: #fb2;
   border-radius: 2px;
-  box-shadow: 0px 0px 0.09375em #000;
+  box-shadow: 0 0 0.09375em #000;
 }
 .fantasy:after {
-  box-shadow: 0px 0px 0.25em 0.25em rgba(0, 0, 0, 0.5) inset;
+  box-shadow: 0 0 0.25em 0.25em rgba(0, 0, 0, 0.5) inset;
 }
 .double {
   position: relative;
   border: 0.2em double #fb2;
 }
 .double:after {
-  box-shadow: 0px 0px 0.25em 0.2em rgba(0, 0, 0, 0.7) inset;
+  box-shadow: 0 0 0.25em 0.2em rgba(0, 0, 0, 0.7) inset;
 }
 
 #forum {
@@ -38,20 +38,29 @@
 }
 
 #forum h3 {
-  font-family: "UnifrakturMaguntia", serif;
-  font-size: 3em;
-  text-shadow: 0px 0px 13px rgb(141, 86, 1);
+  font-family: "ancient", serif;
+  font-size: 2em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   text-align: center;
-  font-weight: lighter;
 }
 
+#forum-welcome {
+  margin: 0 auto;
+  text-align: justify;
+  /*background-image: url("../static/parchment.jpg");
+  background-attachment: scroll;
+  background-position: center center;*/
+  font-size: 1.1em;
+  /*font-family: "ancient", serif;*/
+  padding: 0.5em;
+}
 #form h3 .team {
   letter-spacing: 10px;
 }
 
 #forum .team-members h4 {
   font-size: 1.1em;
-  color: khaki;
+  color: rgb(157, 118, 77);
   margin: 0;
   font-family: MedievalSharp, serif;
 }
@@ -65,6 +74,8 @@
   display: flex;
   align-items: center;
   color: darkred;
+  margin: 4%;
+  padding: 2% 10%;
   --inlay-base-bg: cornsilk !important;
   --inlay-hover-opacity: 0.7 !important;
   --inlay-state-opacity: 0.7 !important;
@@ -94,7 +105,7 @@
   color: darkgray;
   outline: none;
   border: 0;
-  font-family: Medievalsharp;
+  font-family: Medievalsharp, serif;
 }
 
 #new-discussion form label {
@@ -205,11 +216,20 @@
 .discussion-preview {
   border: 1px solid #ffffff9b;
   padding: 2%;
-  margin-top: 11%;
+  margin: 75px 5vw 0;
   box-shadow: 0 0 10px 2px chocolate;
   border-radius: 0.4em;
   scroll-snap-align: start;
   scroll-margin: 1em 0;
+  background: rgba(255, 249, 240, 0.2);
+  transition: all 0.3s ease;
+}
+
+.discussion-preview:hover {
+  /*transform: translateY(5px);
+  box-shadow: 0 0 5px rgba(210, 105, 30, 0.75);
+  margin-top: 70px;*/
+  background: rgba(255, 249, 240, 0.1);
 }
 
 .discussion-preview h4 {
@@ -219,8 +239,7 @@
   gap: 3%;
   font-size: 2em;
   color: khaki;
-  margin: 0;
-  margin-bottom: 2%;
+  margin: 0 0 2%;
 }
 .discussion-preview [role="author"] {
   font-size: 1.2em;
@@ -273,15 +292,13 @@
   border-bottom: 1px solid cornsilk;
   width: fit-content;
   color: cornsilk;
-  font-family: "MedievalSharp";
+  font-family: "MedievalSharp", serif;
 }
 #focused-discussion [role="title"] {
   text-align: center;
-  margin: 0;
-  margin-bottom: 0px;
   margin-bottom: 3%;
   font-size: 2.4em;
-  font-family: "Chomsky";
+  font-family: "Chomsky", serif;
   text-shadow: 1px 1px 1px chocolate;
   font-weight: lighter;
   letter-spacing: 1px;
@@ -297,7 +314,8 @@
 }
 
 #discussion-messages .message {
-  max-width: 50%;
+  max-width: 48%;
+  min-width: 48%;
   font-size: 1.1em;
   scroll-snap-align: end;
   scroll-margin-bottom: 3px;

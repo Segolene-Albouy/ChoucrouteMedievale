@@ -33,7 +33,7 @@ functions.http("newThread", async (req, res) => {
       return;
     }
     const gueux = gueuxQuery.docs[0];
-    if (gueux.data().team == "") {
+    if (gueux.data().team === "") {
       res.status(401).send({
         message:
           "Les mercenaires ne peuvent pas communiquer. Revenez lorsque l'étendard vous sera attribuer !",
@@ -84,7 +84,7 @@ functions.http("getThread", async (req, res) => {
     }
     // Check author is in the same team
     const thread = threadQuery.data();
-    if (thread.team != gueuxQuery.docs[0].data().team) {
+    if (thread.team !== gueuxQuery.docs[0].data().team) {
       res.status(401).send({ message: "L'espionnage est passible de mort !" });
       return;
     }
@@ -108,7 +108,7 @@ functions.http("newMessage", async (req, res) => {
       return;
     }
     const gueux = gueuxQuery.docs[0];
-    if (gueux.data().team == "") {
+    if (gueux.data().team === "") {
       res.status(401).send({
         message:
           "Les mercenaires ne peuvent pas communiquer. Revenez lorsque l'étendard vous sera attribuer !",

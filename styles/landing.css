@@ -291,16 +291,10 @@
   font-size: 1.3em;
   font-family: "Chomsky", serif;
   color: #663300;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
   margin: 0 1em;
   width: 30%;
 }
 
-.choice-rpg:hover {
-  transform: translateY(3px);
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-}
 #welcome {
   display: none;
   font-size: 1.2em;
