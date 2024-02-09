@@ -1,36 +1,38 @@
 const apiURL = "https://europe-west9-choucroutemedievale.cloudfunctions.net/";
 var activeDiscussion = null;
-const patrieGueu = {
-  name: "dev__Team",
-  members: [
-    { name: "Clément L’Ancien" },
-    { name: "Didi Le Goulu" },
-    { name: "Ségolène La Dévergoigneuse" },
-  ],
-};
+var etendard;
+
 function loadForum() {
   resetCursor();
 
-  // load team info
-  // Team name
+  apiGetTeamInfos()
+    .then(({ name, members }) => {
+      etendard = name;
+      displayTeamInfo(members);
+      loadDiscussions();
+    })
+    .catch((e) => {
+      // TODO user has no team!
+    });
+}
+
+function displayTeamInfo(members) {
   document.querySelectorAll(".team").forEach((t) => {
-    t.innerHTML = patrieGueu.name;
+    t.innerHTML = etendard;
   });
   // Team members
   const teamList = document.querySelector("#team-list");
-  patrieGueu.members.forEach((member) => {
+  members.forEach((member) => {
     const memberLi = document.createElement("li");
-    memberLi.innerHTML = member.name;
+    memberLi.innerHTML = member;
     teamList.appendChild(memberLi);
   });
-
-  loadDiscussions();
 }
 
 function loadDiscussions() {
   document.getElementById("discussion-list").setAttribute("state", "loading");
   // load messages
-  apiLoadDiscussionList(patrieGueu.name)
+  apiLoadDiscussionList(etendard)
     .then((threads) => {
       displayDiscussions(threads);
     })
@@ -231,4 +233,15 @@ function hasUsedForum() {
   return localStorage.getItem("forumUsed") != null;
 }
 
-function apiGetTeamMembers() {}
+function apiGetTeamInfos() {
+  const gueuName = getConnectedUser().name;
+
+  return mockApiCall({
+    name: "dev__Team",
+    members: ["Gueux 1", "Gueux 2", "Gueux 3", "Gueux 4"],
+  });
+
+  // return retrieveJSON(
+  //   apiURL + "teamList?" + new URLSearchParams({ gueuName }).toString()
+  // );
+}
