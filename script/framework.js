@@ -228,3 +228,33 @@ function bypassLanding() {
   localStorage.setItem("medievalPsw", "dev_psw");
   opendor();
 }
+
+// onDismiss should return true/false if the popup should be dismissed on click
+function errorPopup(message, onDismiss) {
+  displayPopup("error", message, onDismiss);
+}
+
+// onDismiss should return true/false if the popup should be dismissed on click
+function warningPopup(message, onDismiss) {
+  displayPopup("warning", message, onDismiss);
+}
+
+// To call from errorPopup or warningPopup
+function displayPopup(popupRole, message, onDismiss) {
+  document.querySelectorAll(".popup").forEach((e) => {
+    e.replaceWith(e.cloneNode(true)); // Will clear all event listeners/styles etc..
+  });
+  const popup = document.querySelector(`.popup[role=${popupRole}]`);
+  popup.querySelector(".message").innerText = message;
+  popup.style.display = "flex";
+  document.body.setAttribute("state", "locked");
+
+  popup.addEventListener("click", () => {
+    let dismissPopup = onDismiss ? onDismiss() : true; // dismiss popup by default
+    if (dismissPopup) {
+      popup.style.display = "none";
+      document.body.removeAttribute("state");
+    }
+  });
+  popup.scrollIntoView();
+}

@@ -24,6 +24,11 @@
   height: 72px;
 }
 
+.nuke {
+  width: 78px;
+  height: 121px;
+}
+
 @media (max-width: 600px) {
   .knight_horse_blue {
     width: 50px;
@@ -49,5 +54,10 @@
   .pigeon-letter {
     width: 44px;
     height: 36px;
+  }
+
+  .nuke {
+    width: 39px;
+    height: 60px;
   }
 }

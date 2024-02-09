@@ -12,7 +12,8 @@ function loadForum() {
       loadDiscussions();
     })
     .catch((e) => {
-      // TODO user has no team!
+      if (e.status < 500) warningPopup(e.message);
+      else errorPopup(e.message);
     });
 }
 
@@ -35,6 +36,10 @@ function loadDiscussions() {
   apiLoadDiscussionList(etendard)
     .then((threads) => {
       displayDiscussions(threads);
+    })
+    .catch((e) => {
+      if (e.status < 500) warningPopup(e.message);
+      else errorPopup(e.message);
     })
     .finally(() => {
       document.getElementById("discussion-list").removeAttribute("state");
@@ -81,6 +86,10 @@ function displayDiscussions(threads) {
       document.getElementById("focused-discussion").style.display = "block";
       apiLoadDiscussion(id, getConnectedUser().name)
         .then((res) => focusDiscussion({ id, ...res }))
+        .catch((e) => {
+          if (e.status < 500) warningPopup(e.message);
+          else errorPopup(e.message);
+        })
         .finally(() => {
           document
             .getElementById("focused-discussion")
@@ -146,7 +155,7 @@ function submitDiscussion(evt) {
   } = evt.target;
 
   if (title.trim().length == 0 || message.trim().length == 0) {
-    alert("Saisi du contenu dans ton message sale gueux !");
+    errorPopup("Saisi du contenu dans ton message sale gueux !");
     return;
   }
 
@@ -157,6 +166,10 @@ function submitDiscussion(evt) {
   apiNewThread(title, message, author)
     .then(() => {
       loadDiscussions();
+    })
+    .catch((e) => {
+      if (e.status < 500) warningPopup(e.message);
+      else errorPopup(e.message);
     })
     .finally(() => {
       evt.target.setAttribute("state", "success");
@@ -202,7 +215,6 @@ function submitMessage(evt) {
 }
 
 async function apiNewThread(title, message, author) {
-  // TODO call api "newThread"
   const requestBody = { title, message, author };
   return retrieveJSON(apiURL + "newThread", requestBody);
 }

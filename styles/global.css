@@ -257,3 +257,39 @@ button.invisible {
   outline: none;
   background: none;
 }
+
+body[state="locked"] {
+  overflow-y: hidden;
+  height: 100vh;
+}
+
+.popup {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 800;
+  align-items: center;
+  justify-content: center;
+  background-color: #24242496;
+}
+
+.popup-content {
+  display: flex;
+  align-items: center;
+  padding: 10% 0;
+  box-shadow: 0 0 15px 5px black;
+  width: 90vw;
+  justify-content: space-around;
+  font-size: 1.5em;
+}
+
+.popup[role="error"] {
+  color: red;
+}
+
+.popup[role="warning"] {
+  color: orangered;
+}
