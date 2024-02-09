@@ -194,6 +194,14 @@
   width: 100%;
 }
 
+#empty-discussion {
+  display: none;
+  text-align: center;
+  font-size: 2em;
+}
+#empty-discussion h4 {
+  font-family: "MedievalSharp", serif;
+}
 .discussion-preview {
   border: 1px solid #ffffff9b;
   padding: 2%;

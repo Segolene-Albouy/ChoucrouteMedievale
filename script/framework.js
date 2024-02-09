@@ -224,7 +224,7 @@ function createDoorsNavigation() {
 function bypassLanding() {
   const landiv = document.getElementById("main-landing");
   landiv.style.display = "none";
-  localStorage.setItem("medievalName", "dev_name");
+  localStorage.setItem("medievalName", "Clément L’Ancien");
   localStorage.setItem("medievalPsw", "dev_psw");
   opendor();
 }

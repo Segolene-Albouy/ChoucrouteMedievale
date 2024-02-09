@@ -156,7 +156,15 @@ functions.http("getThreads", async (req, res) => {
           rawThread.messages[rawThread.messages.length - 1].author,
       });
     });
-    res.status(200).send(threads);
+    res
+      .status(200)
+      .send(
+        threads.sort(
+          (a, b) =>
+            new Date(b.lastMessageTime).getTime() -
+            new Date(a.lastMessageTime).getTime()
+        )
+      );
   } catch (e) {
     console.error(e);
     res.status(500).send({ message: "Erreur interne", error: e });

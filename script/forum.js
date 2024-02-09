@@ -24,23 +24,33 @@ function loadForum() {
     teamList.appendChild(memberLi);
   });
 
+  loadDiscussions();
+}
+
+function loadDiscussions() {
   document.getElementById("discussion-list").setAttribute("state", "loading");
   // load messages
   apiLoadDiscussionList(patrieGueu.name)
     .then((threads) => {
-      loadDiscussions(threads);
+      displayDiscussions(threads);
     })
     .finally(() => {
       document.getElementById("discussion-list").removeAttribute("state");
     });
 }
 
-function loadDiscussions(threads) {
+function displayDiscussions(threads) {
   const discussionList = document.getElementById("discussion-list");
   // Clean discussion list
   discussionList
     .querySelectorAll(".discussion-preview:not(.template)")
     .forEach((elt) => elt.remove());
+  document.getElementById("empty-discussion").style.display = "none";
+
+  if (threads.length == 0) {
+    document.getElementById("empty-discussion").style.display = "block";
+    return;
+  }
   for (let {
     title,
     author,
@@ -142,10 +152,10 @@ function submitDiscussion(evt) {
   const author = getConnectedUser().name;
   console.log({ title, message, author });
 
-  // TODO api request "newThread"
-
   apiNewThread(title, message, author)
-    .then(() => {})
+    .then(() => {
+      loadDiscussions();
+    })
     .finally(() => {
       evt.target.setAttribute("state", "success");
       evt.target.reset();
@@ -158,9 +168,7 @@ function submitDiscussion(evt) {
 function goBackToDiscussions() {
   document.getElementById("discussion-list").style.display = "block";
   document.getElementById("focused-discussion").style.display = "none";
-  apiLoadDiscussionList(patrieGueu.name).then((threads) => {
-    loadDiscussions(threads);
-  });
+  loadDiscussions();
 }
 
 function submitMessage(evt) {
