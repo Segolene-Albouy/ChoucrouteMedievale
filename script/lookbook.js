@@ -7,6 +7,13 @@ function getTopOffset(type){
     return randomBetween(typeOffset[type] - 50, typeOffset[type] + 50);
 }
 
+const isPhone = isMobile();
+
+function getCursorXY(e){
+    const cursor = isPhone ? e.touches[0] : e;
+    return [cursor.clientX, cursor.clientY];
+}
+
 window.onload = function () {
     const guenilles = document.querySelectorAll(".drag img");
     const lookbook = document.getElementById('lookbook').getBoundingClientRect();
@@ -18,7 +25,12 @@ window.onload = function () {
     function dragElement(guenille) {
         let xOffset = 0, yOffset = 0, x = 0, y = 0;
 
-        guenille.onmousedown = dragMouseDown;
+        if (isPhone){
+            guenille.addEventListener('touchstart', dragMouseDown, { passive: false });
+        } else {
+            guenille.onmousedown = dragMouseDown;
+        }
+
         initialPosition(guenille);
 
         function initialPosition() {
@@ -33,35 +45,43 @@ window.onload = function () {
             const left = guenille.offsetLeft + xOffset
 
             guenille.style.top = (top + getTopOffset(guenille.parentElement.parentElement.id)) + "px";
-            guenille.style.left = (left + randomBetween(-500, 500)) + "px";
+            guenille.style.left = (left + randomBetween(isPhone ? -200 : -500, isPhone ? 200 : 500)) + "px";
         }
 
         function dragMouseDown(e) {
             maxZIndex++;
             e = e || window.event;
             e.preventDefault();
-            x = e.clientX;
-            y = e.clientY;
+            [x, y] = getCursorXY(e);
             guenille.style.zIndex = maxZIndex;
-            document.onmouseup = closeDragElement;
-            document.onmousemove = elementDrag;
+            if (isPhone){
+                guenille.addEventListener('touchend', closeDragElement);
+                guenille.addEventListener('touchmove', elementDrag, { passive: false });
+            } else {
+                document.onmouseup = closeDragElement;
+                document.onmousemove = elementDrag;
+            }
         }
 
         function elementDrag(e) {
             e = e || window.event;
             e.preventDefault();
-            xOffset = x - e.clientX;
-            yOffset = y - e.clientY;
-            x = e.clientX;
-            y = e.clientY;
-            guenille.style.top = (guenille.offsetTop - yOffset) + "px";
-            guenille.style.left = (guenille.offsetLeft - xOffset) + "px";
+            xOffset = x - guenille.offsetLeft;
+            yOffset = y - guenille.offsetTop;
+            [x, y] = getCursorXY(e);
+
+            guenille.style.top = (y - yOffset) + "px";
+            guenille.style.left = (x - xOffset) + "px";
         }
 
         function closeDragElement() {
-            // img.style.zIndex = originalZIndex;
-            document.onmouseup = null;
-            document.onmousemove = null;
+            if (isPhone){
+                guenille.removeEventListener('touchend', closeDragElement);
+                guenille.removeEventListener('touchmove', elementDrag);
+            } else {
+                document.onmouseup = null;
+                document.onmousemove = null;
+            }
         }
     }
 }

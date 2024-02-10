@@ -17,7 +17,6 @@
 }
 
 .drag img {
-    /*max-width: 50%;*/
     max-width: none;
     transform: scale(var(--ratio));
     width: auto;
