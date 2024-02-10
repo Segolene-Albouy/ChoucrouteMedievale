@@ -39,9 +39,11 @@
 
 #forum h3 {
   font-family: "ancient", serif;
-  font-size: 2em;
+  font-size: 3em;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   text-align: center;
+  margin: auto;
+  padding-top: 1em;
 }
 
 #forum-welcome {
@@ -142,8 +144,7 @@
   background-image: url("../static/wall.jpg");
   filter: sepia(40%);
   box-shadow: 0 0 10px 2px chocolate;
-  margin: auto;
-  margin-top: 2%;
+  margin: 2% auto auto;
   width: 90%;
 }
 
@@ -216,7 +217,7 @@
 .discussion-preview {
   border: 1px solid #ffffff9b;
   padding: 2%;
-  margin: 75px 5vw 0;
+  margin: 75px 5%;
   box-shadow: 0 0 10px 2px chocolate;
   border-radius: 0.4em;
   scroll-snap-align: start;
@@ -273,8 +274,10 @@
   --border-bg: khaki !important;
   --inlay-bg: rgba(255, 255, 255, 0.2) !important;
   --outline-color: transparent !important;
-  margin: auto -5%;
+  /*margin: auto -5%;*/
+  margin: 5% auto;
   font-family: "ancient", serif;
+  padding: 2%;
 }
 #loading-focused-discussion {
   display: none;
@@ -294,16 +297,22 @@
   color: cornsilk;
   font-family: "MedievalSharp", serif;
 }
-#focused-discussion [role="title"] {
-  text-align: center;
-  margin-bottom: 3%;
-  font-size: 2.4em;
+
+.discussion-title {
+  display: flex;
   font-family: "Chomsky", serif;
-  text-shadow: 1px 1px 1px chocolate;
+  align-items: center;
+  gap: 3%;
+  color: khaki;
+  text-align: left;
+  margin: 0 0 2% 1%;
+  font-size: 4em;
   font-weight: lighter;
   letter-spacing: 1px;
   text-decoration: underline;
+  text-shadow: 2px 2px 4px rgb(141 66 1 / 90%);
 }
+
 #discussion-messages {
   max-height: 100vh;
   scroll-snap-type: both mandatory;
@@ -331,6 +340,7 @@
   font-size: 0.8em;
   color: cornsilk;
   letter-spacing: 1px;
+  padding-bottom: 0.2em
 }
 #discussion-messages .message [role="message"] {
   padding: 2%;
