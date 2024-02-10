@@ -54,7 +54,7 @@ function displayDiscussions(threads) {
     .forEach((elt) => elt.remove());
   document.getElementById("empty-discussion").style.display = "none";
 
-  if (threads.length == 0) {
+  if (threads.length === 0) {
     document.getElementById("empty-discussion").style.display = "block";
     return;
   }
