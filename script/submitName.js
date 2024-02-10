@@ -3,7 +3,7 @@ var wrongOnce = false;
 var APIurl =
   "https://europe-west9-choucroutemedievale.cloudfunctions.net/checkName";
 var pswAttempts = null;
-const devMode = true;
+const devMode = false;
 let currentDisplayedFormId = null;
 
 function choose(callback) {
