@@ -3,7 +3,7 @@ var wrongOnce = false;
 var APIurl =
   "https://europe-west9-choucroutemedievale.cloudfunctions.net/checkName";
 var pswAttempts = null;
-const devMode = false;
+const devMode = true;
 let currentDisplayedFormId = null;
 
 function choose(callback) {
@@ -129,6 +129,7 @@ function commonFormHandler(evt, keyNeeded) {
 }
 
 function openGates(medievalName, submitted = false) {
+  if (devMode) bypassLanding()
   document.getElementById(
     "opendor"
   ).innerHTML += `<mark>${medievalName}</mark>`;

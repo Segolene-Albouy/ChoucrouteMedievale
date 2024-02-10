@@ -1,17 +1,31 @@
 .image-container {
     display: flex;
-    justify-content: space-around;
-
+    justify-content: center;
+    overflow: visible;
+    /*flex-wrap: wrap;*/
+    align-items: center;
+}
+.couvre-chef {
+    height: calc(1000px * 0.2);
+}
+.affublement {
+    height: calc(2500px * 0.2);
+}
+.godille {
+    height: calc(500px * 0.2);
 }
 
 .drag img {
-    max-width: 100%;
-    width: 100%;
-    /*height: 75px;*/
-    /*height: auto;*/
+    /*max-width: 50%;*/
+    max-width: none;
+    transform: scale(0.2);
+    width: auto;
+    height: auto;
 }
 
 .drag {
     position: relative;
+    width: auto;
+    margin: -250px;
 }
 

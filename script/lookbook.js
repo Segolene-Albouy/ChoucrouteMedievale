@@ -2,19 +2,21 @@ document.addEventListener('DOMContentLoaded', function () {
     const images = document.querySelectorAll(".drag img");
     images.forEach(dragElement);
 
+    let maxZIndex = 1
+
     function dragElement(img) {
         let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-        let originalZIndex = 1; // Store the original z-index
 
         img.onmousedown = dragMouseDown;
 
         function dragMouseDown(e) {
+            maxZIndex++;
             e = e || window.event;
             e.preventDefault();
             pos3 = e.clientX;
             pos4 = e.clientY;
             // originalZIndex = img.style.zIndex || 1; // Store the original z-index
-            img.style.zIndex = img.style.zIndex + 1; // Set a high z-index to bring the element to the top
+            img.style.zIndex = maxZIndex;
             document.onmouseup = closeDragElement;
             document.onmousemove = elementDrag;
         }
