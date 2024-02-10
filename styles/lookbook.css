@@ -2,30 +2,33 @@
     display: flex;
     justify-content: center;
     overflow: visible;
-    /*flex-wrap: wrap;*/
+    flex-wrap: wrap;
     align-items: center;
+    --ratio: 0.2;
 }
-.couvre-chef {
-    height: calc(1000px * 0.2);
+#couvre-chef {
+    height: calc(1250px * var(--ratio));
 }
-.affublement {
-    height: calc(2500px * 0.2);
+#affublement {
+    height: calc(3000px * var(--ratio));
 }
-.godille {
-    height: calc(500px * 0.2);
+#godille {
+    height: calc(700px * var(--ratio));
 }
 
 .drag img {
     /*max-width: 50%;*/
     max-width: none;
-    transform: scale(0.2);
+    transform: scale(var(--ratio));
     width: auto;
     height: auto;
+
 }
 
 .drag {
     position: relative;
-    width: auto;
+    width: 10px;
+    height: 50px;
     margin: -250px;
 }
 

@@ -1,22 +1,48 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const images = document.querySelectorAll(".drag img");
-    images.forEach(dragElement);
+function getTopOffset(type){
+    const typeOffset = {
+        "couvre-chef": -400,
+        "affublement": 0,
+        "godille": 400
+    }
+    return randomBetween(typeOffset[type] - 50, typeOffset[type] + 50);
+}
+
+window.onload = function () {
+    const guenilles = document.querySelectorAll(".drag img");
+    const lookbook = document.getElementById('lookbook').getBoundingClientRect();
+
+    guenilles.forEach(dragElement);
 
     let maxZIndex = 1
 
-    function dragElement(img) {
-        let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    function dragElement(guenille) {
+        let xOffset = 0, yOffset = 0, x = 0, y = 0;
 
-        img.onmousedown = dragMouseDown;
+        guenille.onmousedown = dragMouseDown;
+        initialPosition(guenille);
+
+        function initialPosition() {
+            const guenilleBox = guenille.getBoundingClientRect();
+
+            x = lookbook.left + (lookbook.width - guenilleBox.width) / 2;
+            y = lookbook.top + (lookbook.height - guenilleBox.height) / 2;
+            xOffset = x - guenilleBox.left;
+            yOffset = y - guenilleBox.top;
+
+            const top = guenille.offsetTop + yOffset;
+            const left = guenille.offsetLeft + xOffset
+
+            guenille.style.top = (top + getTopOffset(guenille.parentElement.parentElement.id)) + "px";
+            guenille.style.left = (left + randomBetween(-500, 500)) + "px";
+        }
 
         function dragMouseDown(e) {
             maxZIndex++;
             e = e || window.event;
             e.preventDefault();
-            pos3 = e.clientX;
-            pos4 = e.clientY;
-            // originalZIndex = img.style.zIndex || 1; // Store the original z-index
-            img.style.zIndex = maxZIndex;
+            x = e.clientX;
+            y = e.clientY;
+            guenille.style.zIndex = maxZIndex;
             document.onmouseup = closeDragElement;
             document.onmousemove = elementDrag;
         }
@@ -24,12 +50,12 @@ document.addEventListener('DOMContentLoaded', function () {
         function elementDrag(e) {
             e = e || window.event;
             e.preventDefault();
-            pos1 = pos3 - e.clientX;
-            pos2 = pos4 - e.clientY;
-            pos3 = e.clientX;
-            pos4 = e.clientY;
-            img.style.top = (img.offsetTop - pos2) + "px";
-            img.style.left = (img.offsetLeft - pos1) + "px";
+            xOffset = x - e.clientX;
+            yOffset = y - e.clientY;
+            x = e.clientX;
+            y = e.clientY;
+            guenille.style.top = (guenille.offsetTop - yOffset) + "px";
+            guenille.style.left = (guenille.offsetLeft - xOffset) + "px";
         }
 
         function closeDragElement() {
@@ -38,4 +64,4 @@ document.addEventListener('DOMContentLoaded', function () {
             document.onmousemove = null;
         }
     }
-});
+}

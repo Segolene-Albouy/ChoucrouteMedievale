@@ -205,6 +205,7 @@ const particlePool = {
       p.state = "ended";
       p.particle.remove();
     });
+    disableBurstOnClick();
   },
 };
 

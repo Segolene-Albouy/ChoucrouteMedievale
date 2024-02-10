@@ -13,15 +13,18 @@ const loadBanquet = () => {
 };
 const unloadBanquet = () => {};
 const loadArmurerie = () => {
+  /*resetCursor();*/
+  particlePool.extinguishParticles();
+  setNewCursor("gif/wand.gif");
+};
+const unloadArmurerie = () => {
   resetCursor();
 };
-const unloadArmurerie = () => {};
 
 const loadDungeon = () => {
   particlePool.extinguishParticles();
   setNewCursor("gif/sword/sword13.png");
   document.addEventListener("click", animateSword, true);
-  disableBurstOnClick();
   play("fire");
 
   const ascii = document.getElementById("sexy");
