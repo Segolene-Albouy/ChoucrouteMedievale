@@ -207,7 +207,7 @@ function submitMessage(evt) {
 
   if (!hasUsedForum()) {
     // Faire une popup avec un vieux monsieur ou autre
-    // "Bonjour visiteur, c'est la première fois que tu utilises le pigeonnier dit-moi...
+    // "Bonjour visiteur, c'est la première fois que tu utilises le pigeonnier dis-moi...
     //  Si tu souhaites voir les réponses de tes compatriotes tu dois faire un pas en arrière et revenir sur le pigeon qui t'intéresse."
   }
 

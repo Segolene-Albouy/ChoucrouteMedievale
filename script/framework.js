@@ -138,10 +138,9 @@ document.addEventListener("DOMContentLoaded", function () {
       const content = collapsible.querySelector("[role=collapse-content]");
 
       trigger.addEventListener("click", function () {
-        // Toggle the "collapsed" class on the trigger
         this.classList.toggle("collapsed");
+        // todo change innerText of btn
 
-        // Toggle the "expanded" class on the content
         if (content) {
           content.classList.toggle("msg-box");
         }

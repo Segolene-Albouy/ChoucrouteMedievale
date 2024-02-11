@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="./styles/door.css" />
     <link rel="stylesheet" href="./styles/donjon.css" />
     <link rel="stylesheet" href="./styles/lookbook.css" />
+    <link rel="stylesheet" href="./styles/team.css" />
     <link rel="stylesheet" href="./styles/forum.css" />
     <script src="script/lib.js"></script>
     <script src="script/cursor.js"></script>
@@ -29,6 +30,7 @@
     <script src="script/lookbook.js"></script>
     <script src="script/framework.js"></script>
     <script src="script/submitName.js"></script>
+    <script src="script/teams.js"></script>
   </head>
   <body>
     <div id="main-cursor" class="custom-cursor"></div>
@@ -111,9 +113,10 @@
               <img
                 src="static/angry_knight.gif"
                 class="reverse-gifs angry-knight"
+                alt="Chevalier enragé"
               />
               <span>!! Ce n'est point le mot de passe !!</span>
-              <img src="static/angry_knight.gif" class="angry-knight" />
+              <img src="static/angry_knight.gif" class="angry-knight" alt="Chevalier enragé"/>
             </div>
             <input type="text" id="psw-input" name="psw" autofocus />
             <button id="psw-submit" class="choice-rpg clickable" type="submit">
@@ -127,8 +130,8 @@
             </p>
             <p>Curieux, mais soit...</p>
             <p>
-              Vénérable <span class="username"></span> voici vostre mot de passe
-              :
+              Vénérable <span class="username"></span>
+              voici vostre mot de passe :
             </p>
             <p><mark class="password"></mark></p>
             <p>
@@ -144,17 +147,23 @@
               <img
                 src="static/angry_knight.gif"
                 class="reverse-gifs angry-knight"
+                alt="Chevalier enragé"
               />
               Quel idiot ce gueux !
-              <img src="static/angry_knight.gif" class="angry-knight" />
+              <img src="static/angry_knight.gif" class="angry-knight" alt="Chevalier enragé"/>
             </h3>
 
             <p>Vous avez énérvé la garde du chasteau.</p>
             <p>Addressez les seigneurs par vos propres moyens.</p>
           </div>
+          <!--<div id="team">
+            <button onClick="drawTeam()">Start</button>
+          </div>-->
         </div>
       </div>
     </div>
+
+
 
     <main>
       <div id="torchs" class="main-banner">
@@ -172,8 +181,25 @@
       </div>
 
       <div id="cour" class="page">
+
+        <section id="team" class="parchment">
+          <button class="choice-rpg clickable" onClick="drawTeam()">Decouvrir vostre fief</button>
+          <div id="team-reveal">
+            <h2 id="team-name"></h2>
+
+            <div id="team-gif">
+              <img id="explosion" src="static/gif/explose.gif" alt="Boooouya" />
+              <img id="ours" src="static/teams/bear4.gif" class="team-gif" alt="Équipe Ours" />
+              <img id="dragon" src="static/teams/dragon4.gif" class="team-gif" alt="Équipe Dragon" />
+              <img id="cerf" src="static/teams/deer.gif" class="team-gif" alt="Équipe Cerf" />
+              <img id="kraken" src="static/teams/kraken.gif" class="team-gif" alt="Équipe Kraken" />
+              <img id="corbeau" src="static/teams/crow.gif" class="team-gif" alt="Équipe Corbeau" />
+            </div>
+          </div>
+        </section>
+
         <section class="parchment">
-          <img id="oyez" src="static/oyezoyez.png" />
+          <img id="oyez" src="static/oyezoyez.png"  alt="oyez oyez"/>
           <h2>Dameselles et damelots</h2>
           <p>
             Entrez entrez dans la cour du chasteau ! Les seigneurs de la
@@ -247,6 +273,7 @@
           <div id="affublement" class="image-container">
             <div class="drag"><img src="static/lookbook/armure.png"></div>
             <div class="drag"><img src="static/lookbook/bliaud.png"></div>
+            <div class="drag"><img src="static/lookbook/chausses.png"></div>
             <div class="drag"><img src="static/lookbook/robe.png"></div>
             <div class="drag"><img src="static/lookbook/cottehardie.png"></div>
             <div class="drag"><img src="static/lookbook/guenaude.png"></div>
@@ -283,7 +310,7 @@
         <section id="forum-welcome">
 
           <p>
-            Bienvenue dans la pièce secrète dedié à vostre fief.
+            Bienvenue dans la pièce secrète dediée à vostre fief.
             Vous pouvez ici communiquer avec vostre clan
             pour ourdir les plus vils complots.
           </p>
@@ -309,7 +336,6 @@
               class="discussion-title"
               name="discussionTitle"
               placeholder="Titre de la discussion"
-              required
             />
             <!-- Message -->
             <label for="message-area">
@@ -319,7 +345,6 @@
               <textarea
                 name="discussionMessage"
                 class="parchment forum-msg"
-                required
                 placeholder="Vostre message"
               ></textarea>
             </div>

@@ -16,6 +16,11 @@ body {
   src: url("../static/fonts/CloisterBlack.ttf");
 }
 
+@font-face {
+  font-family: "fraktur";
+  src: url("../static/fonts/FrakturMonospace.otf");
+}
+
 body {
   margin: 0;
   padding: 0;
