@@ -118,12 +118,30 @@ document.addEventListener("DOMContentLoaded", function () {
     pages[page.id].hide();
   });
 
-  // Create collapsible
+  /*// Create collapsible
   document
     .querySelectorAll("[role=collapse-trigger]")
     .forEach((collapsible) => {
       collapsible.addEventListener("click", function () {
+        // Pourquoi t'as pas juste fait un toggle de display none?
         this.classList.toggle("collapsed");
+      });
+    });*/
+
+  document
+    .querySelectorAll(".collapsible")
+    .forEach((collapsible) => {
+      const trigger = collapsible.querySelector("[role=collapse-trigger]");
+      const content = collapsible.querySelector("[role=collapse-content]");
+
+      trigger.addEventListener("click", function () {
+        // Toggle the "collapsed" class on the trigger
+        this.classList.toggle("collapsed");
+
+        // Toggle the "expanded" class on the content
+        if (content) {
+          content.classList.toggle("msg-box");
+        }
       });
     });
 

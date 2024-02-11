@@ -52,7 +52,7 @@
     border: none;
     --s: (var(--scale) / 4.5);
     font-size: calc(60px * var(--s));
-    font-family: serif;
+    font-family: MedievalSharp, serif;
     min-width: calc(280px * var(--s));
     min-height: calc(200px * var(--s));
     padding-inline: calc(95px * var(--s));
