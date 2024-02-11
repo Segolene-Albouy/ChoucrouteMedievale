@@ -154,8 +154,8 @@ function submitDiscussion(evt) {
     discussionMessage: { value: message },
   } = evt.target;
 
-  if (title.trim().length == 0 || message.trim().length == 0) {
-    errorPopup("Saisi du contenu dans ton message sale gueux !");
+  if (title.trim().length === 0 || message.trim().length === 0) {
+    errorPopup("Saisis du contenu dans ton message sale gueux !");
     return;
   }
 
@@ -177,6 +177,9 @@ function submitDiscussion(evt) {
       evt.target.parentElement
         .querySelector("[role=collapse-trigger]")
         .classList.add("collapsed");
+      evt.target.parentElement
+          .querySelector("[role=collapse-content]")
+          .classList.remove("msg-box");
     });
 }
 
