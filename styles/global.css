@@ -259,6 +259,7 @@ mark {
 }
 
 .collapsed + [role="collapse-content"] {
+  display: none;
   max-height: 0;
   overflow: hidden;
 }

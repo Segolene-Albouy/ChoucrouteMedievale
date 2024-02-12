@@ -306,19 +306,21 @@
             <!-- Titre -->
             <input
               type="text"
+              class="discussion-title"
               name="discussionTitle"
               placeholder="Titre de la discussion"
               required
             />
             <!-- Message -->
-            <label for="discussion-message">
+            <label for="message-area">
               Message à adresser à vos compatriotes
             </label>
-            <div id="message-area" class="fantasy-btn">
+            <div id="message-area"> <!--fantasy-btn-->
               <textarea
                 name="discussionMessage"
-                class="parchment"
+                class="parchment forum-msg"
                 required
+                placeholder="Vostre message"
               ></textarea>
             </div>
             <button type="submit" class="choice-rpg clickable">
@@ -330,7 +332,7 @@
         <!--<hr />-->
         <!-- Liste discussions -->
         <div id="discussion-list">
-          <div class="template discussion-preview">
+          <div class="template discussion-preview msg-box">
             <h4>
               <img
                 src="static/gif/seagull_with_letter1.gif"
@@ -373,7 +375,7 @@
             <div id="discussion-messages">
               <div class="template message">
                 <p class="infos" role="author"></p>
-                <p role="message" class="parchment"></p>
+                <p role="message" class="forum-msg parchment"></p>
               </div>
             </div>
             <form id="new-message" onsubmit="submitMessage(event)">

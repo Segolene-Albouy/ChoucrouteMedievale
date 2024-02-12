@@ -98,27 +98,55 @@
   flex-direction: column;
   gap: 0.4em;
   padding: 0 5%;
+  margin: 2% 0;
 }
 
 #new-discussion form input {
-  font-size: 2em;
+  /*font-size: 2em;
   padding: 3%;
   background: #ffffff27;
   color: darkgray;
   outline: none;
   border: 0;
-  font-family: Medievalsharp, serif;
+  font-family: Medievalsharp, serif;*/
+  background: rgba(255, 255, 255, 0.2);
+  outline: none;
+  border: none;
+  border-bottom: 2px solid black;
+  padding: 0.2em;
+  margin: 2%;
+}
+
+#new-discussion form input::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 #new-discussion form label {
   font-size: 1.2em;
   color: khaki;
+  text-align: center;
+  animation: glow 1s ease-in-out infinite alternate;
+  padding-bottom: 0.5em;
 }
-#new-discussion #message-area.fantasy-btn {
+/*#new-discussion #message-area.fantasy-btn {
   --border-bg: khaki !important;
   --inlay-bg: transparent !important;
   --outline-color: transparent !important;
   margin: 0 -5%;
+}*/
+
+.msg-box {
+  border: 1px solid #ffffff9b;
+  padding: 2%;
+  margin: 75px 5%;
+  box-shadow: 0 0 10px 2px chocolate;
+  border-radius: 0.4em;
+  background: rgba(255, 249, 240, 0.2);
+}
+
+#message-area {
+  padding: 0 2%;
 }
 
 #new-discussion textarea {
@@ -127,25 +155,27 @@
   border: none;
   width: 100%;
   padding: 5%;
-  font-family: serif;
-  font-size: 1.1em;
+  font-family: MedievalSharp, serif;
+  font-size: 1.3em;
+}
+
+#new-discussion textarea::placeholder {
+  color: rgba(0, 0, 0, 0.4);
 }
 
 #new-discussion button[type="submit"] {
   text-align: center;
   font-size: 2em;
   font-weight: bold;
-  color: darkred;
+  /*color: darkred;*/
   letter-spacing: 2px;
-  font-family: "Chomsky", serif;
   background-repeat: repeat;
   background-size: auto;
   background-attachment: scroll;
-  background-image: url("../static/wall.jpg");
-  filter: sepia(40%);
+  /*background-image: url("../static/wall.jpg");*/
   box-shadow: 0 0 10px 2px chocolate;
-  margin: 2% auto auto;
-  width: 90%;
+  margin: 2% auto;
+  /*width: 90%;*/
 }
 
 #new-discussion button[type="submit"] .licorne {
@@ -215,14 +245,14 @@
   font-family: "MedievalSharp", serif;
 }
 .discussion-preview {
-  border: 1px solid #ffffff9b;
+  /*border: 1px solid #ffffff9b;
   padding: 2%;
   margin: 75px 5%;
   box-shadow: 0 0 10px 2px chocolate;
+  background: rgba(255, 249, 240, 0.2);*/
   border-radius: 0.4em;
   scroll-snap-align: start;
   scroll-margin: 1em 0;
-  background: rgba(255, 249, 240, 0.2);
   transition: all 0.3s ease;
 }
 
@@ -309,7 +339,7 @@
   font-size: 4em;
   font-weight: lighter;
   letter-spacing: 1px;
-  text-decoration: underline;
+  /*text-decoration: underline;*/
   text-shadow: 2px 2px 4px rgb(141 66 1 / 90%);
 }
 
@@ -342,12 +372,19 @@
   letter-spacing: 1px;
   padding-bottom: 0.2em
 }
-#discussion-messages .message [role="message"] {
+.forum-msg {
+  padding: 2%;
+  border-radius: 0.3em;
+  color: #241301;
+  font-family: "MedievalSharp", serif;
+}
+
+/*#discussion-messages .message [role="message"] {
   padding: 2%;
   border-radius: 0.3em;
   color: black;
   font-family: "MedievalSharp", serif;
-}
+}*/
 #focused-discussion #new-message {
   display: flex;
   gap: 2%;
