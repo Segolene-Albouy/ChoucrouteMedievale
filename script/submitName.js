@@ -2,8 +2,8 @@
 var wrongOnce = false;
 var APIurl =
   "https://europe-west9-choucroutemedievale.cloudfunctions.net/checkName";
-var pswAttempts = null;
-const devMode = true;
+var pswAttempts = 0;
+const devMode = false;
 let currentDisplayedFormId = null;
 
 function choose(callback) {
@@ -16,11 +16,6 @@ function resetLocalStorage() {
   localStorage.removeItem("pswAttempts");
   localStorage.removeItem("medievalPsw");
   localStorage.removeItem("medievalName");
-}
-
-function passePartout() {
-  localStorage.setItem("medievalName", "Segoline La Devergoigneuse");
-  localStorage.setItem("medievalPsw", "prout");
 }
 
 function displayError(msg) {
@@ -66,8 +61,6 @@ function submitPsw(evt) {
   try {
     commonFormHandler(evt, "psw");
   } catch (e) {
-    // Pas de valeur dans le form
-
     pswAttempts++;
     if (pswAttempts >= 3) {
       document.getElementById("psw-submit").remove();
@@ -151,39 +144,32 @@ function openGates(medievalName, submitted = false) {
 document.addEventListener("DOMContentLoaded", function () {
   const medievalName = localStorage.getItem("medievalName");
   const medievalPsw = localStorage.getItem("medievalPsw");
+  const medievalTeam = localStorage.getItem("medievalTeam");
 
-  console.log({ medievalName, medievalPsw });
+  console.log({ medievalName, medievalPsw, medievalTeam });
 
-  if (medievalName && medievalPsw) {
+  if (medievalName && medievalPsw && medievalTeam) {
     // ça passe les gardes
     openGates(medievalName);
     if (devMode) return;
     // API call to update last connection
     retrieveJSON(APIurl, { psw: medievalPsw }).then((res) => {
       res = JSON.parse(res);
-      console.log(res)
       localStorage.setItem("medievalName", res.name);
       localStorage.setItem("medievalPsw", res.psw);
+      localStorage.setItem("medievalTeam", res.team);
     }).catch(e => {
       console.log("Vous êtes un fossoyeur d'identité vilain !", e);
-      // TODO le gueux n'existe pas
-      //  => peut-être il se fait rattrapper par les garde aux chateau
     });
 
     return;
   }
-  // TODO add to the condition if (no psw but name) or (no name but psw)
-  if (localStorage.getItem("pswAttempts")) {
-    // if the user already tried to connect with psw before, reset their attempts
-    pswAttempts = 0;
-    localStorage.setItem("pswAttempts", "0");
-    // On reset les attemps si il rafraichit la page mais on laisse la page d'acceuil ?
-    // oui carrément pour laisser les 2 options après j'aimais bien l'idée de changer le texte quand même
-    // document.getElementById("douves").innerHTML = `<h3>Halte-là !</h3>
-    //   <p>Je reconnois vostre visage.</p><p>Possedez-vous un mot de passe ?</p>`;
+
+  if (medievalName && medievalPsw){
+    // TODO make #team appear
   }
+
   // les gardes apparaissent
-  // document.getElementById("ask-name").style.display = "block";
   document.getElementById("ask-name").style.scale = "1";
 });
 
@@ -255,6 +241,7 @@ async function apiNewGueux(name) {
       targetForm.removeAttribute("state");
       localStorage.setItem("medievalPsw", res.psw);
       localStorage.setItem("medievalName", res.name);
+      localStorage.setItem("medievalTeam", res.team);
       welcomeUser(res.name, res.psw);
     }
   } catch (res) {
@@ -288,6 +275,8 @@ async function apiCheckGueux(psw) {
       targetForm.removeAttribute("state");
       localStorage.setItem("medievalPsw", res.psw);
       localStorage.setItem("medievalName", res.name);
+      localStorage.setItem("medievalTeam", res.team);
+      // TODO make #team appear
       openGates(res.name, true);
     }
   } catch (res) {
@@ -332,6 +321,7 @@ function welcomeUser(name, psw) {
       .forEach((e) => (e.style.opacity = "1"));
 
     document.getElementById("welcome").addEventListener("click", () => {
+      // TODO drawTeam
       openGates(name, true);
     });
   }, 3000);

@@ -12,7 +12,6 @@
   position: fixed;
   top: 0;
   left: 0;
-  /* z-index: 499; */
   width: 100%;
   gap: 15px;
 }
@@ -26,7 +25,6 @@
   font-size: 3.5em;
   text-shadow: 2px 2px 4px rgb(141 66 1 / 90%);
   color: #b90000;
-
   background-image: url("../static/scroll.png");
   background-size: cover;
   background-position: center center;
@@ -86,10 +84,14 @@
   transform: translateX(90%);
 }
 
+#team-reveal {
+  display: none;
+}
+
 #landing-name {
   transition: all 3s ease;
 }
-#landing-name.submitted {
+.submitted {
   opacity: 0;
   pointer-events: none;
 }
@@ -200,8 +202,6 @@
   pointer-events: none;
 }
 .select-arrow img {
-  /*height: 90%;
-  width: auto;*/
   width: 25px;
   height: auto;
 }
@@ -236,23 +236,6 @@
 .rpg-form select:hover {
   box-shadow: 0 0 0.2em 2px black;
 }
-/*.rpg-form button {
-  display: block;
-  outline: none;
-  background: none;
-  color: darkred;
-  font-family: "Chomsky", serif;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-  font-size: 2em;
-  border: 0;
-  line-height: 140%;
-  letter-spacing: 0.1em;
-  margin-top: 6%;
-}
-
-#ask-name button:hover {
-  text-shadow: 0 0 5px;
-}*/
 
 #psw-submit, #name-submit {
   width: 75%;
@@ -336,8 +319,4 @@
   #ask-name {
     max-width: none;
   }
-  /*.select-arrow img {
-    height: 70%;
-    margin-left: 1.5em;
-  }*/
 }

@@ -5,7 +5,7 @@ const teams = {
     },
     ours: {
         color: "",
-        title: "La tribu de l'Ours"
+        title: "La faction de l'Ours"
     },
     cerf: {
         color: "",
@@ -13,11 +13,11 @@ const teams = {
     },
     dragon: {
         color: "",
-        title: "Le coterie du dragon"
+        title: "Le coterie du Dragon"
     },
     corbeau: {
         color: "",
-        title: "La confrerie du corbeau"
+        title: "La confrerie du Corbeau"
     },
 };
 
@@ -26,9 +26,15 @@ const teamNames = Object.keys(teams)
 var team, teamName, covered, timer, newText;
 
 function drawTeam(){
-    team = teamNames[Math.random() * teamNames.length | 0];
+    team = "dragon" // TODO here API call to get team
+    document.getElementById("draw-team").classList.add("submitted");
+
+    const teamReveal = document.getElementById("team-reveal").
+    teamReveal.style.display = 'block';
+    teamReveal.classList.add('bornInFlames');
+
     teamName = teams[team].title
-    // TODO here API call to get team team
+
 
     covered = teamName.replace(/[^\s]/g, '_');
     document.getElementById("team-name").innerHTML = covered;
@@ -47,7 +53,7 @@ function decode(){
 }
 
 function changeLetter(){
-    const replacements = 'ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
+    const replacements = "DLCOKabcdefghiklmnopqrstuvwxyz'";
     return function(letter, index, err){
         return teamName[index] === letter
             ? letter
@@ -57,11 +63,15 @@ function changeLetter(){
 
 function teamReveal(){
     const explosionGif = document.getElementById('explosion');
+    const teamGif = document.getElementById(team);
 
     explosionGif.style.display = 'block';
-    document.getElementById(team).style.display = 'block';
 
-   /* setTimeout(() => {
+    setTimeout(() => {
         explosionGif.style.display = 'none';
-    }, 2500);*/
+    }, 800);
+    setTimeout(() => {
+        teamGif.style.display = 'block';
+        teamGif.classList.add('bornInFlames');
+    }, 250);
 }

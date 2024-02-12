@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       trigger.addEventListener("click", function () {
         this.classList.toggle("collapsed");
-        // todo change innerText of btn
+        // TODO change innerText of btn
 
         if (content) {
           content.classList.toggle("msg-box");

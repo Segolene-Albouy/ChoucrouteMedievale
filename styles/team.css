@@ -1,34 +1,56 @@
 #team {
+    min-height: 80vh;
+    display: none;
+}
 
+#draw-team {
+    transition: all 3s ease;
 }
 
 #team-name {
     letter-spacing: 9px;
-    font-size: 4em;
+    font-size: 3em;
     height: 2em;
     text-align: center;
-    /*line-height: 2vh;*/
     font-family: "fraktur", monospace;
 }
 
 #team-gif {
-    position: relative;
+    margin: auto;
     height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
 }
 
 .team-gif, #explosion {
     display: none;
     position: absolute;
-    height: 175px;
     width: auto;
-    /*top: 0;
-    left: 0;*/
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin: auto;
 }
 
 #explosion {
-    transform: scale(2.5);
+    transform: scale(4) translateY(10px);
     z-index: 100;
+    margin: auto;
+}
+
+.team-gif {
+    height: 175px;
+    max-height: 175px;
+}
+
+.bornInFlames {
+    animation: fadeIn 1s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }

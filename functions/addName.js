@@ -8,7 +8,7 @@
 
 /**
  * package.json:
-{
+ {
   "dependencies": {
     "@google-cloud/functions-framework": "^3.0.0",
     "@google-cloud/firestore": "^7.0.0"
@@ -73,10 +73,31 @@ async function updateGueux(gueux, ipAddress, now) {
   return gueuxData;
 }
 
-functions.http("checkName", async (req, res) => {
-  let { name, psw } = req.body; // GET req.query / POST req.body
+async function getTeam(isComing = false){
+  /**
+   * const teams = {
+   *     corbeau: {
+   *         color: "black"
+   *     },
+   *     cerf: {
+   *         color: "green"
+   *     },
+   *     kraken: {
+   *         color: "blue"
+   *     },
+   *     dragon: {
+   *         color: "red"
+   *     }
+   * };
+   */
+  // TODO draw team and take into account presence or not
+  return ""
+}
 
- /* /!* WARNING ONLY FOR DEVELOPMENT *!/
+functions.http("checkName", async (req, res) => {
+  let { name, psw, team } = req.body; // GET req.query / POST req.body
+
+  /* /!* WARNING ONLY FOR DEVELOPMENT *!/*/
   res.set("Access-Control-Allow-Origin", "*");
   res.set("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
   res.set("Access-Control-Allow-Headers", "Content-Type");
@@ -85,7 +106,7 @@ functions.http("checkName", async (req, res) => {
     // Handle preflight request
     res.status(204).send('');
     return;
-  }*/
+  }
 
   const domain = req.headers.referer;
   if (!domain || !domain.includes('choucroute-medievale.tech')) {
@@ -98,6 +119,15 @@ functions.http("checkName", async (req, res) => {
     const now = Firestore.FieldValue.serverTimestamp();
     const ipAddress = req.ip;
 
+    // TODO get participation (isComing)
+
+    if (!team){
+      team = getTeam();
+    }
+
+    if (name && psw){
+      // TODO update gueux
+    }
 
     if (name) {
       // The user submits a name
@@ -140,36 +170,14 @@ functions.http("checkName", async (req, res) => {
     res.status(statusCode).json({
       name,
       psw,
+      team
     });
   } catch (error) {
     res.status(500).json({
       error,
       name: null,
       psw: null,
+      team: null
     });
   }
 });
-
-/**
- * const castes = [
- *     "noble",
- *     "chevalier",
- *     "artisan",
- *     "paysan"
- * ];
- *
- * const teams = {
- *     corbeau: {
- *         color: "black"
- *     },
- *     cerf: {
- *         color: "green"
- *     },
- *     kraken: {
- *         color: "blue"
- *     },
- *     dragon: {
- *         color: "red"
- *     }
- * };
- */

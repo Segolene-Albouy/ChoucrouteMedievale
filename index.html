@@ -156,9 +156,21 @@
             <p>Vous avez énérvé la garde du chasteau.</p>
             <p>Addressez les seigneurs par vos propres moyens.</p>
           </div>
-          <!--<div id="team">
-            <button onClick="drawTeam()">Start</button>
-          </div>-->
+          <div id="team" class="parchment">
+            <button id="draw-team" class="choice-rpg clickable" onClick="drawTeam()">Decouvrir vostre fief</button>
+            <div id="team-reveal">
+              <h2 id="team-name"></h2>
+
+              <div id="team-gif">
+                <img id="explosion" src="static/gif/explose.gif" alt="Boooouya" />
+                <img id="ours" src="static/teams/bear4.gif" class="team-gif" alt="Équipe Ours" />
+                <img id="dragon" src="static/teams/dragon4.gif" class="team-gif" alt="Équipe Dragon" />
+                <img id="cerf" src="static/teams/deer.gif" class="team-gif" alt="Équipe Cerf" />
+                <img id="kraken" src="static/teams/kraken.gif" class="team-gif" alt="Équipe Kraken" />
+                <img id="corbeau" src="static/teams/crow.gif" class="team-gif" alt="Équipe Corbeau" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -181,23 +193,6 @@
       </div>
 
       <div id="cour" class="page">
-
-        <section id="team" class="parchment">
-          <button class="choice-rpg clickable" onClick="drawTeam()">Decouvrir vostre fief</button>
-          <div id="team-reveal">
-            <h2 id="team-name"></h2>
-
-            <div id="team-gif">
-              <img id="explosion" src="static/gif/explose.gif" alt="Boooouya" />
-              <img id="ours" src="static/teams/bear4.gif" class="team-gif" alt="Équipe Ours" />
-              <img id="dragon" src="static/teams/dragon4.gif" class="team-gif" alt="Équipe Dragon" />
-              <img id="cerf" src="static/teams/deer.gif" class="team-gif" alt="Équipe Cerf" />
-              <img id="kraken" src="static/teams/kraken.gif" class="team-gif" alt="Équipe Kraken" />
-              <img id="corbeau" src="static/teams/crow.gif" class="team-gif" alt="Équipe Corbeau" />
-            </div>
-          </div>
-        </section>
-
         <section class="parchment">
           <img id="oyez" src="static/oyezoyez.png"  alt="oyez oyez"/>
           <h2>Dameselles et damelots</h2>
