@@ -33,7 +33,7 @@ window.onload = function () {
 
         initialPosition(guenille);
 
-        function initialPosition() {
+        function initialPosition(guenille) {
             const guenilleBox = guenille.getBoundingClientRect();
 
             x = lookbook.left + (lookbook.width - guenilleBox.width) / 2;
@@ -42,10 +42,12 @@ window.onload = function () {
             yOffset = y - guenilleBox.top;
 
             const top = guenille.offsetTop + yOffset;
-            const left = guenille.offsetLeft + xOffset
+            const left = guenille.offsetLeft + xOffset;
 
+            const leftOffset = randomBetween(-lookbook.width / 2, lookbook.width / 2);
+            guenille.style.left = (left + leftOffset) + "px";
             guenille.style.top = (top + getTopOffset(guenille.parentElement.parentElement.id)) + "px";
-            guenille.style.left = (left + randomBetween(isPhone ? -200 : -500, isPhone ? 200 : 500)) + "px";
+            /*guenille.style.left = (left + randomBetween(isPhone ? -200 : -500, isPhone ? 200 : 500)) + "px";*/
         }
 
         function dragMouseDown(e) {

@@ -21,7 +21,6 @@
     transform: scale(var(--ratio));
     width: auto;
     height: auto;
-
 }
 
 .drag {
