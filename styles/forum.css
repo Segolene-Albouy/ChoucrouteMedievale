@@ -33,7 +33,7 @@
 }
 
 #forum {
-  font-family: MedievalSharp, serif;
+  font-family: "MedievalSharp", serif;
   color: cornsilk;
 }
 
@@ -61,7 +61,7 @@
 }
 
 #forum .team-members h4 {
-  font-size: 1.1em;
+  font-size: 1.15em;
   color: rgb(157, 118, 77);
   margin: 0;
   font-family: MedievalSharp, serif;
@@ -76,6 +76,7 @@
   display: flex;
   align-items: center;
   color: darkred;
+  text-shadow: -2px 2px 4px rgba(0, 0, 0, 0.75);
   margin: 4%;
   padding: 2% 10%;
   --inlay-base-bg: cornsilk !important;
@@ -264,7 +265,7 @@
 }
 
 .discussion-preview h4 {
-  font-family: "Chomsky", serif;
+  font-family: "ancient", serif;
   display: flex;
   align-items: center;
   gap: 3%;
@@ -330,7 +331,7 @@
 
 .discussion-title {
   display: flex;
-  font-family: "Chomsky", serif;
+  font-family: "ancient", serif;
   align-items: center;
   gap: 3%;
   color: khaki;
@@ -397,7 +398,7 @@
   outline: none;
   background: #ffffff86;
   font-size: 1.2em;
-  font-family: MedievalSharp, serif;
+  font-family: "MedievalSharp", serif;
 }
 #focused-discussion #new-message button {
   font-weight: bold;
