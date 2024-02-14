@@ -14,6 +14,7 @@ const loadBanquet = () => {
 const unloadBanquet = () => {};
 const loadArmurerie = () => {
   /*resetCursor();*/
+  arrangeGuenille();
   particlePool.extinguishParticles();
   setNewCursor("gif/wand.gif");
 };
@@ -221,6 +222,7 @@ function createDoorsNavigation() {
       input.checked = true;
       // Check input (will change CSS)
       (function smoothscroll() {
+        // document.getElementById("torchs").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
         var currentScroll =
           document.documentElement.scrollTop || document.body.scrollTop;
         if (currentScroll > 0) {

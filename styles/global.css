@@ -44,10 +44,11 @@ h4 {
 }
 
 .main-title {
-  position: absolute;
+  /*position: absolute;*/
   width: 100%;
-  top: 2vh;
-  left: 0;
+  margin-top: -9em;
+  /*top: 2vh;
+  left: 0;*/
   display: flex;
   justify-content: center;
   height: calc(2vh + 134px);
