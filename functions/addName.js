@@ -50,10 +50,11 @@ async function newPsw() {
   }
 }
 
-async function newGueux(name, psw, ipAddress, now) {
+async function newGueux(name, psw, team, isComing, ipAddress, now) {
   const gueuxData = {
     name: name,
-    team: "",
+    team: team,
+    isComing: isComing,
     created: now,
     psw: psw,
     lastConnection: now,
@@ -74,28 +75,32 @@ async function updateGueux(gueux, ipAddress, now) {
 }
 
 async function getTeam(isComing = false){
-  /**
-   * const teams = {
-   *     corbeau: {
-   *         color: "black"
-   *     },
-   *     cerf: {
-   *         color: "green"
-   *     },
-   *     kraken: {
-   *         color: "blue"
-   *     },
-   *     dragon: {
-   *         color: "red"
-   *     }
-   * };
-   */
-  // TODO draw team and take into account presence or not
-  return ""
+   const teams = {
+       corbeau: 0,
+       cerf: 0,
+       kraken: 0,
+       dragon: 0
+   };
+
+   let fewestMembers= 1000;
+   let selectedTeam = "";
+
+  const snapshot = await gueuxDb.get();
+  snapshot.forEach((doc) => {
+    const [team, isComing = false] = [doc.data().team, doc.data().isComing];
+    if (teams.hasOwnProperty(team) && isComing) {
+      teams[team]++;
+      if (teams[team] < fewestMembers){
+        fewestMembers = teams[team];
+        selectedTeam = team;
+      }
+    }
+  });
+  return selectedTeam
 }
 
 functions.http("checkName", async (req, res) => {
-  let { name, psw, team } = req.body; // GET req.query / POST req.body
+  let { name, psw, team, isComing } = req.body; // GET req.query / POST req.body
 
   /* /!* WARNING ONLY FOR DEVELOPMENT *!/*/
   res.set("Access-Control-Allow-Origin", "*");
@@ -122,14 +127,10 @@ functions.http("checkName", async (req, res) => {
     // TODO get participation (isComing)
 
     if (!team){
-      team = getTeam();
+      team = getTeam(isComing);
     }
 
-    if (name && psw){
-      // TODO update gueux
-    }
-
-    if (name) {
+    if (name && !psw) {
       // The user submits a name
       const nameQuery = await gueuxDb.where("name", "==", name).get();
 
@@ -144,7 +145,7 @@ functions.http("checkName", async (req, res) => {
         if (!psw) {
           statusCode = 500;
         } else {
-          await newGueux(name, psw, ipAddress, now);
+          await newGueux(name, psw, team, isComing, ipAddress, now);
           statusCode = 201;
         }
       }
@@ -156,6 +157,7 @@ functions.http("checkName", async (req, res) => {
         // the password is correct
         const gueux = pswQuery.docs[0];
         name = gueux.data().name;
+        await gueux.ref.update({ team: team, isComing: isComing }); // TODO does it need to be updated here?
         await updateGueux(gueux, ipAddress, now);
         statusCode = 200;
       } else if (pswQuery.size > 1) {
