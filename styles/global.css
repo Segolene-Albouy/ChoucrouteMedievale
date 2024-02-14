@@ -9,6 +9,7 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
   cursor: none;
+  /*scroll-behavior: smooth;*/
 }
 
 @font-face {
@@ -49,10 +50,11 @@ h4 {
 }
 
 .main-title {
-  position: absolute;
+  /*position: absolute;*/
   width: 100%;
-  top: 2vh;
-  left: 0;
+  margin-top: -9em;
+  /*top: 2vh;
+  left: 0;*/
   display: flex;
   justify-content: center;
   height: calc(2vh + 134px);
@@ -169,7 +171,7 @@ ul {
 }
 
 li::before {
-  content: "🙚";
+  content: "❧"; /*"🙚";*/
   margin-right: 0.5em;
   margin-left: -1.5em;
 }

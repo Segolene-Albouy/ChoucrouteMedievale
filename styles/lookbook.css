@@ -1,3 +1,7 @@
+#lookbook {
+    /*display: block;*/
+}
+
 .image-container {
     display: flex;
     justify-content: center;
@@ -21,7 +25,6 @@
     transform: scale(var(--ratio));
     width: auto;
     height: auto;
-
 }
 
 .drag {
