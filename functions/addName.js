@@ -74,7 +74,7 @@ async function updateGueux(gueux, ipAddress, now) {
   return gueuxData;
 }
 
-async function getTeam(isComing = false){
+async function getTeam(){
    const teams = {
        corbeau: 0,
        cerf: 0,
@@ -124,10 +124,8 @@ functions.http("checkName", async (req, res) => {
     const now = Firestore.FieldValue.serverTimestamp();
     const ipAddress = req.ip;
 
-    // TODO get participation (isComing)
-
     if (!team){
-      team = getTeam(isComing);
+      team = getTeam();
     }
 
     if (name && !psw) {
@@ -145,7 +143,7 @@ functions.http("checkName", async (req, res) => {
         if (!psw) {
           statusCode = 500;
         } else {
-          await newGueux(name, psw, team, isComing, ipAddress, now);
+          await newGueux(name, psw, team, ipAddress, now);
           statusCode = 201;
         }
       }
@@ -157,7 +155,7 @@ functions.http("checkName", async (req, res) => {
         // the password is correct
         const gueux = pswQuery.docs[0];
         name = gueux.data().name;
-        await gueux.ref.update({ team: team, isComing: isComing }); // TODO does it need to be updated here?
+        await gueux.ref.update({ team: team }); // TODO does it need to be updated here?
         await updateGueux(gueux, ipAddress, now);
         statusCode = 200;
       } else if (pswQuery.size > 1) {
@@ -166,6 +164,14 @@ functions.http("checkName", async (req, res) => {
       } else {
         // incorrect password
         statusCode = 400;
+      }
+    } else if (typeof isComing === "boolean"){
+      const pswQuery = await gueuxDb.where("psw", "==", psw).get();
+      if (pswQuery.size === 1) {
+        await gueux.ref.update({isComing: isComing});
+        statusCode = 200;
+      } else {
+        statusCode = pswQuery.size > 1 ? 500 : 400;
       }
     }
 

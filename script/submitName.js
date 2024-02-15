@@ -145,15 +145,15 @@ document.addEventListener("DOMContentLoaded", function () {
   const medievalName = localStorage.getItem("medievalName");
   const medievalPsw = localStorage.getItem("medievalPsw");
   const medievalTeam = localStorage.getItem("medievalTeam");
+  const isComing = localStorage.getItem("isComing");
 
-  console.log({ medievalName, medievalPsw, medievalTeam });
+  console.log({ medievalName, medievalPsw, medievalTeam, isComing });
+  // TODO make API call to just update the isComing value (send psw+isComing)
 
-  if (medievalName && medievalPsw && medievalTeam) {
-    // ça passe les gardes
-    openGates(medievalName);
-    if (devMode) return;
+  if (medievalName && medievalPsw) {
     // API call to update last connection
-    retrieveJSON(APIurl, { psw: medievalPsw }).then((res) => {
+    const data = { name: medievalName, psw: medievalPsw, team: medievalTeam };
+    retrieveJSON(APIurl, data).then((res) => {
       res = JSON.parse(res);
       localStorage.setItem("medievalName", res.name);
       localStorage.setItem("medievalPsw", res.psw);
@@ -162,11 +162,14 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log("Vous êtes un fossoyeur d'identité vilain !", e);
     });
 
+    if (medievalTeam) {
+      // ça passe les gardes
+      openGates(medievalName);
+      if (devMode) return;
+    } else {
+      // TODO make #team appear
+    }
     return;
-  }
-
-  if (medievalName && medievalPsw){
-    // TODO make #team appear
   }
 
   // les gardes apparaissent
