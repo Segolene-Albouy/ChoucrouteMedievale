@@ -324,3 +324,15 @@ body[state="locked"] {
   transform: translateY(3px);
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }
+
+.center {
+  width: 90%;
+  text-align: center;
+  margin: auto;
+  display: flex;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}

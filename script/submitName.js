@@ -12,12 +12,6 @@ function choose(callback) {
   callback();
 }
 
-function resetLocalStorage() {
-  localStorage.removeItem("pswAttempts");
-  localStorage.removeItem("medievalPsw");
-  localStorage.removeItem("medievalName");
-}
-
 function displayError(msg) {
   const errorMessageElement = document.querySelector(
     `${currentDisplayedFormId} div[role=error]`
@@ -121,6 +115,13 @@ function commonFormHandler(evt, keyNeeded) {
   }
 }
 
+function displayTeam(){
+  document.getElementById("team").style.display = "flex";
+
+  // TODO add: il est temps de descouvrir sous quel étendard vous allez concourir
+  // TODO add isComing + new call to API
+}
+
 function openGates(medievalName, submitted = false) {
   if (devMode) bypassLanding()
   document.getElementById(
@@ -150,6 +151,8 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log({ medievalName, medievalPsw, medievalTeam, isComing });
   // TODO make API call to just update the isComing value (send psw+isComing)
 
+  if (devMode) bypassLanding();
+
   if (medievalName && medievalPsw) {
     // API call to update last connection
     const data = { name: medievalName, psw: medievalPsw, team: medievalTeam };
@@ -165,8 +168,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (medievalTeam) {
       // ça passe les gardes
       openGates(medievalName);
-      if (devMode) return;
     } else {
+      displayTeam();
       // TODO make #team appear
     }
     return;
@@ -267,6 +270,10 @@ async function apiNewGueux(name) {
         }
     }
   }
+}
+
+function showTeam(){
+
 }
 
 async function apiCheckGueux(psw) {

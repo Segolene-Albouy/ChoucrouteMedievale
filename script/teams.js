@@ -25,20 +25,29 @@ const teams = {
 const teamNames = Object.keys(teams)
 var team, teamName, covered, timer, newText;
 
+
+function randomTeam() {
+    return teamNames[Math.floor(Math.random() * teamNames.length)]
+}
+
 function drawTeam(){
-    team = "dragon" // TODO here API call to get team
-    document.getElementById("draw-team").classList.add("submitted");
+    team = localStorage.getItem("medievalTeam") ?? randomTeam();
+    const drawDiv = document.getElementById("draw-team")
 
-    const teamReveal = document.getElementById("team-reveal").
-    teamReveal.style.display = 'block';
-    teamReveal.classList.add('bornInFlames');
+    drawDiv.classList.add("submitted");
+    setTimeout(() => {
+        drawDiv.style.display = "none";
+    }, 3000);
 
-    teamName = teams[team].title
-
-
-    covered = teamName.replace(/[^\s]/g, '_');
-    document.getElementById("team-name").innerHTML = covered;
-    timer = setInterval(decode, 50);
+    setTimeout(() => {
+        const teamReveal = document.getElementById("team-reveal");
+        teamReveal.style.display = 'flex';
+        teamReveal.classList.add('bornInFlames');
+        teamName = teams[team].title;
+        covered = teamName.replace(/[^\s]/g, '_');
+        document.getElementById("team-name").innerHTML = covered;
+        timer = setInterval(decode, 50);
+    }, 3000);
 }
 
 function decode(){
@@ -69,7 +78,7 @@ function teamReveal(){
 
     setTimeout(() => {
         explosionGif.style.display = 'none';
-    }, 800);
+    }, 750);
     setTimeout(() => {
         teamGif.style.display = 'block';
         teamGif.classList.add('bornInFlames');

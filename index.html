@@ -156,26 +156,29 @@
             <p>Vous avez énérvé la garde du chasteau.</p>
             <p>Addressez les seigneurs par vos propres moyens.</p>
           </div>
-          <div id="team" class="parchment">
-            <button id="draw-team" class="choice-rpg clickable" onClick="drawTeam()">Decouvrir vostre fief</button>
-            <div id="team-reveal">
-              <h2 id="team-name"></h2>
+        </div>
+        <div id="team" class="parchment landing-content center">
+          <div id="draw-team" class="center">
+            <h3>Il est temps de connoistre sous quel etendard vous aurez l'honneur de compestir</h3>
+            <button class="choice-rpg clickable" onClick="drawTeam()">Decouvrir vostre fief</button>
+          </div>
+          <div id="team-reveal" class="center">
+            <h2 id="team-name"></h2>
 
-              <div id="team-gif">
-                <img id="explosion" src="static/gif/explose.gif" alt="Boooouya" />
-                <img id="ours" src="static/teams/bear4.gif" class="team-gif" alt="Équipe Ours" />
-                <img id="dragon" src="static/teams/dragon4.gif" class="team-gif" alt="Équipe Dragon" />
-                <img id="cerf" src="static/teams/deer.gif" class="team-gif" alt="Équipe Cerf" />
-                <img id="kraken" src="static/teams/kraken.gif" class="team-gif" alt="Équipe Kraken" />
-                <img id="corbeau" src="static/teams/crow.gif" class="team-gif" alt="Équipe Corbeau" />
-              </div>
+            <div id="team-gif">
+              <img id="explosion" src="static/gif/explose.gif" alt="Boooouya" />
+              <img id="ours" src="static/teams/bear4.gif" class="team-gif" alt="Équipe Ours" />
+              <img id="dragon" src="static/teams/dragon4.gif" class="team-gif" alt="Équipe Dragon" />
+              <img id="cerf" src="static/teams/deer.gif" class="team-gif" alt="Équipe Cerf" />
+              <img id="kraken" src="static/teams/kraken.gif" class="team-gif" alt="Équipe Kraken" />
+              <img id="corbeau" src="static/teams/crow.gif" class="team-gif" alt="Équipe Corbeau" style="margin-top: -100px"/>
             </div>
+
+            <button class="choice-rpg clickable" onClick="showDor()">Continuer au chasteau</button>
           </div>
         </div>
       </div>
     </div>
-
-
 
     <main>
       <div id="torchs" class="main-banner">

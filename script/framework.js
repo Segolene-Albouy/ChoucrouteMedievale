@@ -243,11 +243,28 @@ function createDoorsNavigation() {
   });
 }
 
+function resetLocalStorage() {
+  localStorage.removeItem("medievalPsw");
+  localStorage.removeItem("medievalName");
+  localStorage.removeItem("medievalTeam");
+  localStorage.removeItem("isComing");
+}
+
+function whoIsDev(){
+  if (navigator.userAgent.includes("Macintosh")){
+    localStorage.setItem("medievalName", "Segoline La Devergoigneuse");
+    localStorage.setItem("medievalPsw", "je-suis-ton-maitre");
+  } else {
+    localStorage.setItem("medievalName", "Clément L’Ancien");
+    localStorage.setItem("medievalPsw", "dev_psw");
+  }
+  localStorage.removeItem("medievalTeam");
+}
+
 function bypassLanding() {
   const landiv = document.getElementById("main-landing");
   landiv.style.display = "none";
-  localStorage.setItem("medievalName", "Clément L’Ancien");
-  localStorage.setItem("medievalPsw", "dev_psw");
+  whoIsDev();
   opendor();
 }
 

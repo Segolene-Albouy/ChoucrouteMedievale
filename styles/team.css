@@ -10,9 +10,10 @@
 #team-name {
     letter-spacing: 9px;
     font-size: 3em;
-    height: 2em;
+    /*height: 2em;*/
     text-align: center;
     font-family: "fraktur", monospace;
+    margin: 0 auto;
 }
 
 #team-gif {

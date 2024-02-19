@@ -11,7 +11,7 @@ functions.http("teamList", async (req, res) => {
   try {
     const { gueuName } = req.query;
     const gueuxQuery = await gueuxDb.where("name", "==", gueuName).get();
-    if (gueuxQuery.size == 0) {
+    if (gueuxQuery.size === 0) {
       res
         .status(403)
         .send({ message: "?? Quelle diablerie avez vous faist ??" });
