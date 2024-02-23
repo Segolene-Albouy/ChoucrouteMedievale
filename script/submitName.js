@@ -115,7 +115,7 @@ function commonFormHandler(evt, keyNeeded) {
   }
 }
 
-function displayTeam(){
+function displayTeam() {
   document.getElementById("team").style.display = "flex";
 
   // TODO add: il est temps de descouvrir sous quel étendard vous allez concourir
@@ -123,7 +123,7 @@ function displayTeam(){
 }
 
 function openGates(medievalName, submitted = false) {
-  if (devMode) bypassLanding()
+  if (devMode) bypassLanding();
   document.getElementById(
     "opendor"
   ).innerHTML += `<mark>${medievalName}</mark>`;
@@ -156,21 +156,23 @@ document.addEventListener("DOMContentLoaded", function () {
   if (medievalName && medievalPsw) {
     // API call to update last connection
     const data = { name: medievalName, psw: medievalPsw, team: medievalTeam };
-    retrieveJSON(APIurl, data).then((res) => {
-      res = JSON.parse(res);
-      localStorage.setItem("medievalName", res.name);
-      localStorage.setItem("medievalPsw", res.psw);
-      localStorage.setItem("medievalTeam", res.team);
-    }).catch(e => {
-      console.log("Vous êtes un fossoyeur d'identité vilain !", e);
-    });
+    retrieveJSON(APIurl, data)
+      .then((res) => {
+        res = JSON.parse(res);
+        localStorage.setItem("medievalName", res.name);
+        localStorage.setItem("medievalPsw", res.psw);
+        localStorage.setItem("medievalTeam", res.team);
+        if (res.team && !medievalTeam) {
+          displayTeam();
+        }
+      })
+      .catch((e) => {
+        console.log("Vous êtes un fossoyeur d'identité vilain !", e);
+      });
 
     if (medievalTeam) {
       // ça passe les gardes
       openGates(medievalName);
-    } else {
-      displayTeam();
-      // TODO make #team appear
     }
     return;
   }
@@ -238,11 +240,13 @@ const adjectifs = [
   ["Le Dangereux", "La Dangereuse"],
 ];
 
+// Inscription
 async function apiNewGueux(name) {
   const targetForm = document.getElementById(currentDisplayedFormId);
   try {
     let res = await retrieveJSON(APIurl, { name });
-    if (res){ // Success
+    if (res) {
+      // Success
       res = JSON.parse(res);
       targetForm.removeAttribute("state");
       localStorage.setItem("medievalPsw", res.psw);
@@ -272,21 +276,22 @@ async function apiNewGueux(name) {
   }
 }
 
-function showTeam(){
-
-}
-
+// Submit Password
 async function apiCheckGueux(psw) {
   const targetForm = document.getElementById(currentDisplayedFormId);
   try {
     let res = await retrieveJSON(APIurl, { psw });
-    if (res){ // Success
+    const currentTeam = localStorage.getItem("medievalTeam");
+    if (res) {
+      // Success
       res = JSON.parse(res);
+      if (res.team && !currentTeam) {
+        displayTeam();
+      }
       targetForm.removeAttribute("state");
       localStorage.setItem("medievalPsw", res.psw);
       localStorage.setItem("medievalName", res.name);
       localStorage.setItem("medievalTeam", res.team);
-      // TODO make #team appear
       openGates(res.name, true);
     }
   } catch (res) {
@@ -331,7 +336,7 @@ function welcomeUser(name, psw) {
       .forEach((e) => (e.style.opacity = "1"));
 
     document.getElementById("welcome").addEventListener("click", () => {
-      // TODO drawTeam
+      displayTeam();
       openGates(name, true);
     });
   }, 3000);

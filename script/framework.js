@@ -70,7 +70,7 @@ const pagesOnload = {
   donjon: loadDungeon,
   banquet: loadBanquet,
   armurerie: loadArmurerie,
-  forum: loadForum,
+  pigeonnier: loadForum,
 };
 
 const pagesOnUnload = {
@@ -78,7 +78,7 @@ const pagesOnUnload = {
   donjon: unloadDungeon,
   banquet: unloadBanquet,
   armurerie: unloadArmurerie,
-  forum: unloadForum,
+  pigeonnier: unloadForum,
 };
 
 function opendor() {
@@ -132,21 +132,19 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });*/
 
-  document
-    .querySelectorAll(".collapsible")
-    .forEach((collapsible) => {
-      const trigger = collapsible.querySelector("[role=collapse-trigger]");
-      const content = collapsible.querySelector("[role=collapse-content]");
+  document.querySelectorAll(".collapsible").forEach((collapsible) => {
+    const trigger = collapsible.querySelector("[role=collapse-trigger]");
+    const content = collapsible.querySelector("[role=collapse-content]");
 
-      trigger.addEventListener("click", function () {
-        this.classList.toggle("collapsed");
-        // TODO change innerText of btn
+    trigger.addEventListener("click", function () {
+      this.classList.toggle("collapsed");
+      // TODO change innerText of btn
 
-        if (content) {
-          content.classList.toggle("msg-box");
-        }
-      });
+      if (content) {
+        content.classList.toggle("msg-box");
+      }
     });
+  });
 
   // create doors
   createDoorsNavigation();
@@ -226,7 +224,7 @@ function createDoorsNavigation() {
         const currentScroll = document.documentElement.scrollTop;
         if (currentScroll > 0) {
           window.requestAnimationFrame(smoothscroll);
-          window.scrollTo(0, currentScroll - (currentScroll / 5));
+          window.scrollTo(0, currentScroll - currentScroll / 5);
         }
       })();
     });
@@ -250,8 +248,8 @@ function resetLocalStorage() {
   localStorage.removeItem("isComing");
 }
 
-function whoIsDev(){
-  if (navigator.userAgent.includes("Macintosh")){
+function whoIsDev() {
+  if (navigator.userAgent.includes("Macintosh")) {
     localStorage.setItem("medievalName", "Segoline La Devergoigneuse");
     localStorage.setItem("medievalPsw", "je-suis-ton-maitre");
   } else {

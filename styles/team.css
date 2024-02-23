@@ -1,57 +1,66 @@
 #team {
-    min-height: 80vh;
-    display: none;
+  min-height: 80vh;
+  display: none;
+  transition: all 2s ease;
+  position: relative;
 }
 
-#draw-team {
-    transition: all 3s ease;
+[role="unecessary-steps"] {
+  transition: all 3s ease;
+  position: absolute;
+  font-size: 1.5em;
+}
+[role="unecessary-steps"]:not(:first-child) {
+  opacity: 0;
+  display: none;
 }
 
 #team-name {
-    letter-spacing: 9px;
-    font-size: 3em;
-    /*height: 2em;*/
-    text-align: center;
-    font-family: "fraktur", monospace;
-    margin: 0 auto;
+  letter-spacing: 9px;
+  font-size: 3em;
+  /*height: 2em;*/
+  text-align: center;
+  font-family: "fraktur", monospace;
+  margin: 0 auto;
 }
 
 #team-gif {
-    margin: auto;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
+  margin: auto;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
 }
 
-.team-gif, #explosion {
-    display: none;
-    position: absolute;
-    width: auto;
-    margin: auto;
+.team-gif,
+#explosion {
+  display: none;
+  position: absolute;
+  width: auto;
+  margin: auto;
 }
 
 #explosion {
-    transform: scale(4) translateY(10px);
-    z-index: 100;
-    margin: auto;
+  transform: scale(4) translateY(10px);
+  z-index: 100;
+  margin: auto;
 }
 
 .team-gif {
-    height: 175px;
-    max-height: 175px;
+  height: 175px;
+  max-height: 175px;
 }
 
 .bornInFlames {
-    animation: fadeIn 1s ease-out forwards;
+  animation: fadeIn 1s ease-out forwards;
 }
 
 @keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

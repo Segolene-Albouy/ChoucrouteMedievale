@@ -116,7 +116,11 @@
                 alt="Chevalier enragé"
               />
               <span>!! Ce n'est point le mot de passe !!</span>
-              <img src="static/angry_knight.gif" class="angry-knight" alt="Chevalier enragé"/>
+              <img
+                src="static/angry_knight.gif"
+                class="angry-knight"
+                alt="Chevalier enragé"
+              />
             </div>
             <input type="text" id="psw-input" name="psw" autofocus />
             <button id="psw-submit" class="choice-rpg clickable" type="submit">
@@ -150,32 +154,118 @@
                 alt="Chevalier enragé"
               />
               Quel idiot ce gueux !
-              <img src="static/angry_knight.gif" class="angry-knight" alt="Chevalier enragé"/>
+              <img
+                src="static/angry_knight.gif"
+                class="angry-knight"
+                alt="Chevalier enragé"
+              />
             </h3>
 
             <p>Vous avez énérvé la garde du chasteau.</p>
             <p>Addressez les seigneurs par vos propres moyens.</p>
           </div>
         </div>
-        <div id="team" class="parchment landing-content center">
-          <div id="draw-team" class="center">
-            <h3>Il est temps de connoistre sous quel etendard vous aurez l'honneur de compestir</h3>
-            <button class="choice-rpg clickable" onClick="drawTeam()">Decouvrir vostre fief</button>
-          </div>
-          <div id="team-reveal" class="center">
-            <h2 id="team-name"></h2>
+      </div>
 
-            <div id="team-gif">
-              <img id="explosion" src="static/gif/explose.gif" alt="Boooouya" />
-              <img id="ours" src="static/teams/bear4.gif" class="team-gif" alt="Équipe Ours" />
-              <img id="dragon" src="static/teams/dragon4.gif" class="team-gif" alt="Équipe Dragon" />
-              <img id="cerf" src="static/teams/deer.gif" class="team-gif" alt="Équipe Cerf" />
-              <img id="kraken" src="static/teams/kraken.gif" class="team-gif" alt="Équipe Kraken" />
-              <img id="corbeau" src="static/teams/crow.gif" class="team-gif" alt="Équipe Corbeau" style="margin-top: -100px"/>
-            </div>
+      <div id="team" class="parchment landing-content center">
+        <div class="center" role="unecessary-steps">
+          <h3>
+            La seigneurie de la Vielarnoult se prépare pour les festivités et
+            attendent avec impatience les différents clans du royaume.
+          </h3>
+          <button class="choice-rpg clickable">Découvrir mon clan</button>
+        </div>
+        <div class="center" role="unecessary-steps">
+          <h3>
+            Faire partie d'un clan c'est comme faire partie d'une famille.
+          </h3>
+          <button class="choice-rpg clickable">D'accord</button>
+        </div>
+        <div class="center" role="unecessary-steps">
+          <h3>
+            Estes-vous preste à découvrir sous quel étendard vous allez
+            compestir ?
+          </h3>
+          <button class="choice-rpg clickable">oui</button>
+        </div>
+        <div class="center" role="unecessary-steps">
+          <h3>
+            D'autre valeureux jouveauceaux et valeureuses jouvencelles vous
+            rejoindront au sein du clan.
+          </h3>
+          <button class="choice-rpg clickable">Très bien</button>
+        </div>
+        <div class="center" role="unecessary-steps">
+          <h3>
+            Vous serez en mesure de communiquer avec les memebres de votre clan
+            en vous rendant dans le pigeonnier du chateau.
+          </h3>
+          <button class="choice-rpg clickable">Avec joie</button>
+        </div>
+        <div class="center" role="unecessary-steps">
+          <h3>Qu'attendez-vous pour découvrir votre clan ?!</h3>
+          <button class="choice-rpg clickable">Toi</button>
+        </div>
+        <div class="center" role="unecessary-steps">
+          <h3>
+            Estes-vous preste à connoistre sous quel etendard vous aurez
+            l'honneur de compestir ?
+          </h3>
+          <button class="choice-rpg clickable">oui</button>
+        </div>
+        <div class="center" role="unecessary-steps">
+          <h3>
+            La garde du chasteau est un peu sourde d'oreille. Veuillez clamer
+            haut et fort vos désirs
+          </h3>
+          <button class="choice-rpg clickable">OUIIIIIII !!</button>
+        </div>
+        <div id="draw-team" class="center" role="unecessary-steps">
+          <button class="choice-rpg clickable" onClick="drawTeam()">
+            Decouvrir vostre fief
+          </button>
+        </div>
+        <div id="team-reveal" class="center">
+          <h2 id="team-name"></h2>
 
-            <button class="choice-rpg clickable" onClick="showDor()">Continuer au chasteau</button>
+          <div id="team-gif">
+            <img id="explosion" src="static/gif/explose.gif" alt="Boooouya" />
+            <img
+              id="ours"
+              src="static/teams/bear4.gif"
+              class="team-gif"
+              alt="Équipe Ours"
+            />
+            <img
+              id="dragon"
+              src="static/teams/dragon4.gif"
+              class="team-gif"
+              alt="Équipe Dragon"
+            />
+            <img
+              id="cerf"
+              src="static/teams/deer.gif"
+              class="team-gif"
+              alt="Équipe Cerf"
+            />
+            <img
+              id="kraken"
+              src="static/teams/kraken.gif"
+              class="team-gif"
+              alt="Équipe Kraken"
+            />
+            <img
+              id="corbeau"
+              src="static/teams/crow.gif"
+              class="team-gif"
+              alt="Équipe Corbeau"
+              style="margin-top: -100px"
+            />
           </div>
+
+          <button disabled class="choice-rpg clickable" onClick="hideTeam()">
+            Continuer au chasteau
+          </button>
         </div>
       </div>
     </div>
@@ -197,7 +287,7 @@
 
       <div id="cour" class="page">
         <section class="parchment">
-          <img id="oyez" src="static/oyezoyez.png"  alt="oyez oyez"/>
+          <img id="oyez" src="static/oyezoyez.png" alt="oyez oyez" />
           <h2>Dameselles et damelots</h2>
           <p>
             Entrez entrez dans la cour du chasteau ! Les seigneurs de la
@@ -258,38 +348,52 @@
       <div id="armurerie" class="page">
         <section id="lookbook" class="lookbook-section parchment">
           <div id="couvre-chef" class="image-container">
-            <div class="drag"><img src="static/lookbook/bergere.png"></div>
-            <div class="drag"><img src="static/lookbook/bourgeois.png"></div>
-            <div class="drag"><img src="static/lookbook/casque.png"></div>
-            <div class="drag"><img src="static/lookbook/escoffion.png"></div>
-            <div class="drag"><img src="static/lookbook/escoffion-boule.png"></div>
-            <div class="drag"><img src="static/lookbook/henin-double.png"></div>
-            <div class="drag"><img src="static/lookbook/marchand.png"></div>
-            <div class="drag"><img src="static/lookbook/negociant.png"></div>
+            <div class="drag"><img src="static/lookbook/bergere.png" /></div>
+            <div class="drag"><img src="static/lookbook/bourgeois.png" /></div>
+            <div class="drag"><img src="static/lookbook/casque.png" /></div>
+            <div class="drag"><img src="static/lookbook/escoffion.png" /></div>
+            <div class="drag">
+              <img src="static/lookbook/escoffion-boule.png" />
+            </div>
+            <div class="drag">
+              <img src="static/lookbook/henin-double.png" />
+            </div>
+            <div class="drag"><img src="static/lookbook/marchand.png" /></div>
+            <div class="drag"><img src="static/lookbook/negociant.png" /></div>
           </div>
           <div id="affublement" class="image-container">
-            <div class="drag"><img src="static/lookbook/armure.png"></div>
-            <div class="drag"><img src="static/lookbook/bliaud.png"></div>
-            <div class="drag"><img src="static/lookbook/chausses.png"></div>
-            <div class="drag"><img src="static/lookbook/robe.png"></div>
-            <div class="drag"><img src="static/lookbook/cottehardie.png"></div>
-            <div class="drag"><img src="static/lookbook/guenaude.png"></div>
-            <div class="drag"><img src="static/lookbook/herboriste.png"></div>
-            <div class="drag"><img src="static/lookbook/braguette.png"></div>
-            <div class="drag"><img src="static/lookbook/slip.png"></div>
-            <div class="drag"><img src="static/lookbook/surcot.png"></div>
-            <div class="drag"><img src="static/lookbook/pourpoint.png"></div>
+            <div class="drag"><img src="static/lookbook/armure.png" /></div>
+            <div class="drag"><img src="static/lookbook/bliaud.png" /></div>
+            <div class="drag"><img src="static/lookbook/chausses.png" /></div>
+            <div class="drag"><img src="static/lookbook/robe.png" /></div>
+            <div class="drag">
+              <img src="static/lookbook/cottehardie.png" />
+            </div>
+            <div class="drag"><img src="static/lookbook/guenaude.png" /></div>
+            <div class="drag"><img src="static/lookbook/herboriste.png" /></div>
+            <div class="drag"><img src="static/lookbook/braguette.png" /></div>
+            <div class="drag"><img src="static/lookbook/slip.png" /></div>
+            <div class="drag"><img src="static/lookbook/surcot.png" /></div>
+            <div class="drag"><img src="static/lookbook/pourpoint.png" /></div>
           </div>
           <div id="godille" class="image-container">
-            <div class="drag"><img src="static/lookbook/brodequin-left.png"></div>
-            <div class="drag"><img src="static/lookbook/brodequin-right.png"></div>
-            <div class="drag"><img src="static/lookbook/poulaine-left.png"></div>
-            <div class="drag"><img src="static/lookbook/poulaine-right.png"></div>
+            <div class="drag">
+              <img src="static/lookbook/brodequin-left.png" />
+            </div>
+            <div class="drag">
+              <img src="static/lookbook/brodequin-right.png" />
+            </div>
+            <div class="drag">
+              <img src="static/lookbook/poulaine-left.png" />
+            </div>
+            <div class="drag">
+              <img src="static/lookbook/poulaine-right.png" />
+            </div>
           </div>
         </section>
       </div>
 
-      <div id="forum" class="page">
+      <div id="pigeonnier" class="page">
         <!-- Clan .collapsible -->
         <div class="main-banner" style="justify-content: center">
           <!--<div class="banner-side">
@@ -304,11 +408,9 @@
         </div>
 
         <section id="forum-welcome">
-
           <p>
-            Bienvenue dans la pièce secrète dediée à vostre fief.
-            Vous pouvez ici communiquer avec vostre clan
-            pour ourdir les plus vils complots.
+            Bienvenue dans la pièce secrète dediée à vostre fief. Vous pouvez
+            ici communiquer avec vostre clan pour ourdir les plus vils complots.
           </p>
 
           <div class="team-members">
@@ -337,7 +439,8 @@
             <label for="message-area">
               Message à adresser à vos compatriotes
             </label>
-            <div id="message-area"> <!--fantasy-btn-->
+            <div id="message-area">
+              <!--fantasy-btn-->
               <textarea
                 name="discussionMessage"
                 class="parchment forum-msg"
@@ -389,7 +492,10 @@
 
           <div class="message-wrapper fantasy-btn">
             <h4 class="discussion-title">
-              <img src="static/gif/seagull_with_letter1.gif" class="pigeon-letter">
+              <img
+                src="static/gif/seagull_with_letter1.gif"
+                class="pigeon-letter"
+              />
               <span role="title"></span>
             </h4>
             <!--<h4 role="title"></h4>-->
