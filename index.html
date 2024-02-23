@@ -182,6 +182,14 @@
           <button class="choice-rpg clickable">D'accord</button>
         </div>
         <div class="center" role="unecessary-steps">
+          <h3>On ne le choisi pas mais on se bat pour lui.</h3>
+          <button class="choice-rpg clickable">Soit</button>
+        </div>
+        <div class="center" role="unecessary-steps">
+          <h3>Il n'y a pas de bon ou de mauvais clan.</h3>
+          <button class="choice-rpg clickable">Certes</button>
+        </div>
+        <div class="center" role="unecessary-steps">
           <h3>
             Estes-vous preste à découvrir sous quel étendard vous allez
             compestir ?
@@ -310,10 +318,22 @@
           </ul>
           <hr />
           <p>
-            Avant de connoitre sous quel estendard vous pourrez concourir,
-            baladez-vous donc au chasteau. Vous reviendrez à la cour pour ouïr
+            Baladez-vous donc au chasteau. Vous reviendrez à la cour pour ouïr
             toustes les dernières nouvelles des festivités.
           </p>
+          <hr />
+          <p class="p-accent">
+            Ne manquez pas de prévenir les seigneurs de la Vielarnoult pour
+            confirmer vostre participation aux festivités !
+          </p>
+          <div id="isComing-ui">
+            <label for="isComing-input">Je serai présent</label>
+            <input
+              id="isComing-input"
+              onChange="changeComing(event)"
+              type="checkbox"
+            />
+          </div>
         </section>
       </div>
 

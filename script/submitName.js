@@ -146,10 +146,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const medievalName = localStorage.getItem("medievalName");
   const medievalPsw = localStorage.getItem("medievalPsw");
   const medievalTeam = localStorage.getItem("medievalTeam");
-  const isComing = localStorage.getItem("isComing");
 
-  console.log({ medievalName, medievalPsw, medievalTeam, isComing });
-  // TODO make API call to just update the isComing value (send psw+isComing)
+  console.log({ medievalName, medievalPsw, medievalTeam });
 
   if (devMode) bypassLanding();
 
@@ -159,21 +157,19 @@ document.addEventListener("DOMContentLoaded", function () {
     retrieveJSON(APIurl, data)
       .then((res) => {
         res = JSON.parse(res);
-        localStorage.setItem("medievalName", res.name);
-        localStorage.setItem("medievalPsw", res.psw);
         localStorage.setItem("medievalTeam", res.team);
+        const isComing = req.isComing === true;
+        document.getElementById("isComing-input").checked = isComing;
         if (res.team && !medievalTeam) {
           displayTeam();
+          localStorage.setItem("medievalTeam", res.team);
         }
       })
       .catch((e) => {
         console.log("Vous êtes un fossoyeur d'identité vilain !", e);
       });
 
-    if (medievalTeam) {
-      // ça passe les gardes
-      openGates(medievalName);
-    }
+    openGates(medievalName);
     return;
   }
 
@@ -285,6 +281,9 @@ async function apiCheckGueux(psw) {
     if (res) {
       // Success
       res = JSON.parse(res);
+      const isComing = req.isComing === true;
+      document.getElementById("isComing-input").checked = isComing;
+
       if (res.team && !currentTeam) {
         displayTeam();
       }
@@ -340,4 +339,21 @@ function welcomeUser(name, psw) {
       openGates(name, true);
     });
   }, 3000);
+}
+
+function changeComing(evt) {
+  const checked = evt.target.checked;
+
+  retrieveJSON(
+    "https://europe-west9-choucroutemedievale.cloudfunctions.net/changeAttendance",
+    {
+      gueuxName: localStorage.getItem("medievalName"),
+      isComing: checked,
+    }
+  )
+    .then(() => {})
+    .catch((err) => {
+      displayError(err.message);
+      evt.target.checked = !checked;
+    });
 }

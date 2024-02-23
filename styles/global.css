@@ -118,6 +118,9 @@ section {
   justify-content: space-between;
   align-items: center;
 }
+section p.p-accent {
+  font-size: 1.3rem;
+}
 
 main {
   display: none;
@@ -335,4 +338,16 @@ body[state="locked"] {
   justify-content: center;
   flex-direction: column;
   align-items: center;
+}
+
+#isComing-ui {
+  font-size: 2rem;
+  color: rgb(141 66 1 / 90%);
+  text-shadow: 2px 2px 4px gold;
+}
+
+#isComing-input {
+  accent-color: goldenrod;
+  width: 2em;
+  height: 2em;
 }

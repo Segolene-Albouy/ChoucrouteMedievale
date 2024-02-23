@@ -32,9 +32,9 @@ const mdpDb = firestore.collection("psw");
 async function newPsw() {
   try {
     const freePswQuery = await mdpDb
-        .where("attributed", "==", false)
-        .limit(1)
-        .get();
+      .where("attributed", "==", false)
+      .limit(1)
+      .get();
 
     if (!freePswQuery.empty) {
       const freePs = freePswQuery.docs[0];
@@ -74,47 +74,47 @@ async function updateGueux(gueux, ipAddress, now) {
   return gueuxData;
 }
 
-async function getTeam(){
-   const teams = {
-       corbeau: 0,
-       cerf: 0,
-       kraken: 0,
-       dragon: 0
-   };
+async function getTeam() {
+  const teams = {
+    corbeau: 0,
+    cerf: 0,
+    kraken: 0,
+    dragon: 0,
+  };
 
-   let fewestMembers= 1000;
-   let selectedTeam = "";
+  let fewestMembers = 1000;
+  let selectedTeam = "";
 
   const snapshot = await gueuxDb.get();
   snapshot.forEach((doc) => {
-    const [team, isComing = false] = [doc.data().team, doc.data().isComing];
+    const { team, isComing = false } = doc.data();
     if (teams.hasOwnProperty(team) && isComing) {
       teams[team]++;
-      if (teams[team] < fewestMembers){
+      if (teams[team] < fewestMembers) {
         fewestMembers = teams[team];
         selectedTeam = team;
       }
     }
   });
-  return selectedTeam
+  return selectedTeam;
 }
 
 functions.http("checkName", async (req, res) => {
-  let { name, psw, team, isComing } = req.body; // GET req.query / POST req.body
+  let { name, psw, team } = req.body; // GET req.query / POST req.body
 
   /* /!* WARNING ONLY FOR DEVELOPMENT *!/*/
   res.set("Access-Control-Allow-Origin", "*");
   res.set("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
   res.set("Access-Control-Allow-Headers", "Content-Type");
 
-  if (req.method === 'OPTIONS') {
+  if (req.method === "OPTIONS") {
     // Handle preflight request
-    res.status(204).send('');
+    res.status(204).send("");
     return;
   }
 
   const domain = req.headers.referer;
-  if (!domain || !domain.includes('choucroute-medievale.tech')) {
+  if (!domain || !domain.includes("choucroute-medievale.tech")) {
     res.status(403).send(`Que croyais-tu, manand ?`);
     return;
   }
@@ -124,7 +124,7 @@ functions.http("checkName", async (req, res) => {
     const now = Firestore.FieldValue.serverTimestamp();
     const ipAddress = req.ip;
 
-    if (!team){
+    if (!team) {
       team = getTeam();
     }
 
@@ -165,27 +165,19 @@ functions.http("checkName", async (req, res) => {
         // incorrect password
         statusCode = 400;
       }
-    } else if (typeof isComing === "boolean"){
-      const pswQuery = await gueuxDb.where("psw", "==", psw).get();
-      if (pswQuery.size === 1) {
-        await gueux.ref.update({isComing: isComing});
-        statusCode = 200;
-      } else {
-        statusCode = pswQuery.size > 1 ? 500 : 400;
-      }
     }
 
     res.status(statusCode).json({
       name,
       psw,
-      team
+      team,
     });
   } catch (error) {
     res.status(500).json({
       error,
       name: null,
       psw: null,
-      team: null
+      team: null,
     });
   }
 });
