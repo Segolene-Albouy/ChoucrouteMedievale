@@ -118,9 +118,6 @@ section {
   justify-content: space-between;
   align-items: center;
 }
-section p.p-accent {
-  font-size: 1.3rem;
-}
 
 main {
   display: none;
@@ -341,13 +338,33 @@ body[state="locked"] {
 }
 
 #isComing-ui {
-  font-size: 2rem;
-  color: rgb(141 66 1 / 90%);
-  text-shadow: 2px 2px 4px gold;
+  font-size: 2em;
+  color: rgb(156, 37, 1);
+  font-family: "UnifrakturMaguntia", serif;
+  animation: glow 1s ease-in-out infinite alternate;
 }
 
 #isComing-input {
   accent-color: goldenrod;
   width: 2em;
   height: 2em;
+}
+
+#rsvp {
+  --inlay-bg: rgba(246, 236, 196, 0.2) !important;
+  padding: 7% 15% 10%;
+  font-family: "ancient", serif;
+  font-size: 1.5em;
+  color: rgb(73, 35, 1);
+}
+
+@media screen and (max-width: 768px) {
+  #isComing-ui {
+    font-size: 1.5em;
+  }
+  #rsvp {
+    padding: 7% 15% 12%;
+    font-size: 1.1em;
+    margin: 5% auto 10%;
+  }
 }

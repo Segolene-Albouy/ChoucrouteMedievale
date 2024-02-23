@@ -297,6 +297,24 @@
         <section class="parchment">
           <img id="oyez" src="static/oyezoyez.png" alt="oyez oyez" />
           <h2>Dameselles et damelots</h2>
+
+          <div id="rsvp" class="fantasy-btn">
+            <p>
+              <!--Ne manquez pas de prévenir les seigneurs de la Vielarnoult pour
+              confirmer vostre participation aux festivités !-->
+              Prévenez les seigneurs de la Vielarnoult de vostre participation aux festivités !
+            </p>
+            <div id="isComing-ui">
+              <label for="isComing-input">Je serai présent</label>
+              <input
+                id="isComing-input"
+                onChange="changeComing(event)"
+                type="checkbox"
+              />
+            </div>
+          </div>
+
+          <hr />
           <p>
             Entrez entrez dans la cour du chasteau ! Les seigneurs de la
             Vielarnoult préparent moult réjouissances pour la grand fête du chou
@@ -321,19 +339,6 @@
             Baladez-vous donc au chasteau. Vous reviendrez à la cour pour ouïr
             toustes les dernières nouvelles des festivités.
           </p>
-          <hr />
-          <p class="p-accent">
-            Ne manquez pas de prévenir les seigneurs de la Vielarnoult pour
-            confirmer vostre participation aux festivités !
-          </p>
-          <div id="isComing-ui">
-            <label for="isComing-input">Je serai présent</label>
-            <input
-              id="isComing-input"
-              onChange="changeComing(event)"
-              type="checkbox"
-            />
-          </div>
         </section>
       </div>
 

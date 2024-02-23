@@ -2,43 +2,91 @@
 
 @layer fantasy-presets {
   .fantasy-bone-n-coper {
-    cursor: pointer;
+    /*cursor: pointer;*/
 
     --text-color: #aa9b79;
+    --text-hover-color: #8d7c56;
+    --text-focus-color: #735b41;
+    --text-active-color: #6c4413;
 
-    --text-shadow: calc(1.5px * var(--scale) / 4.5)
-        calc(-1.5px * var(--scale) / 4.5) calc(1.5px * var(--scale) / 4.5)
-        #fffcf2,
-        calc(-1.5px * var(--scale) / 4.5) calc(1.5px * var(--scale) / 4.5)
-        calc(1.5px * var(--scale) / 4.5) #160500;
+    --text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    --text-hover-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
+    --text-focus-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
+    --text-active-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
 
     --border-bg: linear-gradient(
-            to bottom,
-            #bdab8c,
-            #aa9b79 49%,
-            #735b41 51%,
-            #766652
+        to bottom,
+        #bdab8c,
+        #aa9b79 49%,
+        #735b41 51%,
+        #766652
     );
-    --inlay-hover-opacity: 0.75;
-    --border-hover-opacity: 0.75;
-    --border-focus-bg: repeating-conic-gradient(
-            #bdab8c 0deg 30deg,
-            #766652 30deg 60deg
+    --border-hover-bg: linear-gradient(
+        to bottom,
+        #bdab8c,
+        #aa9b79 49%,
+        #735b41 51%,
+        #766652
+    );
+    --border-active-bg: linear-gradient(
+        to bottom,
+        #bdab8c,
+        #aa9b79 49%,
+        #735b41 51%,
+        #766652
     );
 
-    --inlay-bg: radial-gradient(at center 150%, #fffcf2, transparent 35%) 50% 0% /
-        150% 25% no-repeat,
-    radial-gradient(at center -25%, #501608, transparent 35%) 50% 100% / 150%
-    25% no-repeat,
-    linear-gradient(
-            to bottom,
-            #2c201b,
-            #895648 24%,
-            #422419 26% 49%,
-            #291208 49% 74%,
-            #160500 76%,
-            #1a0801
+    --border-focus-bg: repeating-conic-gradient(
+        #bdab8c 0deg 30deg,
+        #766652 30deg 60deg
     );
+
+    --bg: rgb(255, 249, 240);
+    --inlay-bg: rgba(var(--bg), 0.2);
+    /*--inlay-bg:radial-gradient(at center 150%, #fffcf2, transparent 35%) 50% 0% 150% 25% no-repeat,
+      radial-gradient(at center -25%, #501608, transparent 35%) 50% 100% / 150%
+      25% no-repeat,
+      linear-gradient(
+          to bottom,
+          #2c201b,
+          #895648 24%,
+          #422419 26% 49%,
+          #291208 49% 74%,
+          #160500 76%,
+          #1a0801
+      );*/
+    --inlay-hover-bg: rgba(var(--bg), 0.25);
+    --inlay-focus-bg: rgba(var(--bg), 0.25);
+    --inlay-active-bg: rgba(var(--bg), 0.25);
+
+    --outline-hover-color: #735b41;
+    --outline-focus-color: #735b41;
+    --outline-active-color: #735b41;
+
+    --outline-size: 2px;
+    --outline-hover-size: 2px;
+    --outline-focus-size: 2px;
+    --outline-active-size: 2px;
+
+    --outline-offset: 0;
+    --outline-hover-offset: 0;
+    --outline-focus-offset: 0;
+    --outline-active-offset: 0;
+
+    --outline-style: none;
+    --outline-hover-style: none;
+    --outline-focus-style: none;
+    --outline-active-style: none;
+
+    --border-opacity: 1;
+    --border-hover-opacity: 1;
+    --border-focus-opacity: 1;
+    --border-active-opacity: 1;
+
+    --inlay-opacity: 1;
+    --inlay-hover-opacity: 1;
+    --inlay-focus-opacity: 1;
+    --inlay-active-opacity: 1;
   }
 }
 
@@ -50,7 +98,7 @@
     background: transparent;
     outline: none;
     border: none;
-    --s: (var(--scale) / 4.5);
+    --s: var(--scale) / 4.5;
     font-size: calc(60px * var(--s));
     font-family: MedievalSharp, serif;
     min-width: calc(280px * var(--s));
@@ -97,52 +145,52 @@
 
     --_outline-base-color: var(--outline-color, currentColor);
     --_outline-hover-color: var(
-            --outline-hover-color,
-            var(--_outline-base-color)
+        --outline-hover-color,
+        var(--_outline-base-color)
     );
     --_outline-focus-color: var(
-            --outline-focus-color,
-            var(--_outline-hover-color)
+        --outline-focus-color,
+        var(--_outline-hover-color)
     );
     --_outline-active-color: var(
-            --outline-active-color,
-            var(--_outline-focus-color)
+        --outline-active-color,
+        var(--_outline-focus-color)
     );
     --_outline-state-color: var(--_outline-base-color);
 
     --_outline-base-size: var(--outline-size, 0px);
     --_outline-hover-size: var(--outline-hover-size, calc(5px * var(--s)));
     --_outline-focus-size: var(
-            --outline-focus-size,
-            var(--_outline-hover-size)
+        --outline-focus-size,
+        var(--_outline-hover-size)
     );
     --_outline-active-size: var(
-            --outline-active-size,
-            var(--_outline-focus-size)
+        --outline-active-size,
+        var(--_outline-focus-size)
     );
     --_outline-state-size: var(--_outline-base-size);
 
     --_outline-base-offset: var(--outline-offset, 0px);
     --_outline-hover-offset: var(--outline-hover-offset, calc(15px * var(--s)));
     --_outline-focus-offset: var(
-            --outline-focus-offset,
-            var(--_outline-hover-offset)
+        --outline-focus-offset,
+        var(--_outline-hover-offset)
     );
     --_outline-active-offset: var(
-            --outline-active-offset,
-            var(--_outline-focus-offset)
+        --outline-active-offset,
+        var(--_outline-focus-offset)
     );
     --_outline-state-offset: var(--_outline-base-offset);
 
     --_outline-base-style: var(--outline-style, none);
     --_outline-hover-style: var(
-            --outline-hover-style,
-            var(--_outline-base-style)
+        --outline-hover-style,
+        var(--_outline-base-style)
     );
     --_outline-focus-style: var(--outline-focus-style, solid);
     --_outline-active-style: var(
-            --outline-active-style,
-            var(--_outline-focus-style)
+        --outline-active-style,
+        var(--_outline-focus-style)
     );
     --_outline-state-style: var(--_outline-base-style);
 
@@ -154,8 +202,8 @@
   .fantasy-btn-2xl,
   .fantasy-btn-3xl {
     --_outline-hover-offset: var(
-            --outline-hover-offset,
-            calc(-68px * var(--s))
+        --outline-hover-offset,
+        calc(-68px * var(--s))
     );
   }
   .fantasy-btn:hover {
@@ -186,16 +234,16 @@
   .fantasy-btn::after {
     --_border-base-opacity: var(--border-opacity, 1);
     --_border-hover-opacity: var(
-            --border-hover-opacity,
-            var(--_border-base-opacity)
+        --border-hover-opacity,
+        var(--_border-base-opacity)
     );
     --_border-focus-opacity: var(
-            --border-focus-opacity,
-            var(--_border-hover-opacity)
+        --border-focus-opacity,
+        var(--_border-hover-opacity)
     );
     --_border-active-opacity: var(
-            --border-active-opacity,
-            var(--_border-focus-opacity)
+        --border-active-opacity,
+        var(--_border-focus-opacity)
     );
     --_border-state-opacity: var(--_border-base-opacity);
 
@@ -222,20 +270,20 @@
   .fantasy-btn::before {
     --_inlay-base-opacity: var(--inlay-opacity, 1);
     --_inlay-hover-opacity: var(
-            --inlay-hover-opacity,
-            var(--_inlay-base-opacity)
+        --inlay-hover-opacity,
+        var(--_inlay-base-opacity)
     );
     --_inlay-focus-opacity: var(
-            --inlay-focus-opacity,
-            var(--_inlay-hover-opacity)
+        --inlay-focus-opacity,
+        var(--_inlay-hover-opacity)
     );
     --_inlay-active-opacity: var(
-            --inlay-active-opacity,
-            var(--_inlay-focus-opacity)
+        --inlay-active-opacity,
+        var(--_inlay-focus-opacity)
     );
     --_inlay-state-opacity: var(--_inlay-base-opacity);
 
-    --_inlay-base-bg: var(--inlay-bg, #8888);
+    --_inlay-base-bg: var(--inlay-bg);
     --_inlay-hover-bg: var(--inlay-hover-bg, var(--_inlay-base-bg));
     --_inlay-focus-bg: var(--inlay-focus-bg, var(--_inlay-hover-bg));
     --_inlay-active-bg: var(--inlay-active-bg, var(--_inlay-focus-bg));
@@ -259,7 +307,7 @@
   .fantasy-btn::after {
     content: "";
     position: absolute;
-    inset: 0px;
+    inset: 0;
     box-sizing: border-box;
     pointer-events: none;
     z-index: -1;
@@ -269,14 +317,14 @@
     background: var(--_inlay-state-bg);
     opacity: var(--_inlay-state-opacity);
     clip-path: polygon(
-            calc(50px * var(--s)) calc(82px * var(--s)),
-            calc(114px * var(--s)) calc(18px * var(--s)),
-            calc(100% - 114px * var(--s)) calc(18px * var(--s)),
-            calc(100% - 50px * var(--s)) calc(82px * var(--s)),
-            calc(100% - 50px * var(--s)) calc(100% - 82px * var(--s)),
-            calc(100% - 114px * var(--s)) calc(100% - 18px * var(--s)),
-            calc(114px * var(--s)) calc(100% - 18px * var(--s)),
-            calc(50px * var(--s)) calc(100% - 82px * var(--s))
+        calc(50px * var(--s)) calc(82px * var(--s)),
+        calc(114px * var(--s)) calc(18px * var(--s)),
+        calc(100% - 114px * var(--s)) calc(18px * var(--s)),
+        calc(100% - 50px * var(--s)) calc(82px * var(--s)),
+        calc(100% - 50px * var(--s)) calc(100% - 82px * var(--s)),
+        calc(100% - 114px * var(--s)) calc(100% - 18px * var(--s)),
+        calc(114px * var(--s)) calc(100% - 18px * var(--s)),
+        calc(50px * var(--s)) calc(100% - 82px * var(--s))
     );
   }
 
@@ -285,112 +333,112 @@
     opacity: var(--_border-state-opacity);
     clip-path: polygon(
       /* home */ calc(37px * var(--s)) calc(44px * var(--s)),
-              /* jump union point */ calc(52px * var(--s)) calc(29px * var(--s)),
-            calc(61px * var(--s)) calc(18px * var(--s)),
-            calc(82.5px * var(--s)) calc(39.5px * var(--s)),
-            calc(61px * var(--s)) calc(61px * var(--s)),
-            0px 0px,
-            calc(77px * var(--s)) 0px,
-            calc(90px * var(--s)) calc(13px * var(--s)),
-            calc(103px * var(--s)) 0px,
+          /* jump union point */ calc(52px * var(--s)) calc(29px * var(--s)),
+        calc(61px * var(--s)) calc(18px * var(--s)),
+        calc(82px * var(--s)) calc(39px * var(--s)),
+        calc(61px * var(--s)) calc(61px * var(--s)),
+        0px 0px,
+        calc(77px * var(--s)) 0px,
+        calc(90px * var(--s)) calc(13px * var(--s)),
+        calc(103px * var(--s)) 0px,
 
-            calc(100% - 103px * var(--s)) 0px,
-            calc(100% - 90px * var(--s)) calc(13px * var(--s)),
-            calc(100% - 77px * var(--s)) 0px,
-            100% 0px,
-            calc(100% - 61px * var(--s)) calc(61px * var(--s)),
-            calc(100% - 82.5px * var(--s)) calc(39.5px * var(--s)),
-            calc(100% - 61px * var(--s)) calc(18px * var(--s)),
-              /*... -x union point, jump ...*/ calc(100% - 52px * var(--s))
-            calc(29px * var(--s)),
-            calc(100% - 37px * var(--s)) calc(44px * var(--s)),
-            calc(100% - 24.5px * var(--s)) calc(56.5px * var(--s)),
-            calc(100% - 32.5px * var(--s)) calc(64.5px * var(--s)),
-            calc(100% - 32.5px * var(--s)) calc(100% - 64.5px * var(--s)),
-            calc(100% - 24.5px * var(--s)) calc(100% - 56.5px * var(--s)),
-            calc(100% - 37px * var(--s)) calc(100% - 44px * var(--s)),
-            calc(100% - 52px * var(--s)) calc(100% - 29px * var(--s)),
-            calc(100% - 61px * var(--s)) calc(100% - 18px * var(--s)),
-            calc(100% - 82.5px * var(--s)) calc(100% - 39.5px * var(--s)),
-            calc(100% - 61px * var(--s)) calc(100% - 61px * var(--s)),
-            100% 100%,
+        calc(100% - 103px * var(--s)) 0px,
+        calc(100% - 90px * var(--s)) calc(13px * var(--s)),
+        calc(100% - 77px * var(--s)) 0px,
+        100% 0px,
+        calc(100% - 61px * var(--s)) calc(61px * var(--s)),
+        calc(100% - 82px * var(--s)) calc(39px * var(--s)),
+        calc(100% - 61px * var(--s)) calc(18px * var(--s)),
+          /*... -x union point, jump ...*/ calc(100% - 52px * var(--s))
+        calc(29px * var(--s)),
+        calc(100% - 37px * var(--s)) calc(44px * var(--s)),
+        calc(100% - 24px * var(--s)) calc(56px * var(--s)),
+        calc(100% - 32px * var(--s)) calc(64px * var(--s)),
+        calc(100% - 32px * var(--s)) calc(100% - 64px * var(--s)),
+        calc(100% - 24px * var(--s)) calc(100% - 56px * var(--s)),
+        calc(100% - 37px * var(--s)) calc(100% - 44px * var(--s)),
+        calc(100% - 52px * var(--s)) calc(100% - 29px * var(--s)),
+        calc(100% - 61px * var(--s)) calc(100% - 18px * var(--s)),
+        calc(100% - 82px * var(--s)) calc(100% - 39px * var(--s)),
+        calc(100% - 61px * var(--s)) calc(100% - 61px * var(--s)),
+        100% 100%,
 
-            calc(100% - 77px * var(--s)) 100%,
-            calc(100% - 90px * var(--s)) calc(100% - 13px * var(--s)),
-            calc(100% - 103px * var(--s)) 100%,
+        calc(100% - 77px * var(--s)) 100%,
+        calc(100% - 90px * var(--s)) calc(100% - 13px * var(--s)),
+        calc(100% - 103px * var(--s)) 100%,
 
-            calc(103px * var(--s)) 100%,
-            calc(90px * var(--s)) calc(100% - 13px * var(--s)),
-            calc(77px * var(--s)) 100%,
+        calc(103px * var(--s)) 100%,
+        calc(90px * var(--s)) calc(100% - 13px * var(--s)),
+        calc(77px * var(--s)) 100%,
 
-            0px 100%,
-            calc(61px * var(--s)) calc(100% - 61px * var(--s)),
-            calc(82.5px * var(--s)) calc(100% - 39.5px * var(--s)),
-            calc(61px * var(--s)) calc(100% - 18px * var(--s)),
-            calc(52px * var(--s)) calc(100% - 29px * var(--s)),
-            calc(37px * var(--s)) calc(100% - 44px * var(--s)),
-            calc(24.5px * var(--s)) calc(100% - 56.5px * var(--s)),
-            calc(32.5px * var(--s)) calc(100% - 64.5px * var(--s)),
-            calc(32.5px * var(--s)) calc(64.5px * var(--s)),
-            calc(24.5px * var(--s)) calc(56.5px * var(--s)),
-              /* first point in the path, time to CCW inner path */
-            calc(37px * var(--s)) calc(44px * var(--s)),
-              /* w = ~8 */ calc(45px * var(--s)) calc(52px * var(--s)),
-            calc(41px * var(--s)) calc(56px * var(--s)),
-            calc(50px * var(--s)) calc(66px * var(--s)),
-            calc(40.5px * var(--s)) calc(75.5px * var(--s)),
-            calc(40.5px * var(--s)) calc(100% - 75.5px * var(--s)),
-            calc(50px * var(--s)) calc(100% - 66px * var(--s)),
-            calc(41px * var(--s)) calc(100% - 56px * var(--s)),
-            calc(45px * var(--s)) calc(100% - 52px * var(--s)),
-            calc(37px * var(--s)) calc(100% - 44px * var(--s)),
-            calc(52px * var(--s)) calc(100% - 29px * var(--s)),
-            calc(59.5px * var(--s)) calc(100% - 36.5px * var(--s)),
-            calc(61px * var(--s)) calc(100% - 35px * var(--s)),
-            calc(65.5px * var(--s)) calc(100% - 39.5px * var(--s)),
-            calc(61px * var(--s)) calc(100% - 44px * var(--s)),
-            calc(25px * var(--s)) calc(100% - 8px * var(--s)),
-            calc(72.5px * var(--s)) calc(100% - 8px * var(--s)),
-            calc(90px * var(--s)) calc(100% - 25.5px * var(--s)),
-            calc(107.5px * var(--s)) calc(100% - 8px * var(--s)),
-            calc(100% - 107.5px * var(--s)) calc(100% - 8px * var(--s)),
-            calc(100% - 90px * var(--s)) calc(100% - 25.5px * var(--s)),
-            calc(100% - 72.5px * var(--s)) calc(100% - 8px * var(--s)),
-            calc(100% - 25px * var(--s)) calc(100% - 8px * var(--s)),
-            calc(100% - 61px * var(--s)) calc(100% - 44px * var(--s)),
-            calc(100% - 65.5px * var(--s)) calc(100% - 39.5px * var(--s)),
-            calc(100% - 61px * var(--s)) calc(100% - 35px * var(--s)),
-            calc(100% - 59.5px * var(--s)) calc(100% - 36.5px * var(--s)),
-            calc(100% - 52px * var(--s)) calc(100% - 29px * var(--s)),
-            calc(100% - 37px * var(--s)) calc(100% - 44px * var(--s)),
-            calc(100% - 45px * var(--s)) calc(100% - 52px * var(--s)),
-            calc(100% - 41px * var(--s)) calc(100% - 56px * var(--s)),
-            calc(100% - 50px * var(--s)) calc(100% - 66px * var(--s)),
-            calc(100% - 40.5px * var(--s)) calc(100% - 75.5px * var(--s)),
-            calc(100% - 40.5px * var(--s)) calc(75.5px * var(--s)),
-            calc(100% - 50px * var(--s)) calc(66px * var(--s)),
-            calc(100% - 41px * var(--s)) calc(56px * var(--s)),
-            calc(100% - 45px * var(--s)) calc(52px * var(--s)),
-            calc(100% - 37px * var(--s)) calc(44px * var(--s)),
-            calc(100% - 52px * var(--s)) calc(29px * var(--s)),
-            calc(100% - 59.5px * var(--s)) calc(36.5px * var(--s)),
-            calc(100% - 61px * var(--s)) calc(35px * var(--s)),
-            calc(100% - 65.5px * var(--s)) calc(39.5px * var(--s)),
-            calc(100% - 61px * var(--s)) calc(44px * var(--s)),
-            calc(100% - 25px * var(--s)) calc(8px * var(--s)),
-            calc(100% - 72.5px * var(--s)) calc(8px * var(--s)),
-            calc(100% - 90px * var(--s)) calc(25.5px * var(--s)),
-            calc(100% - 107.5px * var(--s)) calc(8px * var(--s)),
-            calc(107.5px * var(--s)) calc(8px * var(--s)),
-            calc(90px * var(--s)) calc(25.5px * var(--s)),
-            calc(72.5px * var(--s)) calc(8px * var(--s)),
-            calc(25px * var(--s)) calc(8px * var(--s)),
-            calc(61px * var(--s)) calc(44px * var(--s)),
-            calc(65.5px * var(--s)) calc(39.5px * var(--s)),
-            calc(61px * var(--s)) calc(35px * var(--s)),
-            calc(59.5px * var(--s)) calc(36.5px * var(--s)),
-              /* union point */ calc(52px * var(--s)) calc(29px * var(--s)),
-              /* jump home */ calc(37px * var(--s)) calc(44px * var(--s))
+        0px 100%,
+        calc(61px * var(--s)) calc(100% - 61px * var(--s)),
+        calc(82px * var(--s)) calc(100% - 39px * var(--s)),
+        calc(61px * var(--s)) calc(100% - 18px * var(--s)),
+        calc(52px * var(--s)) calc(100% - 29px * var(--s)),
+        calc(37px * var(--s)) calc(100% - 44px * var(--s)),
+        calc(24px * var(--s)) calc(100% - 56px * var(--s)),
+        calc(32px * var(--s)) calc(100% - 64px * var(--s)),
+        calc(32px * var(--s)) calc(64px * var(--s)),
+        calc(24px * var(--s)) calc(56px * var(--s)),
+          /* first point in the path, time to CCW inner path */
+        calc(37px * var(--s)) calc(44px * var(--s)),
+          /* w = ~8 */ calc(45px * var(--s)) calc(52px * var(--s)),
+        calc(41px * var(--s)) calc(56px * var(--s)),
+        calc(50px * var(--s)) calc(66px * var(--s)),
+        calc(40px * var(--s)) calc(75px * var(--s)),
+        calc(40px * var(--s)) calc(100% - 75px * var(--s)),
+        calc(50px * var(--s)) calc(100% - 66px * var(--s)),
+        calc(41px * var(--s)) calc(100% - 56px * var(--s)),
+        calc(45px * var(--s)) calc(100% - 52px * var(--s)),
+        calc(37px * var(--s)) calc(100% - 44px * var(--s)),
+        calc(52px * var(--s)) calc(100% - 29px * var(--s)),
+        calc(59px * var(--s)) calc(100% - 36px * var(--s)),
+        calc(61px * var(--s)) calc(100% - 35px * var(--s)),
+        calc(65px * var(--s)) calc(100% - 39px * var(--s)),
+        calc(61px * var(--s)) calc(100% - 44px * var(--s)),
+        calc(25px * var(--s)) calc(100% - 8px * var(--s)),
+        calc(72px * var(--s)) calc(100% - 8px * var(--s)),
+        calc(90px * var(--s)) calc(100% - 25px * var(--s)),
+        calc(107px * var(--s)) calc(100% - 8px * var(--s)),
+        calc(100% - 107px * var(--s)) calc(100% - 8px * var(--s)),
+        calc(100% - 90px * var(--s)) calc(100% - 25px * var(--s)),
+        calc(100% - 72px * var(--s)) calc(100% - 8px * var(--s)),
+        calc(100% - 25px * var(--s)) calc(100% - 8px * var(--s)),
+        calc(100% - 61px * var(--s)) calc(100% - 44px * var(--s)),
+        calc(100% - 65px * var(--s)) calc(100% - 39px * var(--s)),
+        calc(100% - 61px * var(--s)) calc(100% - 35px * var(--s)),
+        calc(100% - 59px * var(--s)) calc(100% - 36px * var(--s)),
+        calc(100% - 52px * var(--s)) calc(100% - 29px * var(--s)),
+        calc(100% - 37px * var(--s)) calc(100% - 44px * var(--s)),
+        calc(100% - 45px * var(--s)) calc(100% - 52px * var(--s)),
+        calc(100% - 41px * var(--s)) calc(100% - 56px * var(--s)),
+        calc(100% - 50px * var(--s)) calc(100% - 66px * var(--s)),
+        calc(100% - 40px * var(--s)) calc(100% - 75px * var(--s)),
+        calc(100% - 40px * var(--s)) calc(75px * var(--s)),
+        calc(100% - 50px * var(--s)) calc(66px * var(--s)),
+        calc(100% - 41px * var(--s)) calc(56px * var(--s)),
+        calc(100% - 45px * var(--s)) calc(52px * var(--s)),
+        calc(100% - 37px * var(--s)) calc(44px * var(--s)),
+        calc(100% - 52px * var(--s)) calc(29px * var(--s)),
+        calc(100% - 59px * var(--s)) calc(36px * var(--s)),
+        calc(100% - 61px * var(--s)) calc(35px * var(--s)),
+        calc(100% - 65px * var(--s)) calc(39px * var(--s)),
+        calc(100% - 61px * var(--s)) calc(44px * var(--s)),
+        calc(100% - 25px * var(--s)) calc(8px * var(--s)),
+        calc(100% - 72px * var(--s)) calc(8px * var(--s)),
+        calc(100% - 90px * var(--s)) calc(25px * var(--s)),
+        calc(100% - 107px * var(--s)) calc(8px * var(--s)),
+        calc(107px * var(--s)) calc(8px * var(--s)),
+        calc(90px * var(--s)) calc(25px * var(--s)),
+        calc(72px * var(--s)) calc(8px * var(--s)),
+        calc(25px * var(--s)) calc(8px * var(--s)),
+        calc(61px * var(--s)) calc(44px * var(--s)),
+        calc(65px * var(--s)) calc(39px * var(--s)),
+        calc(61px * var(--s)) calc(35px * var(--s)),
+        calc(59px * var(--s)) calc(36px * var(--s)),
+        calc(52px * var(--s)) calc(29px * var(--s)), /* union point */
+        calc(37px * var(--s)) calc(44px * var(--s)) /* jump home */
     );
   }
 }
