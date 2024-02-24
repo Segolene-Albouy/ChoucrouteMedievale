@@ -23,10 +23,12 @@
     <link rel="stylesheet" href="./styles/lookbook.css" />
     <link rel="stylesheet" href="./styles/team.css" />
     <link rel="stylesheet" href="./styles/forum.css" />
+    <link rel="stylesheet" href="./styles/herse.css" />
     <script src="script/lib.js"></script>
     <script src="script/cursor.js"></script>
     <script src="script/torchs.js"></script>
     <script src="script/forum.js"></script>
+    <script src="script/herse.js"></script>
     <script src="script/lookbook.js"></script>
     <script src="script/framework.js"></script>
     <script src="script/submitName.js"></script>
@@ -549,6 +551,21 @@
           <div><img src="static/licorne.gif" class="loading licorne" /></div>
         </div>
         <!--<hr />-->
+      </div>
+
+      <div id="herse" class="page">
+        <p>
+          Protègez le chasteau des mendiants !<br />Attention à ne pas heurter
+          les invités...
+        </p>
+        <span id="score">1045</span>
+        <div id="game-container">
+          <div id="castle"></div>
+          <img src="static/crossbow.png" id="crossbow" />
+          <img src="static/arrow.png" class="arrow" id="arrow-template" />
+          <div class="mendiant" id="mendiant-template"></div>
+          <img class="damsel" id="damsel-template" />
+        </div>
       </div>
 
       <div id="doors" class="door-container"></div>

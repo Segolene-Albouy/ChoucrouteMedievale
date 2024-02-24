@@ -45,6 +45,11 @@ function play(audioFilename, onended = () => {}) {
   };
 }
 
+function playShort(audioFilename) {
+  const audio = new Audio(`static/sounds/${audioFilename}.mp3`);
+  audio.play();
+}
+
 function fadeOutAndPause(audio) {
   const initialVolume = audio.volume;
   let currentTime = 0;

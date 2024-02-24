@@ -1,0 +1,84 @@
+#arrow-template {
+  display: none;
+}
+.arrow {
+  position: absolute;
+}
+
+#crossbow {
+  display: block;
+  transform-origin: center;
+}
+#herse {
+  text-align: center;
+}
+#game-container {
+  height: 100vh;
+}
+
+#herse p,
+#score {
+  color: darkgoldenrod;
+  font-size: 2em;
+}
+
+#score {
+  position: absolute;
+  right: 5%;
+}
+
+@media screen and (max-width: 600px) {
+  #herse p,
+  #score {
+    font-size: 1.5em;
+  }
+  #score {
+    right: 0;
+  }
+}
+
+#castle {
+  background: url("../static/castle.png");
+  background-position: 0 0;
+  background-size: cover;
+  width: 200px;
+  height: 64px;
+  margin: auto;
+}
+#castle.hurt {
+  background-position: -200px 0;
+}
+.damsel {
+  position: absolute;
+}
+.damsel.hurt,
+.damsel.hurt-mobile {
+  animation: damage 0.5s infinite;
+}
+
+#mendiant-template {
+  display: none;
+}
+
+.mendiant {
+  position: absolute;
+  background: url("../static/ouille.png");
+  background-position: 0 0;
+  background-size: cover;
+}
+
+.mendiant.hurt {
+  background-position: -158px 0;
+}
+.mendiant.hurt-mobile {
+  background-position: -80px 0;
+}
+
+@keyframes damage {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(60deg);
+  }
+}

@@ -71,6 +71,7 @@ const pagesOnload = {
   banquet: loadBanquet,
   armurerie: loadArmurerie,
   pigeonnier: loadForum,
+  herse: loadHerse,
 };
 
 const pagesOnUnload = {
@@ -79,6 +80,7 @@ const pagesOnUnload = {
   banquet: unloadBanquet,
   armurerie: unloadArmurerie,
   pigeonnier: unloadForum,
+  herse: unloadHerse,
 };
 
 function opendor() {
@@ -284,14 +286,21 @@ function displayPopup(popupRole, message, onDismiss) {
   const popup = document.querySelector(`.popup[role=${popupRole}]`);
   popup.querySelector(".message").innerText = message;
   popup.style.display = "flex";
-  document.body.setAttribute("state", "locked");
+  lockScroll();
 
   popup.addEventListener("click", () => {
     let dismissPopup = onDismiss ? onDismiss() : true; // dismiss popup by default
     if (dismissPopup) {
       popup.style.display = "none";
-      document.body.removeAttribute("state");
+      unlockScroll();
     }
   });
   popup.scrollIntoView();
+}
+
+function lockScroll() {
+  document.body.setAttribute("state", "locked");
+}
+function unlockScroll() {
+  document.body.removeAttribute("state");
 }
