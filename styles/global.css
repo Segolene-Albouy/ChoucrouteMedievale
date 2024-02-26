@@ -339,7 +339,7 @@ body[state="locked"] {
 
 #isComing-ui {
   font-size: 2em;
-  color: rgb(156, 37, 1);
+  color: rgb(203, 37, 0);
   font-family: "UnifrakturMaguntia", serif;
   animation: glow 1s ease-in-out infinite alternate;
 }
@@ -355,7 +355,7 @@ body[state="locked"] {
   padding: 7% 15% 10%;
   font-family: "ancient", serif;
   font-size: 1.5em;
-  color: rgb(73, 35, 1);
+  color: rgb(131, 30, 0);
 }
 
 @media screen and (max-width: 768px) {

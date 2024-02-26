@@ -107,14 +107,16 @@ function nextUnecessaryStep() {
   const current = selectTeamSteps[currentSelectTeamStep];
   current.style.opacity = 0;
   currentSelectTeamStep++;
+  const next = selectTeamSteps[currentSelectTeamStep];
 
   setTimeout(() => {
     current.style.display = "none";
-  }, 3000);
+  }, 2000);
 
   if (currentSelectTeamStep >= selectTeamSteps.length) return;
-  const next = selectTeamSteps[currentSelectTeamStep];
 
-  next.style.opacity = 1;
   next.style.display = "block";
+  setTimeout(() => {
+    next.style.opacity = 1;
+  }, 1750);
 }

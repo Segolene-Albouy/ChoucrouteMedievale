@@ -59,6 +59,7 @@
   position: fixed;
   width: 100vw;
   height: 100vh;
+  transition: all 2s ease;
 }
 
 #opendor.fade {
@@ -89,14 +90,24 @@
 }
 
 #landing-name {
-  transition: all 3s ease;
+  z-index: 10;
 }
 .submitted {
   opacity: 0;
   pointer-events: none;
 }
-#ask-name {
-  /* display: none; */
+.landing-modal {
+  scale: 0;
+  transition: scale 0.5s ease-in, opacity 2s ease;
+  /*transition: all 0.2s ease-in;*/
+  box-shadow: 0 0 2em 0.1em;
+  padding: 2em;
+  text-align: center;
+  font-size: 1rem;
+  max-width: 80vw;
+}
+
+/*#ask-name {
   scale: 0;
   transition: all 0.2s ease-in;
   box-shadow: 0 0 2em 0.1em;
@@ -104,7 +115,7 @@
   text-align: center;
   font-size: 1rem;
   max-width: 80vw;
-}
+}*/
 
 #banner {
   position: relative;
@@ -316,7 +327,7 @@
     gap: 1em;
   }
 
-  #ask-name {
+  .landing-modal {
     max-width: none;
   }
 }

@@ -250,15 +250,21 @@ function resetLocalStorage() {
   localStorage.removeItem("isComing");
 }
 
-function whoIsDev() {
+function whoIsDev(setLocalStorage= true) {
+  let dev;
   if (navigator.userAgent.includes("Macintosh")) {
-    localStorage.setItem("medievalName", "Segoline La Devergoigneuse");
-    localStorage.setItem("medievalPsw", "je-suis-ton-maitre");
+    dev = { name: "Segoline La Devergoigneuse", psw: "je-suis-ton-maitre", team: randomTeam(), isComing: true };
   } else {
-    localStorage.setItem("medievalName", "Clément L’Ancien");
-    localStorage.setItem("medievalPsw", "dev_psw");
+    dev = { name: "Clément L’Ancien", psw: "dev_psw", team: randomTeam(), isComing: true };
   }
-  localStorage.removeItem("medievalTeam");
+  if (setLocalStorage){
+    localStorage.setItem("medievalName", dev.name);
+    localStorage.setItem("medievalPsw", dev.psw);
+    localStorage.setItem("medievalTeam", dev.team);
+    // localStorage.removeItem("medievalTeam");
+    localStorage.setItem("isComing", dev.isComing);
+  }
+  return dev
 }
 
 function bypassLanding() {

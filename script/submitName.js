@@ -3,7 +3,7 @@ var wrongOnce = false;
 var APIurl =
   "https://europe-west9-choucroutemedievale.cloudfunctions.net/checkName";
 var pswAttempts = 0;
-const devMode = false;
+const devMode = true;
 let currentDisplayedFormId = null;
 
 function choose(callback) {
@@ -43,10 +43,6 @@ function submitName(evt) {
   const adj = evt.target.adjectif.value;
 
   let medievalName = `${name} ${adj}`;
-  if (devMode) {
-    welcomeUser("Prout", "turbo-prout");
-    return;
-  }
   evt.target.setAttribute("state", "loading");
   apiNewGueux(medievalName);
 }
@@ -69,10 +65,6 @@ function submitPsw(evt) {
     .trim()
     .toLowerCase()
     .replace(/\s/g, "-");
-  if (devMode) {
-    openGates("prout", true);
-    return;
-  }
 
   targetForm.setAttribute("state", "loading");
   apiCheckGueux(medievalPsw);
@@ -115,21 +107,25 @@ function commonFormHandler(evt, keyNeeded) {
   }
 }
 
-function displayTeam() {
-  document.getElementById("team").style.display = "flex";
-
-  // TODO add: il est temps de descouvrir sous quel étendard vous allez concourir
-  // TODO add isComing + new call to API
+function displayTeam(timeout = true) {
+  if (timeout) {
+    setTimeout(() => {
+      document.getElementById("team").style.scale = "1";
+    }, 2000);
+  } else {
+    document.getElementById("team").style.scale = "1";
+  }
 }
 
+
 function openGates(medievalName, submitted = false) {
-  if (devMode) bypassLanding();
+  // if (devMode) bypassLanding();
   document.getElementById(
     "opendor"
   ).innerHTML += `<mark>${medievalName}</mark>`;
 
   if (submitted) {
-    // Ajout d'une classe pour faire un transition smooth
+    // Ajout d'une classe pour faire une transition smooth
     document.getElementById("landing-name").classList.add("submitted");
   } else {
     document.getElementById("landing-name").remove();
@@ -149,27 +145,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
   console.log({ medievalName, medievalPsw, medievalTeam });
 
-  if (devMode) bypassLanding();
+  // if (devMode) bypassLanding();
+  if (devMode) resetLocalStorage();
 
   if (medievalName && medievalPsw) {
     // API call to update last connection
     const data = { name: medievalName, psw: medievalPsw, team: medievalTeam };
-    retrieveJSON(APIurl, data)
-      .then((res) => {
-        res = JSON.parse(res);
-        localStorage.setItem("medievalTeam", res.team);
-        const isComing = req.isComing === true;
-        document.getElementById("isComing-input").checked = isComing;
-        if (res.team && !medievalTeam) {
-          displayTeam();
-          localStorage.setItem("medievalTeam", res.team);
-        }
-      })
-      .catch((e) => {
-        console.log("Vous êtes un fossoyeur d'identité vilain !", e);
-      });
-
-    openGates(medievalName);
+    if (devMode){
+      handleResTeam(JSON.stringify(whoIsDev(false)));
+    } else {
+      retrieveJSON(APIurl, data)
+        .then((res) => {
+          handleResTeam(res);
+        })
+        .catch((e) => {
+          console.log("Vous êtes un fossoyeur d'identité vilain !", e);
+        });
+    }
+    // openGates(medievalName);
     return;
   }
 
@@ -240,7 +233,13 @@ const adjectifs = [
 async function apiNewGueux(name) {
   const targetForm = document.getElementById(currentDisplayedFormId);
   try {
-    let res = await retrieveJSON(APIurl, { name });
+    let res;
+    if (devMode) {
+      res = whoIsDev(false);
+      res = JSON.stringify(res)
+    } else {
+      res = await retrieveJSON(APIurl, { name });
+    }
     if (res) {
       // Success
       res = JSON.parse(res);
@@ -272,26 +271,37 @@ async function apiNewGueux(name) {
   }
 }
 
+function handleResTeam(res){
+  const currentTeam = localStorage.getItem("medievalTeam");
+  res = JSON.parse(res);
+  document.getElementById("isComing-input").checked = res.isComing === true;
+
+  localStorage.setItem("medievalPsw", res.psw);
+  localStorage.setItem("medievalName", res.name);
+  localStorage.setItem("medievalTeam", res.team);
+  localStorage.setItem("isComing", res.isComing);
+
+  if (res.team && !currentTeam) {
+    displayTeam(false);
+  }
+  openGates(res.name, true);
+}
+
 // Submit Password
 async function apiCheckGueux(psw) {
   const targetForm = document.getElementById(currentDisplayedFormId);
   try {
-    let res = await retrieveJSON(APIurl, { psw });
-    const currentTeam = localStorage.getItem("medievalTeam");
-    if (res) {
-      // Success
-      res = JSON.parse(res);
-      const isComing = req.isComing === true;
-      document.getElementById("isComing-input").checked = isComing;
+    let res;
+    if (devMode) {
+      res = whoIsDev(false);
+      res = JSON.stringify(res)
+    } else {
+      res = await retrieveJSON(APIurl, { psw });
+    }
 
-      if (res.team && !currentTeam) {
-        displayTeam();
-      }
+    if (res) {
+      handleResTeam(res);
       targetForm.removeAttribute("state");
-      localStorage.setItem("medievalPsw", res.psw);
-      localStorage.setItem("medievalName", res.name);
-      localStorage.setItem("medievalTeam", res.team);
-      openGates(res.name, true);
     }
   } catch (res) {
     targetForm.setAttribute("state", "error");
@@ -351,7 +361,9 @@ function changeComing(evt) {
       isComing: checked,
     }
   )
-    .then(() => {})
+    .then(() => {
+      localStorage.setItem("isComing", checked);
+    })
     .catch((err) => {
       displayError(err.message);
       evt.target.checked = !checked;
