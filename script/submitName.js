@@ -108,6 +108,7 @@ function commonFormHandler(evt, keyNeeded) {
 }
 
 function displayTeam(timeout = true) {
+  document.getElementById("landing-name").style.zIndex = 11;
   if (timeout) {
     setTimeout(() => {
       document.getElementById("team").style.scale = "1";
@@ -117,6 +118,11 @@ function displayTeam(timeout = true) {
   }
 }
 
+function displayName() {
+  document.getElementById("ask-name").style.scale = "1";
+  document.getElementById("landing-name").style.zIndex = 10;
+}
+
 
 function openGates(medievalName, submitted = false) {
   // if (devMode) bypassLanding();
@@ -124,11 +130,20 @@ function openGates(medievalName, submitted = false) {
     "opendor"
   ).innerHTML += `<mark>${medievalName}</mark>`;
 
+  const landingName = document.getElementById("landing-name");
+  const landingTeam = document.getElementById("landing-team");
+
   if (submitted) {
     // Ajout d'une classe pour faire une transition smooth
-    document.getElementById("landing-name").classList.add("submitted");
+    landingName.classList.add("submitted");
+    // landingTeam.classList.add("submitted");
+    /*setTimeout(() => {
+      landingName.remove();
+      // landingTeam.remove();
+    }, 2000);*/
   } else {
-    document.getElementById("landing-name").remove();
+    landingName.remove();
+    landingTeam.remove();
   }
 
   // ici si un ptit filou a ajouté un medievalName + un medievalPsw dans son localStorage, il peut entrer
@@ -167,7 +182,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // les gardes apparaissent
-  document.getElementById("ask-name").style.scale = "1";
+  displayName();
 });
 
 /**

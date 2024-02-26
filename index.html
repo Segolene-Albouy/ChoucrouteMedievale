@@ -47,15 +47,17 @@
       <div class="bricks"></div>
     </div>
   </div>
+
   <div class="landing-content">
     <button id="opendor" onclick="opendor()">Pénétrez au chateau !</button>
   </div>
+
   <div id="landing-name" class="landing-content">
     <div id="ask-name" class="parchment landing-modal">
       <div id="banner">
         <img
-                src="static/knight_horse_blue.gif"
-                class="knight_horse_blue reverse-gifs"
+          src="static/knight_horse_blue.gif"
+          class="knight_horse_blue reverse-gifs"
         />
         <img src="static/shiny_shield.gif" class="shiny_shield" />
         <img src="static/knight_horse_blue.gif" class="knight_horse_blue" />
@@ -67,16 +69,16 @@
       </div>
       <div id="name-psw" class="choice-container">
         <button
-                id="choose-name"
-                class="choice-rpg clickable"
-                onclick="choose(showName)"
+          id="choose-name"
+          class="choice-rpg clickable"
+          onclick="choose(showName)"
         >
           Je donne mon nom
         </button>
         <button
-                id="choose-psw"
-                class="choice-rpg clickable"
-                onclick="choose(showPsw)"
+          id="choose-psw"
+          class="choice-rpg clickable"
+          onclick="choose(showPsw)"
         >
           Je connois le mot de passe
         </button>
@@ -84,8 +86,8 @@
       <form id="form-name" class="rpg-form" onsubmit="submitName(event)">
         <div id="error-name" role="error">
           <img
-                  src="static/angry_knight.gif"
-                  class="reverse-gifs angry-knight"
+            src="static/angry_knight.gif"
+            class="reverse-gifs angry-knight"
           />
           <span>!! Vostre nom manant !!</span>
           <img src="static/angry_knight.gif" class="angry-knight" />
@@ -93,9 +95,9 @@
         <div id="name-taken">
           <p>Hélas ce nom est déjà pris par un autre invité !</p>
           <img
-                  src="static/gif/Sword_Fighters.gif"
-                  width="205"
-                  height="138"
+            src="static/gif/Sword_Fighters.gif"
+            width="205"
+            height="138"
           />
           <p>Vous connoisse-t-on sous un autre nom ?</p>
         </div>
@@ -113,15 +115,15 @@
       <form id="form-psw" class="rpg-form" onsubmit="submitPsw(event)">
         <div id="error-psw" role="error">
           <img
-                  src="static/angry_knight.gif"
-                  class="reverse-gifs angry-knight"
-                  alt="Chevalier enragé"
+            src="static/angry_knight.gif"
+            class="reverse-gifs angry-knight"
+            alt="Chevalier enragé"
           />
           <span>!! Ce n'est point le mot de passe !!</span>
           <img
-                  src="static/angry_knight.gif"
-                  class="angry-knight"
-                  alt="Chevalier enragé"
+            src="static/angry_knight.gif"
+            class="angry-knight"
+            alt="Chevalier enragé"
           />
         </div>
         <input type="text" id="psw-input" name="psw" autofocus />
@@ -151,15 +153,15 @@
       <div id="psw-fail">
         <h3>
           <img
-                  src="static/angry_knight.gif"
-                  class="reverse-gifs angry-knight"
-                  alt="Chevalier enragé"
+            src="static/angry_knight.gif"
+            class="reverse-gifs angry-knight"
+            alt="Chevalier enragé"
           />
           Quel idiot ce gueux !
           <img
-                  src="static/angry_knight.gif"
-                  class="angry-knight"
-                  alt="Chevalier enragé"
+            src="static/angry_knight.gif"
+            class="angry-knight"
+            alt="Chevalier enragé"
           />
         </h3>
 
@@ -169,7 +171,7 @@
     </div>
   </div>
 
-  <div style="z-index: 3" class="landing-content">
+  <div id="landing-team" class="landing-content">
     <div id="team" class="parchment landing-modal center">
       <div class="center" role="unecessary-steps">
         <h3>
@@ -242,35 +244,35 @@
         <div id="team-gif">
           <img id="explosion" src="static/gif/explose.gif" alt="Boooouya" />
           <img
-                  id="ours"
-                  src="static/teams/bear4.gif"
-                  class="team-gif"
-                  alt="Équipe Ours"
+            id="ours"
+            src="static/teams/bear4.gif"
+            class="team-gif"
+            alt="Équipe Ours"
           />
           <img
-                  id="dragon"
-                  src="static/teams/dragon4.gif"
-                  class="team-gif"
-                  alt="Équipe Dragon"
+            id="dragon"
+            src="static/teams/dragon4.gif"
+            class="team-gif"
+            alt="Équipe Dragon"
           />
           <img
-                  id="cerf"
-                  src="static/teams/deer.gif"
-                  class="team-gif"
-                  alt="Équipe Cerf"
+            id="cerf"
+            src="static/teams/deer.gif"
+            class="team-gif"
+            alt="Équipe Cerf"
           />
           <img
-                  id="kraken"
-                  src="static/teams/kraken.gif"
-                  class="team-gif"
-                  alt="Équipe Kraken"
+            id="kraken"
+            src="static/teams/kraken.gif"
+            class="team-gif"
+            alt="Équipe Kraken"
           />
           <img
-                  id="corbeau"
-                  src="static/teams/crow.gif"
-                  class="team-gif"
-                  alt="Équipe Corbeau"
-                  style="margin-top: -100px"
+            id="corbeau"
+            src="static/teams/crow.gif"
+            class="team-gif"
+            alt="Équipe Corbeau"
+            style="margin-top: -100px"
           />
         </div>
 
@@ -280,6 +282,7 @@
       </div>
     </div>
   </div>
+
 </div>
 
 <main>

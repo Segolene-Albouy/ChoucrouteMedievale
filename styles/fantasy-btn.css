@@ -41,7 +41,7 @@
         #766652 30deg 60deg
     );
 
-    --bg: rgb(255, 249, 240);
+    --bg: rgb(246, 236, 196);
     --inlay-bg: rgba(var(--bg), 0.2);
     /*--inlay-bg:radial-gradient(at center 150%, #fffcf2, transparent 35%) 50% 0% 150% 25% no-repeat,
       radial-gradient(at center -25%, #501608, transparent 35%) 50% 100% / 150%

@@ -1,22 +1,22 @@
 const teams = {
   kraken: {
-    color: "",
+    color: "rgb(3,82,126)",
     title: "Le clan du Kraken",
   },
   ours: {
-    color: "",
+    color: "rgb(135,111,0)",
     title: "La faction de l'Ours",
   },
   cerf: {
-    color: "",
+    color: "rgb(41,89,7)",
     title: "Le fief du Cerf",
   },
   dragon: {
-    color: "",
+    color: "rgb(128,4,0)",
     title: "Le coterie du Dragon",
   },
   corbeau: {
-    color: "",
+    color: "rgb(31,31,33)",
     title: "La confrerie du Corbeau",
   },
 };
@@ -32,11 +32,13 @@ function hideTeam() {
   document.getElementById("team").style.opacity = 0;
   setTimeout(() => {
     document.getElementById("team").style.display = "none";
+    document.getElementById("landing-team").remove();
   }, 2000);
 }
 
 function drawTeam() {
   team = localStorage.getItem("medievalTeam") ?? randomTeam();
+  document.getElementById("team-name").style.color = teams[team].color
   const drawDiv = document.getElementById("draw-team");
 
   drawDiv.classList.add("submitted");

@@ -89,9 +89,9 @@
   display: none;
 }
 
-#landing-name {
+/*#landing-name {
   z-index: 10;
-}
+}*/
 .submitted {
   opacity: 0;
   pointer-events: none;
