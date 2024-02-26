@@ -128,7 +128,7 @@ function openGates(medievalName, submitted = false) {
   // if (devMode) bypassLanding();
   document.getElementById(
     "opendor"
-  ).innerHTML += `<mark>${medievalName}</mark>`;
+  ).innerHTML = `Pénétrez au chateau ! <mark>${medievalName}</mark>`;
 
   const landingName = document.getElementById("landing-name");
   const landingTeam = document.getElementById("landing-team");
@@ -154,8 +154,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const medievalName = localStorage.getItem("medievalName");
   const medievalPsw = localStorage.getItem("medievalPsw");
   const medievalTeam = localStorage.getItem("medievalTeam");
+  const isComing = localStorage.getItem("isComing");
 
-  console.log({ medievalName, medievalPsw, medievalTeam });
+  console.log({ medievalName, medievalPsw, medievalTeam, isComing });
 
   // if (devMode) bypassLanding();
 
@@ -167,6 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
       handleResTeam(JSON.stringify(whoIsDev(false)));
     } else {
       if (medievalTeam) {
+        /*openGates(medievalName);*/
         document.getElementById("landing-name").remove();
         document.getElementById("landing-team").remove();
       }
@@ -178,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function () {
           console.log("Vous êtes un fossoyeur d'identité vilain !", e);
         });
     }
-    // openGates(medievalName);
+    openGates(medievalName);
     return;
   }
 
@@ -263,6 +265,7 @@ async function apiNewGueux(name) {
       localStorage.setItem("medievalPsw", res.psw);
       localStorage.setItem("medievalName", res.name);
       localStorage.setItem("medievalTeam", res.team);
+      localStorage.setItem("isComing", res.isComing);
       welcomeUser(res.name, res.psw);
     }
   } catch (res) {
@@ -299,15 +302,17 @@ function handleResTeam(res){
 
   if (res.team && !currentTeam) {
     displayTeam(false);
-  } else {
+    openGates(res.name, true);
+  }/* else {
     try {
       document.getElementById("landing-name").remove();
       document.getElementById("landing-team").remove();
+      openGates(res.name, true);
     } catch (e) {
-      console.log("ça a été suppr avant");
+      console.log("turbo prout");
     }
-  }
-  openGates(res.name, true);
+  }*/
+
 }
 
 // Submit Password

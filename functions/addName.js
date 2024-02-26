@@ -54,6 +54,7 @@ async function newGueux(name, psw, team, ipAddress, now) {
   const gueuxData = {
     name: name,
     team: team,
+    isComing: false,
     created: now,
     psw: psw,
     lastConnection: now,
@@ -122,6 +123,7 @@ functions.http("checkName", async (req, res) => {
   }
 
   let statusCode = 500;
+  let isComing = false;
   try {
     const now = Firestore.FieldValue.serverTimestamp();
     const ipAddress = req.ip;
@@ -159,6 +161,7 @@ functions.http("checkName", async (req, res) => {
         name = gueux.data().name;
         if (!gueux.data().team) await gueux.ref.update({ team: team });
         else team = gueux.data().team;
+        isComing = gueux.data().isComing ?? false;
         await updateGueux(gueux, ipAddress, now);
         statusCode = 200;
       } else if (pswQuery.size > 1) {
@@ -174,6 +177,7 @@ functions.http("checkName", async (req, res) => {
       name,
       psw,
       team,
+      isComing
     });
   } catch (error) {
     console.error(error);
@@ -182,6 +186,7 @@ functions.http("checkName", async (req, res) => {
       name: null,
       psw: null,
       team: null,
+      isComing: null
     });
   }
 });
