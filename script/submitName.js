@@ -161,14 +161,18 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log({ medievalName, medievalPsw, medievalTeam });
 
   // if (devMode) bypassLanding();
-  if (devMode) resetLocalStorage();
 
   if (medievalName && medievalPsw) {
     // API call to update last connection
     const data = { name: medievalName, psw: medievalPsw, team: medievalTeam };
     if (devMode){
+      resetLocalStorage();
       handleResTeam(JSON.stringify(whoIsDev(false)));
     } else {
+      if (medievalTeam) {
+        document.getElementById("landing-name").remove();
+        document.getElementById("landing-team").remove();
+      }
       retrieveJSON(APIurl, data)
         .then((res) => {
           handleResTeam(res);
@@ -298,6 +302,13 @@ function handleResTeam(res){
 
   if (res.team && !currentTeam) {
     displayTeam(false);
+  } else {
+    try {
+      document.getElementById("landing-name").remove();
+      document.getElementById("landing-team").remove();
+    } catch (e) {
+      console.log("ça a été suppr avant");
+    }
   }
   openGates(res.name, true);
 }
