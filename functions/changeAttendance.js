@@ -23,7 +23,7 @@ const { Firestore } = require("@google-cloud/firestore");
 
 const firestore = new Firestore({
   projectId: "choucroutemedievale",
-  databaseId: "choucroute-dev",
+  databaseId: "(default)",
 });
 
 const gueuxDb = firestore.collection("names");
