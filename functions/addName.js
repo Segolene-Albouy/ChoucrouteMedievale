@@ -9,11 +9,11 @@
 /**
  * package.json:
  {
-  "dependencies": {
-    "@google-cloud/functions-framework": "^3.0.0",
-    "@google-cloud/firestore": "^7.0.0"
-  }
-}
+ "dependencies": {
+ "@google-cloud/functions-framework": "^3.0.0",
+ "@google-cloud/firestore": "^7.0.0"
+ }
+ }
  */
 
 // https://cloud.google.com/functions/docs/samples
@@ -32,9 +32,9 @@ const mdpDb = firestore.collection("psw");
 async function newPsw() {
   try {
     const freePswQuery = await mdpDb
-      .where("attributed", "==", false)
-      .limit(1)
-      .get();
+        .where("attributed", "==", false)
+        .limit(1)
+        .get();
 
     if (!freePswQuery.empty) {
       const freePs = freePswQuery.docs[0];
@@ -50,11 +50,10 @@ async function newPsw() {
   }
 }
 
-async function newGueux(name, psw, team, isComing, ipAddress, now) {
+async function newGueux(name, psw, team, ipAddress, now) {
   const gueuxData = {
     name: name,
     team: team,
-    isComing: isComing,
     created: now,
     psw: psw,
     lastConnection: now,
@@ -75,27 +74,30 @@ async function updateGueux(gueux, ipAddress, now) {
 }
 
 async function getTeam() {
-  const teams = {
-    corbeau: 0,
-    cerf: 0,
-    kraken: 0,
-    dragon: 0,
-  };
+  const teams = new Map([
+    ["corbeau", 0],
+    ["cerf", 0],
+    ["kraken", 0],
+    ["dragon", 0],
+    ["ours", 0],
+  ])
 
-  let fewestMembers = 1000;
   let selectedTeam = "";
 
   const snapshot = await gueuxDb.get();
   snapshot.forEach((doc) => {
     const { team, isComing = false } = doc.data();
-    if (teams.hasOwnProperty(team) && isComing) {
-      teams[team]++;
-      if (teams[team] < fewestMembers) {
-        fewestMembers = teams[team];
-        selectedTeam = team;
-      }
+    if (teams.has(team) && isComing) {
+      teams.set(team,teams.get(team) + 1);
     }
   });
+
+  // get all teams with min value
+  let min = Math.min(...teams.values());
+  let minTeams = Array.from(teams.entries()).filter(([k, v]) => v === min);
+  // select a random team
+  selectedTeam = minTeams[Math.floor(Math.random() * minTeams.length)][0];
+
   return selectedTeam;
 }
 
@@ -125,7 +127,7 @@ functions.http("checkName", async (req, res) => {
     const ipAddress = req.ip;
 
     if (!team) {
-      team = getTeam();
+      team = await getTeam();
     }
 
     if (name && !psw) {
@@ -155,7 +157,8 @@ functions.http("checkName", async (req, res) => {
         // the password is correct
         const gueux = pswQuery.docs[0];
         name = gueux.data().name;
-        await gueux.ref.update({ team: team }); // TODO does it need to be updated here?
+        if (!gueux.data().team) await gueux.ref.update({ team: team });
+        else team = gueux.data().team;
         await updateGueux(gueux, ipAddress, now);
         statusCode = 200;
       } else if (pswQuery.size > 1) {
@@ -173,6 +176,7 @@ functions.http("checkName", async (req, res) => {
       team,
     });
   } catch (error) {
+    console.error(error);
     res.status(500).json({
       error,
       name: null,
