@@ -139,8 +139,8 @@ function openGates(medievalName, submitted = false) {
       landingName.classList.add("submitted");
     }
   } else {
-    landingName.remove();
-    landingTeam.remove();
+    if (landingName) landingName.style.display = "none";
+    if (landingTeam) landingTeam.style.display = "none";
   }
 
   // ici si un ptit filou a ajouté un medievalName + un medievalPsw dans son localStorage, il peut entrer
@@ -163,14 +163,16 @@ document.addEventListener("DOMContentLoaded", function () {
   if (medievalName && medievalPsw) {
     // API call to update last connection
     const data = { name: medievalName, psw: medievalPsw, team: medievalTeam };
+    let submitted = true;
     if (devMode){
       resetLocalStorage();
       handleResTeam(JSON.stringify(whoIsDev(false)));
     } else {
       if (medievalTeam) {
         /*openGates(medievalName);*/
-        document.getElementById("landing-name").remove();
-        document.getElementById("landing-team").remove();
+        document.getElementById("landing-name").style.display = "none";
+        document.getElementById("landing-team").style.display = "none";
+        submitted = false;
       }
       retrieveJSON(APIurl, data)
         .then((res) => {
@@ -180,7 +182,7 @@ document.addEventListener("DOMContentLoaded", function () {
           console.log("Vous êtes un fossoyeur d'identité vilain !", e);
         });
     }
-    openGates(medievalName);
+    openGates(medievalName, submitted);
     return;
   }
 
