@@ -135,12 +135,9 @@ function openGates(medievalName, submitted = false) {
 
   if (submitted) {
     // Ajout d'une classe pour faire une transition smooth
-    landingName.classList.add("submitted");
-    // landingTeam.classList.add("submitted");
-    /*setTimeout(() => {
-      landingName.remove();
-      // landingTeam.remove();
-    }, 2000);*/
+    if (landingName){
+      landingName.classList.add("submitted");
+    }
   } else {
     landingName.remove();
     landingTeam.remove();
