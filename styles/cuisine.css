@@ -4,11 +4,6 @@
   width: 100%;
   text-align: center;
 }
-@media screen and (max-width: 600px) {
-  #cuisine #score-container {
-    font-size: 1.5em;
-  }
-}
 
 #cuisinepopup {
   display: none;
@@ -99,5 +94,14 @@
   }
   100% {
     scale: 1;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #cuisine #score-container {
+    font-size: 1.5em;
+  }
+  #cuisinepopup {
+    font-size: 1rem;
   }
 }

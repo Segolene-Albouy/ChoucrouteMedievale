@@ -5,14 +5,14 @@ var cabbageWidth = isMobile() ? 26 : 53;
 var cabbageHeight = isMobile() ? 21 : 43;
 var sausageWidth = isMobile() ? 59 : 118;
 var sausageHeight = isMobile() ? 25 : 49;
-const nbRow = 5;
-const nbCol = 10;
+var nbRow = 5;
+var nbCol = 10;
 var sausages = [];
 var cabbages = [];
 var gameContainerRect, maxWidth, maxValue;
 var isDragging = false;
 var dragStart;
-var gameIntervalRef = null;
+var cuisineGameIntervalRef = null;
 var startTime;
 var sausageDestroyed = 0;
 const specialEffects = [
@@ -137,42 +137,50 @@ function loadCuisine() {
     .getBoundingClientRect();
   maxWidth = gameContainerRect.width;
   maxValue = 1 - tableWidth / maxWidth;
+  cabbage.speed = 0;
   movetable(0.5);
 
-  // center cabbage on top of table
-  const tableRect = table.getBoundingClientRect();
-  cabbage.style.left = `${tableRect.left}px`;
-  cabbage.style.top = `${tableRect.top - cabbageHeight}px`;
-  cabbage.speed = 0;
+  const gameContainer = document.querySelector("#cuisine #game-container");
 
   // Scroll game container into view
-  document
-    .querySelector("#cuisine #game-container")
-    .scrollIntoView({ behavior: "smooth" });
+  gameContainer.scrollIntoView({ behavior: "smooth" });
 
   initSausageGrid();
 
-  gameIntervalRef = setInterval(gameInterval, 1000 / 30);
+  cuisineGameIntervalRef = setInterval(cuisineGameInterval, 1000 / 30);
 
   if (isMobile()) {
-    document.addEventListener("touchstart", tableFollow, { passive: false });
-    document.addEventListener("touchmove", tableFollow, { passive: false });
-    document.addEventListener("touchend", launchCabbage, { passive: false });
+    gameContainer.addEventListener("touchstart", tableFollow, {
+      passive: false,
+    });
+    gameContainer.addEventListener("touchmove", tableFollow, {
+      passive: false,
+    });
+    gameContainer.addEventListener("touchend", launchCabbage, {
+      passive: false,
+    });
   } else {
-    document.addEventListener("mousemove", tableFollow);
-    document.addEventListener("mouseup", launchCabbage);
+    gameContainer.addEventListener("mousemove", tableFollow);
+    gameContainer.addEventListener("mouseup", launchCabbage);
   }
 }
 
 function unloadCuisine() {
   resetCursor();
+  const gameContainer = document.querySelector("#cuisine #game-container");
 
-  document.removeEventListener("touchstart", tableFollow, { passive: false });
-  document.removeEventListener("touchend", launchCabbage, { passive: false });
-  document.removeEventListener("touchmove", tableFollow, { passive: false });
-  document.removeEventListener("mousemove", tableFollow);
-  document.removeEventListener("mouseup", launchCabbage);
-  clearInterval(gameIntervalRef);
+  gameContainer.removeEventListener("touchstart", tableFollow, {
+    passive: false,
+  });
+  gameContainer.removeEventListener("touchend", launchCabbage, {
+    passive: false,
+  });
+  gameContainer.removeEventListener("touchmove", tableFollow, {
+    passive: false,
+  });
+  gameContainer.removeEventListener("mousemove", tableFollow);
+  gameContainer.removeEventListener("mouseup", launchCabbage);
+  clearInterval(cuisineGameIntervalRef);
 }
 
 function initSausageGrid() {
@@ -180,8 +188,14 @@ function initSausageGrid() {
   const sausageContainer = document.getElementById("sausage-bricks");
   const yStart = gameContainerRect.height * 0.1;
   // can fit in width ?
+  if (gameContainerRect.width / nbCol < sausageWidth) {
+    let fitCol = Math.floor(gameContainerRect.width / sausageWidth);
+    nbRow = Math.ceil((nbCol * nbRow) / fitCol);
+    nbCol = fitCol;
+  }
   const widthReduction =
     (sausageWidth - gameContainerRect.width / nbCol) / sausageWidth;
+
   sausageWidth = gameContainerRect.width / nbCol;
   sausageHeight = sausageHeight * (1 - widthReduction);
 
@@ -217,8 +231,12 @@ function initSausageGrid() {
 }
 
 function launchCabbage() {
-  document.removeEventListener("touchend", launchCabbage, { passive: false });
-  document.removeEventListener("mouseup", launchCabbage);
+  const gameContainer = document.querySelector("#cuisine #game-container");
+
+  gameContainer.removeEventListener("touchend", launchCabbage, {
+    passive: false,
+  });
+  gameContainer.removeEventListener("mouseup", launchCabbage);
   const cabbage = cabbages[0];
   cabbage.speed = 20;
   cabbage.direction = Math.PI / 2;
@@ -227,7 +245,7 @@ function launchCabbage() {
   currentScore = 0;
 }
 
-function gameInterval() {
+function cuisineGameInterval() {
   // Move cabbage and bounce off gameContainer walls
   const _tableRect = table.getBoundingClientRect();
 
@@ -355,9 +373,14 @@ function tableFollow(event) {
     ? event.touches[0].clientX
     : event.clientX - gameContainerRect.x;
   var xRatio = x / maxWidth;
-  if (isMobile() && !isDragging) dragStart = xRatio;
-  else if (isMobile()) {
-    xRatio = table.currentPosition + (xRatio - dragStart);
+  if (isMobile()) {
+    if (event.type === "touchstart") {
+      dragStart = xRatio;
+      return;
+    } else if (event.type == "touchmove") {
+      isDragging = true;
+      xRatio = table.currentPosition + (xRatio - dragStart) / 3;
+    }
   }
   movetable(xRatio);
 }
@@ -434,7 +457,7 @@ function commonEndGame() {
     disableBurstOnClick();
   }
   play("fire");
-  clearInterval(gameIntervalRef);
+  clearInterval(cuisineGameIntervalRef);
   document.body.scrollIntoView();
   lockScroll();
   const hs = getHighScore();
@@ -445,27 +468,29 @@ function commonEndGame() {
 
 function resetCuisineGame() {
   unlockScroll();
-  document
-    .querySelector("#cuisine #game-container")
-    .scrollIntoView({ behavior: "smooth" });
+  const gameContainer = document.querySelector("#cuisine #game-container");
+  gameContainer.scrollIntoView({ behavior: "smooth" });
   document.getElementById("cuisinepopup").removeAttribute("role");
   cabbages.forEach((c) => c.remove());
   cabbages.splice(1, cabbages.length);
   const cabbage = cabbages[0];
-  document.querySelector("#cuisine #game-container").appendChild(cabbage);
+  gameContainer.appendChild(cabbage);
   cabbage.speed = 0;
   const tableRect = table.getBoundingClientRect();
   cabbage.left = tableRect.left;
   cabbage.top = gameContainerRect.height - tableHeight - cabbageHeight;
   cabbage.style.left = `${tableRect.x + tableWidth / 2 - cabbageWidth / 2}px`;
   cabbage.style.top = `${tableRect.y - cabbageHeight}px`;
+
   if (isMobile())
-    document.addEventListener("touchend", launchCabbage, { passive: false });
-  else document.addEventListener("mouseup", launchCabbage);
+    gameContainer.addEventListener("touchend", launchCabbage, {
+      passive: false,
+    });
+  else gameContainer.addEventListener("mouseup", launchCabbage);
   sausages.forEach((s) => s.sausage.remove());
   sausages = [];
   initSausageGrid();
-  gameIntervalRef = setInterval(gameInterval, 1000 / 30);
+  cuisineGameIntervalRef = setInterval(cuisineGameInterval, 1000 / 30);
 }
 
 function arrangeCabbageDirection(cabbage) {

@@ -161,6 +161,7 @@ functions.http("checkName", async (req, res) => {
         name = gueux.data().name;
         if (!gueux.data().team) await gueux.ref.update({ team: team });
         else team = gueux.data().team;
+        isComing = gueux.data().isComing ?? false;
         await updateGueux(gueux, ipAddress, now);
         statusCode = 200;
       } else if (pswQuery.size > 1) {
