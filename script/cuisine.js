@@ -150,13 +150,13 @@ function loadCuisine() {
   cuisineGameIntervalRef = setInterval(cuisineGameInterval, 1000 / 30);
 
   if (isMobile()) {
-    gameContainer.addEventListener("touchstart", tableFollow, {
+    table.addEventListener("touchstart", tableFollow, {
       passive: false,
     });
-    gameContainer.addEventListener("touchmove", tableFollow, {
+    table.addEventListener("touchmove", tableFollow, {
       passive: false,
     });
-    gameContainer.addEventListener("touchend", launchCabbage, {
+    table.addEventListener("touchend", launchCabbage, {
       passive: false,
     });
   } else {
@@ -169,18 +169,20 @@ function unloadCuisine() {
   resetCursor();
   const gameContainer = document.querySelector("#cuisine #game-container");
 
-  gameContainer.removeEventListener("touchstart", tableFollow, {
+  table.removeEventListener("touchstart", tableFollow, {
     passive: false,
   });
-  gameContainer.removeEventListener("touchend", launchCabbage, {
+  table.removeEventListener("touchend", launchCabbage, {
     passive: false,
   });
-  gameContainer.removeEventListener("touchmove", tableFollow, {
+  table.removeEventListener("touchmove", tableFollow, {
     passive: false,
   });
   gameContainer.removeEventListener("mousemove", tableFollow);
   gameContainer.removeEventListener("mouseup", launchCabbage);
   clearInterval(cuisineGameIntervalRef);
+  sausages.forEach((s) => s.sausage.remove());
+  sausages = [];
 }
 
 function initSausageGrid() {
@@ -233,12 +235,12 @@ function initSausageGrid() {
 function launchCabbage() {
   const gameContainer = document.querySelector("#cuisine #game-container");
 
-  gameContainer.removeEventListener("touchend", launchCabbage, {
+  table.removeEventListener("touchend", launchCabbage, {
     passive: false,
   });
   gameContainer.removeEventListener("mouseup", launchCabbage);
   const cabbage = cabbages[0];
-  cabbage.speed = 20;
+  cabbage.speed = gameContainerRect.height / 40;
   cabbage.direction = Math.PI / 2;
   repeatAudio("la-soupe-aux-choux");
   startTime = new Date();
@@ -374,6 +376,7 @@ function tableFollow(event) {
     : event.clientX - gameContainerRect.x;
   var xRatio = x / maxWidth;
   if (isMobile()) {
+    event.preventDefault();
     if (event.type === "touchstart") {
       dragStart = xRatio;
       return;
@@ -483,7 +486,7 @@ function resetCuisineGame() {
   cabbage.style.top = `${tableRect.y - cabbageHeight}px`;
 
   if (isMobile())
-    gameContainer.addEventListener("touchend", launchCabbage, {
+    table.addEventListener("touchend", launchCabbage, {
       passive: false,
     });
   else gameContainer.addEventListener("mouseup", launchCabbage);

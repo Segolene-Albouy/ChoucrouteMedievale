@@ -1,6 +1,6 @@
 const crossbowWidth = isMobile() ? 61 : 122;
 const crossbowHeight = isMobile() ? 72 : 144;
-var maxWidth = window.screen.availWidth || window.screen.width;
+var gameContainerRect, maxWidth, maxValue;
 var crossbow;
 var isDragging = false;
 var dragStart;
@@ -11,19 +11,20 @@ function loadHerse() {
   particlePool.extinguishParticles();
   setNewCursor("");
   play("fire");
+  const gameContainer = document.querySelector("#herse #game-container");
+  gameContainer.scrollIntoView({ behavior: "smooth" });
 
   currentScore = 0;
   crossbow = document.getElementById("crossbow");
   crossbow.style.width = `${crossbowWidth}px`;
   crossbow.style.height = `${crossbowHeight}px`;
+  moveCrossbow(0.5);
+  gameContainerRect = gameContainer.getBoundingClientRect();
+  maxWidth = gameContainerRect.width;
+  maxValue = 1 - crossbowWidth / maxWidth;
 
   // Set crossbow at center
-  moveCrossbow(0.5);
-  maxWidth = document.getElementById("herse").clientWidth;
-
   herseGameIntervalRef = setInterval(herseGameInterval, 1000 / 60);
-  const gameContainer = document.querySelector("#herse #game-container");
-  gameContainer.scrollIntoView({ behavior: "smooth" });
 
   if (isMobile()) {
     const arrow = document.getElementById("arrow-template");
@@ -34,13 +35,13 @@ function loadHerse() {
     mendiant.style.width = "79px";
     mendiant.style.height = "80px";
 
-    gameContainer.addEventListener("touchstart", crossbowFollow, {
+    crossbow.addEventListener("touchstart", crossbowFollow, {
       passive: false,
     });
-    gameContainer.addEventListener("touchmove", crossbowFollow, {
+    crossbow.addEventListener("touchmove", crossbowFollow, {
       passive: false,
     });
-    gameContainer.addEventListener("touchend", fireArrow, { passive: false });
+    crossbow.addEventListener("touchend", fireArrow, { passive: false });
   } else {
     const mendiant = document.getElementById("mendiant-template");
     mendiant.style.width = "158px";
@@ -53,13 +54,13 @@ function loadHerse() {
 function unloadHerse() {
   resetCursor();
   const gameContainer = document.querySelector("#herse #game-container");
-  gameContainer.removeEventListener("touchstart", crossbowFollow, {
+  crossbow.removeEventListener("touchstart", crossbowFollow, {
     passive: false,
   });
-  gameContainer.removeEventListener("touchmove", crossbowFollow, {
+  crossbow.removeEventListener("touchmove", crossbowFollow, {
     passive: false,
   });
-  gameContainer.removeEventListener("touchend", fireArrow, { passive: false });
+  crossbow.removeEventListener("touchend", fireArrow, { passive: false });
   gameContainer.removeEventListener("mousemove", crossbowFollow);
   gameContainer.removeEventListener("mouseup", fireArrow);
   peoplePool.pool.forEach((person) => person.remove());
@@ -85,10 +86,13 @@ function fireArrow(event) {
 }
 
 function crossbowFollow(event) {
-  const x = isMobile() ? event.touches[0].clientX : event.clientX;
+  const x = isMobile()
+    ? event.touches[0].clientX
+    : event.clientX - gameContainerRect.x;
   // xRatio with
   var xRatio = x / maxWidth;
   if (isMobile()) {
+    event.preventDefault();
     if (event.type === "touchstart") {
       dragStart = xRatio;
       return;
@@ -158,11 +162,13 @@ function herseGameInterval() {
     // Check arrow overlap mendiant
     arrowPool.pool.forEach((arrow) => {
       const isMendiant = person.classList.contains("mendiant");
-      if (isOverlap(arrow, person) && !person.classList.contains("hurt")) {
+      if (isOverlap(arrow, person) && !person.isHurt) {
         arrowPool.removeArrow(arrow);
+        person.isHurt = true;
         person.classList.add("hurt" + (isMobile() ? "-mobile" : ""));
 
         setTimeout(() => {
+          person.isHurt = false;
           person.classList.remove("hurt" + (isMobile() ? "-mobile" : ""));
         }, 1000);
 
@@ -194,7 +200,7 @@ function herseGameInterval() {
 
   // Update people
   peoplePool.pool.forEach((person) => {
-    person.currentPosition -= 1;
+    if (!person.isHurt) person.currentPosition -= 1;
     person.style.top = person.currentPosition + "px";
     if (person.currentPosition < 0) {
       // Reach castle

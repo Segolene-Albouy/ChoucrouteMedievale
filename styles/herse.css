@@ -8,6 +8,7 @@
 #crossbow {
   display: block;
   transform-origin: center;
+  z-index: 50;
 }
 #herse {
   text-align: center;
@@ -23,8 +24,8 @@
 }
 
 #herse #score {
-  position: absolute;
-  right: 5%;
+  /* position: absolute;
+  right: 5%; */
 }
 
 @media screen and (max-width: 600px) {
