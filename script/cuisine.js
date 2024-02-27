@@ -363,17 +363,17 @@ function cuisineGameInterval() {
   if (sausages.every((s) => s.dead)) {
     win();
   }
-  //   const follower = document.getElementById("debug");
+  const follower = document.getElementById("debug");
   //   // follow sausage
-  //   follower.style.top = `${tableRect.y}px`;
-  //   follower.style.left = `${tableRect.x}px`;
-  //   follower.style.width = `${tableWidth}px`;
-  //   follower.style.height = `${tableHeight}px`;
+  follower.style.top = `${tableRect.y}px`;
+  follower.style.left = `${tableRect.x}px`;
+  follower.style.width = `${tableWidth}px`;
+  follower.style.height = `${tableHeight}px`;
 }
 
 function tableFollow(event) {
   var x = isMobile()
-    ? event.touches[0].clientX
+    ? event.touches[0].clientX - tableWidth / 2
     : event.clientX - gameContainerRect.x;
   var xRatio = x / maxWidth;
   if (isMobile()) {

@@ -83,3 +83,8 @@
     filter: hue-rotate(60deg);
   }
 }
+
+#debug {
+  position: absolute;
+  border: 1px solid red;
+}

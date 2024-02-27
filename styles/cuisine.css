@@ -43,11 +43,6 @@
   bottom: 0;
 }
 
-#debug {
-  position: absolute;
-  /* border: 1px solid red; */
-}
-
 #sausage-template {
   display: none;
 }

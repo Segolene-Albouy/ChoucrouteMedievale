@@ -43,7 +43,7 @@ function loadHerse() {
     crossbow.addEventListener("touchmove", crossbowFollow, {
       passive: false,
     });
-    crossbow.addEventListener("touchend", fireArrow, { passive: false });
+    gameContainer.addEventListener("touchend", fireArrow, { passive: false });
   } else {
     const mendiant = document.getElementById("mendiant-template");
     mendiant.style.width = "158px";
@@ -62,7 +62,7 @@ function unloadHerse() {
   crossbow.removeEventListener("touchmove", crossbowFollow, {
     passive: false,
   });
-  crossbow.removeEventListener("touchend", fireArrow, { passive: false });
+  gameContainer.removeEventListener("touchend", fireArrow, { passive: false });
   gameContainer.removeEventListener("mousemove", crossbowFollow);
   gameContainer.removeEventListener("mouseup", fireArrow);
   peoplePool.pool.forEach((person) => person.remove());
@@ -88,8 +88,8 @@ function fireArrow(event) {
 
 function crossbowFollow(event) {
   const x = isMobile()
-    ? event.touches[0].clientX
-    : event.clientX - gameContainerRect.x;
+    ? event.touches[0].clientX - crossbowWidth / 2
+    : event.clientX;
   // xRatio with
   var xRatio = x / maxWidth;
   if (isMobile()) {
@@ -263,6 +263,15 @@ function herseGameInterval() {
     damsel.src = `static/lookbook/${rndImg.src}`;
     peoplePool.newPerson(damsel);
   }
+
+  // const follower = document.getElementById("debug");
+  // // follow sausage
+  // follower.style.top = `${crossbow.y}px`;
+  // follower.style.left = `${
+  //   crossbow.currentPosition * maxWidth - crossbowWidth / 2
+  // }px`;
+  // follower.style.width = `${crossbowWidth}px`;
+  // follower.style.height = `${crossbowHeight}px`;
 }
 
 function isOverlap(element1, element2) {
