@@ -98,7 +98,7 @@ function crossbowFollow(event) {
       return;
     } else if (event.type == "touchmove") {
       isDragging = true;
-      xRatio = crossbow.currentPosition + (xRatio - dragStart) / 3;
+      // xRatio = crossbow.currentPosition + (xRatio - dragStart) / 3;
     }
   }
 

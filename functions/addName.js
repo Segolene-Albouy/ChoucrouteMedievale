@@ -9,11 +9,11 @@
 /**
  * package.json:
  {
- "dependencies": {
- "@google-cloud/functions-framework": "^3.0.0",
- "@google-cloud/firestore": "^7.0.0"
- }
- }
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.0.0",
+    "@google-cloud/firestore": "^7.0.0"
+  }
+}
  */
 
 // https://cloud.google.com/functions/docs/samples
@@ -92,12 +92,27 @@ async function getTeam() {
       teams.set(team, teams.get(team) + 1);
     }
   });
+  const totalMembers = Array.from(teams.values()).reduce((a, b) => a + b, 0);
 
-  // get all teams with min value
-  let min = Math.min(...teams.values());
-  let minTeams = Array.from(teams.entries()).filter(([k, v]) => v === min);
-  // select a random team
-  selectedTeam = minTeams[Math.floor(Math.random() * minTeams.length)][0];
+  // Calculate weights for each team
+  const weights = new Map();
+  for (let [team, members] of teams) {
+    weights.set(team, totalMembers - members);
+  }
+
+  // Calculate total weight
+  const totalWeight = Array.from(weights.values()).reduce((a, b) => a + b, 0);
+  const sortedWeights = Array.from(weights).sort((a, b) => a[1] - b[1]);
+  // Select a random team based on weights
+  const random = Math.random() * totalWeight;
+  let sum = 0;
+  for (let [team, weight] of sortedWeights) {
+    sum += weight;
+    if (random < sum) {
+      selectedTeam = team;
+      break;
+    }
+  }
 
   return selectedTeam;
 }

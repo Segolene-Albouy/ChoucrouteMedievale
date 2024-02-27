@@ -382,7 +382,7 @@ function tableFollow(event) {
       return;
     } else if (event.type == "touchmove") {
       isDragging = true;
-      xRatio = table.currentPosition + (xRatio - dragStart) / 3;
+      // xRatio = table.currentPosition + (xRatio - dragStart) / 3;
     }
   }
   movetable(xRatio);
