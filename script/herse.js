@@ -1,6 +1,6 @@
 const crossbowWidth = isMobile() ? 61 : 122;
 const crossbowHeight = isMobile() ? 72 : 144;
-var gameContainerRect, maxWidth, maxValue;
+var gameContainerRect, maxWidth, maxValue, minValue;
 var crossbow;
 var isDragging = false;
 var dragStart;
@@ -18,10 +18,12 @@ function loadHerse() {
   crossbow = document.getElementById("crossbow");
   crossbow.style.width = `${crossbowWidth}px`;
   crossbow.style.height = `${crossbowHeight}px`;
-  moveCrossbow(0.5);
+
   gameContainerRect = gameContainer.getBoundingClientRect();
   maxWidth = gameContainerRect.width;
-  maxValue = 1 - crossbowWidth / maxWidth;
+  minValue = crossbowWidth / 2 / maxWidth;
+  maxValue = 1 - minValue;
+  moveCrossbow(0.5);
 
   // Set crossbow at center
   herseGameIntervalRef = setInterval(herseGameInterval, 1000 / 60);
@@ -81,8 +83,7 @@ function fireArrow(event) {
 
   const arrow = arrowPool.newArrow();
   arrow.currentPosition = crossbow.getBoundingClientRect().top;
-  arrow.style.left =
-    Math.floor(crossbow.currentPosition * maxWidth + crossbowWidth / 2) + "px";
+  arrow.style.left = Math.floor(crossbow.currentPosition * maxWidth) + "px";
 }
 
 function crossbowFollow(event) {
@@ -113,11 +114,13 @@ function crossbowFollow(event) {
 
 // 0 < value < 1 => 0 bord gauche de l'écran, 1  = bord droit
 function moveCrossbow(value) {
-  if (value < 0) value = 0;
-  if (value > 1) value = 1;
+  if (value < minValue) value = minValue;
+  if (value > maxValue) value = maxValue;
   if (crossbow) {
     crossbow.currentPosition = value;
-    crossbow.style.transform = `translateX(${Math.floor(value * maxWidth)}px)`;
+    crossbow.style.transform = `translateX(${Math.floor(
+      value * maxWidth - crossbowWidth / 2
+    )}px)`;
   }
 }
 

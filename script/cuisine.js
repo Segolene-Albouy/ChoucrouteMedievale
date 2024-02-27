@@ -9,7 +9,7 @@ var nbRow = 5;
 var nbCol = 10;
 var sausages = [];
 var cabbages = [];
-var gameContainerRect, maxWidth, maxValue;
+var gameContainerRect, maxWidth, maxValue, minValue;
 var isDragging = false;
 var dragStart;
 var cuisineGameIntervalRef = null;
@@ -136,7 +136,8 @@ function loadCuisine() {
     .querySelector("#cuisine #game-container")
     .getBoundingClientRect();
   maxWidth = gameContainerRect.width;
-  maxValue = 1 - tableWidth / maxWidth;
+  minValue = tableWidth / 2 / maxWidth;
+  maxValue = 1 - minValue;
   cabbage.speed = 0;
   movetable(0.5);
 
@@ -389,11 +390,13 @@ function tableFollow(event) {
 }
 
 function movetable(value) {
-  if (value < 0) value = 0;
+  if (value < minValue) value = minValue;
   if (value > maxValue) value = maxValue;
   if (table) {
     table.currentPosition = value;
-    table.style.transform = `translateX(${Math.floor(value * maxWidth)}px)`;
+    table.style.transform = `translateX(${Math.floor(
+      value * maxWidth - tableWidth / 2
+    )}px)`;
     const cabbage = cabbages[0];
     if (cabbage.speed === 0) {
       const tableRect = table.getBoundingClientRect();
