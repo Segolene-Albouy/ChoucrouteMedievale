@@ -1,13 +1,13 @@
 .fantasy span,
 .fantasy:after,
-.double:after {
+#forum .double:after {
   display: inline-block;
   height: 100%;
   width: 100%;
   box-sizing: border-box;
 }
 .fantasy:after,
-.double:after {
+#forum .double:after {
   content: "";
   position: absolute;
   top: 0;
@@ -24,11 +24,11 @@
 .fantasy:after {
   box-shadow: 0 0 0.25em 0.25em rgba(0, 0, 0, 0.5) inset;
 }
-.double {
+#forum .double {
   position: relative;
   border: 0.2em double #fb2;
 }
-.double:after {
+#forum .double:after {
   box-shadow: 0 0 0.25em 0.2em rgba(0, 0, 0, 0.7) inset;
 }
 

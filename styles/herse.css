@@ -12,24 +12,24 @@
 #herse {
   text-align: center;
 }
-#game-container {
+#herse #game-container {
   height: 100vh;
 }
 
 #herse p,
-#score {
+#herse #score {
   color: darkgoldenrod;
   font-size: 2em;
 }
 
-#score {
+#herse #score {
   position: absolute;
   right: 5%;
 }
 
 @media screen and (max-width: 600px) {
   #herse p,
-  #score {
+  #herse #score {
     font-size: 1.5em;
   }
   #score {

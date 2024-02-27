@@ -32,9 +32,9 @@ const mdpDb = firestore.collection("psw");
 async function newPsw() {
   try {
     const freePswQuery = await mdpDb
-        .where("attributed", "==", false)
-        .limit(1)
-        .get();
+      .where("attributed", "==", false)
+      .limit(1)
+      .get();
 
     if (!freePswQuery.empty) {
       const freePs = freePswQuery.docs[0];
@@ -81,7 +81,7 @@ async function getTeam() {
     ["kraken", 0],
     ["dragon", 0],
     ["ours", 0],
-  ])
+  ]);
 
   let selectedTeam = "";
 
@@ -89,7 +89,7 @@ async function getTeam() {
   snapshot.forEach((doc) => {
     const { team, isComing = false } = doc.data();
     if (teams.has(team) && isComing) {
-      teams.set(team,teams.get(team) + 1);
+      teams.set(team, teams.get(team) + 1);
     }
   });
 
@@ -177,7 +177,7 @@ functions.http("checkName", async (req, res) => {
       name,
       psw,
       team,
-      isComing
+      isComing,
     });
   } catch (error) {
     console.error(error);
@@ -186,7 +186,7 @@ functions.http("checkName", async (req, res) => {
       name: null,
       psw: null,
       team: null,
-      isComing: null
+      isComing: null,
     });
   }
 });

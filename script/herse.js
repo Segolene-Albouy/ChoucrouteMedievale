@@ -3,7 +3,8 @@ const crossbowHeight = isMobile() ? 72 : 144;
 var maxWidth = window.screen.availWidth || window.screen.width;
 var crossbow;
 var isDragging = false;
-var gameIntervalRef = null;
+var dragStart;
+var herseGameIntervalRef = null;
 var currentScore = 0;
 
 function loadHerse() {
@@ -20,7 +21,9 @@ function loadHerse() {
   moveCrossbow(0.5);
   maxWidth = document.getElementById("herse").clientWidth;
 
-  gameIntervalRef = setInterval(gameInterval, 1000 / 60);
+  herseGameIntervalRef = setInterval(herseGameInterval, 1000 / 60);
+  const gameContainer = document.querySelector("#herse #game-container");
+  gameContainer.scrollIntoView({ behavior: "smooth" });
 
   if (isMobile()) {
     const arrow = document.getElementById("arrow-template");
@@ -31,31 +34,47 @@ function loadHerse() {
     mendiant.style.width = "79px";
     mendiant.style.height = "80px";
 
-    document.addEventListener("touchmove", crossbowFollow, { passive: false });
-    document.addEventListener("touchend", fireArrow, { passive: false });
+    gameContainer.addEventListener("touchstart", crossbowFollow, {
+      passive: false,
+    });
+    gameContainer.addEventListener("touchmove", crossbowFollow, {
+      passive: false,
+    });
+    gameContainer.addEventListener("touchend", fireArrow, { passive: false });
   } else {
     const mendiant = document.getElementById("mendiant-template");
     mendiant.style.width = "158px";
     mendiant.style.height = "159px";
-    document.addEventListener("mousemove", crossbowFollow);
-    document.addEventListener("mouseup", fireArrow);
+    gameContainer.addEventListener("mousemove", crossbowFollow);
+    gameContainer.addEventListener("mouseup", fireArrow);
   }
 }
 
 function unloadHerse() {
   resetCursor();
-  //   unlockScroll();
-  document.removeEventListener("touchmove", crossbowFollow, { passive: false });
-  document.removeEventListener("touchend", fireArrow, { passive: false });
-  document.removeEventListener("mousemove", crossbowFollow);
-  document.removeEventListener("mouseup", fireArrow);
-  clearInterval(gameIntervalRef);
+  const gameContainer = document.querySelector("#herse #game-container");
+  gameContainer.removeEventListener("touchstart", crossbowFollow, {
+    passive: false,
+  });
+  gameContainer.removeEventListener("touchmove", crossbowFollow, {
+    passive: false,
+  });
+  gameContainer.removeEventListener("touchend", fireArrow, { passive: false });
+  gameContainer.removeEventListener("mousemove", crossbowFollow);
+  gameContainer.removeEventListener("mouseup", fireArrow);
+  peoplePool.pool.forEach((person) => person.remove());
+  peoplePool.pool = [];
+  arrowPool.pool.forEach((arrow) => arrow.remove());
+  arrowPool.pool = [];
+
+  clearInterval(herseGameIntervalRef);
 }
 
 function fireArrow(event) {
   event.preventDefault();
   if (isMobile() && isDragging) {
     isDragging = false;
+    dragStart = null;
     return;
   }
 
@@ -66,10 +85,25 @@ function fireArrow(event) {
 }
 
 function crossbowFollow(event) {
-  isDragging = true;
   const x = isMobile() ? event.touches[0].clientX : event.clientX;
   // xRatio with
-  const xRatio = x / maxWidth;
+  var xRatio = x / maxWidth;
+  if (isMobile()) {
+    if (event.type === "touchstart") {
+      dragStart = xRatio;
+      return;
+    } else if (event.type == "touchmove") {
+      isDragging = true;
+      xRatio = crossbow.currentPosition + (xRatio - dragStart) / 3;
+    }
+  }
+
+  // if (isMobile() && !isDragging) dragStart = xRatio;
+  // else if (isMobile()) {
+  //   // drag has started
+  //   xRatio = crossbow.currentPosition + (xRatio - dragStart);
+  // }
+  // if (isMobile() && dragStart) isDragging = true;
   moveCrossbow(xRatio);
 }
 
@@ -119,7 +153,7 @@ var damselSpawnChance = 0.005;
 const damselKillScore = -40;
 const damselWinScore = 20;
 
-function gameInterval() {
+function herseGameInterval() {
   peoplePool.pool.forEach((person) => {
     // Check arrow overlap mendiant
     arrowPool.pool.forEach((arrow) => {
@@ -182,7 +216,7 @@ function gameInterval() {
     }
   });
 
-  document.getElementById("score").innerText = currentScore;
+  document.querySelector("#herse #score").innerText = currentScore;
 
   let rnd = Math.random();
   // Spawn mendiant
