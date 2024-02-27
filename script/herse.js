@@ -3,6 +3,7 @@ const crossbowHeight = isMobile() ? 72 : 144;
 var maxWidth = window.screen.availWidth || window.screen.width;
 var crossbow;
 var isDragging = false;
+var dragStart;
 var gameIntervalRef = null;
 var currentScore = 0;
 
@@ -31,6 +32,7 @@ function loadHerse() {
     mendiant.style.width = "79px";
     mendiant.style.height = "80px";
 
+    document.addEventListener("touchstart", crossbowFollow, { passive: false });
     document.addEventListener("touchmove", crossbowFollow, { passive: false });
     document.addEventListener("touchend", fireArrow, { passive: false });
   } else {
@@ -45,6 +47,9 @@ function loadHerse() {
 function unloadHerse() {
   resetCursor();
   //   unlockScroll();
+  document.removeEventListener("touchstart", crossbowFollow, {
+    passive: false,
+  });
   document.removeEventListener("touchmove", crossbowFollow, { passive: false });
   document.removeEventListener("touchend", fireArrow, { passive: false });
   document.removeEventListener("mousemove", crossbowFollow);
@@ -66,10 +71,15 @@ function fireArrow(event) {
 }
 
 function crossbowFollow(event) {
-  isDragging = true;
   const x = isMobile() ? event.touches[0].clientX : event.clientX;
   // xRatio with
-  const xRatio = x / maxWidth;
+  var xRatio = x / maxWidth;
+  if (isMobile() && !isDragging) dragStart = xRatio;
+  else if (isMobile()) {
+    // drag has started
+    xRatio = crossbow.currentPosition + (xRatio - dragStart);
+  }
+  isDragging = true;
   moveCrossbow(xRatio);
 }
 
@@ -182,7 +192,7 @@ function gameInterval() {
     }
   });
 
-  document.getElementById("score").innerText = currentScore;
+  document.querySelector("#herse #score").innerText = currentScore;
 
   let rnd = Math.random();
   // Spawn mendiant

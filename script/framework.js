@@ -72,6 +72,7 @@ const pagesOnload = {
   armurerie: loadArmurerie,
   pigeonnier: loadForum,
   herse: loadHerse,
+  cuisine: loadCuisine,
 };
 
 const pagesOnUnload = {
@@ -81,6 +82,7 @@ const pagesOnUnload = {
   armurerie: unloadArmurerie,
   pigeonnier: unloadForum,
   herse: unloadHerse,
+  cuisine: unloadCuisine,
 };
 
 function opendor() {
@@ -250,21 +252,31 @@ function resetLocalStorage() {
   localStorage.removeItem("isComing");
 }
 
-function whoIsDev(setLocalStorage= true) {
+function whoIsDev(setLocalStorage = true) {
   let dev;
   if (navigator.userAgent.includes("Macintosh")) {
-    dev = { name: "Segoline La Devergoigneuse", psw: "je-suis-ton-maitre", team: randomTeam(), isComing: true };
+    dev = {
+      name: "Segoline La Devergoigneuse",
+      psw: "je-suis-ton-maitre",
+      team: randomTeam(),
+      isComing: true,
+    };
   } else {
-    dev = { name: "Clément L’Ancien", psw: "dev_psw", team: randomTeam(), isComing: true };
+    dev = {
+      name: "Clément L’Ancien",
+      psw: "dev_psw",
+      team: randomTeam(),
+      isComing: true,
+    };
   }
-  if (setLocalStorage){
+  if (setLocalStorage) {
     localStorage.setItem("medievalName", dev.name);
     localStorage.setItem("medievalPsw", dev.psw);
     localStorage.setItem("medievalTeam", dev.team);
     // localStorage.removeItem("medievalTeam");
     localStorage.setItem("isComing", dev.isComing);
   }
-  return dev
+  return dev;
 }
 
 function bypassLanding() {

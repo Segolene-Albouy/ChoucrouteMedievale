@@ -1,372 +1,373 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Choucroute médiévale</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <!-- TODO enlever des polices -->
-  <link
-          href="https://fonts.googleapis.com/css2?family=Almendra:wght@400;700&family=Astloch&family=Bokor&family=Caudex&family=Eagle+Lake&family=Grenze+Gotisch:wght@200;400;700&family=MedievalSharp&family=Pirata+One&family=UnifrakturCook:wght@700&family=UnifrakturMaguntia&display=swap"
-          rel="stylesheet"
-  />
-  <link rel="icon" type="image/png" href="static/favicon/castle1.png" />
-  <link rel="stylesheet" href="./styles/fantasy-btn.css" />
-  <link rel="stylesheet" href="./styles/gifs.css" />
-  <link rel="stylesheet" href="./styles/global.css" />
-  <link rel="stylesheet" href="./styles/cursor.css" />
-  <link rel="stylesheet" href="./styles/landing.css" />
-  <link rel="stylesheet" href="./styles/bricks.css" />
-  <link rel="stylesheet" href="./styles/door.css" />
-  <link rel="stylesheet" href="./styles/donjon.css" />
-  <link rel="stylesheet" href="./styles/lookbook.css" />
-  <link rel="stylesheet" href="./styles/team.css" />
-  <link rel="stylesheet" href="./styles/forum.css" />
-  <link rel="stylesheet" href="./styles/herse.css" />
-  <script src="script/lib.js"></script>
-  <script src="script/cursor.js"></script>
-  <script src="script/torchs.js"></script>
-  <script src="script/forum.js"></script>
-  <script src="script/herse.js"></script>
-  <script src="script/lookbook.js"></script>
-  <script src="script/framework.js"></script>
-  <script src="script/submitName.js"></script>
-  <script src="script/teams.js"></script>
-</head>
-<body>
-<div id="main-cursor" class="custom-cursor"></div>
-<div id="main-landing">
-  <div id="landing-bg">
-    <div id="left-bricks">
-      <div class="bricks"></div>
-      <div class="left-border"></div>
-    </div>
-    <div id="right-bricks">
-      <div class="right-border"></div>
-      <div class="bricks"></div>
-    </div>
-  </div>
-
-  <div class="landing-content">
-    <button id="opendor" onclick="opendor()">Pénétrez au chateau !</button>
-  </div>
-
-  <div id="landing-name" class="landing-content">
-    <div id="ask-name" class="parchment landing-modal">
-      <div id="banner">
-        <img
-          src="static/knight_horse_blue.gif"
-          class="knight_horse_blue reverse-gifs"
-        />
-        <img src="static/shiny_shield.gif" class="shiny_shield" />
-        <img src="static/knight_horse_blue.gif" class="knight_horse_blue" />
-      </div>
-      <div id="douves">
-        <h3>Halte-là vagabond !</h3>
-        <p>La seigneurie de la Vielarnoult ne conoisse point vostre nom.</p>
-        <p>Révélez-le avant de pénétrer au chasteau.</p>
-      </div>
-      <div id="name-psw" class="choice-container">
-        <button
-          id="choose-name"
-          class="choice-rpg clickable"
-          onclick="choose(showName)"
-        >
-          Je donne mon nom
-        </button>
-        <button
-          id="choose-psw"
-          class="choice-rpg clickable"
-          onclick="choose(showPsw)"
-        >
-          Je connois le mot de passe
-        </button>
-      </div>
-      <form id="form-name" class="rpg-form" onsubmit="submitName(event)">
-        <div id="error-name" role="error">
-          <img
-            src="static/angry_knight.gif"
-            class="reverse-gifs angry-knight"
-          />
-          <span>!! Vostre nom manant !!</span>
-          <img src="static/angry_knight.gif" class="angry-knight" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Choucroute médiévale</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- TODO enlever des polices -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Almendra:wght@400;700&family=Astloch&family=Bokor&family=Caudex&family=Eagle+Lake&family=Grenze+Gotisch:wght@200;400;700&family=MedievalSharp&family=Pirata+One&family=UnifrakturCook:wght@700&family=UnifrakturMaguntia&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="static/favicon/castle1.png" />
+    <link rel="stylesheet" href="./styles/fantasy-btn.css" />
+    <link rel="stylesheet" href="./styles/gifs.css" />
+    <link rel="stylesheet" href="./styles/global.css" />
+    <link rel="stylesheet" href="./styles/cursor.css" />
+    <link rel="stylesheet" href="./styles/landing.css" />
+    <link rel="stylesheet" href="./styles/bricks.css" />
+    <link rel="stylesheet" href="./styles/door.css" />
+    <link rel="stylesheet" href="./styles/donjon.css" />
+    <link rel="stylesheet" href="./styles/lookbook.css" />
+    <link rel="stylesheet" href="./styles/team.css" />
+    <link rel="stylesheet" href="./styles/forum.css" />
+    <link rel="stylesheet" href="./styles/herse.css" />
+    <link rel="stylesheet" href="./styles/cuisine.css" />
+    <script src="script/lib.js"></script>
+    <script src="script/cursor.js"></script>
+    <script src="script/torchs.js"></script>
+    <script src="script/forum.js"></script>
+    <script src="script/herse.js"></script>
+    <script src="script/cuisine.js"></script>
+    <script src="script/lookbook.js"></script>
+    <script src="script/framework.js"></script>
+    <script src="script/submitName.js"></script>
+    <script src="script/teams.js"></script>
+  </head>
+  <body>
+    <div id="main-cursor" class="custom-cursor"></div>
+    <div id="main-landing">
+      <div id="landing-bg">
+        <div id="left-bricks">
+          <div class="bricks"></div>
+          <div class="left-border"></div>
         </div>
-        <div id="name-taken">
-          <p>Hélas ce nom est déjà pris par un autre invité !</p>
-          <img
-            src="static/gif/Sword_Fighters.gif"
-            width="205"
-            height="138"
-          />
-          <p>Vous connoisse-t-on sous un autre nom ?</p>
+        <div id="right-bricks">
+          <div class="right-border"></div>
+          <div class="bricks"></div>
         </div>
-        <input type="text" id="name-input" name="name" autofocus />
-        <div class="medieval-select">
-          <select name="adjectif"></select>
-          <div class="select-arrow">
-            <img src="static/gif/arrow.gif" />
+      </div>
+      <div class="landing-content">
+        <button id="opendor" onclick="opendor()">Pénétrez au chateau !</button>
+      </div>
+      <div id="landing-name" class="landing-content">
+        <div id="ask-name" class="parchment landing-modal">
+          <div id="banner">
+            <img
+              src="static/knight_horse_blue.gif"
+              class="knight_horse_blue reverse-gifs"
+            />
+            <img src="static/shiny_shield.gif" class="shiny_shield" />
+            <img src="static/knight_horse_blue.gif" class="knight_horse_blue" />
+          </div>
+          <div id="douves">
+            <h3>Halte-là vagabond !</h3>
+            <p>La seigneurie de la Vielarnoult ne conoisse point vostre nom.</p>
+            <p>Révélez-le avant de pénétrer au chasteau.</p>
+          </div>
+          <div id="name-psw" class="choice-container">
+            <button
+              id="choose-name"
+              class="choice-rpg clickable"
+              onclick="choose(showName)"
+            >
+              Je donne mon nom
+            </button>
+            <button
+              id="choose-psw"
+              class="choice-rpg clickable"
+              onclick="choose(showPsw)"
+            >
+              Je connois le mot de passe
+            </button>
+          </div>
+          <form id="form-name" class="rpg-form" onsubmit="submitName(event)">
+            <div id="error-name" role="error">
+              <img
+                src="static/angry_knight.gif"
+                class="reverse-gifs angry-knight"
+              />
+              <span>!! Vostre nom manant !!</span>
+              <img src="static/angry_knight.gif" class="angry-knight" />
+            </div>
+            <div id="name-taken">
+              <p>Hélas ce nom est déjà pris par un autre invité !</p>
+              <img
+                src="static/gif/Sword_Fighters.gif"
+                width="205"
+                height="138"
+              />
+              <p>Vous connoisse-t-on sous un autre nom ?</p>
+            </div>
+            <input type="text" id="name-input" name="name" autofocus />
+            <div class="medieval-select">
+              <select name="adjectif"></select>
+              <div class="select-arrow">
+                <img src="static/gif/arrow.gif" />
+              </div>
+            </div>
+            <button id="name-submit" class="choice-rpg clickable" type="submit">
+              Soumettre ce nom à la garde du chasteau
+            </button>
+          </form>
+          <form id="form-psw" class="rpg-form" onsubmit="submitPsw(event)">
+            <div id="error-psw" role="error">
+              <img
+                src="static/angry_knight.gif"
+                class="reverse-gifs angry-knight"
+                alt="Chevalier enragé"
+              />
+              <span>!! Ce n'est point le mot de passe !!</span>
+              <img
+                src="static/angry_knight.gif"
+                class="angry-knight"
+                alt="Chevalier enragé"
+              />
+            </div>
+            <input type="text" id="psw-input" name="psw" autofocus />
+            <button id="psw-submit" class="choice-rpg clickable" type="submit">
+              Proférer ce mot de passe aux gardes
+            </button>
+          </form>
+          <div id="welcome">
+            <p>
+              <span class="username"></span>
+              <span class="thinking"></span>
+            </p>
+            <p>Curieux, mais soit...</p>
+            <p>
+              Vénérable <span class="username"></span>
+              voici vostre mot de passe :
+            </p>
+            <p><mark class="password"></mark></p>
+            <p>
+              Scribez-le dans vos parchemins.<br />
+              Il vous servira à vous faire reconnaître des autres gardes du
+              chasteau.<br />
+              Cette information est de grande importance, ne la divulguez en
+              aucun cas !
+            </p>
+          </div>
+          <div id="psw-fail">
+            <h3>
+              <img
+                src="static/angry_knight.gif"
+                class="reverse-gifs angry-knight"
+                alt="Chevalier enragé"
+              />
+              Quel idiot ce gueux !
+              <img
+                src="static/angry_knight.gif"
+                class="angry-knight"
+                alt="Chevalier enragé"
+              />
+            </h3>
+
+            <p>Vous avez énérvé la garde du chasteau.</p>
+            <p>Addressez les seigneurs par vos propres moyens.</p>
           </div>
         </div>
-        <button id="name-submit" class="choice-rpg clickable" type="submit">
-          Soumettre ce nom à la garde du chasteau
-        </button>
-      </form>
-      <form id="form-psw" class="rpg-form" onsubmit="submitPsw(event)">
-        <div id="error-psw" role="error">
-          <img
-            src="static/angry_knight.gif"
-            class="reverse-gifs angry-knight"
-            alt="Chevalier enragé"
-          />
-          <span>!! Ce n'est point le mot de passe !!</span>
-          <img
-            src="static/angry_knight.gif"
-            class="angry-knight"
-            alt="Chevalier enragé"
-          />
+      </div>
+
+      <div style="z-index: 3" class="landing-content">
+        <div id="team" class="parchment landing-modal center">
+          <div class="center" role="unecessary-steps">
+            <h3>
+              La seigneurie de la Vielarnoult se prépare pour les festivités<br />et
+              attendent avec impatience les différents clans du Royaume.
+            </h3>
+            <button class="choice-rpg clickable">Descouvrir mon clan</button>
+          </div>
+          <div class="center" role="unecessary-steps">
+            <h3>
+              Faire partie d'un clan, c'est comme faire partie d'une famille.
+            </h3>
+            <button class="choice-rpg clickable">D'accord</button>
+          </div>
+          <div class="center" role="unecessary-steps">
+            <h3>On ne le choisit pas mais on se bat pour lui.</h3>
+            <button class="choice-rpg clickable">Soit</button>
+          </div>
+          <div class="center" role="unecessary-steps">
+            <h3>Il n'y a pas de bon ou de mauvais clan.</h3>
+            <button class="choice-rpg clickable">Certes</button>
+          </div>
+          <div class="center" role="unecessary-steps">
+            <h3>
+              D'autre valeureux jouveauceaux et valeureuses jouvencelles vous
+              rejoindront au sein du clan.
+            </h3>
+            <button class="choice-rpg clickable">Très bien</button>
+          </div>
+          <div class="center" role="unecessary-steps">
+            <h3>
+              Vous serez en mesure de communiquer avec les membres de votre
+              clan<br />
+              en vous rendant dans le pigeonnier du chasteau.
+            </h3>
+            <button class="choice-rpg clickable">Avec joie</button>
+          </div>
+          <div class="center" role="unecessary-steps">
+            <h3>Qu'attendez-vous pour découvrir votre clan ?!</h3>
+            <button class="choice-rpg clickable">Toi</button>
+          </div>
+          <div class="center" role="unecessary-steps">
+            <h3>
+              Estes-vous preste à defendre vostre gonfanon au tournoi comme s'il
+              s'agissait de vostre vie ?
+            </h3>
+            <button class="choice-rpg clickable">C'est-à-dire...</button>
+          </div>
+          <div class="center" role="unecessary-steps">
+            <h3>
+              Estes-vous desireux de connoistre sous quel étendard vous allez
+              compestir ?!
+            </h3>
+            <button class="choice-rpg clickable">...oui !</button>
+          </div>
+          <div class="center" role="unecessary-steps">
+            <h3>
+              La garde du chasteau est un peu sourde d'oreille. Veuillez clamer
+              haut et fort vos désirs
+            </h3>
+            <button class="choice-rpg clickable">OUIIIIIII !!</button>
+          </div>
+          <div id="draw-team" class="center" role="unecessary-steps">
+            <button class="choice-rpg clickable" onClick="drawTeam()">
+              Descouvrir vostre fief
+            </button>
+          </div>
+          <div id="team-reveal" class="center">
+            <h2 id="team-name"></h2>
+
+            <div id="team-gif">
+              <img id="explosion" src="static/gif/explose.gif" alt="Boooouya" />
+              <img
+                id="ours"
+                src="static/teams/bear4.gif"
+                class="team-gif"
+                alt="Équipe Ours"
+              />
+              <img
+                id="dragon"
+                src="static/teams/dragon4.gif"
+                class="team-gif"
+                alt="Équipe Dragon"
+              />
+              <img
+                id="cerf"
+                src="static/teams/deer.gif"
+                class="team-gif"
+                alt="Équipe Cerf"
+              />
+              <img
+                id="kraken"
+                src="static/teams/kraken.gif"
+                class="team-gif"
+                alt="Équipe Kraken"
+              />
+              <img
+                id="corbeau"
+                src="static/teams/crow.gif"
+                class="team-gif"
+                alt="Équipe Corbeau"
+                style="margin-top: -100px"
+              />
+            </div>
+
+            <button disabled class="choice-rpg clickable" onClick="hideTeam()">
+              Continuer au chasteau
+            </button>
+          </div>
         </div>
-        <input type="text" id="psw-input" name="psw" autofocus />
-        <button id="psw-submit" class="choice-rpg clickable" type="submit">
-          Proférer ce mot de passe aux gardes
-        </button>
-      </form>
-      <div id="welcome">
-        <p>
-          <span class="username"></span>
-          <span class="thinking"></span>
-        </p>
-        <p>Curieux, mais soit...</p>
-        <p>
-          Vénérable <span class="username"></span>
-          voici vostre mot de passe :
-        </p>
-        <p><mark class="password"></mark></p>
-        <p>
-          Scribez-le dans vos parchemins.<br />
-          Il vous servira à vous faire reconnaître des autres gardes du
-          chasteau.<br />
-          Cette information est de grande importance, ne la divulguez en
-          aucun cas !
-        </p>
-      </div>
-      <div id="psw-fail">
-        <h3>
-          <img
-            src="static/angry_knight.gif"
-            class="reverse-gifs angry-knight"
-            alt="Chevalier enragé"
-          />
-          Quel idiot ce gueux !
-          <img
-            src="static/angry_knight.gif"
-            class="angry-knight"
-            alt="Chevalier enragé"
-          />
-        </h3>
-
-        <p>Vous avez énérvé la garde du chasteau.</p>
-        <p>Addressez les seigneurs par vos propres moyens.</p>
       </div>
     </div>
-  </div>
 
-  <div id="landing-team" class="landing-content">
-    <div id="team" class="parchment landing-modal center">
-      <div class="center" role="unecessary-steps">
-        <h3>
-          La seigneurie de la Vielarnoult se prépare pour les festivités<br>et
-          attendent avec impatience les différents clans du Royaume.
-        </h3>
-        <button class="choice-rpg clickable">Descouvrir mon clan</button>
-      </div>
-      <div class="center" role="unecessary-steps">
-        <h3>
-          Faire partie d'un clan, c'est comme faire partie d'une famille.
-        </h3>
-        <button class="choice-rpg clickable">D'accord</button>
-      </div>
-      <div class="center" role="unecessary-steps">
-        <h3>On ne le choisit pas mais on se bat pour lui.</h3>
-        <button class="choice-rpg clickable">Soit</button>
-      </div>
-      <div class="center" role="unecessary-steps">
-        <h3>Il n'y a pas de bon ou de mauvais clan.</h3>
-        <button class="choice-rpg clickable">Certes</button>
-      </div>
-      <div class="center" role="unecessary-steps">
-        <h3>
-          D'autre valeureux jouveauceaux et valeureuses jouvencelles vous
-          rejoindront au sein du clan.
-        </h3>
-        <button class="choice-rpg clickable">Très bien</button>
-      </div>
-      <div class="center" role="unecessary-steps">
-        <h3>
-          Vous serez en mesure de communiquer avec les membres de votre clan<br>
-          en vous rendant dans le <mark>pigeonnier du chasteau</mark>.
-        </h3>
-        <button class="choice-rpg clickable">Avec joie</button>
-      </div>
-      <div class="center" role="unecessary-steps">
-        <h3>Qu'attendez-vous pour découvrir votre clan ?!</h3>
-        <button class="choice-rpg clickable">Toi</button>
-      </div>
-      <!--<div class="center" role="unecessary-steps">
-        <h3>
-          Estes-vous preste à defendre les couleurs de vostre fief au tournoi<br>
-          comme s'il s'agissait de vostre vie ?
-        </h3>
-        <button class="choice-rpg clickable">C'est-à-dire...</button>
-      </div>-->
-      <div class="center" role="unecessary-steps">
-        <h3>
-          Estes-vous desireux de connoistre sous quel étendard vous allez
-          compestir ?!
-        </h3>
-        <button class="choice-rpg clickable">...oui !</button>
-      </div>
-      <div class="center" role="unecessary-steps">
-        <h3>
-          La garde du chasteau est un peu sourde d'oreille.<br>Veuillez clamer
-          haut et fort vos désirs
-        </h3>
-        <button class="choice-rpg clickable">OUIIIIIII !!</button>
-      </div>
-      <div id="draw-team" class="center" role="unecessary-steps">
-        <button class="choice-rpg clickable" onClick="drawTeam()">
-          Descouvrir vostre fief
-        </button>
-      </div>
-      <div id="team-reveal" class="center">
-        <h2 id="team-name"></h2>
-
-        <div id="team-gif">
-          <img id="explosion" src="static/gif/explose.gif" alt="Boooouya" />
-          <img
-            id="ours"
-            src="static/teams/bear4.gif"
-            class="team-gif"
-            alt="Équipe Ours"
-          />
-          <img
-            id="dragon"
-            src="static/teams/dragon4.gif"
-            class="team-gif"
-            alt="Équipe Dragon"
-          />
-          <img
-            id="cerf"
-            src="static/teams/deer.gif"
-            class="team-gif"
-            alt="Équipe Cerf"
-          />
-          <img
-            id="kraken"
-            src="static/teams/kraken.gif"
-            class="team-gif"
-            alt="Équipe Kraken"
-          />
-          <img
-            id="corbeau"
-            src="static/teams/crow.gif"
-            class="team-gif"
-            alt="Équipe Corbeau"
-            style="margin-top: -100px"
-          />
+    <main>
+      <div id="torchs" class="main-banner">
+        <div class="torch on banner-side">
+          <img src="static/gif/fireanim.gif" alt="FIIIRE!!!" />
+          <img src="static/gif/torch.gif" alt="torch" />
         </div>
-
-        <button disabled class="choice-rpg clickable" onClick="hideTeam()">
-          Continuer au chasteau
-        </button>
+        <div class="torch on banner-side">
+          <img src="static/gif/fireanim.gif" alt="FIIIRE!!!" />
+          <img src="static/gif/torch.gif" alt="torch" />
+        </div>
       </div>
-    </div>
-  </div>
+      <div class="main-title">
+        <a href="/" class="false-link">Choucroute médiévale</a>
+      </div>
 
-</div>
+      <div id="cour" class="page">
+        <section class="parchment">
+          <img id="oyez" src="static/oyezoyez.png" alt="oyez oyez" />
+          <h2>Dameselles et damelots</h2>
 
-<main>
-  <div id="torchs" class="main-banner">
-    <div class="torch on banner-side">
-      <img src="static/gif/fireanim.gif" alt="FIIIRE!!!" />
-      <img src="static/gif/torch.gif" alt="torch" />
-    </div>
-    <div class="torch on banner-side">
-      <img src="static/gif/fireanim.gif" alt="FIIIRE!!!" />
-      <img src="static/gif/torch.gif" alt="torch" />
-    </div>
-  </div>
-  <div class="main-title">
-    <a href="/" class="false-link">Choucroute médiévale</a>
-  </div>
-
-  <div id="cour" class="page">
-    <section class="parchment">
-      <img id="oyez" src="static/oyezoyez.png" alt="oyez oyez" />
-      <h2>Dameselles et damelots</h2>
-
-      <div id="rsvp" class="fantasy-btn">
-        <p>
-          <!--Ne manquez pas de prévenir les seigneurs de la Vielarnoult pour
+          <div id="rsvp" class="fantasy-btn">
+            <p>
+              <!--Ne manquez pas de prévenir les seigneurs de la Vielarnoult pour
           confirmer vostre participation aux festivités !-->
-          Prévenez les seigneurs de la Vielarnoult de vostre participation aux festivités !
-        </p>
-        <div id="isComing-ui">
-          <label for="isComing-input">Je serai présent</label>
-          <input
-                  id="isComing-input"
-                  onChange="changeComing(event)"
-                  type="checkbox"
-          />
-        </div>
+              Prévenez les seigneurs de la Vielarnoult de vostre participation
+              aux festivités !
+            </p>
+            <div id="isComing-ui">
+              <label for="isComing-input">Je serai présent</label>
+              <input
+                id="isComing-input"
+                onChange="changeComing(event)"
+                type="checkbox"
+              />
+            </div>
+          </div>
+
+          <hr />
+          <p>
+            Entrez entrez dans la cour du chasteau ! Les seigneurs de la
+            Vielarnoult préparent moult réjouissances pour la grand fête du chou
+            nouveau. Le <mark>16 mars</mark> deux mil vingt-quatre, les quatre
+            fiefs du Royaume se réuniront pour demonstrer prouesses et
+            valeresses dans le plus prodigieux tournoi que la Bretagne ait cognu
+            !
+          </p>
+          <p>
+            Pour tenter de gagner le <mark>chou-chêne d'or</mark>, les preux
+            champions devront s'affronter autour de quinte espreuves
+          </p>
+          <ul>
+            <li>Le tournoi du plus flamboyant costume</li>
+            <li>Le Catapultou</li>
+            <li>La joute chevalresque</li>
+            <li>Les énigmes de ménestrels</li>
+            <li>La traque des ombres</li>
+          </ul>
+          <hr />
+          <p>
+            Baladez-vous donc au chasteau. Vous reviendrez à la cour pour ouïr
+            toustes les dernières nouvelles des festivités.
+          </p>
+        </section>
       </div>
 
-      <hr />
-      <p>
-        Entrez entrez dans la cour du chasteau ! Les seigneurs de la
-        Vielarnoult préparent moult réjouissances pour la grand fête du chou
-        nouveau. Le <mark>16 mars</mark> deux mil vingt-quatre, les quatre
-        fiefs du Royaume se réuniront pour demonstrer prouesses et
-        valeresses dans le plus prodigieux tournoi que la Bretagne ait cognu
-        !
-      </p>
-      <p>
-        Pour tenter de gagner le <mark>chou-chêne d'or</mark>, les preux
-        champions devront s'affronter autour de quinte espreuves
-      </p>
-      <ul>
-        <li>Le tournoi du plus flamboyant costume</li>
-        <li>Le Catapultou</li>
-        <li>La joute chevalresque</li>
-        <li>Les énigmes de ménestrels</li>
-        <li>La traque des ombres</li>
-      </ul>
-      <hr />
-      <p>
-        Baladez-vous donc au chasteau. Vous reviendrez à la cour pour ouïr
-        toustes les dernières nouvelles des festivités.
-      </p>
-    </section>
-  </div>
-
-  <div id="donjon" class="page">
-    <!--<section>
+      <div id="donjon" class="page">
+        <!--<section>
       <h2>Reste te destendre au donjon...</h2>
     </section>-->
 
-    <div id="scroll">
-      <div id="sexy"></div>
-    </div>
-  </div>
+        <div id="scroll">
+          <div id="sexy"></div>
+        </div>
+      </div>
 
-  <div id="banquet" class="page">
-    <section class="parchment">
-      <h2>Patience escuyer,<br />la pitance n'est pas preste !</h2>
-      <img src="static/gif/chandeler.gif" alt="prout" />
-    </section>
-  </div>
+      <div id="banquet" class="page">
+        <section class="parchment">
+          <h2>Patience escuyer,<br />la pitance n'est pas preste !</h2>
+          <img src="static/gif/chandeler.gif" alt="prout" />
+        </section>
+      </div>
 
-  <!--<div id="armurerie" class="page">
+      <!--<div id="armurerie" class="page">
     <section class="parchment">
       <h2>Qui entre paré ainsi ?</h2>
       <p>
@@ -377,227 +378,280 @@
     </section>
   </div>-->
 
-  <div id="armurerie" class="page">
-    <section id="lookbook" class="lookbook-section parchment">
-      <div id="couvre-chef" class="image-container">
-        <div class="drag"><img src="static/lookbook/bergere.png" /></div>
-        <div class="drag"><img src="static/lookbook/bourgeois.png" /></div>
-        <div class="drag"><img src="static/lookbook/casque.png" /></div>
-        <div class="drag"><img src="static/lookbook/escoffion.png" /></div>
-        <div class="drag">
-          <img src="static/lookbook/escoffion-boule.png" />
-        </div>
-        <div class="drag">
-          <img src="static/lookbook/henin-double.png" />
-        </div>
-        <div class="drag"><img src="static/lookbook/marchand.png" /></div>
-        <div class="drag"><img src="static/lookbook/negociant.png" /></div>
+      <div id="armurerie" class="page">
+        <section id="lookbook" class="lookbook-section parchment">
+          <div id="couvre-chef" class="image-container">
+            <div class="drag"><img src="static/lookbook/bergere.png" /></div>
+            <div class="drag"><img src="static/lookbook/bourgeois.png" /></div>
+            <div class="drag"><img src="static/lookbook/casque.png" /></div>
+            <div class="drag"><img src="static/lookbook/escoffion.png" /></div>
+            <div class="drag">
+              <img src="static/lookbook/escoffion-boule.png" />
+            </div>
+            <div class="drag">
+              <img src="static/lookbook/henin-double.png" />
+            </div>
+            <div class="drag"><img src="static/lookbook/marchand.png" /></div>
+            <div class="drag"><img src="static/lookbook/negociant.png" /></div>
+          </div>
+          <div id="affublement" class="image-container">
+            <div class="drag"><img src="static/lookbook/armure.png" /></div>
+            <div class="drag"><img src="static/lookbook/bliaud.png" /></div>
+            <div class="drag"><img src="static/lookbook/chausses.png" /></div>
+            <div class="drag"><img src="static/lookbook/robe.png" /></div>
+            <div class="drag">
+              <img src="static/lookbook/cottehardie.png" />
+            </div>
+            <div class="drag"><img src="static/lookbook/guenaude.png" /></div>
+            <div class="drag"><img src="static/lookbook/herboriste.png" /></div>
+            <div class="drag"><img src="static/lookbook/braguette.png" /></div>
+            <div class="drag"><img src="static/lookbook/slip.png" /></div>
+            <div class="drag"><img src="static/lookbook/surcot.png" /></div>
+            <div class="drag"><img src="static/lookbook/pourpoint.png" /></div>
+          </div>
+          <div id="godille" class="image-container">
+            <div class="drag">
+              <img src="static/lookbook/brodequin-left.png" />
+            </div>
+            <div class="drag">
+              <img src="static/lookbook/brodequin-right.png" />
+            </div>
+            <div class="drag">
+              <img src="static/lookbook/poulaine-left.png" />
+            </div>
+            <div class="drag">
+              <img src="static/lookbook/poulaine-right.png" />
+            </div>
+          </div>
+        </section>
       </div>
-      <div id="affublement" class="image-container">
-        <div class="drag"><img src="static/lookbook/armure.png" /></div>
-        <div class="drag"><img src="static/lookbook/bliaud.png" /></div>
-        <div class="drag"><img src="static/lookbook/chausses.png" /></div>
-        <div class="drag"><img src="static/lookbook/robe.png" /></div>
-        <div class="drag">
-          <img src="static/lookbook/cottehardie.png" />
-        </div>
-        <div class="drag"><img src="static/lookbook/guenaude.png" /></div>
-        <div class="drag"><img src="static/lookbook/herboriste.png" /></div>
-        <div class="drag"><img src="static/lookbook/braguette.png" /></div>
-        <div class="drag"><img src="static/lookbook/slip.png" /></div>
-        <div class="drag"><img src="static/lookbook/surcot.png" /></div>
-        <div class="drag"><img src="static/lookbook/pourpoint.png" /></div>
-      </div>
-      <div id="godille" class="image-container">
-        <div class="drag">
-          <img src="static/lookbook/brodequin-left.png" />
-        </div>
-        <div class="drag">
-          <img src="static/lookbook/brodequin-right.png" />
-        </div>
-        <div class="drag">
-          <img src="static/lookbook/poulaine-left.png" />
-        </div>
-        <div class="drag">
-          <img src="static/lookbook/poulaine-right.png" />
-        </div>
-      </div>
-    </section>
-  </div>
 
-  <div id="pigeonnier" class="page">
-    <!-- Clan .collapsible -->
-    <div class="main-banner" style="justify-content: center">
-      <!--<div class="banner-side">
+      <div id="pigeonnier" class="page">
+        <!-- Clan .collapsible -->
+        <div class="main-banner" style="justify-content: center">
+          <!--<div class="banner-side">
         <img src="static/gif/colombe.gif" class="reverse-gifs">
       </div>-->
-      <div class="banner-center">
-        <h3>Pigeonnier des<br /><mark class="team"></mark></h3>
-      </div>
-      <!--<div class="banner-side">
+          <div class="banner-center">
+            <h3>Pigeonnier des<br /><mark class="team"></mark></h3>
+          </div>
+          <!--<div class="banner-side">
         <img src="static/gif/colombe.gif">
       </div>-->
-    </div>
-
-    <section id="forum-welcome">
-      <p>
-        Bienvenue dans la pièce secrète dediée à vostre fief. Vous pouvez
-        ici communiquer avec vostre clan pour ourdir les plus vils complots.
-      </p>
-
-      <div class="team-members">
-        <h4>Se battent à vos côtés sous le même étendard :</h4>
-      </div>
-      <ul id="team-list"></ul>
-    </section>
-
-    <hr />
-    <!-- Discussions -->
-    <!-- Nouvelle discussion .collapsible -->
-    <div id="new-discussion" class="collapsible">
-      <h4 role="collapse-trigger" class="fantasy-btn collapsed clickable">
-        <span>Entamer une nouvelle discussion</span>
-        <img src="static/+.png" />
-      </h4>
-      <form role="collapse-content" onsubmit="submitDiscussion(event)">
-        <!-- Titre -->
-        <input
-                type="text"
-                class="discussion-title"
-                name="discussionTitle"
-                placeholder="Titre de la discussion"
-        />
-        <!-- Message -->
-        <label for="message-area">
-          Message à adresser à vos compatriotes
-        </label>
-        <div id="message-area">
-          <!--fantasy-btn-->
-          <textarea
-                  name="discussionMessage"
-                  class="parchment forum-msg"
-                  placeholder="Vostre message"
-          ></textarea>
         </div>
-        <button type="submit" class="choice-rpg clickable">
-          <span>Envoyer</span>
-          <img src="static/licorne.gif" class="loading licorne" />
-        </button>
-      </form>
-    </div>
-    <!--<hr />-->
-    <!-- Liste discussions -->
-    <div id="discussion-list">
-      <div class="template discussion-preview msg-box">
-        <h4>
-          <img
-                  src="static/gif/seagull_with_letter1.gif"
-                  class="pigeon-letter"
-          /><span role="title"></span>
-        </h4>
-        <p class="infos">
-          <span>Par : <span role="author"></span></span>
-          <span role="msg-number"></span>
-          <br />
-          <span class="additional-info">
+
+        <section id="forum-welcome">
+          <p>
+            Bienvenue dans la pièce secrète dediée à vostre fief. Vous pouvez
+            ici communiquer avec vostre clan pour ourdir les plus vils complots.
+          </p>
+
+          <div class="team-members">
+            <h4>Se battent à vos côtés sous le même étendard :</h4>
+          </div>
+          <ul id="team-list"></ul>
+        </section>
+
+        <hr />
+        <!-- Discussions -->
+        <!-- Nouvelle discussion .collapsible -->
+        <div id="new-discussion" class="collapsible">
+          <h4 role="collapse-trigger" class="fantasy-btn collapsed clickable">
+            <span>Entamer une nouvelle discussion</span>
+            <img src="static/+.png" />
+          </h4>
+          <form role="collapse-content" onsubmit="submitDiscussion(event)">
+            <!-- Titre -->
+            <input
+              type="text"
+              class="discussion-title"
+              name="discussionTitle"
+              placeholder="Titre de la discussion"
+            />
+            <!-- Message -->
+            <label for="message-area">
+              Message à adresser à vos compatriotes
+            </label>
+            <div id="message-area">
+              <!--fantasy-btn-->
+              <textarea
+                name="discussionMessage"
+                class="parchment forum-msg"
+                placeholder="Vostre message"
+              ></textarea>
+            </div>
+            <button type="submit" class="choice-rpg clickable">
+              <span>Envoyer</span>
+              <img src="static/licorne.gif" class="loading licorne" />
+            </button>
+          </form>
+        </div>
+        <!--<hr />-->
+        <!-- Liste discussions -->
+        <div id="discussion-list">
+          <div class="template discussion-preview msg-box">
+            <h4>
+              <img
+                src="static/gif/seagull_with_letter1.gif"
+                class="pigeon-letter"
+              /><span role="title"></span>
+            </h4>
+            <p class="infos">
+              <span>Par : <span role="author"></span></span>
+              <span role="msg-number"></span>
+              <br />
+              <span class="additional-info">
                 Dernier message de
                 <span role="last-author"></span>
                 <span role="last-datetime"></span>
               </span>
-        </p>
-      </div>
-    </div>
-    <div id="loading-discussion-list">
-      <img src="static/licorne.gif" class="loading licorne" />
-    </div>
-    <div id="empty-discussion">
-      <h4>Aucune discussion pour le moment</h4>
-    </div>
-    <div id="focused-discussion">
-      <button
-              class="invisible"
-              role="go-back"
-              onclick="goBackToDiscussions()"
-      >
-        &lt;- Toutes les discussions
-      </button>
-
-      <div class="message-wrapper fantasy-btn">
-        <h4 class="discussion-title">
-          <img
-                  src="static/gif/seagull_with_letter1.gif"
-                  class="pigeon-letter"
-          />
-          <span role="title"></span>
-        </h4>
-        <!--<h4 role="title"></h4>-->
-        <div id="discussion-messages">
-          <div class="template message">
-            <p class="infos" role="author"></p>
-            <p role="message" class="forum-msg parchment"></p>
+            </p>
           </div>
         </div>
-        <form id="new-message" onsubmit="submitMessage(event)">
-              <textarea
-                      name="message"
-                      required
-                      placeholder="Répondre"
-              ></textarea>
-          <button type="submit" class="invisible clickable">
-            <span>OK</span>
-          </button>
+        <div id="loading-discussion-list">
           <img src="static/licorne.gif" class="loading licorne" />
-        </form>
+        </div>
+        <div id="empty-discussion">
+          <h4>Aucune discussion pour le moment</h4>
+        </div>
+        <div id="focused-discussion">
+          <button
+            class="invisible"
+            role="go-back"
+            onclick="goBackToDiscussions()"
+          >
+            &lt;- Toutes les discussions
+          </button>
+
+          <div class="message-wrapper fantasy-btn">
+            <h4 class="discussion-title">
+              <img
+                src="static/gif/seagull_with_letter1.gif"
+                class="pigeon-letter"
+              />
+              <span role="title"></span>
+            </h4>
+            <!--<h4 role="title"></h4>-->
+            <div id="discussion-messages">
+              <div class="template message">
+                <p class="infos" role="author"></p>
+                <p role="message" class="forum-msg parchment"></p>
+              </div>
+            </div>
+            <form id="new-message" onsubmit="submitMessage(event)">
+              <textarea
+                name="message"
+                required
+                placeholder="Répondre"
+              ></textarea>
+              <button type="submit" class="invisible clickable">
+                <span>OK</span>
+              </button>
+              <img src="static/licorne.gif" class="loading licorne" />
+            </form>
+          </div>
+        </div>
+        <div id="loading-focused-discussion">
+          <button
+            class="invisible"
+            role="go-back"
+            onclick="goBackToDiscussions()"
+          >
+            &lt;- Toutes les discussions
+          </button>
+          <div><img src="static/licorne.gif" class="loading licorne" /></div>
+        </div>
+        <!--<hr />-->
       </div>
-    </div>
-    <div id="loading-focused-discussion">
-      <button
-              class="invisible"
-              role="go-back"
-              onclick="goBackToDiscussions()"
-      >
-        &lt;- Toutes les discussions
-      </button>
-      <div><img src="static/licorne.gif" class="loading licorne" /></div>
-    </div>
-    <!--<hr />-->
-  </div>
 
-  <div id="herse" class="page">
-    <p>
-      Protègez le chasteau des mendiants !<br />Attention à ne pas heurter
-      les invités...
-    </p>
-    <span id="score">1045</span>
-    <div id="game-container">
-      <div id="castle"></div>
-      <img src="static/crossbow.png" id="crossbow" />
-      <img src="static/arrow.png" class="arrow" id="arrow-template" />
-      <div class="mendiant" id="mendiant-template"></div>
-      <img class="damsel" id="damsel-template" />
-    </div>
-  </div>
+      <div id="herse" class="page">
+        <p>
+          Protègez le chasteau des mendiants !<br />Attention à ne pas heurter
+          les invités...
+        </p>
+        <span id="score">0</span>
+        <div id="game-container">
+          <div id="castle"></div>
+          <img src="static/crossbow.png" id="crossbow" />
+          <img src="static/arrow.png" class="arrow" id="arrow-template" />
+          <div class="mendiant" id="mendiant-template"></div>
+          <img class="damsel" id="damsel-template" />
+        </div>
+      </div>
 
-  <div id="doors" class="door-container"></div>
+      <div id="cuisine" class="page">
+        <div id="game-container">
+          <div id="sausage-bricks">
+            <img
+              src="static/sausage.png"
+              id="sausage-template"
+              class="sausage"
+            />
+          </div>
+          <img id="cabbage" src="static/cabbage.png" />
+          <img id="table" src="static/table.png" />
+          <img
+            id="explosion-template"
+            class="explose"
+            src="static/gif/explose.gif"
+          />
+        </div>
+        <div id="score-container">Score : <span class="score"></span></div>
+      </div>
 
-  <div class="popup" role="error">
-    <div class="popup-content parchment">
-      <img src="static/nuke.gif" class="reverse-gifs nuke" />
-      <span class="message"></span>
-      <img src="static/nuke.gif" class="nuke" />
-    </div>
-  </div>
+      <div id="doors" class="door-container"></div>
 
-  <div class="popup" role="warning">
-    <div class="popup-content parchment">
-      <img
-              src="static/angry_knight.gif"
-              class="reverse-gifs angry-knight"
-      />
-      <span class="message"></span>
-      <img src="static/angry_knight.gif" class="angry-knight" />
-    </div>
-  </div>
-</main>
-</body>
+      <div class="popup" role="error">
+        <div class="popup-content parchment">
+          <img src="static/nuke.gif" class="reverse-gifs nuke" />
+          <span class="message"></span>
+          <img src="static/nuke.gif" class="nuke" />
+        </div>
+      </div>
+
+      <div class="popup" role="warning">
+        <div class="popup-content parchment">
+          <img
+            src="static/angry_knight.gif"
+            class="reverse-gifs angry-knight"
+          />
+          <span class="message"></span>
+          <img src="static/angry_knight.gif" class="angry-knight" />
+        </div>
+      </div>
+      <div class="popup" id="cuisinepopup" onclick="resetCuisineGame()">
+        <div class="popup-content parchment">
+          <img
+            src="static/gif/hola-visiteur.gif"
+            class="reverse-gifs hola-visiteur"
+          />
+          <div class="message" role="highscore">
+            <h2>Félicitation !</h2>
+            <p>
+              Incroyable ! Vous avez atteint un nouveau meilleur score de
+              <span class="score"></span>
+            </p>
+            <p>Précédent score: <mark class="highscore"></mark></p>
+          </div>
+          <div class="message" role="win">
+            <h2>Félicitation !</h2>
+            <p>
+              Vous avez atteint le merveilleux score de
+              <span class="score"></span>
+            </p>
+            <p>Meilleur score: <mark class="highscore"></mark></p>
+          </div>
+          <div class="message" role="loose">
+            <h2>C'est perdu !</h2>
+            <p>
+              Vous avez quand même atteint un score de
+              <mark class="score"></mark>
+            </p>
+            <p>Meilleur score: <span class="highscore"></span></p>
+          </div>
+          <img src="static/gif/hola-visiteur.gif" class="hola-visiteur" />
+        </div>
+      </div>
+    </main>
+  </body>
 </html>

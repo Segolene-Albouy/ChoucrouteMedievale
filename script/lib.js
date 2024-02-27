@@ -45,6 +45,18 @@ function play(audioFilename, onended = () => {}) {
   };
 }
 
+function repeatAudio(audioFilename) {
+  if (currentAudio) {
+    currentAudio.pause();
+    // fadeOutAndPause(currentAudio);
+  }
+  const audio = new Audio(`static/sounds/${audioFilename}.mp3`);
+  audio.loop = true;
+  audio.play();
+  currentAudio = audio;
+  return audio;
+}
+
 function playShort(audioFilename) {
   const audio = new Audio(`static/sounds/${audioFilename}.mp3`);
   audio.play();
@@ -166,4 +178,8 @@ async function mockApiCall(returnedData) {
       resolve(returnedData);
     }, 2000);
   });
+}
+
+function normalizeAngle(angle) {
+  return Math.atan2(Math.sin(angle), Math.cos(angle));
 }
