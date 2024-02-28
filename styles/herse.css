@@ -16,26 +16,27 @@
 #herse #game-container {
   height: 100vh;
 }
-
+#hersepopup .popup-content {
+  display: flex;
+  flex-direction: column;
+}
+#hersepopup .popup-content > div:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+#hersepopup .message {
+  font-size: 2em;
+  text-align: center;
+}
 #herse p,
-#herse #score {
+#herse #score-container {
   color: darkgoldenrod;
   font-size: 2em;
 }
-
-#herse #score {
-  /* position: absolute;
-  right: 5%; */
-}
-
-@media screen and (max-width: 600px) {
-  #herse p,
-  #herse #score {
-    font-size: 1.5em;
-  }
-  #score {
-    right: 0;
-  }
+#herse #score-container {
+  position: absolute;
+  right: 0;
 }
 
 #castle {
@@ -86,5 +87,15 @@
 
 #debug {
   position: absolute;
-  border: 1px solid red;
+  /* border: 1px solid red; */
+}
+
+@media screen and (max-width: 600px) {
+  #herse p,
+  #herse #score-container {
+    font-size: 1em;
+  }
+  #hersepopup {
+    font-size: 0.8rem;
+  }
 }

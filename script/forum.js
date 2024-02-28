@@ -161,7 +161,6 @@ function submitDiscussion(evt) {
 
   evt.target.setAttribute("state", "loading");
   const author = getConnectedUser().name;
-  console.log({ title, message, author });
 
   apiNewThread(title, message, author)
     .then(() => {
@@ -178,8 +177,8 @@ function submitDiscussion(evt) {
         .querySelector("[role=collapse-trigger]")
         .classList.add("collapsed");
       evt.target.parentElement
-          .querySelector("[role=collapse-content]")
-          .classList.remove("msg-box");
+        .querySelector("[role=collapse-content]")
+        .classList.remove("msg-box");
     });
 }
 

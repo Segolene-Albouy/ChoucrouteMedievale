@@ -5,11 +5,12 @@ var crossbow;
 var isDragging = false;
 var dragStart;
 var herseGameIntervalRef = null;
-var currentScore = 0;
+var currentScore = 0,
+  currentHighScore = 0;
 
 function loadHerse() {
   particlePool.extinguishParticles();
-  setNewCursor("");
+  disableBurstOnClick();
   play("fire");
   const gameContainer = document.querySelector("#herse #game-container");
   gameContainer.scrollIntoView({ behavior: "smooth" });
@@ -51,6 +52,26 @@ function loadHerse() {
     gameContainer.addEventListener("mousemove", crossbowFollow);
     gameContainer.addEventListener("mouseup", fireArrow);
   }
+
+  currentHighScore = localStorage.getItem("herseHighScore") || 0;
+  document.querySelector("#herse .highscore").innerText = currentHighScore;
+  document.querySelector("#hersepopup .highscore").innerText = currentHighScore;
+  getDBHighScore(localStorage.getItem("medievalName")).then((res) => {
+    const highScore = res.herse || 0;
+    document.querySelector("#herse .highscore").innerText = highScore;
+    if (currentHighScore > highScore) {
+      localStorage.setItem("herseHighScore");
+      postScore(
+        "herse",
+        currentHighScore,
+        localStorage.getItem("medievalName")
+      );
+      document.querySelector("#herse .highscore").innerText = currentHighScore;
+    } else {
+      localStorage.setItem("herseHighScore", highScore);
+      currentHighScore = highScore;
+    }
+  });
 }
 
 function unloadHerse() {
@@ -89,7 +110,7 @@ function fireArrow(event) {
 function crossbowFollow(event) {
   const x = isMobile()
     ? event.touches[0].clientX - crossbowWidth / 2
-    : event.clientX;
+    : event.clientX - gameContainerRect.x;
   // xRatio with
   var xRatio = x / maxWidth;
   if (isMobile()) {
@@ -135,7 +156,6 @@ const arrowPool = {
     return arrow;
   },
   removeArrow: (arrow) => {
-    console.log("remove arrow");
     arrow.remove();
     arrowPool.pool.splice(arrowPool.pool.indexOf(arrow), 1);
   },
@@ -225,7 +245,15 @@ function herseGameInterval() {
     }
   });
 
-  document.querySelector("#herse #score").innerText = currentScore;
+  document.querySelector("#herse .score").innerText = currentScore;
+  if (currentScore > currentHighScore) {
+    localStorage.setItem("herseHighScore", currentScore);
+    currentHighScore = currentScore;
+    document.querySelector("#herse .highscore").innerText = currentHighScore;
+    document.querySelector("#hersepopup .highscore").innerText =
+      currentHighScore;
+    postScore("herse", currentHighScore, localStorage.getItem("medievalName"));
+  }
 
   let rnd = Math.random();
   // Spawn mendiant
@@ -296,3 +324,37 @@ const damselImgs = [
   { src: "escoffion-boule.png", width: 557 / 4, height: 727 / 4 },
   { src: "escoffion.png", width: 596 / 4, height: 666 / 4 },
 ];
+
+function showHerseScore() {
+  const hs = localStorage.getItem("herseHighScore");
+  postScore(
+    "herse",
+    hs > currentScore ? 0 : currentScore,
+    localStorage.getItem("medievalName")
+  ).then((res) => {
+    const scores = res.highscores;
+    document.querySelector("#hersepopup #highscores").innerHTML = "";
+    scores
+      .sort((a, b) => b.score - a.score)
+      .forEach((score) => {
+        const li = document.createElement("li");
+        li.innerHTML = `${score.gueuxName} - ${score.gueuTeam} : <mark>${score.score}</mark>`;
+        document.querySelector("#hersepopup #highscores").appendChild(li);
+      });
+  });
+  // Pause game
+  clearInterval(herseGameIntervalRef);
+  document.body.scrollIntoView();
+  lockScroll();
+
+  document.getElementById("hersepopup").style.display = "flex";
+}
+
+function resumeHerseGame() {
+  // Resume game
+  unlockScroll();
+  const gameContainer = document.querySelector("#herse #game-container");
+  gameContainer.scrollIntoView({ behavior: "smooth" });
+  document.getElementById("hersepopup").style.display = "none";
+  herseGameIntervalRef = setInterval(herseGameInterval, 1000 / 60);
+}

@@ -570,7 +570,10 @@
           les invités...
         </p>
         <div id="game-container">
-          <span id="score">0</span>
+          <div id="score-container" onclick="showHerseScore()">
+            <div>Score : <span class="score"></span></div>
+            <div>Meilleur score : <span class="highscore"></span></div>
+          </div>
           <div id="castle"></div>
           <img src="static/crossbow.png" id="crossbow" />
           <img src="static/arrow.png" class="arrow" id="arrow-template" />
@@ -649,6 +652,25 @@
                 <mark class="score"></mark>
               </p>
               <p>Meilleur score: <span class="highscore"></span></p>
+            </div>
+            <img src="static/gif/hola-visiteur.gif" class="hola-visiteur" />
+          </div>
+          <div>
+            <h4>Meilleurs scores du royaume:</h4>
+            <ul id="highscores"></ul>
+          </div>
+        </div>
+      </div>
+      <div class="popup" id="hersepopup" onclick="resumeHerseGame()">
+        <div class="popup-content parchment">
+          <div>
+            <img
+              src="static/gif/hola-visiteur.gif"
+              class="reverse-gifs hola-visiteur"
+            />
+            <div class="message">
+              <h2>Votre meilleur score</h2>
+              <p><mark class="highscore"></mark></p>
             </div>
             <img src="static/gif/hola-visiteur.gif" class="hola-visiteur" />
           </div>

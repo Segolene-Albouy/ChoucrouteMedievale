@@ -488,7 +488,6 @@ function commonEndGame(win = false) {
     win ? currentScore : 0,
     localStorage.getItem("medievalName")
   ).then((res) => {
-    console.log(res);
     const scores = res.highscores;
     document.querySelector("#cuisinepopup #highscores").innerHTML = "";
     scores
