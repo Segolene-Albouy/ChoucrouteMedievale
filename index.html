@@ -621,35 +621,41 @@
       </div>
       <div class="popup" id="cuisinepopup" onclick="resetCuisineGame()">
         <div class="popup-content parchment">
-          <img
-            src="static/gif/hola-visiteur.gif"
-            class="reverse-gifs hola-visiteur"
-          />
-          <div class="message" role="highscore">
-            <h2>Félicitation !</h2>
-            <p>
-              Incroyable ! Vous avez atteint un nouveau meilleur score de
-              <span class="score"></span>
-            </p>
-            <p>Précédent score: <mark class="highscore"></mark></p>
+          <div>
+            <img
+              src="static/gif/hola-visiteur.gif"
+              class="reverse-gifs hola-visiteur"
+            />
+            <div class="message" role="highscore">
+              <h2>Félicitation !</h2>
+              <p>
+                Incroyable ! Vous avez atteint un nouveau meilleur score de
+                <span class="score"></span>
+              </p>
+              <p>Précédent score: <mark class="highscore"></mark></p>
+            </div>
+            <div class="message" role="win">
+              <h2>Félicitation !</h2>
+              <p>
+                Vous avez atteint le merveilleux score de
+                <span class="score"></span>
+              </p>
+              <p>Meilleur score: <mark class="highscore"></mark></p>
+            </div>
+            <div class="message" role="loose">
+              <h2>C'est perdu !</h2>
+              <p>
+                Vous avez quand même atteint un score de
+                <mark class="score"></mark>
+              </p>
+              <p>Meilleur score: <span class="highscore"></span></p>
+            </div>
+            <img src="static/gif/hola-visiteur.gif" class="hola-visiteur" />
           </div>
-          <div class="message" role="win">
-            <h2>Félicitation !</h2>
-            <p>
-              Vous avez atteint le merveilleux score de
-              <span class="score"></span>
-            </p>
-            <p>Meilleur score: <mark class="highscore"></mark></p>
+          <div>
+            <h4>Meilleurs scores du royaume:</h4>
+            <ul id="highscores"></ul>
           </div>
-          <div class="message" role="loose">
-            <h2>C'est perdu !</h2>
-            <p>
-              Vous avez quand même atteint un score de
-              <mark class="score"></mark>
-            </p>
-            <p>Meilleur score: <span class="highscore"></span></p>
-          </div>
-          <img src="static/gif/hola-visiteur.gif" class="hola-visiteur" />
         </div>
       </div>
     </main>

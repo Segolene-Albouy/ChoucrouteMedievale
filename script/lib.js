@@ -1,3 +1,6 @@
+const COMMON_API_URL =
+  "https://europe-west9-choucroutemedievale.cloudfunctions.net/";
+
 // Create a random between min and max function
 function floorRandomBetween(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -182,4 +185,18 @@ async function mockApiCall(returnedData) {
 
 function normalizeAngle(angle) {
   return Math.atan2(Math.sin(angle), Math.cos(angle));
+}
+
+function postScore(gameName, highscore, gueuxName) {
+  return retrieveJSON(COMMON_API_URL + "games", {
+    gameName,
+    highscore,
+    gueuxName,
+  }).then((res) => JSON.parse(res));
+}
+
+function getDBHighScore(gueuxName) {
+  return retrieveJSON(
+    COMMON_API_URL + "games?" + new URLSearchParams({ gueuxName })
+  );
 }

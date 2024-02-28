@@ -265,7 +265,7 @@ function whoIsDev(setLocalStorage = true) {
     dev = {
       name: "Clément L’Ancien",
       psw: "dev_psw",
-      team: randomTeam(),
+      team: "cerf",
       isComing: true,
     };
   }

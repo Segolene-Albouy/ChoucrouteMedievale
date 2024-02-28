@@ -164,6 +164,19 @@ function loadCuisine() {
     gameContainer.addEventListener("mousemove", tableFollow);
     gameContainer.addEventListener("mouseup", launchCabbage);
   }
+
+  // Get highscore from db
+  getDBHighScore(localStorage.getItem("medievalName")).then((res) => {
+    const savedHighScore = localStorage.getItem("cuisineHighScore") || 0;
+    const highScore = res.cuisine || 0;
+    if (savedHighScore > highScore) {
+      postScore(
+        "cuisine",
+        savedHighScore,
+        localStorage.getItem("medievalName")
+      ).then((res) => {});
+    }
+  });
 }
 
 function unloadCuisine() {
@@ -363,12 +376,12 @@ function cuisineGameInterval() {
   if (sausages.every((s) => s.dead)) {
     win();
   }
-  const follower = document.getElementById("debug");
-  //   // follow sausage
-  follower.style.top = `${tableRect.y}px`;
-  follower.style.left = `${tableRect.x}px`;
-  follower.style.width = `${tableWidth}px`;
-  follower.style.height = `${tableHeight}px`;
+  // const follower = document.getElementById("debug");
+  // //   // follow sausage
+  // follower.style.top = `${tableRect.y}px`;
+  // follower.style.left = `${tableRect.x}px`;
+  // follower.style.width = `${tableWidth}px`;
+  // follower.style.height = `${tableHeight}px`;
 }
 
 function tableFollow(event) {
@@ -448,7 +461,7 @@ function loose(cabbage) {
 }
 
 function win() {
-  commonEndGame();
+  commonEndGame(true);
   document.getElementById("cuisinepopup").setAttribute("role", "win");
   const currentHighScore = getHighScore();
   if (currentScore > currentHighScore) {
@@ -457,7 +470,7 @@ function win() {
   }
 }
 
-function commonEndGame() {
+function commonEndGame(win = false) {
   if (!isMobile()) {
     resetCursor();
     disableBurstOnClick();
@@ -470,6 +483,22 @@ function commonEndGame() {
   document
     .querySelectorAll("#cuisinepopup .highscore")
     .forEach((elt) => (elt.innerText = hs));
+  postScore(
+    "cuisine",
+    win ? currentScore : 0,
+    localStorage.getItem("medievalName")
+  ).then((res) => {
+    console.log(res);
+    const scores = res.highscores;
+    document.querySelector("#cuisinepopup #highscores").innerHTML = "";
+    scores
+      .sort((a, b) => b.score - a.score)
+      .forEach((score) => {
+        const li = document.createElement("li");
+        li.innerHTML = `${score.gueuxName} - ${score.gueuTeam} : <mark>${score.score}</mark>`;
+        document.querySelector("#cuisinepopup #highscores").appendChild(li);
+      });
+  });
 }
 
 function resetCuisineGame() {
