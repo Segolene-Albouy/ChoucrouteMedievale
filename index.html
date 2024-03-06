@@ -25,12 +25,14 @@
     <link rel="stylesheet" href="./styles/forum.css" />
     <link rel="stylesheet" href="./styles/herse.css" />
     <link rel="stylesheet" href="./styles/cuisine.css" />
+    <link rel="stylesheet" href="./styles/banquet.css" />
     <script src="script/lib.js"></script>
     <script src="script/cursor.js"></script>
     <script src="script/torchs.js"></script>
     <script src="script/forum.js"></script>
     <script src="script/herse.js"></script>
     <script src="script/cuisine.js"></script>
+    <script src="script/banquet.js"></script>
     <script src="script/lookbook.js"></script>
     <script src="script/framework.js"></script>
     <script src="script/submitName.js"></script>
@@ -361,10 +363,11 @@
       </div>
 
       <div id="banquet" class="page">
-        <section class="parchment">
+        <!-- <section class="parchment">
           <h2>Patience escuyer,<br />la pitance n'est pas preste !</h2>
           <img src="static/gif/chandeler.gif" alt="prout" />
-        </section>
+        </section> -->
+        <canvas></canvas>
       </div>
 
       <!--<div id="armurerie" class="page">
@@ -662,6 +665,25 @@
         </div>
       </div>
       <div class="popup" id="hersepopup" onclick="resumeHerseGame()">
+        <div class="popup-content parchment">
+          <div>
+            <img
+              src="static/gif/hola-visiteur.gif"
+              class="reverse-gifs hola-visiteur"
+            />
+            <div class="message">
+              <h2>Votre meilleur score</h2>
+              <p><mark class="highscore"></mark></p>
+            </div>
+            <img src="static/gif/hola-visiteur.gif" class="hola-visiteur" />
+          </div>
+          <div>
+            <h4>Meilleurs scores du royaume:</h4>
+            <ul id="highscores"></ul>
+          </div>
+        </div>
+      </div>
+      <div class="popup" id="banquetpopup" onclick="banquetSetup()">
         <div class="popup-content parchment">
           <div>
             <img

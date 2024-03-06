@@ -1,0 +1,23 @@
+#banquet canvas {
+  width: 100%;
+  height: 100vh;
+}
+
+#banquetpopup .popup-content {
+  display: flex;
+  flex-direction: column;
+}
+#banquetpopup .popup-content > div:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+#banquetpopup .message {
+  font-size: 2em;
+  text-align: center;
+}
+@media screen and (max-width: 600px) {
+  #banquetpopup {
+    font-size: 0.8rem;
+  }
+}

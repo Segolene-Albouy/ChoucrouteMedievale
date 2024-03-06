@@ -8,10 +8,6 @@ const loadHome = (firstTime) => {
 };
 const unloadHome = () => {};
 
-const loadBanquet = () => {
-  resetCursor();
-};
-const unloadBanquet = () => {};
 const loadArmurerie = () => {
   /*resetCursor();*/
   arrangeGuenille();
