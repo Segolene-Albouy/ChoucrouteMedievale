@@ -1,6 +1,7 @@
+const mobileRatio = 0.6;
 const cabbage = {
-  width: isMobile() ? 53 * 0.75 : 53,
-  height: isMobile() ? 43 * 0.75 : 43,
+  width: isMobile() ? 53 * mobileRatio : 53,
+  height: isMobile() ? 43 * mobileRatio : 43,
   src: "static/cabbage.png",
   x: 50,
   y: 0,
@@ -26,15 +27,12 @@ const cabbage = {
   },
 };
 
-const mobileRatio = 0.75;
-
 const knifeAndFork = {
   width: isMobile() ? 46 * mobileRatio : 46,
   knife: "static/knife.png",
   fork: "static/fork.png",
-  gap: isMobile() ? 200 : 270,
   speed: isMobile() ? 4 : 6,
-  pipesGap: () => floorRandomBetween(canvas.height * 0.1, canvas.height * 0.8),
+  pipesGap: () => floorRandomBetween(canvas.height * 0.2, canvas.height * 0.8),
   newPipe: (
     x = pipes[pipes.length - 1].x + knifeAndFork.gap + knifeAndFork.width
   ) => {
@@ -69,6 +67,8 @@ function loadBanquet() {
     knifeAndFork.forkImage.src = knifeAndFork.fork;
     knifeAndFork.knifeImage = new Image();
     knifeAndFork.knifeImage.src = knifeAndFork.knife;
+    knifeAndFork.gap = isMobile() ? canvas.offsetWidth / 2 : 200;
+    knifeAndFork.gapHeight = canvas.offsetHeight / 3;
 
     canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
@@ -85,7 +85,9 @@ function loadBanquet() {
 function startBanquetGame(event) {
   pipes = Array(Math.ceil(canvas.offsetWidth / knifeAndFork.gap))
     .fill()
-    .map((a, i) => knifeAndFork.newPipe(canvas.offsetWidth + i * 300));
+    .map((a, i) =>
+      knifeAndFork.newPipe(canvas.offsetWidth + i * knifeAndFork.gap)
+    );
   if (isMobile()) {
     canvas.removeEventListener("touchstart", startBanquetGame);
     canvas.addEventListener("touchstart", cabbageJump);
@@ -198,16 +200,17 @@ class Pipe {
 
   getRects() {
     const { forkHeight, knifeHeight } = knifeAndFork.heights();
-    var topY = this.gap - knifeAndFork.gap / 2 - forkHeight;
+    var topY = this.gap - knifeAndFork.gapHeight / 2 - forkHeight;
     var forkTotalheight = forkHeight;
     if (topY > 0) {
       topY = 0;
-      forkTotalheight = this.gap - knifeAndFork.gap / 2;
+      forkTotalheight = this.gap - knifeAndFork.gapHeight / 2;
     }
 
     var knifeTotalHeight = knifeHeight;
-    if (this.gap + knifeAndFork.gap / 2 + knifeHeight < canvas.height) {
-      knifeTotalHeight = canvas.height - (this.gap + knifeAndFork.gap / 2);
+    if (this.gap + knifeAndFork.gapHeight / 2 + knifeHeight < canvas.height) {
+      knifeTotalHeight =
+        canvas.height - (this.gap + knifeAndFork.gapHeight / 2);
     }
 
     return [
@@ -219,7 +222,7 @@ class Pipe {
       },
       {
         x: this.x,
-        y: this.gap + knifeAndFork.gap / 2,
+        y: this.gap + knifeAndFork.gapHeight / 2,
         width: knifeAndFork.width,
         height: knifeTotalHeight,
       },
