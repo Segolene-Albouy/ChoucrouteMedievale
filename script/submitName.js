@@ -247,6 +247,7 @@ const adjectifs = [
   ["L’Intrépide"],
   ["L’Audacieux", "L’Audacieuse"],
   ["Le Dangereux", "La Dangereuse"],
+  ["Le Marteau", "La Martelle"],
 ];
 
 // Inscription
