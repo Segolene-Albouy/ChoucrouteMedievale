@@ -2,7 +2,7 @@ const mobileRatio = 0.6;
 const cabbage = {
   width: isMobile() ? 53 * mobileRatio : 53,
   height: isMobile() ? 43 * mobileRatio : 43,
-  src: "static/cabbage.png",
+  src: "./ChoucrouteMedievale/static/cabbage.png",
   x: 50,
   y: 0,
   velocity: 0,
@@ -29,8 +29,8 @@ const cabbage = {
 
 const knifeAndFork = {
   width: isMobile() ? 46 * mobileRatio : 46,
-  knife: "static/knife.png",
-  fork: "static/fork.png",
+  knife: "./ChoucrouteMedievale/static/knife.png",
+  fork: "./ChoucrouteMedievale/static/fork.png",
   speed: isMobile() ? 4 : 6,
   pipesGap: () => floorRandomBetween(canvas.height * 0.2, canvas.height * 0.8),
   newPipe: (

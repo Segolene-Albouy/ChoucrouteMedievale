@@ -11,7 +11,7 @@
       href="https://fonts.googleapis.com/css2?family=Almendra:wght@400;700&family=Astloch&family=Bokor&family=Caudex&family=Eagle+Lake&family=Grenze+Gotisch:wght@200;400;700&family=MedievalSharp&family=Pirata+One&family=UnifrakturCook:wght@700&family=UnifrakturMaguntia&display=swap"
       rel="stylesheet"
     />
-    <link rel="icon" type="image/png" href="static/favicon/castle1.png" />
+    <link rel="icon" type="image/png" href="./static/favicon/castle1.png" />
     <link rel="stylesheet" href="./styles/fantasy-btn.css" />
     <link rel="stylesheet" href="./styles/gifs.css" />
     <link rel="stylesheet" href="./styles/global.css" />
@@ -26,17 +26,17 @@
     <link rel="stylesheet" href="./styles/herse.css" />
     <link rel="stylesheet" href="./styles/cuisine.css" />
     <link rel="stylesheet" href="./styles/banquet.css" />
-    <script src="script/lib.js"></script>
-    <script src="script/cursor.js"></script>
-    <script src="script/torchs.js"></script>
-    <script src="script/forum.js"></script>
-    <script src="script/herse.js"></script>
-    <script src="script/cuisine.js"></script>
-    <script src="script/banquet.js"></script>
-    <script src="script/lookbook.js"></script>
-    <script src="script/framework.js"></script>
-    <script src="script/submitName.js"></script>
-    <script src="script/teams.js"></script>
+    <script src="./script/lib.js"></script>
+    <script src="./script/cursor.js"></script>
+    <script src="./script/torchs.js"></script>
+    <script src="./script/forum.js"></script>
+    <script src="./script/herse.js"></script>
+    <script src="./script/cuisine.js"></script>
+    <script src="./script/banquet.js"></script>
+    <script src="./script/lookbook.js"></script>
+    <script src="./script/framework.js"></script>
+    <script src="./script/submitName.js"></script>
+    <script src="./script/teams.js"></script>
   </head>
   <body>
     <div id="main-cursor" class="custom-cursor"></div>
@@ -57,9 +57,9 @@
       <div id="landing-name" class="landing-content">
         <div id="ask-name" class="parchment landing-modal">
           <div id="banner">
-            <img src="./ChoucrouteMedievale/static/knight_horse_blue.gif" class="knight_horse_blue reverse-gifs" alt="Chevalier"/>
-            <img src="./ChoucrouteMedievale/static/shiny_shield.gif" class="shiny_shield" alt="Brillant écu"/>
-            <img src="./ChoucrouteMedievale/static/knight_horse_blue.gif" class="knight_horse_blue" alt="Chevalier"/>
+            <img src="./static/knight_horse_blue.gif" class="knight_horse_blue reverse-gifs" alt="Chevalier"/>
+            <img src="./static/shiny_shield.gif" class="shiny_shield" alt="Brillant écu"/>
+            <img src="./static/knight_horse_blue.gif" class="knight_horse_blue" alt="Chevalier"/>
           </div>
           <div id="douves">
             <h3>Halte-là vagabond !</h3>
@@ -76,20 +76,20 @@
           </div>
           <form id="form-name" class="rpg-form" onsubmit="submitName(event)">
             <div id="error-name" role="error">
-              <img src="./ChoucrouteMedievale/static/angry_knight.gif" class="reverse-gifs angry-knight" alt="Chevalier enragé"/>
+              <img src="./static/angry_knight.gif" class="reverse-gifs angry-knight" alt="Chevalier enragé"/>
               <span>!! Vostre nom manant !!</span>
-              <img src="./ChoucrouteMedievale/static/angry_knight.gif" class="angry-knight" alt="Chevalier enragé" />
+              <img src="./static/angry_knight.gif" class="angry-knight" alt="Chevalier enragé" />
             </div>
             <div id="name-taken">
               <p>Hélas ce nom est déjà pris par un autre invité !</p>
-              <img src="./ChoucrouteMedievale/static/gif/Sword_Fighters.gif" width="205" height="138" alt="Chevalier combattant"/>
+              <img src="./static/gif/Sword_Fighters.gif" width="205" height="138" alt="Chevalier combattant"/>
               <p>Vous connoisse-t-on sous un autre nom ?</p>
             </div>
             <input type="text" id="name-input" name="name" autofocus />
             <div class="medieval-select">
               <select name="adjectif"></select>
               <div class="select-arrow">
-                <img src="./ChoucrouteMedievale/static/gif/arrow.gif" alt="Trait pourfendeur"/>
+                <img src="./static/gif/arrow.gif" alt="Trait pourfendeur"/>
               </div>
             </div>
             <button id="name-submit" class="choice-rpg clickable" type="submit">
@@ -99,13 +99,13 @@
           <form id="form-psw" class="rpg-form" onsubmit="submitPsw(event)">
             <div id="error-psw" role="error">
               <img
-                src="./ChoucrouteMedievale/static/angry_knight.gif"
+                src="./static/angry_knight.gif"
                 class="reverse-gifs angry-knight"
                 alt="Chevalier enragé"
               />
               <span>!! Ce n'est point le mot de passe !!</span>
               <img
-                src="./ChoucrouteMedievale/static/angry_knight.gif"
+                src="./static/angry_knight.gif"
                 class="angry-knight"
                 alt="Chevalier enragé"
               />
@@ -136,9 +136,9 @@
           </div>
           <div id="psw-fail">
             <h3>
-              <img src="./ChoucrouteMedievale/static/angry_knight.gif" class="reverse-gifs angry-knight" alt="Chevalier enragé"/>
+              <img src="./static/angry_knight.gif" class="reverse-gifs angry-knight" alt="Chevalier enragé"/>
               Quel idiot ce gueux !
-              <img src="./ChoucrouteMedievale/static/angry_knight.gif" class="angry-knight" alt="Chevalier enragé"/>
+              <img src="./static/angry_knight.gif" class="angry-knight" alt="Chevalier enragé"/>
             </h3>
 
             <p>Vous avez énérvé la garde du chasteau.</p>
@@ -219,34 +219,34 @@
             <h2 id="team-name"></h2>
 
             <div id="team-gif">
-              <img id="explosion" src="./ChoucrouteMedievale/static/gif/explose.gif" alt="Boooouya" />
+              <img id="explosion" src="./static/gif/explose.gif" alt="Boooouya" />
               <img
                 id="ours"
-                src="./ChoucrouteMedievale/static/teams/bear4.gif"
+                src="./static/teams/bear4.gif"
                 class="team-gif"
                 alt="Équipe Ours"
               />
               <img
                 id="dragon"
-                src="./ChoucrouteMedievale/static/teams/dragon4.gif"
+                src="./static/teams/dragon4.gif"
                 class="team-gif"
                 alt="Équipe Dragon"
               />
               <img
                 id="cerf"
-                src="./ChoucrouteMedievale/static/teams/deer.gif"
+                src="./static/teams/deer.gif"
                 class="team-gif"
                 alt="Équipe Cerf"
               />
               <img
                 id="kraken"
-                src="./ChoucrouteMedievale/static/teams/kraken.gif"
+                src="./static/teams/kraken.gif"
                 class="team-gif"
                 alt="Équipe Kraken"
               />
               <img
                 id="corbeau"
-                src="./ChoucrouteMedievale/static/teams/crow.gif"
+                src="./static/teams/crow.gif"
                 class="team-gif"
                 alt="Équipe Corbeau"
                 style="margin-top: -100px"
@@ -264,12 +264,12 @@
     <main>
       <div id="torchs" class="main-banner">
         <div class="torch on banner-side">
-          <img src="./ChoucrouteMedievale/static/gif/fireanim.gif" alt="FIIIRE!!!" />
-          <img src="./ChoucrouteMedievale/static/gif/torch.gif" alt="torch" />
+          <img src="./static/gif/fireanim.gif" alt="FIIIRE!!!" />
+          <img src="./static/gif/torch.gif" alt="torch" />
         </div>
         <div class="torch on banner-side">
-          <img src="./ChoucrouteMedievale/static/gif/fireanim.gif" alt="FIIIRE!!!" />
-          <img src="./ChoucrouteMedievale/static/gif/torch.gif" alt="torch" />
+          <img src="./static/gif/fireanim.gif" alt="FIIIRE!!!" />
+          <img src="./static/gif/torch.gif" alt="torch" />
         </div>
       </div>
       <div class="main-title">
@@ -278,7 +278,7 @@
 
       <div id="cour" class="page">
         <section class="parchment">
-          <img id="oyez" src="./ChoucrouteMedievale/static/oyezoyez.png" alt="oyez oyez" />
+          <img id="oyez" src="./static/oyezoyez.png" alt="oyez oyez" />
           <h2>Dameselles et damelots</h2>
 
           <div id="rsvp" class="fantasy-btn">
@@ -338,7 +338,7 @@
       <div id="banquet" class="page">
         <!-- <section class="parchment">
           <h2>Patience escuyer,<br />la pitance n'est pas preste !</h2>
-          <img src="./ChoucrouteMedievale/static/gif/chandeler.gif" alt="prout" />
+          <img src="./static/gif/chandeler.gif" alt="prout" />
         </section> -->
         <canvas></canvas>
       </div>
@@ -350,7 +350,7 @@
         Dégouspille, maraud, avec<br />ton affublement<br />de
         <mark>giguedouilleux</mark> !
       </p>
-      <img src="./ChoucrouteMedievale/static/gif/knight3.gif" alt="boursemolle" />
+      <img src="./static/gif/knight3.gif" alt="boursemolle" />
     </section>
   </div>-->
 
@@ -358,77 +358,77 @@
         <section id="lookbook" class="lookbook-section parchment">
           <div id="couvre-chef" class="image-container">
             <div class="drag">
-              <img src="./ChoucrouteMedievale/static/lookbook/bergere.png" alt="Bonne bergère"/>
+              <img src="./static/lookbook/bergere.png" alt="Bonne bergère"/>
             </div>
             <div class="drag">
-              <img src="./ChoucrouteMedievale/static/lookbook/bourgeois.png" alt="Laid bourgeois"/>
+              <img src="./static/lookbook/bourgeois.png" alt="Laid bourgeois"/>
             </div>
             <div class="drag">
-              <img src="./ChoucrouteMedievale/static/lookbook/casque.png" alt="Casque goulu"/>
+              <img src="./static/lookbook/casque.png" alt="Casque goulu"/>
             </div>
             <div class="drag">
-              <img src="./ChoucrouteMedievale/static/lookbook/escoffion.png" alt="Escoffion"/>
+              <img src="./static/lookbook/escoffion.png" alt="Escoffion"/>
             </div>
             <div class="drag">
-              <img src="./ChoucrouteMedievale/static/lookbook/escoffion-boule.png" alt="Escoffion boulique"/>
+              <img src="./static/lookbook/escoffion-boule.png" alt="Escoffion boulique"/>
             </div>
             <div class="drag">
-              <img src="./ChoucrouteMedievale/static/lookbook/henin-double.png" alt="Henin double"/>
+              <img src="./static/lookbook/henin-double.png" alt="Henin double"/>
             </div>
             <div class="drag">
-              <img src="./ChoucrouteMedievale/static/lookbook/marchand.png" alt="Vilain marchand"/>
+              <img src="./static/lookbook/marchand.png" alt="Vilain marchand"/>
             </div>
             <div class="drag">
-              <img src="./ChoucrouteMedievale/static/lookbook/negociant.png" alt="Preux negociant"/>
+              <img src="./static/lookbook/negociant.png" alt="Preux negociant"/>
             </div>
           </div>
           <div id="affublement" class="image-container">
             <div class="drag">
-              <img src="./ChoucrouteMedievale/static/lookbook/armure.png" alt="Armure briante"/>
+              <img src="./static/lookbook/armure.png" alt="Armure briante"/>
             </div>
             <div class="drag">
-              <img src="./ChoucrouteMedievale/static/lookbook/bliaud.png" alt="Bliaud"/>
+              <img src="./static/lookbook/bliaud.png" alt="Bliaud"/>
             </div>
             <div class="drag">
-              <img src="./ChoucrouteMedievale/static/lookbook/chausses.png" alt="Chausses"/>
+              <img src="./static/lookbook/chausses.png" alt="Chausses"/>
             </div>
             <div class="drag">
-              <img src="./ChoucrouteMedievale/static/lookbook/robe.png" alt="Robe"/>
+              <img src="./static/lookbook/robe.png" alt="Robe"/>
             </div>
             <div class="drag">
-              <img src="./ChoucrouteMedievale/static/lookbook/cottehardie.png" alt="Cottehardie"/>
+              <img src="./static/lookbook/cottehardie.png" alt="Cottehardie"/>
             </div>
             <div class="drag">
-              <img src="./ChoucrouteMedievale/static/lookbook/guenaude.png" alt="Guenaude"/>
+              <img src="./static/lookbook/guenaude.png" alt="Guenaude"/>
             </div>
             <div class="drag">
-              <img src="./ChoucrouteMedievale/static/lookbook/herboriste.png" alt="Herboriste"/>
+              <img src="./static/lookbook/herboriste.png" alt="Herboriste"/>
             </div>
             <div class="drag">
-              <img src="./ChoucrouteMedievale/static/lookbook/braguette.png" alt="Braguette"/>
+              <img src="./static/lookbook/braguette.png" alt="Braguette"/>
             </div>
             <div class="drag">
-              <img src="./ChoucrouteMedievale/static/lookbook/slip.png" alt="Slip"/>
+              <img src="./static/lookbook/slip.png" alt="Slip"/>
             </div>
             <div class="drag">
-              <img src="./ChoucrouteMedievale/static/lookbook/surcot.png" alt="Surcot"/>
+              <img src="./static/lookbook/surcot.png" alt="Surcot"/>
             </div>
             <div class="drag">
-              <img src="./ChoucrouteMedievale/static/lookbook/pourpoint.png" alt="Pourpoint"/>
+              <img src="./static/lookbook/pourpoint.png" alt="Pourpoint"/>
             </div>
           </div>
           <div id="godille" class="image-container">
             <div class="drag">
-              <img src="./ChoucrouteMedievale/static/lookbook/brodequin-left.png" alt="Brodequin gauche"/>
+              <img src="./static/lookbook/brodequin-left.png" alt="Brodequin gauche"/>
             </div>
             <div class="drag">
-              <img src="./ChoucrouteMedievale/static/lookbook/brodequin-right.png" alt="Brodequin droit"/>
+              <img src="./static/lookbook/brodequin-right.png" alt="Brodequin droit"/>
             </div>
             <div class="drag">
-              <img src="./ChoucrouteMedievale/static/lookbook/poulaine-left.png" alt="Poulaine gauche"/>
+              <img src="./static/lookbook/poulaine-left.png" alt="Poulaine gauche"/>
             </div>
             <div class="drag">
-              <img src="./ChoucrouteMedievale/static/lookbook/poulaine-right.png" alt="Poulaine droite"/>
+              <img src="./static/lookbook/poulaine-right.png" alt="Poulaine droite"/>
             </div>
           </div>
         </section>
@@ -438,13 +438,13 @@
         <!-- Clan .collapsible -->
         <div class="main-banner" style="justify-content: center">
           <!--<div class="banner-side">
-        <img src="./ChoucrouteMedievale/static/gif/colombe.gif" class="reverse-gifs">
+        <img src="./static/gif/colombe.gif" class="reverse-gifs">
       </div>-->
           <div class="banner-center">
             <h3>Pigeonnier des<br /><mark class="team"></mark></h3>
           </div>
           <!--<div class="banner-side">
-        <img src="./ChoucrouteMedievale/static/gif/colombe.gif">
+        <img src="./static/gif/colombe.gif">
       </div>-->
         </div>
 
@@ -466,7 +466,7 @@
         <div id="new-discussion" class="collapsible">
           <h4 role="collapse-trigger" class="fantasy-btn collapsed clickable">
             <span>Entamer une nouvelle discussion</span>
-            <img src="./ChoucrouteMedievale/static/+.png" />
+            <img src="./static/+.png" />
           </h4>
           <form role="collapse-content" onsubmit="submitDiscussion(event)">
             <!-- Titre -->
@@ -490,7 +490,7 @@
             </div>
             <button type="submit" class="choice-rpg clickable">
               <span>Envoyer</span>
-              <img src="./ChoucrouteMedievale/static/licorne.gif" class="loading licorne" />
+              <img src="./static/licorne.gif" class="loading licorne" />
             </button>
           </form>
         </div>
@@ -500,7 +500,7 @@
           <div class="template discussion-preview msg-box">
             <h4>
               <img
-                src="./ChoucrouteMedievale/static/gif/seagull_with_letter1.gif"
+                src="./static/gif/seagull_with_letter1.gif"
                 class="pigeon-letter"
               /><span role="title"></span>
             </h4>
@@ -517,7 +517,7 @@
           </div>
         </div>
         <div id="loading-discussion-list">
-          <img src="./ChoucrouteMedievale/static/licorne.gif" class="loading licorne" alt="Licorne de chargement"/>
+          <img src="./static/licorne.gif" class="loading licorne" alt="Licorne de chargement"/>
         </div>
         <div id="empty-discussion">
           <h4>Aucune discussion pour le moment</h4>
@@ -534,7 +534,7 @@
           <div class="message-wrapper fantasy-btn">
             <h4 class="discussion-title">
               <img
-                src="./ChoucrouteMedievale/static/gif/seagull_with_letter1.gif"
+                src="./static/gif/seagull_with_letter1.gif"
                 class="pigeon-letter"
               />
               <span role="title"></span>
@@ -555,7 +555,7 @@
               <button type="submit" class="invisible clickable">
                 <span>OK</span>
               </button>
-              <img src="./ChoucrouteMedievale/static/licorne.gif" class="loading licorne" />
+              <img src="./static/licorne.gif" class="loading licorne" />
             </form>
           </div>
         </div>
@@ -568,7 +568,7 @@
             &lt;- Toutes les discussions
           </button>
           <div>
-            <img src="./ChoucrouteMedievale/static/licorne.gif" class="loading licorne" alt="Licorne de chargement"/>
+            <img src="./static/licorne.gif" class="loading licorne" alt="Licorne de chargement"/>
           </div>
         </div>
         <!--<hr />-->
@@ -585,8 +585,8 @@
             <div>Meilleur score : <span class="highscore"></span></div>
           </div>
           <div id="castle"></div>
-          <img src="./ChoucrouteMedievale/static/crossbow.png" id="crossbow" />
-          <img src="./ChoucrouteMedievale/static/arrow.png" class="arrow" id="arrow-template" />
+          <img src="./static/crossbow.png" id="crossbow" />
+          <img src="./static/arrow.png" class="arrow" id="arrow-template" />
           <div class="mendiant" id="mendiant-template"></div>
           <img class="damsel" id="damsel-template" />
         </div>
@@ -595,11 +595,11 @@
       <div id="cuisine" class="page">
         <div id="game-container">
           <div id="sausage-bricks">
-            <img src="./ChoucrouteMedievale/static/sausage.png" id="sausage-template" class="sausage" alt="Prototype de saucisse"/>
+            <img src="./static/sausage.png" id="sausage-template" class="sausage" alt="Prototype de saucisse"/>
           </div>
-          <img id="cabbage" src="./ChoucrouteMedievale/static/cabbage.png" alt="Chou"/>
-          <img id="table" src="./ChoucrouteMedievale/static/table.png" alt="Table"/>
-          <img id="explosion-template" class="explose" src="./ChoucrouteMedievale/static/gif/explose.gif" alt="explosion"/>
+          <img id="cabbage" src="./static/cabbage.png" alt="Chou"/>
+          <img id="table" src="./static/table.png" alt="Table"/>
+          <img id="explosion-template" class="explose" src="./static/gif/explose.gif" alt="explosion"/>
         </div>
         <div id="score-container">Score : <span class="score"></span></div>
       </div>
@@ -608,26 +608,26 @@
 
       <div class="popup" role="error">
         <div class="popup-content parchment">
-          <img src="./ChoucrouteMedievale/static/nuke.gif" class="reverse-gifs nuke" />
+          <img src="./static/nuke.gif" class="reverse-gifs nuke" />
           <span class="message"></span>
-          <img src="./ChoucrouteMedievale/static/nuke.gif" class="nuke" />
+          <img src="./static/nuke.gif" class="nuke" />
         </div>
       </div>
 
       <div class="popup" role="warning">
         <div class="popup-content parchment">
           <img
-            src="./ChoucrouteMedievale/static/angry_knight.gif"
+            src="./static/angry_knight.gif"
             class="reverse-gifs angry-knight"
           />
           <span class="message"></span>
-          <img src="./ChoucrouteMedievale/static/angry_knight.gif" class="angry-knight" />
+          <img src="./static/angry_knight.gif" class="angry-knight" />
         </div>
       </div>
       <div class="popup" id="cuisinepopup" onclick="resetCuisineGame()">
         <div class="popup-content parchment">
           <div>
-            <img src="./ChoucrouteMedievale/static/gif/hola-visiteur.gif" class="reverse-gifs hola-visiteur"/>
+            <img src="./static/gif/hola-visiteur.gif" class="reverse-gifs hola-visiteur"/>
             <div class="message" role="highscore">
               <h2>Félicitation !</h2>
               <p>
@@ -652,7 +652,7 @@
               </p>
               <p>Meilleur score : <span class="highscore"></span></p>
             </div>
-            <img src="./ChoucrouteMedievale/static/gif/hola-visiteur.gif" class="hola-visiteur" />
+            <img src="./static/gif/hola-visiteur.gif" class="hola-visiteur" />
           </div>
           <div>
             <h4>Meilleurs scores du royaume :</h4>
@@ -664,14 +664,14 @@
         <div class="popup-content parchment">
           <div>
             <img
-              src="./ChoucrouteMedievale/static/gif/hola-visiteur.gif"
+              src="./static/gif/hola-visiteur.gif"
               class="reverse-gifs hola-visiteur"
             />
             <div class="message">
               <h2>Votre meilleur score</h2>
               <p><mark class="highscore"></mark></p>
             </div>
-            <img src="./ChoucrouteMedievale/static/gif/hola-visiteur.gif" class="hola-visiteur" />
+            <img src="./static/gif/hola-visiteur.gif" class="hola-visiteur" />
           </div>
           <div>
             <h4>Meilleurs scores du royaume:</h4>
@@ -683,14 +683,14 @@
         <div class="popup-content parchment">
           <div>
             <img
-              src="./ChoucrouteMedievale/static/gif/hola-visiteur.gif"
+              src="./static/gif/hola-visiteur.gif"
               class="reverse-gifs hola-visiteur"
             />
             <div class="message">
               <h2>Votre meilleur score</h2>
               <p><mark class="highscore"></mark></p>
             </div>
-            <img src="./ChoucrouteMedievale/static/gif/hola-visiteur.gif" class="hola-visiteur" />
+            <img src="./static/gif/hola-visiteur.gif" class="hola-visiteur" />
           </div>
           <div>
             <h4>Meilleurs scores du royaume:</h4>
