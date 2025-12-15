@@ -38,7 +38,7 @@ function play(audioFilename, onended = () => {}) {
     // fadeOutAndPause(currentAudio);
   }
 
-  const audio = new Audio(`static/sounds/${audioFilename}.mp3`);
+  const audio = new Audio(`ChoucrouteMedievale/static/sounds/${audioFilename}.mp3`);
   audio.play();
   currentAudio = audio;
 
@@ -53,7 +53,7 @@ function repeatAudio(audioFilename) {
     currentAudio.pause();
     // fadeOutAndPause(currentAudio);
   }
-  const audio = new Audio(`static/sounds/${audioFilename}.mp3`);
+  const audio = new Audio(`ChoucrouteMedievale/static/sounds/${audioFilename}.mp3`);
   audio.loop = true;
   audio.play();
   currentAudio = audio;
@@ -61,7 +61,7 @@ function repeatAudio(audioFilename) {
 }
 
 function playShort(audioFilename) {
-  const audio = new Audio(`static/sounds/${audioFilename}.mp3`);
+  const audio = new Audio(`ChoucrouteMedievale/static/sounds/${audioFilename}.mp3`);
   audio.play();
 }
 
